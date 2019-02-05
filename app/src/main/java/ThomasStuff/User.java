@@ -7,7 +7,7 @@ public class User
     private String authToken;
 
 
-    User()
+    public User()
     {
 
     }

@@ -4,12 +4,12 @@ public class RegisterService
 {
     //ServerProxy proxy;
 
-    RegisterService()
+    public RegisterService()
     {
         //Initialize proxy
     }
 
-    void register(String username, String password)
+    public void register(String username, String password)
     {
         //proxy.register(username, password);
     }

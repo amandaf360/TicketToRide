@@ -1,16 +1,22 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
-//import android.support.v4.app.FragmentManager;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 
-public class LoginActivity extends AppCompatActivity implements LoginActivityPresenter.View {
+import java.util.Objects;
+
+public class LoginActivityView extends AppCompatActivity implements ILoginView {
     private LoginActivityPresenter presenter;
+
     private EditText loginUsernameEdit;
     private EditText loginPasswordEdit;
     private EditText registerUsernameEdit;
@@ -37,18 +43,132 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityPre
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onLoginClicked();
             }
         });
         registerButton = findViewById(R.id.button_register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onRegisterClicked();
             }
         });
 
+        loginButton.setEnabled(false);
+        registerButton.setEnabled(false);
 
+        // add text changed listener to login username
+        loginUsernameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onLoginUsernameChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // add text changed listener to login password
+        loginPasswordEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onLoginPasswordChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // add text changed listener to register username
+        registerUsernameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onRegisterUsernameChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // add text changed listener to register password
+        registerPasswordEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onRegisterPasswordChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // add text changed listener to confirm password
+        confirmPasswordEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onRegisterConfirmChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+//        TextWatcher loginWatcher = new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                loginButton.setEnabled(false);
+//                registerButton.setEnabled(false);
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                if (loginUsernameEdit.getText().toString().length() != 0 && loginPasswordEdit.getText().toString().length() != 0) {
+//                    loginButton.setEnabled(true);
+//                }
+//                else {
+//                    loginButton.setEnabled(false);
+//                }
+//            }
+//        };
 
 //        userName.addTextChangedListener(new TextWatcher() {
 //            @Override
@@ -84,6 +204,91 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityPre
 
     }
 
+    @Override
+    public void onLoginClicked() {
+        /*login.setEnabled(false);
+        returnLoginResult();*/
+        // for now, just show a toast
+        Context context = Objects.requireNonNull(this).getApplicationContext();
+        CharSequence text = "Login Pressed!";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        // call login in presenter
+        presenter.login();
+    }
+
+    @Override
+    public void onRegisterClicked() {
+        // for now, just show a toast
+        Context context = Objects.requireNonNull(this).getApplicationContext();
+        CharSequence text = "Register Pressed!";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        // call register in presenter
+        presenter.register();
+    }
+
+    @Override
+    public void setLoginEnabled(boolean enabled) {
+        loginButton.setEnabled(enabled);
+    }
+
+    @Override
+    public void setRegisterEnabled(boolean enabled) {
+        registerButton.setEnabled(enabled);
+    }
+
+    @Override
+    public String getLoginUsername() {
+        return loginUsernameEdit.getText().toString();
+    }
+
+    @Override
+    public String getLoginPassword() {
+        return loginPasswordEdit.getText().toString();
+    }
+
+    @Override
+    public String getRegisterUsername() {
+        return registerUsernameEdit.getText().toString();
+    }
+
+    @Override
+    public String getRegisterPassword() {
+        return registerPasswordEdit.getText().toString();
+    }
+
+    @Override
+    public String getConfirmPassword() {
+        return confirmPasswordEdit.getText().toString();
+    }
+
+    // DO WE NEED THESE??
+//    @Override
+//    public void setLoginUsername(String username) {
+//        loginPasswordEdit.setText("username");
+//    }
+//
+//    @Override
+//    public void setLoginPassword(String password) {
+//
+//    }
+
+    @Override
+    public void displayErrorMessage(String error) {
+        // give a toast displaying error message
+        Context context = Objects.requireNonNull(this).getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, error, duration);
+        toast.show();
+    }
 
 
 //    @Override

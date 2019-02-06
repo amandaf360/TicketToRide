@@ -4,12 +4,12 @@ public class LoginService
 {
     //ServerProxy proxy;
 
-    LoginService()
+    public LoginService()
     {
         //Initialize proxy
     }
 
-    void login(String username, String password)
+    public void login(String username, String password)
     {
         //proxy.login(username, password);
     }

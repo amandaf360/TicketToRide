@@ -6,8 +6,9 @@ public class ClientModel
 {
     private ArrayList<String> gameList;
     private Game game;
+    private User currentUser;
 
-    ClientModel()
+    public ClientModel()
     {
 
     }
@@ -30,5 +31,9 @@ public class ClientModel
     public void setGame(Game game)
     {
         this.game = game;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

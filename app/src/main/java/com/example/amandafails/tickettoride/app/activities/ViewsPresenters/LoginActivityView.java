@@ -206,8 +206,6 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
     @Override
     public void onLoginClicked() {
-        /*login.setEnabled(false);
-        returnLoginResult();*/
         // for now, just show a toast
         Context context = Objects.requireNonNull(this).getApplicationContext();
         CharSequence text = "Login Pressed!";

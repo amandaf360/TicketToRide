@@ -2,8 +2,6 @@ package proxy;
 
 import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -64,22 +62,22 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         };
     }
 
-    public void join_game(int gameNumber)
+    public void joinGame(int gameNumber)
     {
 
     }
 
-    public void create_game(String username, String gameName)
+    public void createGame(String username, int numPlayers, String gameName)
     {
 
     }
 
-    public void leave_game(String username, String gameName)
+    public void leaveGame(String username, String gameName)
     {
 
     }
 
-    public void begin_game(String gameName)
+    public void beginGame(String gameName)
     {
 
     }
@@ -95,7 +93,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         try
         {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.24.216.101:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://10.24.222.9:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");

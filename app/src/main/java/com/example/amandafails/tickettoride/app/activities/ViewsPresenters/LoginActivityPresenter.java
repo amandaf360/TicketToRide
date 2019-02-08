@@ -2,7 +2,6 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
 import ChrisStuff.LoginService;
 import ChrisStuff.RegisterService;
-import ThomasStuff.User;
 
 public class LoginActivityPresenter implements ILoginPresenter {
 
@@ -18,7 +17,6 @@ public class LoginActivityPresenter implements ILoginPresenter {
     private ILoginView view;
 
     public LoginActivityPresenter(ILoginView view) {
-        //this.user = new User();
         this.view = view;
     }
 
@@ -32,8 +30,17 @@ public class LoginActivityPresenter implements ILoginPresenter {
         // will get both username and password and attempt to login
         loginService.login(view.getLoginUsername(), view.getLoginPassword());
 
-        // if login failed, call displayErrorMessage("Login failed");
-        // HOW TO SEE THIS????
+        // create a method called "Update" implemented from observer
+        // login succeeds if the user object is not null
+            // should change screens
+        // login fails if error message is updated
+            // call displayErrorMessage("Login failed");
+
+        /* TO START A NEW ACTIVITY!!
+        Intent i = new Intent(context, EventActivity.class);
+                    i.putExtra("event", eventID);
+                    context.startActivity(i);
+         */
     }
 
     @Override

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/search_list_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lobby_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:src="@drawable/person_added" />
+
+        <TextView
+            android:id="@+id/lobby_player_text"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_blue"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

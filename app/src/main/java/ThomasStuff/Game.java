@@ -8,9 +8,10 @@ public class Game
     private int numPlayers;
     private ArrayList<Player> players;
     private int gameNum;
+    private int currentPlayers;
 
 
-    public Game()
+    Game()
     {
 
     }
@@ -26,7 +27,15 @@ public class Game
         return player.getAuthToken();
     }
 
-    public int getNumPlayers() {
-        return numPlayers;
+    public int getCurrentPlayers()
+    {
+        currentPlayers = players.size();
+        return currentPlayers;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
 }

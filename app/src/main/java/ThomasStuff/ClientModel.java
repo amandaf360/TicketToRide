@@ -1,26 +1,73 @@
 package ThomasStuff;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ClientModel
+
+/*
+ * to get a ClientModel object do something like this where needed
+ * e.x.
+ * public class Dummy
+ * {
+ *      private ClientModel clientModel
+ *      public Dummy()
+ *      {
+ *          this.clientModel = ClientModel.getInstance()
+ *      }
+ * }
+ *
+ */
+
+public class ClientModel extends Observable
 {
-    private ArrayList<String> gameList;
+    private ArrayList<Game> gameList;
     private Game game;
-    private User currentUser;
+    private ArrayList<String> messages;
+    private static ClientModel instance;
+    private List<Observer> observers = new ArrayList<Observer>();
 
-    public ClientModel()
+
+    ClientModel()
     {
-
+        this.instance = this;
     }
 
-    public ArrayList<String> getGameList()
+    public static ClientModel getInstance() {
+        if (instance == null)
+            instance = new ClientModel();
+        return instance;
+    }
+
+    public ArrayList<Game> getGameList()
     {
         return gameList;
     }
 
-    public void setGameList(ArrayList<String> gameList)
+    public void setGameList(ArrayList<Game> gameList)
     {
+
         this.gameList = gameList;
+        setChanged();
+        notifyObservers(this.gameList);
+    }
+
+    public void addGame(Game newGame)
+    {
+        gameList.add(newGame);
+        setChanged();
+        notifyObservers(gameList);
+    }
+
+    public void deleteGame(Game goneGame)
+    {
+        if(gameList.contains(goneGame))
+        {
+            gameList.remove(goneGame);
+            setChanged();
+            notifyObservers(gameList);
+        }
     }
 
     public Game getGame()
@@ -28,12 +75,38 @@ public class ClientModel
         return game;
     }
 
-    public void setGame(Game game)
+    public Game getGame(String gameName)
     {
-        this.game = game;
+        for(Game game : gameList)
+        {
+            if(game.getName().equals(gameName))
+            {
+                return game;
+            }
+        }
+        return null;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public void setGame(Game game)
+    {
+
+        this.game = game;
+        setChanged();
+        notifyObservers(this.game);
+
     }
+
+    @Override
+    public synchronized void addObserver(Observer o)
+    {
+        super.addObserver(o);
+    }
+
+    @Override
+    public synchronized void deleteObserver(Observer o)
+    {
+        super.deleteObserver(o);
+    }
+
+
 }

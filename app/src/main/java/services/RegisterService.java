@@ -12,6 +12,7 @@ public class RegisterService
 
     public void register(String username, String password)
     {
+        System.out.println("In Register Service");
         proxy.register(username, password);
     }
 }

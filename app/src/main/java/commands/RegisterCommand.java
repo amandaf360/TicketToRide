@@ -8,7 +8,7 @@ public class RegisterCommand implements ICommand
 
     public void execute()
     {
-
+        System.out.println("In register command");
         if(username != null)
         {
             SetUserService userService = new SetUserService();

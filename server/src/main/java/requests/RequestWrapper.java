@@ -1,13 +1,14 @@
 package requests;
 
-public class RequestWrapper
-{
-    private String requestType;
-    private BaseRequest request;
+import java.util.ArrayList;
 
-    public RequestWrapper(String requestType, BaseRequest request) {
+public class RequestWrapper {
+    private String requestType;
+    private ArrayList<String> stringList;
+
+    public RequestWrapper(String requestType, ArrayList<String> stringList) {
         this.requestType = requestType;
-        this.request = request;
+        this.stringList = stringList;
     }
 
     public String getRequestType() {
@@ -18,11 +19,11 @@ public class RequestWrapper
         this.requestType = requestType;
     }
 
-    public BaseRequest getRequest() {
-        return request;
+    public ArrayList<String> getStringList() {
+        return stringList;
     }
 
-    public void setRequest(BaseRequest request) {
-        this.request = request;
+    public void setStringList(ArrayList<String> stringList) {
+        this.stringList = stringList;
     }
 }

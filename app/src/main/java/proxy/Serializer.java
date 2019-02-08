@@ -7,7 +7,7 @@ import responses.*;
 
 public class Serializer
 {
-    Gson gson;
+    private Gson gson;
 
     public Serializer(){
         gson = new Gson();

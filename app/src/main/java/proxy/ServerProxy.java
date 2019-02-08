@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+
 import requests.*;
 import commands.*;
 import responses.*;
@@ -20,7 +22,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
     public void login(String username, String password)
     {
         LoginRequest request = new LoginRequest(username, password);
-        RequestWrapper wrapper = new RequestWrapper("login", request);
+       // RequestWrapper wrapper = new RequestWrapper("login", request);
         callerClass = new OnTaskCompleted()
         {
             @Override
@@ -31,13 +33,15 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
                 command.execute();
             }
         };
-        execute(wrapper);
+       // execute(wrapper);
     }
 
     public void register(String username, String password)
     {
+        System.out.println("In register proxy command");
         RegisterRequest request = new RegisterRequest(username, password);
-        RequestWrapper wrapper = new RequestWrapper("register", request);
+        ArrayList<String> stringList = new ArrayList<String>();
+        RequestWrapper wrapper = new RequestWrapper("register", stringList);
         callerClass = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson)

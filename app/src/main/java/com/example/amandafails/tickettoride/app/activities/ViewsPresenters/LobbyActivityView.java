@@ -15,6 +15,7 @@ import com.example.amandafails.tickettoride.app.adaptors.LobbyRecyclerViewAdapto
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Player;
@@ -75,10 +76,10 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ClientModel clientModel = new ClientModel();
-        // CHANGE THIS LINE TOO
-        // int numPlayers = ClientModel.get().getGame().getNumPlayers();
-        numPlayers = clientModel.getGame().getNumPlayers();
+//        ClientModel clientModel = new ClientModel();
+//        // CHANGE THIS LINE TOO
+//        // int numPlayers = ClientModel.get().getGame().getNumPlayers();
+//        numPlayers = clientModel.getGame().getNumPlayers();
 
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
         mRecyclerView.setAdapter(mAdapter);

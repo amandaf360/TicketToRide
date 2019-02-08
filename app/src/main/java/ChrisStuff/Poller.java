@@ -4,12 +4,12 @@ public class Poller
 {
     //ServerProxy proxy;
 
-    Poller()
+    public Poller()
     {
         //initialize proxy
     }
 
-    void poll()
+    public void poll()
     {
         while(true)
         {

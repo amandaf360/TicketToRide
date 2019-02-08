@@ -1,5 +1,7 @@
 package commands;
 
+import services.*;
+
 public class LoginCommand implements ICommand
 {
     String username;
@@ -13,13 +15,13 @@ public class LoginCommand implements ICommand
 
     public void execute()
     {
-        /*
+
         if(username != null)
         {
-            SetPlayerService playerService = new SetPlayerService();
-            playerService.setPlayer(username);
+            SetUserService userService = new SetUserService();
+            userService.setUser(username);
         }
-        else
+        /*else
         {
             ShowMessageService messageService = new ShowMessageService();
             messageService.show(errorMessage);

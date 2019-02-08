@@ -2,8 +2,8 @@ package requests;
 
 public class RegisterRequest extends BaseRequest
 {
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     public RegisterRequest(String username, String password) {
         this.username = username;

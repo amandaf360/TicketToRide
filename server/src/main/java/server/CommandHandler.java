@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 
 import commands.*;
 import responses.BaseResponse;
@@ -19,6 +20,7 @@ public class CommandHandler implements HttpHandler
     @Override
     public void handle(HttpExchange exchange)
     {
+        System.out.println("Connected");
         StringBuilder builder = new StringBuilder();
 
         InputStreamReader reader = new InputStreamReader(exchange.getRequestBody());
@@ -41,27 +43,29 @@ public class CommandHandler implements HttpHandler
         String commandType = wrappedRequest.getRequestType();
         ICommand command;
         command = null;
+        System.out.println("Command type: " + commandType);
 
         switch(commandType)
         {
             case "login":
-                LoginRequest loginRequest = (LoginRequest)wrappedRequest.getRequest();
-                command = new LoginCommand(loginRequest.getUsername(), loginRequest.getPassword());
+                //LoginRequest loginRequest = (LoginRequest)wrappedRequest.getRequest();
+                //command = new LoginCommand(loginRequest.getUsername(), loginRequest.getPassword());
                 break;
             case "register":
-                RegisterRequest registerRequest = (RegisterRequest)wrappedRequest.getRequest();
-                command = new RegisterCommand(registerRequest.getUsername(), registerRequest.getPassword());
+                ArrayList<String> argumentList = wrappedRequest.getStringList();
+                command = new RegisterCommand(argumentList.get(0), argumentList.get(1));
                 break;
             case "poll":
                 break;
             case "startGame":
-                StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
+               // StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
                 command = new StartGameCommand();
         }
 
+        System.out.println("Executing");
         BaseResponse response = command.execute();
         String responseString = serializer.serializeResponse(response);
-
+        System.out.println("writing response");
         writeResponse(exchange, HttpURLConnection.HTTP_OK, responseString);
     }
 

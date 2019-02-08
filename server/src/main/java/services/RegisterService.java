@@ -22,7 +22,7 @@ public class RegisterService
                 i = userList.size();
             }
         }
-
+        System.out.println("In register service");
         RegisterResponse response = new RegisterResponse();
 
         if(password == null || password.equals(""))
@@ -43,5 +43,6 @@ public class RegisterService
             response.setErrorMessage("Username already exists.");
             return response;
         }
+
     }
 }

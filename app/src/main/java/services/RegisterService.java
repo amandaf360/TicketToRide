@@ -1,16 +1,17 @@
-package ChrisStuff;
+package services;
+import proxy.ServerProxy;
 
 public class RegisterService
 {
-    //ServerProxy proxy;
+    ServerProxy proxy;
 
     public RegisterService()
     {
-        //Initialize proxy
+        proxy = new ServerProxy();
     }
 
     public void register(String username, String password)
     {
-        //proxy.register(username, password);
+        proxy.register(username, password);
     }
 }

@@ -11,7 +11,7 @@ public class Game
     private int currentPlayers;
 
 
-    Game()
+    public Game()
     {
 
     }

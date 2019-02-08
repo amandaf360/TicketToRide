@@ -26,10 +26,10 @@ public class ClientModel extends Observable
     private Game game;
     private ArrayList<String> messages;
     private static ClientModel instance;
-    private List<Observer> observers = new ArrayList<Observer>();
+    private List<Observer> observers = new ArrayList<>();
 
 
-    ClientModel()
+    public ClientModel()
     {
         this.instance = this;
     }

@@ -10,7 +10,7 @@ public class Game
     private int gameNum;
 
 
-    Game()
+    public Game()
     {
 
     }
@@ -26,4 +26,7 @@ public class Game
         return player.getAuthToken();
     }
 
+    public int getNumPlayers() {
+        return numPlayers;
+    }
 }

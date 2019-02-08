@@ -6,7 +6,7 @@ public class Player
     private String authToken;
     private String name;
 
-    Player()
+    public Player()
     {
 
     }

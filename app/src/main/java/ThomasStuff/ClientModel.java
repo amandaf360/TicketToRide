@@ -30,7 +30,7 @@ public class ClientModel extends Observable
     private List<Observer> observers = new ArrayList<Observer>();
 
 
-    ClientModel()
+    public ClientModel()
     {
         this.instance = this;
     }

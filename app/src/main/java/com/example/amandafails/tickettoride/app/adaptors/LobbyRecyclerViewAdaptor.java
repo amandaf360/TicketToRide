@@ -50,7 +50,7 @@ public class LobbyRecyclerViewAdaptor extends RecyclerView.Adapter<LobbyRecycler
         final String currentString = lines.get(position);
 
         ClientModel clientModel = new ClientModel();
-        String username = clientModel.getCurrentUser().getUserName();
+        String username = clientModel.getUser().getUserName();
         Player myPlayer = new Player();
         String toDisplay = "";
         toDisplay = username + currentString;

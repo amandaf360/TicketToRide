@@ -5,8 +5,8 @@ import android.content.Intent;
 import java.util.Observable;
 import java.util.Observer;
 
-import ChrisStuff.LoginService;
-import ChrisStuff.RegisterService;
+import services.LoginService;
+import services.RegisterService;
 import ThomasStuff.ClientModel;
 import ThomasStuff.User;
 

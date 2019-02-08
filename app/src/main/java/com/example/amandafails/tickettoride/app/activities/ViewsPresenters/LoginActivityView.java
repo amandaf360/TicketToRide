@@ -147,62 +147,6 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
             }
         });
-
-//        TextWatcher loginWatcher = new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                loginButton.setEnabled(false);
-//                registerButton.setEnabled(false);
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                if (loginUsernameEdit.getText().toString().length() != 0 && loginPasswordEdit.getText().toString().length() != 0) {
-//                    loginButton.setEnabled(true);
-//                }
-//                else {
-//                    loginButton.setEnabled(false);
-//                }
-//            }
-//        };
-
-//        userName.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                presenter.updateFullName(s.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                hideProgressBar();
-//            }
-//        });
-//
-//        email.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                presenter.updateEmail(s.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                hideProgressBar();
-//            }
-//        });
-
     }
 
     @Override

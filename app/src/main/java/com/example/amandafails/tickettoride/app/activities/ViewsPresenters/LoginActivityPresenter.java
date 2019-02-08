@@ -54,9 +54,6 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
         RegisterService registerService = new RegisterService();
         // will make sure both passwords are the same
         registerService.register(view.getRegisterUsername(), view.getRegisterPassword());
-
-        // if register failed, call displayErrorMessage("Register failed");
-        // HOW TO SEE IF IT FAILS????
     }
 
     @Override

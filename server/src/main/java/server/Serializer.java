@@ -2,8 +2,8 @@ package server;
 
 import com.google.gson.*;
 
-import communicationdata.BaseResponse;
-import communicationdata.Request;
+import responses.BaseResponse;
+import requests.RequestWrapper;
 
 public class Serializer
 {
@@ -13,9 +13,9 @@ public class Serializer
         gson = new Gson();
     }
 
-    public Request deserializeRequest(String serializedString)
+    public RequestWrapper deserializeRequestWrapper(String serializedString)
     {
-        return gson.fromJson(serializedString, Request.class);
+        return gson.fromJson(serializedString, RequestWrapper.class);
     }
 
     public String serializeResponse(BaseResponse response)

@@ -1,46 +1,97 @@
-package DallinStuff.proxy;
+package proxy;
 
 import android.os.AsyncTask;
+
+import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import requests.*;
+import commands.*;
+import responses.*;
 
 
-/*
- * How to use (2 options):
- * 1. ServerProxy proxy = new ServerProxy(new OnTaskCompleted(){
- *          @Override
- *          public void completeTask(Object o)
- *          {
- *              (Your object) whatever = (Your object) o; <--cast it
- *              do stuff
- *          }
- * });
- *
- * 2. Have your class implement the OnTaskCompleted interface and override the copmleteTask method
- *
- *  ServerProxy proxy = new ServerProxy(this);
- *
- */
-public class ServerProxy extends AsyncTask<Request, Void, Object>
+public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
 {
+    private OnTaskCompleted callerClass;
+    private Serializer serializer;
 
     public void login(String username, String password)
     {
         LoginRequest request = new LoginRequest(username, password);
+        RequestWrapper wrapper = new RequestWrapper("login", request);
+        callerClass = new OnTaskCompleted()
+        {
+            @Override
+            public void completeTask(String responseJson)
+            {
+                LoginResponse response = serializer.deserializeLoginResponse(responseJson);
+                LoginCommand command = new LoginCommand(response.getUsername(), response.getErrorMessage());
+                command.execute();
+            }
+        };
+        execute(wrapper);
     }
 
-    OnTaskCompleted callerClass;
-    public ServerProxy(OnTaskCompleted caller) {
-        callerClass = caller;
+    public void register(String username, String password)
+    {
+        RegisterRequest request = new RegisterRequest(username, password);
+        RequestWrapper wrapper = new RequestWrapper("register", request);
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson)
+            {
+                RegisterResponse response = serializer.deserializeRegisterResponse(responseJson);
+                RegisterCommand command = new RegisterCommand(response.getUsername(), response.getErrorMessage());
+                command.execute();
+            }
+        };
+        execute(wrapper);
+    }
+
+    public void poll()
+    {
+        RequestWrapper wrapper = new RequestWrapper("poll", null);
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson)
+            {
+
+            }
+        };
+    }
+
+    public void join_game(int gameNumber)
+    {
+
+    }
+
+    public void create_game(String username, String gameName)
+    {
+
+    }
+
+    public void leave_game(String username, String gameName)
+    {
+
+    }
+
+    public void begin_game(String gameName)
+    {
+
+    }
+
+    public ServerProxy()
+    {
+        serializer = new Serializer();
     }
     @Override
-    protected Object doInBackground(Request... requests)
+    protected String doInBackground(RequestWrapper... requests)
     {
-        Request theRequest = requests[0];
+        RequestWrapper theRequest = requests[0];
         try
         {
             Serializer serializer = new Serializer();
@@ -71,13 +122,14 @@ public class ServerProxy extends AsyncTask<Request, Void, Object>
         }
         catch (Exception e)
         {
-            return null;
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
-    protected void onPostExecute(Object o)
+    protected void onPostExecute(String s)
     {
-        callerClass.completeTask(o);
+        callerClass.completeTask(s);
     }
 }

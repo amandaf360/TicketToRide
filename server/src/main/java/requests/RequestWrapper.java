@@ -2,8 +2,8 @@ package requests;
 
 public class RequestWrapper
 {
-    String requestType;
-    BaseRequest request;
+    private String requestType;
+    private BaseRequest request;
 
     public RequestWrapper(String requestType, BaseRequest request) {
         this.requestType = requestType;

@@ -2,7 +2,7 @@ package services;
 
 import java.util.List;
 
-import communicationdata.RegisterResponse;
+import responses.RegisterResponse;
 import servermodel.ModelRoot;
 import servermodel.User;
 

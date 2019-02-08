@@ -8,11 +8,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 
-import commands.ICommand;
-import commands.LoginCommand;
-import commands.RegisterCommand;
-import communicationdata.BaseResponse;
-import communicationdata.Request;
+import commands.*;
+import responses.BaseResponse;
+import requests.*;
+import responses.*;
 
 public class CommandHandler implements HttpHandler
 {
@@ -37,19 +36,27 @@ public class CommandHandler implements HttpHandler
         }
 
         Serializer serializer = new Serializer();
-        Request request = serializer.deserializeRequest(builder.toString());
+        RequestWrapper wrappedRequest = serializer.deserializeRequestWrapper(builder.toString());
 
-        String commandType = request.getCommandType();
+        String commandType = wrappedRequest.getRequestType();
         ICommand command;
         command = null;
 
         switch(commandType)
         {
             case "login":
-                command = new LoginCommand(request.getStringAt(0), request.getStringAt(1));
+                LoginRequest loginRequest = (LoginRequest)wrappedRequest.getRequest();
+                command = new LoginCommand(loginRequest.getUsername(), loginRequest.getPassword());
                 break;
             case "register":
-                command = new RegisterCommand(request.getStringAt(0), request.getStringAt(1));
+                RegisterRequest registerRequest = (RegisterRequest)wrappedRequest.getRequest();
+                command = new RegisterCommand(registerRequest.getUsername(), registerRequest.getPassword());
+                break;
+            case "poll":
+                break;
+            case "startGame":
+                StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
+                command = new StartGameCommand();
         }
 
         BaseResponse response = command.execute();

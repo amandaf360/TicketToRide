@@ -12,7 +12,9 @@ public class ModelRoot
         userList = new ArrayList<>();
     }
 
-    List<User> userList;
+    private List<User> userList;
+
+    private List<Game> gameList;
 
     public void addUser(User user)
     {
@@ -27,5 +29,13 @@ public class ModelRoot
     public static ModelRoot getModel()
     {
         return model;
+    }
+
+    public List<Game> getGameList() {
+        return gameList;
+    }
+
+    public void setGameList(List<Game> gameList) {
+        this.gameList = gameList;
     }
 }

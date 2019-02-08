@@ -1,4 +1,4 @@
-package DallinStuff.proxy;
+package requests;
 
 public class BaseRequest {
 }

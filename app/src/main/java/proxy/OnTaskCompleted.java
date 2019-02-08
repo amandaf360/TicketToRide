@@ -1,6 +1,6 @@
-package DallinStuff.proxy;
+package proxy;
 
 public interface OnTaskCompleted
 {
-    public void completeTask(Object o);
+    public void completeTask(String responseJson);
 }

@@ -1,6 +1,6 @@
 package commands;
 
-import communicationdata.BaseResponse;
+import responses.BaseResponse;
 
 public interface ICommand
 {

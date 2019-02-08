@@ -1,4 +1,4 @@
-package communicationdata;
+package responses;
 
 public class LoginResponse extends BaseResponse
 {

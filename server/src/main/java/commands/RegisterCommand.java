@@ -1,6 +1,7 @@
 package commands;
 
-import communicationdata.BaseResponse;
+import responses.BaseResponse;
+import services.RegisterService;
 
 public class RegisterCommand implements ICommand
 {
@@ -10,7 +11,7 @@ public class RegisterCommand implements ICommand
     @Override
     public BaseResponse execute()
     {
-        return null;
+        return new RegisterService().register(username, password);
     }
 
     public RegisterCommand(String username, String password) {

@@ -2,8 +2,8 @@ package services;
 
 import java.util.List;
 
-import communicationdata.BaseResponse;
-import communicationdata.LoginResponse;
+import responses.BaseResponse;
+import responses.LoginResponse;
 import servermodel.ModelRoot;
 import servermodel.User;
 

@@ -14,6 +14,6 @@ public class SetPlayerService
 
     public void setPlayer(ArrayList<Player> players)
     {
-        model.setPlayers(players);
+        //model.setPlayers(players);
     }
 }

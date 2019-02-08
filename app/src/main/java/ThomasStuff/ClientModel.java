@@ -26,7 +26,8 @@ public class ClientModel extends Observable
     private Game game;
     private ArrayList<String> messages;
     private static ClientModel instance;
-    private List<Observer> observers = new ArrayList<>();
+    private User user;
+    private List<Observer> observers = new ArrayList<Observer>();
 
 
     public ClientModel()
@@ -109,4 +110,13 @@ public class ClientModel extends Observable
     }
 
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        setChanged();
+        notifyObservers(this.user);
+    }
 }

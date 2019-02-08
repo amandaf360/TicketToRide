@@ -1,9 +1,16 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
-import ChrisStuff.LoginService;
-import ChrisStuff.RegisterService;
+import android.content.Intent;
 
-public class LoginActivityPresenter implements ILoginPresenter {
+import java.util.Observable;
+import java.util.Observer;
+
+import services.LoginService;
+import services.RegisterService;
+import ThomasStuff.ClientModel;
+import ThomasStuff.User;
+
+public class LoginActivityPresenter implements ILoginPresenter, Observer {
 
 //    private User user;
 //    private View view;
@@ -13,11 +20,12 @@ public class LoginActivityPresenter implements ILoginPresenter {
 //        this.view = v;
 //    }
 
-    //private User user;
+    private ClientModel clientModel = ClientModel.getInstance();
     private ILoginView view;
 
     public LoginActivityPresenter(ILoginView view) {
         this.view = view;
+        this.clientModel.addObserver(this);
     }
 
     @Override
@@ -29,12 +37,6 @@ public class LoginActivityPresenter implements ILoginPresenter {
         LoginService loginService = new LoginService();
         // will get both username and password and attempt to login
         loginService.login(view.getLoginUsername(), view.getLoginPassword());
-
-        // create a method called "Update" implemented from observer
-        // login succeeds if the user object is not null
-            // should change screens
-        // login fails if error message is updated
-            // call displayErrorMessage("Login failed");
 
         /* TO START A NEW ACTIVITY!!
         Intent i = new Intent(context, EventActivity.class);
@@ -115,6 +117,20 @@ public class LoginActivityPresenter implements ILoginPresenter {
         // else if a field is empty or passwords no longer match, disable the register button
         else {
             view.setRegisterEnabled(false);
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // create a method called "Update" implemented from observer
+        // if user object is created, then login has succeeded
+        // change to next screen
+        if(arg.getClass() == User.class) {
+            view.switchActivity();
+        }
+        else {
+            view.displayErrorMessage(arg.toString());
+            //clientModel.deleteMessage(arg.toString());
         }
     }
 

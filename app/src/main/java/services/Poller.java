@@ -1,12 +1,13 @@
-package ChrisStuff;
+package services;
+import proxy.ServerProxy;
 
 public class Poller
 {
-    //ServerProxy proxy;
+    ServerProxy proxy;
 
     public Poller()
     {
-        //initialize proxy
+        proxy = new ServerProxy();
     }
 
     public void poll()
@@ -19,7 +20,7 @@ public class Poller
             }
             catch (InterruptedException ex)
             {
-                //server.poll();
+                proxy.poll();
             }
         }
     }

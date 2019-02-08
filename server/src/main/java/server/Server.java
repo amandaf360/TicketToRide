@@ -33,6 +33,6 @@ public class Server
     }
 
     public static void main(String[] args) {
-        new Server().run("3001");
+        new Server().run("3000");
     }
 }

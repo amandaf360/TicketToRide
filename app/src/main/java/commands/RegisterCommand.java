@@ -1,4 +1,5 @@
 package commands;
+import services.*;
 
 public class RegisterCommand implements ICommand
 {
@@ -7,19 +8,19 @@ public class RegisterCommand implements ICommand
 
     public void execute()
     {
-        /*
+
         if(username != null)
         {
-            SetPlayerService playerService = new SetPlayerService();
-            playerService.setPlayer(username);
+            SetUserService userService = new SetUserService();
+            userService.setUser(username);
         }
-        else
+       /* else
         {
             ShowMessageService messageService = new ShowMessageService();
             messageService.show(errorMessage);
-        }
+        }*/
 
-        */
+
     }
 
     public RegisterCommand(String username, String errorMessage)

@@ -1,6 +1,7 @@
 package commands;
 
 import communicationdata.BaseResponse;
+import services.LoginService;
 
 public class LoginCommand implements ICommand
 {
@@ -32,6 +33,8 @@ public class LoginCommand implements ICommand
     @Override
     public BaseResponse execute()
     {
-        return null;
+        LoginService service = new LoginService();
+        BaseResponse response = service.login(username, password);
+        return response;
     }
 }

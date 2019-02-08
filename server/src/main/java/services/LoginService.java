@@ -2,13 +2,14 @@ package services;
 
 import java.util.List;
 
+import communicationdata.BaseResponse;
 import communicationdata.LoginResponse;
 import servermodel.ModelRoot;
 import servermodel.User;
 
 public class LoginService
 {
-    public LoginResponse login(String username, String password)
+    public BaseResponse login(String username, String password)
     {
         ModelRoot model = ModelRoot.getModel();
         List<User> userList = model.getUserList();

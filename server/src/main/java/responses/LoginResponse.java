@@ -1,6 +1,6 @@
 package communicationdata;
 
-public class LoginResponse
+public class LoginResponse extends BaseResponse
 {
     private String username;
     private String errorMessage;

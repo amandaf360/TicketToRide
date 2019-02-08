@@ -5,6 +5,8 @@
     <string name="username">Username:</string>
     <string name="password">Password:</string>
     <string name="confirmPassword">Confirm Password:</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 
     <!-- Strings related to settings -->
     <string name="settings_life_story">Life Story Lines</string>

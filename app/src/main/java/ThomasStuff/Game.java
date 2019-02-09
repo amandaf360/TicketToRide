@@ -5,10 +5,11 @@ import java.util.ArrayList;
 public class Game
 {
     private String name;
-    private int numPlayers;
+    private int maxPlayers;
     private ArrayList<Player> players;
     private int gameNum;
     private int currentPlayers;
+    private String creator;
 
 
     public Game()
@@ -38,4 +39,32 @@ public class Game
         return name;
     }
 
+    public String getCreator()
+    {
+        if(creator == null || creator == "")
+        {
+            return "Games have creators now";
+        }
+        return creator;
+    }
+
+    public void setCreator(String creator)
+    {
+        this.creator = creator;
+    }
+
+    public int getMaxPlayers()
+    {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(int maxPlayers)
+    {
+        this.maxPlayers = maxPlayers;
+    }
+
+    public void setCurrentPlayers(int currentPlayers)
+    {
+        this.currentPlayers = currentPlayers;
+    }
 }

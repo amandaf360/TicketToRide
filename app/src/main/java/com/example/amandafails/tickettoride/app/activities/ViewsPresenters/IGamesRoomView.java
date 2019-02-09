@@ -4,6 +4,6 @@ public interface IGamesRoomView
 {
 
     void onCreateGameClicked();
-    void onJoinGameClicked();
-    void onGameClicked();
+    //void onJoinGameClicked();
+    //void onGameClicked();
 }

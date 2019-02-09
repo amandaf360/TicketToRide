@@ -78,8 +78,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
 //        ClientModel clientModel = new ClientModel();
 //        // CHANGE THIS LINE TOO
-//        // int numPlayers = ClientModel.get().getGame().getNumPlayers();
-//        numPlayers = clientModel.getGame().getNumPlayers();
+//        // int numPlayers = ClientModel.get().getGame().getMaxPlayers();
+//        numPlayers = clientModel.getGame().getMaxPlayers();
 
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
         mRecyclerView.setAdapter(mAdapter);

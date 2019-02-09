@@ -97,6 +97,15 @@ public class ClientModel extends Observable
 
     }
 
+    public int getGameNum(Game game)
+    {
+        if(gameList.contains(game))
+        {
+            return gameList.indexOf(game);
+        }
+        return -1;
+    }
+
     @Override
     public synchronized void addObserver(Observer o)
     {

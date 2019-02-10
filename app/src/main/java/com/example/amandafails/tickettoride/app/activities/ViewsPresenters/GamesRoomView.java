@@ -180,11 +180,18 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
 
 
+    @Override
     public void update()
     {
 
         setGames();
         upDateGameList();
+    }
+
+    @Override
+    public String[] getStringArray()
+    {
+        return getResources().getStringArray(R.array.dialog_create_game_num_players);
     }
 
     private void upDateGameList()

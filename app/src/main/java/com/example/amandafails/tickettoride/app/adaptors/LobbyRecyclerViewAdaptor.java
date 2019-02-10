@@ -21,15 +21,10 @@ public class LobbyRecyclerViewAdaptor extends RecyclerView.Adapter<LobbyRecycler
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
         ImageView mImageView;
-        String myUsername;
         ViewHolder(View v) {
             super(v);
             mTextView = v.findViewById(R.id.lobby_player_text);
             mImageView = v.findViewById(R.id.lobby_image);
-        }
-
-        void bindPerson(final String username) {
-            myUsername = username;
         }
 
     }
@@ -48,16 +43,7 @@ public class LobbyRecyclerViewAdaptor extends RecyclerView.Adapter<LobbyRecycler
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final String currentString = lines.get(position);
-
-        ClientModel clientModel = new ClientModel();
-        String username = clientModel.getUser().getUserName();
-        Player myPlayer = new Player();
-        String toDisplay = "";
-        toDisplay = username + currentString;
-        holder.bindPerson(username);
-
-        holder.mTextView.setText(toDisplay);
-
+        holder.mTextView.setText(currentString);
     }
 
     @Override

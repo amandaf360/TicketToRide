@@ -88,6 +88,14 @@ public class ClientModel extends Observable
         return null;
     }
 
+    public void addPlayerToGame(Game game, Player player)
+    {
+        game.addPlayer(player);
+
+        setChanged();
+        notifyObservers(this.gameList);
+    }
+
     public void setGame(Game game)
     {
 

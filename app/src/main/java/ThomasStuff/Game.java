@@ -67,4 +67,9 @@ public class Game
     {
         this.currentPlayers = currentPlayers;
     }
+
+    public void addPlayer(Player player) /// THIS SHOULD NEVER BE CALLED
+    {
+        players.add(player);
+    }
 }

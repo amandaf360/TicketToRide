@@ -6,7 +6,6 @@ public interface IGamesRoomView
 
     public void onCreateGameClicked();
     public void update();
-    String[] getStringArray();
     //void onJoinGameClicked();
     //void onGameClicked();
 }

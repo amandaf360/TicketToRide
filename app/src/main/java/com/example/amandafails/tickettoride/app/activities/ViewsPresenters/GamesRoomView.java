@@ -49,7 +49,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_room);
 
-        //presenter = new GamesRoomPresenter(this);
+        presenter = new GamesRoomPresenter(this);
 
         createGame = findViewById(R.id.create_game);
         createGame.setOnClickListener(new View.OnClickListener()
@@ -66,53 +66,11 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         gameListRecycler = findViewById(R.id.my_games_recycler_view);
         setGames(); // initializes games
         upDateGameList();
-        /*
 
-        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
-        {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount)
-            {
-
-            }
-
-            @Override
-            public void onChanged()
-            {
-                if (games.size() != numPlayers)
-                {
-                    createGame.setEnabled(false);
-                } else
-                {
-                    createGame.setEnabled(true);
-                }
-            }
-        });
-
-        layoutManager = new LinearLayoutManager(this);
-        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
-        gameListRecycler.setLayoutManager(layoutManager);
-
-//        ClientModel clientModel = new ClientModel();
-//        // CHANGE THIS LINE TOO
-//        // int numPlayers = ClientModel.get().getGame().getMaxPlayers();
-//        numPlayers = clientModel.getGame().getMaxPlayers();
-
-        adapter = new LobbyRecyclerViewAdaptor(games);
-        gameListRecycler.setAdapter(adapter);
-        */
 
 
     }
 
-    /* DON'T KNOW IF WE NEED THIS OR NOT
-    @Override
-    public void onBackPressed() {
-        Intent data = new Intent();
-        setResult(RESULT_OK, data);
-        finish();
-    }
-    */
 
     @Override
     public void onCreateGameClicked()
@@ -164,7 +122,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
     public void setGames()
     {
-        //games = presenter.getGameListFromModel();
+        games = presenter.getGameListFromModel();
     }
 
 

@@ -1,6 +1,12 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
-public class LobbyActivityPresenter implements ILobbyPresenter {
+import java.util.Observable;
+import java.util.Observer;
+
+import ThomasStuff.Player;
+import ThomasStuff.User;
+
+public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     private ILobbyView view;
 
@@ -29,6 +35,18 @@ public class LobbyActivityPresenter implements ILobbyPresenter {
                     i.putExtra("event", eventID);
                     context.startActivity(i);
          */
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // if new player object is created, display that this player has joined game
+        if(arg.getClass() == Player.class) {
+            view.displayPlayer((Player)arg);
+        }
+        else {
+            view.displayErrorMessage(arg.toString());
+            //clientModel.popMessage(arg.toString());
+        }
     }
 
 

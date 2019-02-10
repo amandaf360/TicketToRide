@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import ThomasStuff.ClientModel;
+import ThomasStuff.Game;
 import requests.*;
 import commands.*;
 import responses.*;
@@ -78,7 +80,18 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
 
     public void createGame(String username, int numPlayers, String gameName)
     {
+        //Hacky sterff, feel free to delete completely
 
+        Game game = new Game();
+        game.setCreator(username);
+        game.setMaxPlayers(numPlayers);
+        game.setName(gameName);
+
+        ClientModel clientModel = ClientModel.getInstance();
+
+        clientModel.addGame(game);
+
+        // Hacky stuff done
     }
 
     public void leaveGame(String username, String gameName)

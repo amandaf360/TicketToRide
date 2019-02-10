@@ -121,7 +121,6 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        // create a method called "Update" implemented from observer
         // if user object is created, then login has succeeded
         // change to next screen
         if(arg.getClass() == User.class) {

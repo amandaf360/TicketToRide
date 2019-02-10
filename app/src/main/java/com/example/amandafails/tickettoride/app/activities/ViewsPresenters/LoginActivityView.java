@@ -153,28 +153,12 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
     @Override
     public void onLoginClicked() {
-        // for now, just show a toast
-        Context context = Objects.requireNonNull(this).getApplicationContext();
-        CharSequence text = "Login Pressed!";
-        int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
         // call login in presenter
         presenter.login();
     }
 
     @Override
     public void onRegisterClicked() {
-        // for now, just show a toast
-        Context context = Objects.requireNonNull(this).getApplicationContext();
-        CharSequence text = "Register Pressed! Should switch activities...";
-        int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
         // call register in presenter
         presenter.register();
     }

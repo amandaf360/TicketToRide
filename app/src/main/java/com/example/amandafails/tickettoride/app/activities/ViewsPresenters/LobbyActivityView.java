@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
@@ -29,6 +31,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
     int numPlayers;
     private LobbyActivityPresenter presenter;
 
+    private TextView gameName;
+
     private Button startButton;
 
     @Override
@@ -40,6 +44,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         lines = new ArrayList<>();
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
 
+        gameName = findViewById(R.id.game_name_text);
+        gameName.setText(presenter.getGameName());
         startButton = findViewById(R.id.button_start);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override

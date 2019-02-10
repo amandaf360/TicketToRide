@@ -19,6 +19,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     }
 
+
     @Override
     public void startGame() {
         // disable the start game button
@@ -56,6 +57,21 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
                     context.startActivity(i);
          */
     }
+
+    @Override
+    public String getGameName() {
+        // FOR NOW set the current game manually (for testing)
+        // will need to update client model with current game once a game has been joined
+        Game game = new Game();
+        game.setMaxPlayers(3);
+        game.setName("My first game");
+        game.setCreator("creator");
+        game.setCurrentPlayers(0);
+        clientModel.setGame(game);
+
+        return clientModel.getGame().getName();
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {

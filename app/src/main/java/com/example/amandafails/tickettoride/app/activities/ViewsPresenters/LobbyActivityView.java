@@ -37,6 +37,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         setContentView(R.layout.activity_game_lobby);
 
         presenter = new LobbyActivityPresenter(this);
+        lines = new ArrayList<>();
+        mAdapter = new LobbyRecyclerViewAdaptor(lines);
 
         startButton = findViewById(R.id.button_start);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +51,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         startButton.setEnabled(false);
 
         mRecyclerView = findViewById(R.id.my_lobby_recycler_view);
-        lines = new ArrayList<>();
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -81,7 +82,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 //        // int numPlayers = ClientModel.get().getGame().getMaxPlayers();
 //        numPlayers = clientModel.getGame().getMaxPlayers();
 
-        mAdapter = new LobbyRecyclerViewAdaptor(lines);
         mRecyclerView.setAdapter(mAdapter);
     }
 

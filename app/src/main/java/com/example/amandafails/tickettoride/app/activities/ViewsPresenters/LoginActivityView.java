@@ -167,7 +167,7 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
     public void onRegisterClicked() {
         // for now, just show a toast
         Context context = Objects.requireNonNull(this).getApplicationContext();
-        CharSequence text = "Register Pressed!";
+        CharSequence text = "Register Pressed! Should switch activities...";
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);

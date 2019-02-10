@@ -61,7 +61,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             }
         });
 
-        createGame.setEnabled(true);
+        //createGame.setEnabled(false);
 
         gameListRecycler = findViewById(R.id.my_games_recycler_view);
         setGames(); // initializes games
@@ -81,35 +81,16 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
         presenter.createGame(gamesRoomView);
+        update();
+        //toast.show();
 
         // call register in presenter
         //presenter.startGame();
     }
 
-    /*
-    @Override
-    public void setCreateEnabled(boolean enabled)
-    {
-        createGame.setEnabled(enabled);
-    }
-    */
 
-    /*
-    @Override
-    public void displayPlayer(Player player)
-    {
-        String toAdd = player.getName() + " has entered the game.";
-        games.add(toAdd);
-        adapter.notifyDataSetChanged();
 
-        // don't know if this works in here??
-        adapter = new LobbyRecyclerViewAdaptor(games);
-        gameListRecycler.setAdapter(adapter);
-    }
-    */
 
     //@Override
     public void displayErrorMessage(String error)
@@ -187,6 +168,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         @Override
         public GameListHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
+
 
             LayoutInflater layoutInflater = LayoutInflater.from(gamesRoomView);
             View view = layoutInflater.inflate(R.layout.game_list_object, parent, false);

@@ -17,6 +17,7 @@ import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
+import services.CreateGameService;
 import services.JoinGameService;
 
 public class GamesRoomPresenter implements ILobbyPresenter, Observer
@@ -110,12 +111,23 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
         joinGame = true;
     }
 
+    private static boolean createGame;
+
+    private static void createGameYes()
+    {
+        createGame = true;
+    }
+
+    private static void createGameNo()
+    {
+        createGame = true;
+    }
 
 
     public boolean createGame(Context context)
     {
         String joinGameName = "pick the amount of players you want in your game";
-        String[] singleChoiceItems = view.getStringArray();
+        String[] singleChoiceItems = {"2","3","4","5"};
         int itemSelected = 0;
         new AlertDialog.Builder(context)
                 .setTitle("How many players do you want in your game?")
@@ -129,20 +141,20 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
                 .setPositiveButton("Join", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        joinGameYes();
+                        createGameYes();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        joinGameNo();
+                        createGameNo();
                     }
                 })
                 .show();
 
-        if(joinGame == true)
+        if(createGame == true)
         {
-            JoinGameService joinGameService = new JoinGameService();
+            CreateGameService createGameService = new CreateGameService();
             //joinGameService.joinGame(clientModel.getGameNum(game));
 
             return true;

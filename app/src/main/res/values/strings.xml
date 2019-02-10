@@ -18,14 +18,8 @@
     <string name="joinGame">Join Game</string>
     <string name="joinPopUpMessage">Do you really want to join this game?</string>
     <string name="positiveJoinGame">Yes</string>
-    <string name="negativeJoineGame">No</string>
+    <string name="negativeJoinGame">No</string>
 
-    <string-array name="dialog_create_game_num_players">
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
 
         <!-- Strings related to game lobby -->
     <string name="waiting">Waiting for people to join game&#8230;</string>

@@ -42,6 +42,36 @@ public class ClientModel extends Observable
         return instance;
     }
 
+    public void errorChecking()
+    {
+        Game game = new Game();
+        game.setName("Ya boi");
+        game.setMaxPlayers(5);
+        game.setCreator("Ya boi");
+
+        Game game2 = new Game();
+        game2.setName("THORSTY boi");
+        game2.setMaxPlayers(5);
+        game2.setCreator("THORSTY boi's game");
+
+        Game game4 = new Game();
+        game4.setName("STRONK boi");
+        game4.setMaxPlayers(5);
+        game4.setCreator("STRONK BOI'S GAME TOO STRONK");
+
+        Player player = new Player();
+        player.setName("Superman");
+
+        game4.addPlayer(player);
+
+        gameList.add(game);
+        gameList.add(game2);
+        gameList.add(game4);
+
+
+
+    }
+
     public ArrayList<Game> getGameList()
     {
         return gameList;

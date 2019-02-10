@@ -16,23 +16,19 @@ import commands.*;
 import responses.*;
 
 
-public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
-{
+public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     private OnTaskCompleted callerClass;
     private Serializer serializer;
 
-    public void login(String username, String password)
-    {
+    public void login(String username, String password) {
         LoginRequest request = new LoginRequest(username, password);
         ArrayList<String> stringList = new ArrayList<String>();
         stringList.add(username);
         stringList.add(password);
         RequestWrapper wrapper = new RequestWrapper("login", stringList);
-        callerClass = new OnTaskCompleted()
-        {
+        callerClass = new OnTaskCompleted() {
             @Override
-            public void completeTask(String responseJson)
-            {
+            public void completeTask(String responseJson) {
                 LoginResponse response = serializer.deserializeLoginResponse(responseJson);
                 LoginCommand command = new LoginCommand(response.getUsername(), response.getErrorMessage());
                 command.execute();
@@ -41,8 +37,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         execute(wrapper);
     }
 
-    public void register(String username, String password)
-    {
+    public void register(String username, String password) {
         System.out.println("In register proxy command");
         RegisterRequest request = new RegisterRequest(username, password);
         ArrayList<String> stringList = new ArrayList<String>();
@@ -51,8 +46,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         RequestWrapper wrapper = new RequestWrapper("register", stringList);
         callerClass = new OnTaskCompleted() {
             @Override
-            public void completeTask(String responseJson)
-            {
+            public void completeTask(String responseJson) {
                 RegisterResponse response = serializer.deserializeRegisterResponse(responseJson);
                 RegisterCommand command = new RegisterCommand(response.getUsername(), response.getErrorMessage());
                 command.execute();
@@ -61,25 +55,21 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         execute(wrapper);
     }
 
-    public void poll()
-    {
+    public void poll() {
         RequestWrapper wrapper = new RequestWrapper("poll", null);
         callerClass = new OnTaskCompleted() {
             @Override
-            public void completeTask(String responseJson)
-            {
+            public void completeTask(String responseJson) {
 
             }
         };
     }
 
-    public void joinGame(int gameNumber)
-    {
+    public void joinGame(int gameNumber) {
 
     }
 
-    public void createGame(String username, int numPlayers, String gameName)
-    {
+    public void createGame(String username, int numPlayers, String gameName) {
         //Hacky sterff, feel free to delete completely
 
         Game game = new Game();
@@ -92,30 +82,41 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         clientModel.addGame(game);
 
         // Hacky stuff done
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        stringList.add(Integer.toString(numPlayers));
+        stringList.add(gameName);
+        RequestWrapper wrapper = new RequestWrapper("createGame", stringList);
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson)
+            {
+                CreateGameResponse gameResponse = serializer.deserializeCreateGameResponse(responseJson);
+                CreateGameCommand command = new CreateGameCommand(gameResponse.getGameName(), gameResponse.getUser(), gameResponse.getNumPlayers());
+                command.execute();
+            }
+        };
+        execute(wrapper);
     }
 
-    public void leaveGame(String username, String gameName)
-    {
+    public void leaveGame(String username, String gameName) {
 
     }
 
-    public void beginGame(String gameName)
-    {
+    public void beginGame(String gameName) {
 
     }
 
-    public ServerProxy()
-    {
+    public ServerProxy() {
         serializer = new Serializer();
     }
+
     @Override
-    protected String doInBackground(RequestWrapper... requests)
-    {
+    protected String doInBackground(RequestWrapper... requests) {
         RequestWrapper theRequest = requests[0];
-        try
-        {
+        try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.0.0.143:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://192.168.1.7:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
@@ -133,23 +134,19 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
             InputStreamReader is = new InputStreamReader(connection.getInputStream());
 
             int currentChar;
-            while ((currentChar = is.read()) != -1)
-            {
+            while ((currentChar = is.read()) != -1) {
                 resultBuilder.append((char) currentChar);
             }
             is.close();
             return resultBuilder.toString();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
     @Override
-    protected void onPostExecute(String s)
-    {
+    protected void onPostExecute(String s) {
         callerClass.completeTask(s);
     }
 }

@@ -12,7 +12,8 @@ public class RegisterCommand implements ICommand
     public BaseResponse execute()
     {
         System.out.println("In server register command");
-        return new RegisterService().register(username, password);
+        RegisterService service = new RegisterService();
+        return service.register(username, password);
     }
 
     public RegisterCommand(String username, String password) {

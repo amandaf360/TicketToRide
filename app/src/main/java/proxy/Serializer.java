@@ -28,4 +28,9 @@ public class Serializer
         return gson.fromJson(response, RegisterResponse.class);
     }
 
+    public CreateGameResponse deserializeCreateGameResponse(String response)
+    {
+        return gson.fromJson(response, CreateGameResponse.class);
+    }
+
 }

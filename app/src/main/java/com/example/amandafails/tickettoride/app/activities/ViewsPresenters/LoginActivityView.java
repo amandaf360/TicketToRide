@@ -214,6 +214,11 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
     @Override
     public void switchActivity() {
+        Context context = Objects.requireNonNull(this).getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, "Success!", duration);
+        toast.show();
         Intent i = new Intent(LoginActivityView.this, LobbyActivityView.class);
         startActivity(i);
     }

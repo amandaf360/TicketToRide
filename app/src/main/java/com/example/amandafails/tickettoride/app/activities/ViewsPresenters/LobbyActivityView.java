@@ -52,6 +52,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
         mRecyclerView = findViewById(R.id.my_lobby_recycler_view);
 
+
+
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -81,6 +83,7 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 //        // CHANGE THIS LINE TOO
 //        // int numPlayers = ClientModel.get().getGame().getMaxPlayers();
 //        numPlayers = clientModel.getGame().getMaxPlayers();
+
 
         mRecyclerView.setAdapter(mAdapter);
     }

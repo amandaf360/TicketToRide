@@ -126,9 +126,9 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
 
     public boolean createGame(Context context)
     {
-        String joinGameName = "pick the amount of players you want in your game";
+        final String joinGameName = "pick the amount of players you want in your game";
         String[] singleChoiceItems = {"2","3","4","5"};
-        int itemSelected = 0;
+        final int itemSelected = 0;
         new AlertDialog.Builder(context)
                 .setTitle("How many players do you want in your game?")
                 .setMessage(joinGameName)
@@ -144,7 +144,7 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
                         createGameYes();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         createGameNo();

@@ -34,12 +34,12 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 {
 
     private RecyclerView gameListRecycler;
-    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Game> games;
     int numPlayers;
     private GamesRoomPresenter presenter;
     private GamesRoomView gamesRoomView = this;
+    private GamesAdapter gameAdapter;
 
     private Button createGame;
 
@@ -82,6 +82,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         Toast toast = Toast.makeText(context, text, duration);
         presenter.createGame(gamesRoomView);
+        gameAdapter.notifyDataSetChanged();
         update();
         //toast.show();
 
@@ -135,9 +136,8 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
     {
 
 
-
-        GamesRoomView.GamesAdapter adapter = new GamesRoomView.GamesAdapter(games);
-        gameListRecycler.setAdapter(adapter);
+        gameAdapter = new GamesRoomView.GamesAdapter(games);
+        gameListRecycler.setAdapter(gameAdapter);
     }
 
 

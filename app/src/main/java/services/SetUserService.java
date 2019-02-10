@@ -1,5 +1,6 @@
 package services;
 import ThomasStuff.ClientModel;
+import ThomasStuff.User;
 
 public class SetUserService
 {
@@ -12,6 +13,8 @@ public class SetUserService
 
     public void setUser(String username)
     {
-
+        User newUser = new User();
+        newUser.setUserName(username);
+        model.setUser(newUser);
     }
 }

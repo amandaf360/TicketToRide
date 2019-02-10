@@ -24,7 +24,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
     public void login(String username, String password)
     {
         LoginRequest request = new LoginRequest(username, password);
-       // RequestWrapper wrapper = new RequestWrapper("login", request);
+        ArrayList<String> stringList = new ArrayList<String>();
+        stringList.add(username);
+        stringList.add(password);
+        RequestWrapper wrapper = new RequestWrapper("login", stringList);
         callerClass = new OnTaskCompleted()
         {
             @Override
@@ -35,7 +38,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
                 command.execute();
             }
         };
-       // execute(wrapper);
+        execute(wrapper);
     }
 
     public void register(String username, String password)
@@ -43,6 +46,8 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         System.out.println("In register proxy command");
         RegisterRequest request = new RegisterRequest(username, password);
         ArrayList<String> stringList = new ArrayList<String>();
+        stringList.add(username);
+        stringList.add(password);
         RequestWrapper wrapper = new RequestWrapper("register", stringList);
         callerClass = new OnTaskCompleted() {
             @Override
@@ -110,7 +115,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         try
         {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://192.168.255.93:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://10.37.56.105:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
@@ -133,6 +138,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
             {
                 resultBuilder.append((char) currentChar);
             }
+            is.close();
             return resultBuilder.toString();
         }
         catch (Exception e)

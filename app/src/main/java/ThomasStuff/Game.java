@@ -14,7 +14,7 @@ public class Game
 
     public Game()
     {
-
+        players = new ArrayList<Player>();
     }
 
 

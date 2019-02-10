@@ -15,6 +15,8 @@ import com.example.amandafails.tickettoride.R;
 
 import java.util.Objects;
 
+import ThomasStuff.ClientModel;
+
 public class LoginActivityView extends AppCompatActivity implements ILoginView {
     private LoginActivityPresenter presenter;
 
@@ -214,7 +216,12 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
     @Override
     public void switchActivity() {
-        Intent i = new Intent(LoginActivityView.this, LobbyActivityView.class);
+        Context context = Objects.requireNonNull(this).getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, "Success!", duration);
+        toast.show();
+        Intent i = new Intent(LoginActivityView.this, GamesRoomView.class);
         startActivity(i);
     }
 

@@ -45,11 +45,10 @@ public class CommandHandler implements HttpHandler
         command = null;
         System.out.println("Command type: " + commandType);
 
-        switch(commandType)
-        {
+        switch(commandType) {
             case "login":
-                //LoginRequest loginRequest = (LoginRequest)wrappedRequest.getRequest();
-                //command = new LoginCommand(loginRequest.getUsername(), loginRequest.getPassword());
+                ArrayList<String> loginList = wrappedRequest.getStringList();
+                command = new LoginCommand(loginList.get(0), loginList.get(1));
                 break;
             case "register":
                 ArrayList<String> argumentList = wrappedRequest.getStringList();
@@ -58,7 +57,7 @@ public class CommandHandler implements HttpHandler
             case "poll":
                 break;
             case "startGame":
-               // StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
+                // StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
                 command = new StartGameCommand();
         }
 

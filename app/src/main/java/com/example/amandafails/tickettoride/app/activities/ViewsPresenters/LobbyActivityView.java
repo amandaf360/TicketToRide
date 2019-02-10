@@ -48,7 +48,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
             }
         });
 
-        startButton.setEnabled(false);
+        //startButton.setEnabled(false);
+        startButton.setEnabled(true);
 
         mRecyclerView = findViewById(R.id.my_lobby_recycler_view);
 
@@ -57,22 +58,26 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
+                /*
                 if(lines.size() != numPlayers) {
                     startButton.setEnabled(false);
                 }
                 else {
                     startButton.setEnabled(true);
                 }
+                */
             }
 
             @Override
             public void onChanged() {
+                /*
                 if(lines.size() != numPlayers) {
                     startButton.setEnabled(false);
                 }
                 else {
                     startButton.setEnabled(true);
                 }
+                */
             }
         });
         mLayoutManager = new LinearLayoutManager(this);
@@ -107,7 +112,7 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
-        // call register in presenter
+        // call start game in presenter
         presenter.startGame();
     }
 

@@ -77,4 +77,9 @@ public class Game
     {
         this.name = name;
     }
+
+    public ArrayList<Player> getPlayers()
+    {
+        return players;
+    }
 }

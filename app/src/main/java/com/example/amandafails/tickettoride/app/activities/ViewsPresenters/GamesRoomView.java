@@ -187,7 +187,6 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         public GameListHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
 
-
             LayoutInflater layoutInflater = LayoutInflater.from(gamesRoomView);
             View view = layoutInflater.inflate(R.layout.game_list_object, parent, false);
             return new GameListHolder(view);

@@ -154,7 +154,6 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
 
         GamesRoomView.GamesAdapter adapter = new GamesRoomView.GamesAdapter(games);
-        //do things to the adapterPerson.
         gameListRecycler.setAdapter(adapter);
     }
 

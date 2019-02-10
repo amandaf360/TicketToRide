@@ -61,7 +61,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             }
         });
 
-        createGame.setEnabled(false);
+        createGame.setEnabled(true);
 
         gameListRecycler = findViewById(R.id.my_games_recycler_view);
         setGames(); // initializes games
@@ -81,7 +81,9 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);
-        //toast.show();
+        toast.show();
+
+        presenter.createGame(gamesRoomView);
 
         // call register in presenter
         //presenter.startGame();

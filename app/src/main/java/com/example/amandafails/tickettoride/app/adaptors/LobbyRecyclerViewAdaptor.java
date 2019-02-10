@@ -26,7 +26,6 @@ public class LobbyRecyclerViewAdaptor extends RecyclerView.Adapter<LobbyRecycler
             mTextView = v.findViewById(R.id.lobby_player_text);
             mImageView = v.findViewById(R.id.lobby_image);
         }
-
     }
 
     public LobbyRecyclerViewAdaptor(List<String> lines) {

@@ -49,7 +49,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_room);
 
-        //presenter = new GamesRoomPresenter(this);
+        presenter = new GamesRoomPresenter(this);
 
         createGame = findViewById(R.id.create_game);
         createGame.setOnClickListener(new View.OnClickListener()
@@ -61,7 +61,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             }
         });
 
-        //createGame.setEnabled(false);
+        createGame.setEnabled(false);
 
         gameListRecycler = findViewById(R.id.my_games_recycler_view);
         setGames(); // initializes games
@@ -164,7 +164,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
     public void setGames()
     {
-        //games = presenter.getGameListFromModel();
+        games = presenter.getGameListFromModel();
     }
 
 

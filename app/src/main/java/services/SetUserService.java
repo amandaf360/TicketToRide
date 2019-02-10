@@ -4,7 +4,7 @@ import ThomasStuff.User;
 
 public class SetUserService
 {
-    ClientModel model;
+    private ClientModel model;
 
     public SetUserService()
     {

@@ -5,7 +5,7 @@ import ThomasStuff.Player;
 
 public class SetPlayerService
 {
-    ClientModel model;
+    private ClientModel model;
 
     SetPlayerService()
     {

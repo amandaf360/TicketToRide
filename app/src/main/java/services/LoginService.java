@@ -3,7 +3,7 @@ import proxy.ServerProxy;
 
 public class LoginService
 {
-    ServerProxy proxy;
+    private ServerProxy proxy;
 
     public LoginService()
     {

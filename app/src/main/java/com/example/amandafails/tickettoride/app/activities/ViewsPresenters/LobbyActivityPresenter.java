@@ -23,6 +23,10 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     public void startGame() {
         // disable the start game button
         //view.setStartEnabled(false);
+        User user = new User();
+        user.setUserName("afails");
+        clientModel.setUser(user);
+
         Game game = new Game();
         game.setMaxPlayers(3);
         game.setCreator("creator");

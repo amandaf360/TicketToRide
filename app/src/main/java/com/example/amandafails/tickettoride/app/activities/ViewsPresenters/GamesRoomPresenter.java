@@ -32,6 +32,8 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
     public GamesRoomPresenter(IGamesRoomView view) {
         this.view = view;
         clientModel = ClientModel.getInstance();
+        clientModel.addObserver(this);
+        clientModel.errorChecking();
     }
 
     @Override
@@ -113,9 +115,30 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
 
     private static boolean createGame;
 
-    private static void createGameYes()
+    private static int value;
+
+    private static void setChoice(int arg)
     {
+        value = arg;
+    }
+
+    private static void createGameYes(int which)
+    {
+
+        value = which;
         createGame = true;
+    }
+
+    private void doit()
+    {
+
+        if(createGame)
+        {
+            CreateGameService createGameService = new CreateGameService();
+            createGameService.createGame(clientModel.getUser().getUserName(), value + 2, makeGameName());
+            //joinGameService.joinGame(clientModel.getGameNum(game));
+            createGameNo();
+        }
     }
 
     private static void createGameNo()
@@ -124,27 +147,32 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
     }
 
 
+    private static CharSequence selected;
+
     public boolean createGame(Context context)
     {
-        String joinGameName = "pick the amount of players you want in your game";
+
+
+        final String joinGameName = "pick the amount of players you want in your game";
         String[] singleChoiceItems = {"2","3","4","5"};
-        int itemSelected = 0;
+        final int itemSelected = 0;
         new AlertDialog.Builder(context)
                 .setTitle("How many players do you want in your game?")
-                .setMessage(joinGameName)
+                //.setMessage(joinGameName)
                 .setSingleChoiceItems(singleChoiceItems, itemSelected, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int selectedIndex) {
-
+                        setChoice(selectedIndex);
                     }
                 })
                 .setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        createGameYes();
+                        createGameYes(value);
+                        doit();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         createGameNo();
@@ -152,20 +180,10 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
                 })
                 .show();
 
-        if(createGame == true)
-        {
-            CreateGameService createGameService = new CreateGameService();
-            createGameService.createGame(clientModel.getUser().getUserName(), (itemSelected + 2), makeGameName());
-            //joinGameService.joinGame(clientModel.getGameNum(game));
+        createGameNo();
 
-            return true;
-        }
 
-        else
-        {
-            return false;
-        }
-        //return true;
+        return true;
     }
 
     @Override

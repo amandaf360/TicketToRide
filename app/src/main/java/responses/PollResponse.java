@@ -1,9 +1,10 @@
 package responses;
 
 import java.util.ArrayList;
-import servermodel.Game;
 
-public class PollResponse extends BaseResponse
+import ThomasStuff.Game;
+
+public class PollResponse
 {
     private ArrayList<Game> gamesCreated;
     private ArrayList<String> gamesDeleted;

@@ -21,11 +21,10 @@ public class LoginCommand implements ICommand
             SetUserService userService = new SetUserService();
             userService.setUser(username);
         }
-        /*else
+        else
         {
-            ShowMessageService messageService = new ShowMessageService();
-            messageService.show(errorMessage);
+            AddMessageService messageService = new AddMessageService();
+            messageService.addMessage(errorMessage);
         }
-        */
     }
 }

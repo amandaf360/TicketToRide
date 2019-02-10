@@ -5,7 +5,7 @@ import ThomasStuff.Game;
 
 public class SetActiveGameService
 {
-    ClientModel model;
+    private ClientModel model;
 
     public SetActiveGameService()
     {

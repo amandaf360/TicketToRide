@@ -6,7 +6,7 @@ import ThomasStuff.Game;
 
 public class SetGamelistService
 {
-    ClientModel model;
+    private ClientModel model;
 
     public SetGamelistService()
     {

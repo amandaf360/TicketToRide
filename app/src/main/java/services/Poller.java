@@ -3,7 +3,7 @@ import proxy.ServerProxy;
 
 public class Poller
 {
-    ServerProxy proxy;
+    private ServerProxy proxy;
 
     public Poller()
     {

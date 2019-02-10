@@ -3,7 +3,7 @@ import proxy.ServerProxy;
 
 public class CreateGameService
 {
-    ServerProxy proxy;
+    private ServerProxy proxy;
 
     public CreateGameService()
     {

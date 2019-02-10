@@ -3,7 +3,7 @@ import proxy.ServerProxy;
 
 public class JoinGameService
 {
-    ServerProxy proxy;
+    private ServerProxy proxy;
 
     public JoinGameService()
     {

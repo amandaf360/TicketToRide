@@ -3,7 +3,7 @@ import proxy.ServerProxy;
 
 public class RegisterService
 {
-    ServerProxy proxy;
+    private ServerProxy proxy;
 
     public RegisterService()
     {

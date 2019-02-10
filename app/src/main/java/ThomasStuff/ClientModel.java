@@ -33,6 +33,7 @@ public class ClientModel extends Observable
     public ClientModel()
     {
         this.instance = this;
+        gameList = new ArrayList<>();
     }
 
     public static ClientModel getInstance() {

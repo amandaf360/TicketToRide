@@ -49,7 +49,7 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
     public void register() {
         // disable the register button
         view.setRegisterEnabled(false);
-        view.switchActivity();
+        //view.switchActivity();
 
         // call register service connected to model??
         RegisterService registerService = new RegisterService();

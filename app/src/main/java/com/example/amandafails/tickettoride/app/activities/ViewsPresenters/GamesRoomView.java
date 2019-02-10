@@ -34,12 +34,12 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 {
 
     private RecyclerView gameListRecycler;
-    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Game> games;
     int numPlayers;
     private GamesRoomPresenter presenter;
     private GamesRoomView gamesRoomView = this;
+    private GamesAdapter gameAdapter;
 
     private Button createGame;
 
@@ -63,7 +63,15 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         //createGame.setEnabled(false);
 
+
+
         gameListRecycler = findViewById(R.id.my_games_recycler_view);
+
+        layoutManager = new LinearLayoutManager(this);
+
+        ((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
+        gameListRecycler.setLayoutManager(layoutManager);
+
         setGames(); // initializes games
         upDateGameList();
 
@@ -82,6 +90,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         Toast toast = Toast.makeText(context, text, duration);
         presenter.createGame(gamesRoomView);
+        gameAdapter.notifyDataSetChanged();
         update();
         //toast.show();
 
@@ -135,9 +144,8 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
     {
 
 
-
-        GamesRoomView.GamesAdapter adapter = new GamesRoomView.GamesAdapter(games);
-        gameListRecycler.setAdapter(adapter);
+        gameAdapter = new GamesRoomView.GamesAdapter(games);
+        gameListRecycler.setAdapter(gameAdapter);
     }
 
 
@@ -215,7 +223,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
             this.list = list;
             gameName.setText(list.getName());
-            gameNum.setText(presenter.getGameNumber(list));
+            gameNum.setText(Integer.toString(presenter.getGameNumber(list)));
             gameCreator.setText(list.getCreator());
             int numPlayers = list.getCurrentPlayers();
             int maxPlayers = list.getMaxPlayers();

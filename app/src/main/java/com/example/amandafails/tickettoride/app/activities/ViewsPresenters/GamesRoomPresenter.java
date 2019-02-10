@@ -33,6 +33,7 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
         this.view = view;
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
+        clientModel.errorChecking();
     }
 
     @Override

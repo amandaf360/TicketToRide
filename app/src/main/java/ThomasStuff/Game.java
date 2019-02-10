@@ -72,4 +72,14 @@ public class Game
     {
         players.add(player);
     }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public ArrayList<Player> getPlayers()
+    {
+        return players;
+    }
 }

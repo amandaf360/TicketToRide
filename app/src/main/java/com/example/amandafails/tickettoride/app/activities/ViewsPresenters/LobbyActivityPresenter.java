@@ -33,7 +33,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         player.setName("player1");
         player.setAuthToken("auth1");
         player.setColor("red");
-        clientModel.addPlayerToGame(game, player);
+        //clientModel.addPlayerToCurrentGame(player);
 
         // will call the "start game service" once it's created
         // similar to this below...

@@ -23,6 +23,8 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     public void startGame() {
         // disable the start game button
         //view.setStartEnabled(false);
+
+        // ********* BELOW IS FOR TESTING PURPOSES ONLY *********** //
         Game game = new Game();
         game.setMaxPlayers(3);
         game.setCreator("creator");
@@ -34,6 +36,8 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         player.setAuthToken("auth1");
         player.setColor("red");
         clientModel.addPlayerToCurrentGame(player);
+
+        // ************ END OF TESTING STUFF ********************** //
 
         // will call the "start game service" once it's created
         // similar to this below...
@@ -60,7 +64,6 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
             if(clientModel.getGame().getCurrentPlayers() != 0) {
                 view.displayPlayer(clientModel.getGame().getPlayers().get(clientModel.getGame().getCurrentPlayers() - 1));
             }
-
         }
         else {
             view.displayErrorMessage(arg.toString());
@@ -68,10 +71,5 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         }
         // BEFORE SWITCHING ACTIVITIES, DELETE OBSERVER!!!
     }
-
-
-    // create a method called "Update" implemented from observer to see when new players join
-    // call displayPlayer(Player player) in view when this occurs
-
 
 }

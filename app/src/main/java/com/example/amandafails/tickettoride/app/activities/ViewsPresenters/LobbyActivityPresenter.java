@@ -11,9 +11,12 @@ import ThomasStuff.User;
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     private ILobbyView view;
+    private ClientModel clientModel = ClientModel.getInstance();
 
     public LobbyActivityPresenter(ILobbyView view) {
         this.view = view;
+        this.clientModel.addObserver(this);
+
     }
 
     @Override
@@ -24,19 +27,13 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         game.setMaxPlayers(3);
         game.setCreator("creator");
         game.setCurrentPlayers(0);
+        clientModel.setGame(game);
+
         Player player = new Player();
         player.setName("player1");
         player.setAuthToken("auth1");
         player.setColor("red");
-        /*
-        private String name;
-    private int maxPlayers;
-    private ArrayList<Player> players;
-    private int gameNum;
-    private int currentPlayers;
-    private String creator;
-         */
-        ClientModel.getInstance().addPlayerToGame(game, player);
+        clientModel.addPlayerToGame(game, player);
 
         // will call the "start game service" once it's created
         // similar to this below...
@@ -59,13 +56,17 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     @Override
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
-        if(arg.getClass() == Player.class) {
-            view.displayPlayer((Player)arg);
+        if(arg.getClass() == Game.class) {
+            if(clientModel.getGame().getCurrentPlayers() != 0) {
+                //view.displayPlayer(clientModel.getGame().getPlayers().at(clientModel.getGame().getCurrentPlayers() - 1));
+            }
+
         }
         else {
             view.displayErrorMessage(arg.toString());
             //clientModel.popMessage(arg.toString());
         }
+        // BEFORE SWITCHING ACTIVITES, DELETE OBSERVER!!!
     }
 
 

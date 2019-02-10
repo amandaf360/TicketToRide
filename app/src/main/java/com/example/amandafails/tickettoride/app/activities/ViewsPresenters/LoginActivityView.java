@@ -15,6 +15,8 @@ import com.example.amandafails.tickettoride.R;
 
 import java.util.Objects;
 
+import ThomasStuff.ClientModel;
+
 public class LoginActivityView extends AppCompatActivity implements ILoginView {
     private LoginActivityPresenter presenter;
 

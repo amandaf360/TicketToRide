@@ -58,7 +58,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         // if new player object is created, display that this player has joined game
         if(arg.getClass() == Game.class) {
             if(clientModel.getGame().getCurrentPlayers() != 0) {
-                //view.displayPlayer(clientModel.getGame().getPlayers().at(clientModel.getGame().getCurrentPlayers() - 1));
+                view.displayPlayer(clientModel.getGame().getPlayers().get(clientModel.getGame().getCurrentPlayers() - 1));
             }
 
         }
@@ -66,7 +66,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
             view.displayErrorMessage(arg.toString());
             //clientModel.popMessage(arg.toString());
         }
-        // BEFORE SWITCHING ACTIVITES, DELETE OBSERVER!!!
+        // BEFORE SWITCHING ACTIVITIES, DELETE OBSERVER!!!
     }
 
 

@@ -11,9 +11,11 @@ import ThomasStuff.User;
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     private ILobbyView view;
+    private ClientModel clientModel = ClientModel.getInstance();
 
     public LobbyActivityPresenter(ILobbyView view) {
         this.view = view;
+        this.clientModel.addObserver(this);
     }
 
     @Override

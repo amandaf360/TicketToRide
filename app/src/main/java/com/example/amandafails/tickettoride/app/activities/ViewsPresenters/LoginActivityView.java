@@ -219,7 +219,7 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
         Toast toast = Toast.makeText(context, "Success!", duration);
         toast.show();
-        Intent i = new Intent(LoginActivityView.this, LobbyActivityView.class);
+        Intent i = new Intent(LoginActivityView.this, GamesRoomView.class);
         startActivity(i);
     }
 

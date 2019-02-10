@@ -49,7 +49,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_room);
 
-        presenter = new GamesRoomPresenter(this);
+        //presenter = new GamesRoomPresenter(this);
 
         createGame = findViewById(R.id.create_game);
         createGame.setOnClickListener(new View.OnClickListener()
@@ -164,7 +164,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
     public void setGames()
     {
-        games = presenter.getGameListFromModel();
+        //games = presenter.getGameListFromModel();
     }
 
 
@@ -180,11 +180,18 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
 
 
+    @Override
     public void update()
     {
 
         setGames();
         upDateGameList();
+    }
+
+    @Override
+    public String[] getStringArray()
+    {
+        return getResources().getStringArray(R.array.dialog_create_game_num_players);
     }
 
     private void upDateGameList()
@@ -270,6 +277,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         public void bind(final Game list)
         {
+            /*
             this.list = list;
             gameName.setText(list.getName());
             gameNum.setText(presenter.getGameNumber(list));
@@ -278,6 +286,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             int maxPlayers = list.getMaxPlayers();
             String str = numPlayers + "/" + maxPlayers;
             inGame.setText(str);
+            */
         }
 
 
@@ -295,7 +304,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         private void joinGame()
         {
-
+            /*
             if(presenter.joinGame(list, gamesRoomView))
             {
                 Intent intent = new Intent(gamesRoomView, LobbyActivityView.class);
@@ -306,7 +315,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
                 startActivity(intent);
             }
 
-
+*/
         }
     }
 

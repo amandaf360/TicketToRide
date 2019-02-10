@@ -3,6 +3,8 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 import java.util.Observable;
 import java.util.Observer;
 
+import ThomasStuff.ClientModel;
+import ThomasStuff.Game;
 import ThomasStuff.Player;
 import ThomasStuff.User;
 
@@ -17,7 +19,24 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     @Override
     public void startGame() {
         // disable the start game button
-        view.setStartEnabled(false);
+        //view.setStartEnabled(false);
+        Game game = new Game();
+        game.setMaxPlayers(3);
+        game.setCreator("creator");
+        game.setCurrentPlayers(0);
+        Player player = new Player();
+        player.setName("player1");
+        player.setAuthToken("auth1");
+        player.setColor("red");
+        /*
+        private String name;
+    private int maxPlayers;
+    private ArrayList<Player> players;
+    private int gameNum;
+    private int currentPlayers;
+    private String creator;
+         */
+        ClientModel.getInstance().addPlayerToGame(game, player);
 
         // will call the "start game service" once it's created
         // similar to this below...

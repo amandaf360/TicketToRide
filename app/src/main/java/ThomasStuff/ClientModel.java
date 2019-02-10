@@ -114,6 +114,12 @@ public class ClientModel extends Observable
         return -1;
     }
 
+    public void popMessage()
+    {
+        messages.remove(messages.size() - 1);
+    }
+
+
     @Override
     public synchronized void addObserver(Observer o)
     {

@@ -233,7 +233,6 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             LayoutInflater layoutInflater = LayoutInflater.from(gamesRoomView);
             View view = layoutInflater.inflate(R.layout.game_list_object, parent, false);
             return new GameListHolder(view);
-            //return new GameListHolder(layoutInflater, parent);
         }
 
         @Override
@@ -273,7 +272,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         public void bind(final Game list)
         {
-            /*
+
             this.list = list;
             gameName.setText(list.getName());
             gameNum.setText(presenter.getGameNumber(list));
@@ -282,7 +281,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             int maxPlayers = list.getMaxPlayers();
             String str = numPlayers + "/" + maxPlayers;
             inGame.setText(str);
-            */
+
         }
 
 
@@ -300,18 +299,18 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         private void joinGame()
         {
-            /*
+
             if(presenter.joinGame(list, gamesRoomView))
             {
                 Intent intent = new Intent(gamesRoomView, LobbyActivityView.class);
                 JoinGameService joinGameService = new JoinGameService();
                 joinGameService.joinGame(presenter.getGameNumber(list));
                 intent.putExtra("gameName", list.getName());
-
+                presenter.stopObserving();
                 startActivity(intent);
             }
 
-*/
+
         }
     }
 

@@ -153,6 +153,10 @@ public class ClientModel extends Observable
         return -1;
     }
 
+    public void addMessage(String message) {
+        messages.add(message);
+    }
+
     public void popMessage()
     {
         messages.remove(messages.size() - 1);

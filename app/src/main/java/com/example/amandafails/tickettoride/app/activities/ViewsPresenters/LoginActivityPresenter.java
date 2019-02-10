@@ -124,7 +124,7 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
         // if user object is created, then login has succeeded
         // change to next screen
         if(arg.getClass() == User.class) {
-            ClientModel.getInstance().deleteObserver(this);
+            this.clientModel.deleteObserver(this);
             view.switchActivity();
         }
         else {

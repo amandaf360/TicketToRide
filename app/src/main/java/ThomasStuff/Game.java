@@ -82,4 +82,8 @@ public class Game
     {
         return players;
     }
+
+    public int getGameNum() {
+        return gameNum;
+    }
 }

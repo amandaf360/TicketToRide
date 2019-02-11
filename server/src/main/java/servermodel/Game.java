@@ -17,6 +17,20 @@ public class Game
         players = new ArrayList<Player>();
     }
 
+    public Game(Game game)
+    {
+        this.name = game.name;
+        this.maxPlayers = game.maxPlayers;
+        players = new ArrayList<>();
+        for(int i = 0; i < game.players.size(); i++)
+        {
+            players.add(new Player(game.players.get(i)));
+        }
+        this.gameNum = game.gameNum;
+        this.currentPlayers = game.currentPlayers;
+        this.creator = game.creator;
+    }
+
 
     public String getPlayerColor(Player player)
     {
@@ -71,6 +85,7 @@ public class Game
     public void addPlayer(Player player) /// THIS SHOULD NEVER BE CALLED
     {
         players.add(player);
+        currentPlayers++;
     }
 
     public void setName(String name)
@@ -81,5 +96,13 @@ public class Game
     public ArrayList<Player> getPlayers()
     {
         return players;
+    }
+
+    public int getGameNum() {
+        return gameNum;
+    }
+
+    public void setGameNum(int gameNum) {
+        this.gameNum = gameNum;
     }
 }

@@ -8,6 +8,8 @@ public class PollService
     public PollResponse poll(String username)
     {
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
-        return manager.poll(username);
+        PollResponse response = manager.poll(username);
+        response.setUsername(username);
+        return response;
     }
 }

@@ -1,6 +1,7 @@
 package commands;
 
 import responses.CreateGameResponse;
+import services.GameCreateService;
 
 public class CreateGameCommand implements ICommand
 {
@@ -12,11 +13,11 @@ public class CreateGameCommand implements ICommand
     @Override
     public CreateGameResponse execute()
     {
-
-        return null;
+        GameCreateService service = new GameCreateService(gameName, numPlayers, user);
+        return service.startGame();
     }
 
-    public CreateGameCommand(String gameName, String user, int numPlayers) {
+    public CreateGameCommand(String user, int numPlayers, String gameName) {
         this.gameName = gameName;
         this.user = user;
         this.numPlayers = numPlayers;

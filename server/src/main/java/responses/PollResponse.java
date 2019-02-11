@@ -5,6 +5,7 @@ import servermodel.Game;
 
 public class PollResponse extends BaseResponse
 {
+    private String username;
     private ArrayList<Game> gamesCreated;
     private ArrayList<String> gamesDeleted;
     private ArrayList<String> playersJoined;
@@ -43,5 +44,13 @@ public class PollResponse extends BaseResponse
 
     public void setPlayersLeft(ArrayList<String> playerLeft) {
         this.playersLeft = playerLeft;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

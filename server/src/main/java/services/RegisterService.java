@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 
 import responses.RegisterResponse;
+import server.ClientCommandManager;
 import servermodel.ModelRoot;
 import servermodel.User;
 
@@ -22,7 +23,6 @@ public class RegisterService
                 i = userList.size();
             }
         }
-        System.out.println("In register service");
         RegisterResponse response = new RegisterResponse();
 
         if(password == null || password.equals(""))
@@ -36,6 +36,8 @@ public class RegisterService
             User user = new User(username, password);
             model.addUser(user);
             response.setUsername(username);
+            ClientCommandManager commandManager = ClientCommandManager.getCommandManager();
+            commandManager.addUser(username);
             return response;
         }
         else

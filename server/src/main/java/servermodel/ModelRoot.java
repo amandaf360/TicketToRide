@@ -9,11 +9,13 @@ public class ModelRoot
 
     private ModelRoot()
     {
+        gameCounter = 5;
         userList = new ArrayList<>();
+        gameList = new ArrayList<>();
     }
 
     private List<User> userList;
-
+    private int gameCounter;
     private List<Game> gameList;
 
     public void addUser(User user)
@@ -42,5 +44,11 @@ public class ModelRoot
     public void addGame(Game game)
     {
         gameList.add(game);
+    }
+
+    public int assignNumber()
+    {
+        gameCounter++;
+        return gameCounter;
     }
 }

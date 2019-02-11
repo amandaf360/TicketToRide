@@ -16,9 +16,11 @@ import commands.*;
 import responses.*;
 
 
+
 public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     private OnTaskCompleted callerClass;
     private Serializer serializer;
+    private boolean pollSafe;
 
     public void login(String username, String password) {
         LoginRequest request = new LoginRequest(username, password);
@@ -56,6 +58,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     }
 
     public void poll(String username) {
+
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
         RequestWrapper wrapper = new RequestWrapper("poll", stringList);
@@ -64,28 +67,34 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
             public void completeTask(String responseJson) {
                 PollResponse response = serializer.deserializePollResponse(responseJson);
                 PollCommand command = new PollCommand(response);
+                ServerProxy proxy = new ServerProxy();
                 command.execute();
             }
         };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void joinGame(int gameNumber) {
-
+    public void joinGame(int gameNumber, String username)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(Integer.toString(gameNumber));
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("joinGame", stringList);
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+                JoinGameResponse response = serializer.deserializeJoinGameResponse(responseJson);
+                if(response != null) {
+                    JoinGameCommand command = new JoinGameCommand(response.getErrorMessage());
+                    command.execute();
+                }
+            }
+        };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void createGame(String username, int numPlayers, String gameName) {
-        //Hacky sterff, feel free to delete completely
-
-        /*Game game = new Game();
-        game.setCreator(username);
-        game.setMaxPlayers(numPlayers);
-        game.setName(gameName);
-
-        ClientModel clientModel = ClientModel.getInstance();
-
-        clientModel.addGame(game);*/
-
-        // Hacky stuff done
+    public void createGame(String username, int numPlayers, String gameName)
+    {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
         stringList.add(Integer.toString(numPlayers));
@@ -96,11 +105,29 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
             public void completeTask(String responseJson)
             {
                 CreateGameResponse gameResponse = serializer.deserializeCreateGameResponse(responseJson);
-                CreateGameCommand command = new CreateGameCommand(gameResponse.getErrorMessage());
-                command.execute();
+                if(responseJson != null)
+                {
+                    CreateGameCommand command = new CreateGameCommand(gameResponse.getErrorMessage());
+                    command.execute();
+                }
             }
         };
-        execute(wrapper);
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void clearPoll(String username)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("clearPoll", stringList);
+
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson)
+            {
+            }
+        };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
     public void leaveGame(String username, String gameName) {
@@ -113,6 +140,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
 
     public ServerProxy() {
         serializer = new Serializer();
+        pollSafe = true;
     }
 
     @Override
@@ -120,7 +148,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.37.96.141:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://192.168.1.7:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
@@ -152,5 +180,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         callerClass.completeTask(s);
+        pollSafe = true;
     }
 }

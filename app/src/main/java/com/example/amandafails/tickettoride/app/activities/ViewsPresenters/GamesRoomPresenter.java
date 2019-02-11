@@ -180,7 +180,8 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     @Override
     public void update(Observable observable, Object o)
     {
-        // if game list is updated, then update the game list on screen
+        // if game list is updated, (either game added/deleted or person added to a game)
+        // then update the game list on screen
         if(o.getClass() == ArrayList.class) {
             view.updateView();
         }

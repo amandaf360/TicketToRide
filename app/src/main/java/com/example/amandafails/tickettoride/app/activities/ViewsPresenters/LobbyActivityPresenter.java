@@ -1,5 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -52,7 +53,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     @Override
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
-        if(arg.getClass() == Game.class) {
+        if(arg.getClass() == ArrayList.class) {
             if(clientModel.getActiveGame().getCurrentPlayers() != 0) {
                 view.displayPlayer(clientModel.getActiveGame().getPlayers().get(clientModel.getActiveGame().getCurrentPlayers() - 1));
             }

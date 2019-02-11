@@ -6,10 +6,12 @@ import proxy.ServerProxy;
 public class Poller extends AsyncTask
 {
     private ServerProxy proxy;
+    private String user;
 
-    public Poller()
+    public Poller(String user)
     {
         proxy = new ServerProxy();
+        this.user = user;
     }
 
     @Override
@@ -20,7 +22,7 @@ public class Poller extends AsyncTask
             try
             {
                 Thread.sleep(1000);
-                proxy.poll();
+                proxy.poll(user);
             }
             catch (InterruptedException ex)
             {

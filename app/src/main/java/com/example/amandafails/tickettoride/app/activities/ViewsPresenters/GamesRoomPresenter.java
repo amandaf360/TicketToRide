@@ -34,11 +34,11 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     public GamesRoomPresenter(IGamesRoomView view)
     {
         this.view = view;
-        this.poller = new Poller(clientModel.getUser().getUserName());
-        poller.poll();
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
         clientModel.errorChecking();
+        this.poller = new Poller(clientModel.getUser().getUserName());
+        poller.poll();
     }
 
     public List<Game> getGameListFromModel()
@@ -74,7 +74,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         if(joinGame == true)
         {
             JoinGameService joinGameService = new JoinGameService();
-            joinGameService.joinGame(clientModel.getGameNum(game));
+            joinGameService.joinGame(clientModel.getGameNum(game), clientModel.getUser().getUserName());
 
             return true;
         }

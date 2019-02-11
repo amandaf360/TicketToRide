@@ -1,5 +1,7 @@
 package proxy;
 
+import android.graphics.Paint;
+
 import com.google.gson.Gson;
 
 import requests.RequestWrapper;
@@ -36,6 +38,11 @@ public class Serializer
     public PollResponse deserializePollResponse(String response)
     {
         return gson.fromJson(response, PollResponse.class);
+    }
+
+    public JoinGameResponse deserializeJoinGameResponse(String response)
+    {
+        return gson.fromJson(response, JoinGameResponse.class);
     }
 
 }

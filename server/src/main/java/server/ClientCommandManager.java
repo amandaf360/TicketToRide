@@ -59,17 +59,28 @@ public class ClientCommandManager
     public PollResponse poll(String username)
     {
         PollResponse response = new PollResponse();
+        ArrayList<Game> currentGamesCreated = gamesCreated.get(username);
+        ArrayList<Game> polledGamesCreated = new ArrayList<>();
+        for(int i = 0; i < currentGamesCreated.size(); i++)
+        {
+            polledGamesCreated.add(new Game(currentGamesCreated.get(i)));
+        }
+
         response.setGamesCreated(gamesCreated.get(username));
+
         response.setGamesDeleted(gamesDeleted.get(username));
         response.setPlayersJoined(playersJoined.get(username));
         response.setPlayersLeft(playersLeft.get(username));
 
+        return response;
+    }
+
+    public void pollClear(String username)
+    {
         gamesCreated.get(username).clear();
         gamesDeleted.get(username).clear();
         playersJoined.get(username).clear();
         playersLeft.get(username).clear();
-
-        return response;
     }
 
     public void addGame(Game game)
@@ -93,14 +104,14 @@ public class ClientCommandManager
         }
     }
 
-    public void join(String username, String gameName) {
+    public void join(String username, int gameNum) {
         Set<Map.Entry<String, ArrayList<String>>> joinedSet = playersJoined.entrySet();
         Iterator<Map.Entry<String, ArrayList<String>>> iter = joinedSet.iterator();
         while (iter.hasNext())
         {
             ArrayList<String> joined = iter.next().getValue();
             joined.add(username);
-            joined.add(gameName);
+            joined.add(Integer.toString(gameNum));
         }
     }
 

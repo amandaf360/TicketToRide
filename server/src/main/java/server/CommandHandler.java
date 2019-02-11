@@ -43,7 +43,11 @@ public class CommandHandler implements HttpHandler
         String commandType = wrappedRequest.getRequestType();
         ICommand command;
         command = null;
-        System.out.println("Command type: " + commandType);
+
+        if(!commandType.equals("poll"))
+        {
+            int i = 0;
+        }
 
         switch(commandType) {
             case "login":
@@ -65,14 +69,20 @@ public class CommandHandler implements HttpHandler
                 break;
             case "createGame":
                 ArrayList<String> createList = wrappedRequest.getStringList();
+                command = new CreateGameCommand(createList.get(0), Integer.parseInt(createList.get(1)), createList.get(2));
                 break;
+            case "clearPoll":
+                ArrayList<String> clearPollList = wrappedRequest.getStringList();
+                command = new ClearPollCommand(clearPollList.get(0));
+                break;
+            case "joinGame":
+                ArrayList<String> joinGameList = wrappedRequest.getStringList();
+                command = new JoinGameCommand(Integer.parseInt(joinGameList.get(0)), joinGameList.get(1));
 
         }
 
-        System.out.println("Executing");
         BaseResponse response = command.execute();
         String responseString = serializer.serializeResponse(response);
-        System.out.println("writing response");
         writeResponse(exchange, HttpURLConnection.HTTP_OK, responseString);
     }
 

@@ -1,31 +1,35 @@
 package services;
 
+import responses.CreateGameResponse;
 import responses.StartGameResponse;
 import server.ClientCommandManager;
 import servermodel.Game;
 import servermodel.ModelRoot;
 
-public class StartGameService
+public class GameCreateService
 {
     private String gameName;
-    private String numPlayers;
+    private int numPlayers;
     private String username;
 
 
-    public StartGameResponse startGame()
+    public CreateGameResponse startGame()
     {
+        ModelRoot model = ModelRoot.getModel();
         Game game = new Game();
         game.setCreator(username);
-        game.setMaxPlayers(Integer.parseInt(numPlayers));
+        game.setMaxPlayers(numPlayers);
         game.setName(gameName);
+        game.setGameNum(model.assignNumber());
 
-        ModelRoot.getModel().addGame(game);
+        model.addGame(game);
         ClientCommandManager commandManager = ClientCommandManager.getCommandManager();
         commandManager.addGame(game);
-        return null;
+        CreateGameResponse response = new CreateGameResponse(null);
+        return response;
     }
 
-    public StartGameService(String gameName, String numPlayers, String username) {
+    public GameCreateService(String gameName, int numPlayers, String username) {
         this.gameName = gameName;
         this.numPlayers = numPlayers;
         this.username = username;

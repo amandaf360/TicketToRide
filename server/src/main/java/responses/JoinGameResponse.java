@@ -1,10 +1,10 @@
 package responses;
 
-public class CreateGameResponse extends BaseResponse
+public class JoinGameResponse extends BaseResponse
 {
     private String errorMessage;
 
-    public CreateGameResponse(String errorMessage) {
+    public JoinGameResponse(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
@@ -14,5 +14,8 @@ public class CreateGameResponse extends BaseResponse
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public JoinGameResponse() {
     }
 }

@@ -11,6 +11,13 @@ public class Player
 
     }
 
+    public Player(Player player)
+    {
+        this.color = player.color;
+        this.authToken = player.authToken;
+        this.name = player.name;
+    }
+
     public String getColor()
     {
         return color;

@@ -11,7 +11,6 @@ public class RegisterCommand implements ICommand
     @Override
     public BaseResponse execute()
     {
-        System.out.println("In server register command");
         RegisterService service = new RegisterService();
         return service.register(username, password);
     }

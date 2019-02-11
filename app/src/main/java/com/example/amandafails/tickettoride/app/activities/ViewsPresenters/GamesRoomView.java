@@ -27,6 +27,7 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
+import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
 import services.JoinGameService;
 
@@ -252,7 +253,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             {
                 Intent intent = new Intent(gamesRoomView, LobbyActivityView.class);
                 JoinGameService joinGameService = new JoinGameService();
-                joinGameService.joinGame(presenter.getGameNumber(list));
+                joinGameService.joinGame(presenter.getGameNumber(list), ClientModel.getInstance().getUser().getUserName());
                 intent.putExtra("gameName", list.getName());
                 presenter.stopObserving();
                 startActivity(intent);

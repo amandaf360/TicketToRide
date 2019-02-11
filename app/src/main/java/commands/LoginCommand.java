@@ -23,8 +23,8 @@ public class LoginCommand implements ICommand
         }
         else
         {
-            AddMessageService messageService = new AddMessageService();
-            messageService.addMessage(errorMessage);
+            SetMessageService messageService = new SetMessageService();
+            messageService.setMessage(errorMessage);
         }
     }
 }

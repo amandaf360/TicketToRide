@@ -24,7 +24,7 @@ public class ClientModel extends Observable
 {
     private ArrayList<Game> gameList;
     private Game game;
-    private ArrayList<String> messages;
+    private String message;
     private static ClientModel instance;
     private User user;
     private List<Observer> observers = new ArrayList<Observer>();
@@ -34,6 +34,7 @@ public class ClientModel extends Observable
     {
         this.instance = this;
         gameList = new ArrayList<>();
+        messages = new ArrayList<>();
     }
 
     public static ClientModel getInstance() {
@@ -153,15 +154,15 @@ public class ClientModel extends Observable
         return -1;
     }
 
-    public void addMessage(String message) {
-        messages.add(message);
+    public String getMessage() {
+        return message;
     }
 
-    public void popMessage()
-    {
-        messages.remove(messages.size() - 1);
+    public void setMessage(String message) {
+        this.message = message;
+        setChanged();
+        notifyObservers(this.message);
     }
-
 
     @Override
     public synchronized void addObserver(Observer o)
@@ -185,4 +186,5 @@ public class ClientModel extends Observable
         setChanged();
         notifyObservers(this.user);
     }
+
 }

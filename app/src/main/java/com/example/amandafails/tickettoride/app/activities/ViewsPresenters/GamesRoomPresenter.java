@@ -21,7 +21,7 @@ import services.CreateGameService;
 import services.JoinGameService;
 import services.Poller;
 
-public class GamesRoomPresenter implements ILobbyPresenter, Observer
+public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
 {
 
     private IGamesRoomView view;
@@ -38,29 +38,6 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
         clientModel.errorChecking();
-    }
-
-    @Override
-    public void startGame() {
-        // disable the start game button
-        //view.setStartEnabled(false);
-
-        // will call the "start game service" once it's created
-        // similar to this below...
-        // will want to return a result from start game service??
-        /*
-        // call login service connected to model??
-        LoginService loginService = new LoginService();
-        // will get both username and password and attempt to login
-        loginService.login(view.getLoginUsername(), view.getLoginPassword());
-        */
-
-        // once it is ready to start, change the activity
-        /* TO START A NEW ACTIVITY!!
-        Intent i = new Intent(context, EventActivity.class);
-                    i.putExtra("event", eventID);
-                    context.startActivity(i);
-         */
     }
 
     public List<Game> getGameListFromModel()

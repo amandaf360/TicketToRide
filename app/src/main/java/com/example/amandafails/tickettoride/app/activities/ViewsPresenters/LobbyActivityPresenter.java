@@ -1,5 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,6 +19,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         this.clientModel.addObserver(this);
 
     }
+
 
     @Override
     public void startGame() {
@@ -58,6 +60,23 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     }
 
     @Override
+    public String getGameName() {
+        // ****************** TEST CODE *************************** //
+        // FOR NOW set the current game manually (for testing)
+        // will need to update client model with current game once a game has been joined
+        Game game = new Game();
+        game.setMaxPlayers(3);
+        game.setName("My first game");
+        game.setCreator("creator");
+        game.setCurrentPlayers(0);
+        clientModel.setGame(game);
+        // ****************** END OF TEST CODE ******************* //
+
+        return clientModel.getGame().getName();
+    }
+
+
+    @Override
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
         if(arg.getClass() == Game.class) {
@@ -65,9 +84,9 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
                 view.displayPlayer(clientModel.getGame().getPlayers().get(clientModel.getGame().getCurrentPlayers() - 1));
             }
         }
-        else {
-            view.displayErrorMessage(arg.toString());
-            //clientModel.popMessage(arg.toString());
+        else if(arg.getClass() == String.class) {
+            // display the most recent error message
+            view.displayErrorMessage(clientModel.getMessage());
         }
         // BEFORE SWITCHING ACTIVITIES, DELETE OBSERVER!!!
     }

@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top|center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/us_map_brown">
 
         <TextView
             android:id="@+id/game_name_text"

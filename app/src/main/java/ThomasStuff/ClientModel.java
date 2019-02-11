@@ -45,24 +45,30 @@ public class ClientModel extends Observable
     public void errorChecking()
     {
         Game game = new Game();
-        game.setName("Ya boi");
+        game.setName("Ya boi's Game");
         game.setMaxPlayers(5);
         game.setCreator("Ya boi");
 
         Game game2 = new Game();
-        game2.setName("THORSTY boi");
+        game2.setName("THORSTY boi's activeGame");
         game2.setMaxPlayers(5);
-        game2.setCreator("THORSTY boi's activeGame");
+        game2.setCreator("THORSTY boi");
 
         Game game4 = new Game();
-        game4.setName("STRONK boi");
+        game4.setName("STRONK BOI'S GAME TOO STRONK");
         game4.setMaxPlayers(5);
-        game4.setCreator("STRONK BOI'S GAME TOO STRONK");
+        game4.setCreator("STRONK boi");
 
         Player player = new Player();
         player.setName("Superman");
+        Player player2 = new Player();
+        player2.setName("My name is");
+        Player player1 = new Player();
+        player1.setName("Yo it's me");
 
         game4.addPlayer(player);
+        game4.addPlayer(player1);
+        game4.addPlayer(player2);
 
         gameList.add(game);
         gameList.add(game2);

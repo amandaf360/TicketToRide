@@ -22,7 +22,7 @@
 
 
         <!-- Strings related to activeGame lobby -->
-    <string name="waiting">Waiting for people to join activeGame&#8230;</string>
+    <string name="waiting">Waiting for people to join game&#8230;</string>
     <string name="startGame">Start Game</string>
 
 

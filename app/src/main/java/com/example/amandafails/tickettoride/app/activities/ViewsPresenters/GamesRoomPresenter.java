@@ -17,6 +17,7 @@ import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
+import ThomasStuff.Player;
 import services.CreateGameService;
 import services.JoinGameService;
 import services.Poller;
@@ -34,11 +35,11 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     public GamesRoomPresenter(IGamesRoomView view)
     {
         this.view = view;
-        this.poller = new Poller(clientModel.getUser().getUserName());
-        poller.poll();
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
         clientModel.errorChecking();
+        this.poller = new Poller(clientModel.getUser().getUserName());
+        poller.poll();
     }
 
     public List<Game> getGameListFromModel()
@@ -80,6 +81,18 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
 
         // *************** TEST FUNCTIONALITY ***************** //
         clientModel.setActiveGame(game);
+
+        Player player = new Player();
+        player.setName("player1");
+        player.setAuthToken("auth1");
+        player.setColor("red");
+        clientModel.addPlayerToCurrentGame(player);
+
+        Player player2 = new Player();
+        player2.setName("player2");
+        player2.setAuthToken("auth2");
+        player2.setColor("green");
+        clientModel.addPlayerToCurrentGame(player2);
 
         // *************** END OF TEST FUNCTIONALITY ********** //
         joinGame = true;

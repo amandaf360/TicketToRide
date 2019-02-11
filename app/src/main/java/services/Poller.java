@@ -1,7 +1,9 @@
 package services;
+import android.os.AsyncTask;
+
 import proxy.ServerProxy;
 
-public class Poller
+public class Poller extends AsyncTask
 {
     private ServerProxy proxy;
 
@@ -10,18 +12,25 @@ public class Poller
         proxy = new ServerProxy();
     }
 
-    public void poll()
+    @Override
+    protected Object doInBackground(Object[] objects)
     {
         while(true)
         {
             try
             {
                 Thread.sleep(1000);
+                proxy.poll();
             }
             catch (InterruptedException ex)
             {
-                proxy.poll();
+                System.out.println("Hello there! An InterruptedException has been thrown!");
             }
         }
+    }
+
+    public void poll()
+    {
+        this.execute();
     }
 }

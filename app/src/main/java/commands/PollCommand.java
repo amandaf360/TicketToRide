@@ -19,7 +19,7 @@ public class PollCommand implements ICommand
         {
             listService.addGame(gameList.get(i));
         }
-        
+
         //updates players in a given game
     }
 

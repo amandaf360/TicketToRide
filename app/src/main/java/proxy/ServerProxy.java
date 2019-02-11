@@ -55,9 +55,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         execute(wrapper);
     }
 
-    public void poll()
-    {
-        RequestWrapper wrapper = new RequestWrapper("poll", null);
+    public void poll(String username) {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("poll", stringList);
         callerClass = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {

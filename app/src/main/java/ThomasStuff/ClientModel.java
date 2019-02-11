@@ -159,11 +159,7 @@ public class ClientModel extends Observable
 
     public int getGameNum(Game game)
     {
-        if(gameList.contains(game))
-        {
-            return gameList.indexOf(game);
-        }
-        return -1;
+        return game.getGameNum();
     }
 
     public String getMessage() {

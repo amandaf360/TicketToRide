@@ -76,7 +76,7 @@
         android:text="@string/createGame"
         android:textSize="20sp" />
 
-   
+
 
 
 </LinearLayout>

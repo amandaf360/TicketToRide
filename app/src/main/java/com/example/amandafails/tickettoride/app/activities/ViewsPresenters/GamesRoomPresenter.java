@@ -31,9 +31,10 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     private Poller poller;
 
 
-    public GamesRoomPresenter(IGamesRoomView view) {
+    public GamesRoomPresenter(IGamesRoomView view)
+    {
         this.view = view;
-        this.poller = new Poller();
+        this.poller = new Poller(clientModel.getUser().getUserName());
         poller.poll();
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);

@@ -33,4 +33,9 @@ public class Serializer
         return gson.fromJson(response, CreateGameResponse.class);
     }
 
+    public PollResponse deserializePollResponse(String response)
+    {
+        return gson.fromJson(response, PollResponse.class);
+    }
+
 }

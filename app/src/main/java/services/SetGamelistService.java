@@ -17,4 +17,9 @@ public class SetGamelistService
     {
         model.setGameList(games);
     }
+
+    public void addGame(Game game)
+    {
+        model.addGame(game);
+    }
 }

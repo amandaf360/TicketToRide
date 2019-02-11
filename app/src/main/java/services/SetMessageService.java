@@ -2,16 +2,16 @@ package services;
 
 import ThomasStuff.ClientModel;
 
-public class AddMessageService
+public class SetMessageService
 {
     private ClientModel model;
 
-    public AddMessageService()
+    public SetMessageService()
     {
         model = ClientModel.getInstance();
     }
 
-    public void addMessage(String message)
+    public void setMessage(String message)
     {
         model.setMessage(message);
     }

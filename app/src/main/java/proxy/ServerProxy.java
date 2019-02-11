@@ -55,13 +55,16 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         execute(wrapper);
     }
 
-    public void poll() {
-        RequestWrapper wrapper = new RequestWrapper("poll", null);
+    public void poll(String username) {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("poll", stringList);
         callerClass = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
-
-
+                PollResponse response = serializer.deserializePollResponse(responseJson);
+                PollCommand command = new PollCommand(response);
+                command.execute();
             }
         };
     }
@@ -73,14 +76,14 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     public void createGame(String username, int numPlayers, String gameName) {
         //Hacky sterff, feel free to delete completely
 
-        Game game = new Game();
+        /*Game game = new Game();
         game.setCreator(username);
         game.setMaxPlayers(numPlayers);
         game.setName(gameName);
 
         ClientModel clientModel = ClientModel.getInstance();
 
-        clientModel.addGame(game);
+        clientModel.addGame(game);*/
 
         // Hacky stuff done
         ArrayList<String> stringList = new ArrayList<>();
@@ -93,7 +96,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
             public void completeTask(String responseJson)
             {
                 CreateGameResponse gameResponse = serializer.deserializeCreateGameResponse(responseJson);
-                CreateGameCommand command = new CreateGameCommand(gameResponse.getGameName(), gameResponse.getUser(), gameResponse.getNumPlayers());
+                CreateGameCommand command = new CreateGameCommand(gameResponse.getErrorMessage());
                 command.execute();
             }
         };

@@ -44,6 +44,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     @Override
     public String getGameName() {
+
         return clientModel.getActiveGame().getName();
     }
 

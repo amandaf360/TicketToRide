@@ -37,7 +37,8 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         this.view = view;
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
-        clientModel.errorChecking();
+        // for error checking purposes only (adding games to game room)
+        //clientModel.errorChecking();
         this.poller = new Poller(clientModel.getUser().getUserName());
         poller.poll();
     }
@@ -79,6 +80,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         JoinGameService joinGameService = new JoinGameService();
         joinGameService.joinGame(clientModel.getGameNum(game), clientModel.getUser().getUserName());
 
+        /*
         // *************** TEST FUNCTIONALITY ***************** //
         clientModel.setActiveGame(game);
 
@@ -95,6 +97,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         clientModel.addPlayerToCurrentGame(player2);
 
         // *************** END OF TEST FUNCTIONALITY ********** //
+        */
         joinGame = true;
     }
 

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
+import ThomasStuff.Player;
 import proxy.ServerProxy;
 import responses.PollResponse;
+import services.SetActiveGameService;
 import services.SetGamelistService;
 
 public class PollCommand implements ICommand
@@ -25,19 +27,27 @@ public class PollCommand implements ICommand
                     listService.addGame(gameList.get(i));
                 }
 
-            /*String currentUser = ClientModel.getInstance().getUser().getUserName();
+            String currentUser = ClientModel.getInstance().getUser().getUserName();
             ArrayList<String> joinedList = response.getPlayersJoined();
+            ClientModel model = ClientModel.getInstance();
             for(int i = 0; i < joinedList.size(); i += 2)
             {
                 String username = joinedList.get(i);
                 int gameNum = Integer.parseInt(joinedList.get(i + 1));
 
+                Player player = new Player();
+                player.setName(username);
+                player.setAuthToken(username);
+                player.setColor("blue");
 
+                Game game = model.getGameByNumber(gameNum);
+                model.addPlayerToGame(game, player);
                 if(username.equals(currentUser))
                 {
-                    //
+                    SetActiveGameService service = new SetActiveGameService();
+                    service.setActiveGame(game);
                 }
-            }*/
+            }
 
             }
         }

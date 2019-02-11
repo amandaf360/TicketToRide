@@ -14,17 +14,16 @@ public class PollCommand implements ICommand
 
     public void execute()
     {
-        if(response.getGamesCreated().size() != 0 || response.getGamesDeleted().size() != 0 ||
-            response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0)
-        {
-            ServerProxy proxy = new ServerProxy();
-            proxy.clearPoll(response.getUsername());
-            SetGamelistService listService = new SetGamelistService();
-            ArrayList<Game> gameList = response.getGamesCreated();
-            for (int i = 0; i < gameList.size(); i++)
-            {
-                listService.addGame(gameList.get(i));
-            }
+        if(response != null) {
+            if (response.getGamesCreated().size() != 0 || response.getGamesDeleted().size() != 0 ||
+                    response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0) {
+                ServerProxy proxy = new ServerProxy();
+                proxy.clearPoll(response.getUsername());
+                SetGamelistService listService = new SetGamelistService();
+                ArrayList<Game> gameList = response.getGamesCreated();
+                for (int i = 0; i < gameList.size(); i++) {
+                    listService.addGame(gameList.get(i));
+                }
 
             /*String currentUser = ClientModel.getInstance().getUser().getUserName();
             ArrayList<String> joinedList = response.getPlayersJoined();
@@ -40,6 +39,7 @@ public class PollCommand implements ICommand
                 }
             }*/
 
+            }
         }
 
         //updates players in a given game

@@ -1,15 +1,19 @@
 package commands;
 
 import responses.BaseResponse;
+import services.StartGameService;
 
 public class StartGameCommand implements ICommand
 {
-    private String gameName;
-    private String numPlayers;
-    private String username;
+    private int gameNum;
+
+    public StartGameCommand(int gameNum) {
+        this.gameNum = gameNum;
+    }
 
     public BaseResponse execute()
     {
-        return null;
+        StartGameService service = new StartGameService();
+        return service.startGame(gameNum);
     }
 }

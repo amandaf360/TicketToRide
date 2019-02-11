@@ -14,16 +14,16 @@ public class ModelRoot
         gameList = new ArrayList<>();
     }
 
-    private List<User> userList;
+    private ArrayList<User> userList;
     private int gameCounter;
-    private List<Game> gameList;
+    private ArrayList<Game> gameList;
 
     public void addUser(User user)
     {
         userList.add(user);
     }
 
-    public List<User> getUserList()
+    public ArrayList<User> getUserList()
     {
         return userList;
     }
@@ -33,11 +33,11 @@ public class ModelRoot
         return model;
     }
 
-    public List<Game> getGameList() {
+    public ArrayList<Game> getGameList() {
         return gameList;
     }
 
-    public void setGameList(List<Game> gameList) {
+    public void setGameList(ArrayList<Game> gameList) {
         this.gameList = gameList;
     }
 

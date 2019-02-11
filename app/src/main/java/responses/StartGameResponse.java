@@ -1,6 +1,6 @@
 package responses;
 
-public class StartGameResponse extends BaseResponse
+public class StartGameResponse
 {
     private String errorMessage;
 

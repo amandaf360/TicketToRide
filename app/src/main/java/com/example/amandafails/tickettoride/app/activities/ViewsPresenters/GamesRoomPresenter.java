@@ -19,6 +19,7 @@ import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
 import services.CreateGameService;
 import services.JoinGameService;
+import services.Poller;
 
 public class GamesRoomPresenter implements ILobbyPresenter, Observer
 {
@@ -27,10 +28,13 @@ public class GamesRoomPresenter implements ILobbyPresenter, Observer
     private ClientModel clientModel;
     private static boolean joinGame;
     private GamesRoomPresenter gamesRoomPresenter = this;
+    private Poller poller;
 
 
     public GamesRoomPresenter(IGamesRoomView view) {
         this.view = view;
+        this.poller = new Poller();
+        poller.poll();
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
         clientModel.errorChecking();

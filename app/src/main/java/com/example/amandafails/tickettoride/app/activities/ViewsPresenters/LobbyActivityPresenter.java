@@ -1,13 +1,11 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
 import ThomasStuff.Player;
-import ThomasStuff.User;
 
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
@@ -31,7 +29,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         game.setMaxPlayers(3);
         game.setCreator("creator");
         game.setCurrentPlayers(0);
-        clientModel.setGame(game);
+        clientModel.setActiveGame(game);
 
         Player player = new Player();
         player.setName("player1");
@@ -69,10 +67,10 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         game.setName("My first game");
         game.setCreator("creator");
         game.setCurrentPlayers(0);
-        clientModel.setGame(game);
+        clientModel.setActiveGame(game);
         // ****************** END OF TEST CODE ******************* //
 
-        return clientModel.getGame().getName();
+        return clientModel.getActiveGame().getName();
     }
 
 
@@ -80,8 +78,8 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
         if(arg.getClass() == Game.class) {
-            if(clientModel.getGame().getCurrentPlayers() != 0) {
-                view.displayPlayer(clientModel.getGame().getPlayers().get(clientModel.getGame().getCurrentPlayers() - 1));
+            if(clientModel.getActiveGame().getCurrentPlayers() != 0) {
+                view.displayPlayer(clientModel.getActiveGame().getPlayers().get(clientModel.getActiveGame().getCurrentPlayers() - 1));
             }
         }
         else if(arg.getClass() == String.class) {

@@ -23,7 +23,7 @@ import java.util.Observer;
 public class ClientModel extends Observable
 {
     private ArrayList<Game> gameList;
-    private Game game;
+    private Game activeGame;
     private String message;
     private static ClientModel instance;
     private User user;
@@ -33,7 +33,7 @@ public class ClientModel extends Observable
     public ClientModel()
     {
         this.instance = this;
-        gameList = new ArrayList<>();;
+        gameList = new ArrayList<>();
     }
 
     public static ClientModel getInstance() {
@@ -52,7 +52,7 @@ public class ClientModel extends Observable
         Game game2 = new Game();
         game2.setName("THORSTY boi");
         game2.setMaxPlayers(5);
-        game2.setCreator("THORSTY boi's game");
+        game2.setCreator("THORSTY boi's activeGame");
 
         Game game4 = new Game();
         game4.setName("STRONK boi");
@@ -102,9 +102,9 @@ public class ClientModel extends Observable
         }
     }
 
-    public Game getGame()
+    public Game getActiveGame()
     {
-        return game;
+        return activeGame;
     }
 
     public Game getGame(String gameName)
@@ -129,19 +129,17 @@ public class ClientModel extends Observable
 
     public void addPlayerToCurrentGame(Player player)
     {
-        game.addPlayer(player);
+        activeGame.addPlayer(player);
 
         setChanged();
-        notifyObservers(this.game);
+        notifyObservers(this.activeGame);
     }
 
-    public void setGame(Game game)
+    public void setActiveGame(Game activeGame)
     {
-
-        this.game = game;
+        this.activeGame = activeGame;
         setChanged();
-        notifyObservers(this.game);
-
+        notifyObservers(this.activeGame);
     }
 
     public int getGameNum(Game game)

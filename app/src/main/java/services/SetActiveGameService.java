@@ -14,6 +14,6 @@ public class SetActiveGameService
 
     public void setActiveGame(Game game)
     {
-        model.setGame(game);
+        model.setActiveGame(game);
     }
 }

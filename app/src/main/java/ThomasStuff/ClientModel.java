@@ -149,20 +149,33 @@ public class ClientModel extends Observable
 
     public void addPlayerToGame(Game game, Player player)
     {
-        game.addPlayer(player);
-
-        if(activeGame != null)
+        ArrayList<Player> players = game.getPlayers();
+        boolean playIsPresent = false;
+        String playerName = player.getName();
+        for(Player playerCheck : players)
         {
-
-
-            if (game.getGameNum() == activeGame.getGameNum())
+            if(playerCheck.getName().equals(playerName))
             {
-                activeGame.addPlayer(player);
+                playIsPresent = true;
             }
         }
+        if(!playIsPresent)
+        {
+            game.addPlayer(player);
 
-        setChanged();
-        notifyObservers(this.gameList);
+            if (activeGame != null)
+            {
+
+
+                if (game.getGameNum() == activeGame.getGameNum())
+                {
+                    activeGame.addPlayer(player);
+                }
+            }
+
+            setChanged();
+            notifyObservers(this.gameList);
+        }
     }
 
     public void addPlayerToCurrentGame(Player player)

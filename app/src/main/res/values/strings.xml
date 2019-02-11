@@ -8,21 +8,21 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
 
-        <!-- Strings related to game room -->
-    <string name="sampleText">SAMPLE REXT</string>
+        <!-- Strings related to activeGame room -->
+    <string name="sampleText">SAMPLE TEXT</string>
     <string name="gameNum">  #</string>
     <string name="gameName">Game Name</string>
     <string name="creator">Creator</string>
     <string name="inGame">In Game</string>
     <string name="createGame">Create Game</string>
     <string name="joinGame">Join Game</string>
-    <string name="joinPopUpMessage">Do you really want to join this game?</string>
+    <string name="joinPopUpMessage">Do you really want to join this activeGame?</string>
     <string name="positiveJoinGame">Yes</string>
     <string name="negativeJoinGame">No</string>
 
 
-        <!-- Strings related to game lobby -->
-    <string name="waiting">Waiting for people to join game&#8230;</string>
+        <!-- Strings related to activeGame lobby -->
+    <string name="waiting">Waiting for people to join activeGame&#8230;</string>
     <string name="startGame">Start Game</string>
 
 

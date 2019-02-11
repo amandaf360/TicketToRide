@@ -7,37 +7,50 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@color/light_grey">
+    <!--To add border: android:background="@drawable/border"-->
 
         <TextView
             android:id="@+id/game_list_game_number"
-            android:layout_width="34dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:text="@string/sampleText" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/sampleText"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/game_list_game_name"
             android:layout_width="470dp"
             android:layout_height="match_parent"
-            android:text="@string/sampleText" />
+            android:text="@string/sampleText"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/game_list_creator"
-            android:layout_width="674dp"
+            android:layout_width="610dp"
             android:layout_height="match_parent"
-            android:text="@string/sampleText" />
+            android:text="@string/sampleText"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/game_list_in_game"
             android:layout_width="106dp"
             android:layout_height="match_parent"
-            android:text="@string/sampleText" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/sampleText"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black" />
 
 </LinearLayout>

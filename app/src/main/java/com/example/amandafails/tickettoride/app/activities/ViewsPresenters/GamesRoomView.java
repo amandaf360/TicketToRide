@@ -74,11 +74,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         setGames(); // initializes games
         upDateGameList();
-
-
-
     }
-
 
     @Override
     public void onCreateGameClicked()
@@ -91,17 +87,20 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         Toast toast = Toast.makeText(context, text, duration);
         presenter.createGame(gamesRoomView);
         gameAdapter.notifyDataSetChanged();
-        update();
+        updateView();
         //toast.show();
 
         // call register in presenter
         //presenter.startGame();
     }
 
+    @Override
+    public void switchActivity() {
+        Intent intent = new Intent(gamesRoomView, LobbyActivityView.class);
+        startActivity(intent);
+    }
 
-
-
-    //@Override
+    @Override
     public void displayErrorMessage(String error)
     {
         // give a toast displaying error message
@@ -117,33 +116,19 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         games = presenter.getGameListFromModel();
     }
 
-
-
-
-
-
-
-
     /*
      * DON"T KNOW IF THIS WILL WORK
      */
 
-
-
     @Override
-    public void update()
+    public void updateView()
     {
-
         setGames();
         upDateGameList();
     }
 
-
-
     private void upDateGameList()
     {
-
-
         gameAdapter = new GamesRoomView.GamesAdapter(games);
         gameListRecycler.setAdapter(gameAdapter);
     }
@@ -232,40 +217,10 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 
         }
 
-
         @Override
         public void onClick(View view)
         {
-
-
-
-
-            joinGame();
-
-
-        }
-
-        private void joinGame()
-        {
-
-            if(presenter.joinGame(list, gamesRoomView))
-            {
-                Intent intent = new Intent(gamesRoomView, LobbyActivityView.class);
-                JoinGameService joinGameService = new JoinGameService();
-                joinGameService.joinGame(presenter.getGameNumber(list));
-                intent.putExtra("gameName", list.getName());
-                presenter.stopObserving();
-                startActivity(intent);
-            }
-
-
+            presenter.joinGame(list, gamesRoomView);
         }
     }
-
-
-
-
-
-
-
 }

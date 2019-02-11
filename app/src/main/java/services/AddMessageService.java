@@ -13,6 +13,6 @@ public class AddMessageService
 
     public void addMessage(String message)
     {
-        model.addMessage(message);
+        model.setMessage(message);
     }
 }

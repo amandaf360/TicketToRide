@@ -5,39 +5,81 @@ import java.util.ArrayList;
 public class Game
 {
     private String name;
-    private int numPlayers;
-    private ArrayList<User> players;
+    private int maxPlayers;
+    private ArrayList<Player> players;
     private int gameNum;
+    private int currentPlayers;
+    private String creator;
 
-    public String getName() {
+
+    public Game()
+    {
+        players = new ArrayList<Player>();
+    }
+
+
+    public String getPlayerColor(Player player)
+    {
+        return player.getColor();
+    }
+
+    public String getPlayerAuthToken(Player player)
+    {
+        return player.getAuthToken();
+    }
+
+    public int getCurrentPlayers()
+    {
+        currentPlayers = players.size();
+        return currentPlayers;
+    }
+
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public String getCreator()
+    {
+        if(creator == null || creator == "")
+        {
+            return "Games have creators now";
+        }
+        return creator;
+    }
+
+    public void setCreator(String creator)
+    {
+        this.creator = creator;
+    }
+
+    public int getMaxPlayers()
+    {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(int maxPlayers)
+    {
+        this.maxPlayers = maxPlayers;
+    }
+
+    public void setCurrentPlayers(int currentPlayers)
+    {
+        this.currentPlayers = currentPlayers;
+    }
+
+    public void addPlayer(Player player) /// THIS SHOULD NEVER BE CALLED
+    {
+        players.add(player);
+    }
+
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public int getNumPlayers() {
-        return numPlayers;
-    }
-
-    public void setNumPlayers(int numPlayers) {
-        this.numPlayers = numPlayers;
-    }
-
-    public ArrayList<User> getPlayers() {
+    public ArrayList<Player> getPlayers()
+    {
         return players;
-    }
-
-    public void setPlayers(ArrayList<User> players) {
-        this.players = players;
-    }
-
-    public int getGameNum() {
-        return gameNum;
-    }
-
-    public void setGameNum(int gameNum) {
-        this.gameNum = gameNum;
     }
 }

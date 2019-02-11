@@ -38,4 +38,9 @@ public class ModelRoot
     public void setGameList(List<Game> gameList) {
         this.gameList = gameList;
     }
+
+    public void addGame(Game game)
+    {
+        gameList.add(game);
+    }
 }

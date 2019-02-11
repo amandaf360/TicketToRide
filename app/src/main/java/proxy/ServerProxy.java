@@ -60,8 +60,9 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         callerClass = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
-
-
+                PollResponse response = serializer.deserializePollResponse(responseJson);
+                PollCommand command = new PollCommand(response);
+                command.execute();
             }
         };
     }
@@ -73,14 +74,14 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     public void createGame(String username, int numPlayers, String gameName) {
         //Hacky sterff, feel free to delete completely
 
-        Game game = new Game();
+        /*Game game = new Game();
         game.setCreator(username);
         game.setMaxPlayers(numPlayers);
         game.setName(gameName);
 
         ClientModel clientModel = ClientModel.getInstance();
 
-        clientModel.addGame(game);
+        clientModel.addGame(game);*/
 
         // Hacky stuff done
         ArrayList<String> stringList = new ArrayList<>();

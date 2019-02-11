@@ -1,6 +1,6 @@
 package commands;
 
-import services.SetGamelistService;
+import services.SetMessageService;
 
 public class CreateGameCommand implements ICommand
 {
@@ -12,7 +12,8 @@ public class CreateGameCommand implements ICommand
     {
         if(errorMessage != null)
         {
-            return;
+            SetMessageService service = new SetMessageService();
+            service.setMessage(errorMessage);
         }
     }
 

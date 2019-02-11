@@ -71,6 +71,7 @@ public class Game
     public void addPlayer(Player player) /// THIS SHOULD NEVER BE CALLED
     {
         players.add(player);
+        int i = getCurrentPlayers();
     }
 
     public void setName(String name)

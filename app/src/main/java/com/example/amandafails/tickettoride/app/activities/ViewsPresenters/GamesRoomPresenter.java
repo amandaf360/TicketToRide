@@ -77,7 +77,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     private void joinGameYes(Game game)
     {
         JoinGameService joinGameService = new JoinGameService();
-        joinGameService.joinGame(clientModel.getGameNum(game));
+        joinGameService.joinGame(clientModel.getGameNum(game), clientModel.getUser().getUserName());
 
         // *************** TEST FUNCTIONALITY ***************** //
         clientModel.setActiveGame(game);

@@ -14,44 +14,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top|center"
-        android:orientation="vertical"
-        android:background="@drawable/us_map_brown">
+        android:orientation="vertical">
+        <!--android:background="@drawable/us_map_brown"-->
 
         <TextView
             android:id="@+id/game_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_blue"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingTop="30dp"
             android:paddingBottom="20dp"
             android:text="TEMP TEXT"
             android:textColor="@android:color/black"
+            android:background="@color/light_blue"
             android:textSize="25sp"
             android:textStyle="bold" />
+
 
         <TextView
             android:id="@+id/waiting_for_game_to_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_blue"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingTop="0dp"
             android:paddingBottom="20dp"
             android:text="@string/waiting"
             android:textColor="@android:color/black"
+            android:background="@color/light_blue"
             android:textSize="20sp"
             android:textStyle="italic" />
+        <!--android:background="@color/light_blue_transparent"-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_lobby_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:paddingTop="40dp"
             android:layout_weight="1"
             android:scrollbars="vertical" />
+        <!--android:background="@color/light_grey_transparent""-->
+
 
         <Button
             android:id="@+id/button_start"
@@ -67,7 +71,10 @@
             android:freezesText="false"
             android:gravity="center_horizontal"
             android:text="@string/startGame"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+        <!--android:background="@color/light_grey_transparent""-->
+
 
     </LinearLayout>
 

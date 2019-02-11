@@ -113,6 +113,15 @@ public class ClientModel extends Observable
         return activeGame;
     }
 
+    public Game getGameByNumber(int gameNum) {
+        for(Game game : gameList) {
+            if(game.getGameNum() == gameNum) {
+                return game;
+            }
+        }
+        return null;
+    }
+
     public Game getGame(String gameName)
     {
         for(Game game : gameList)

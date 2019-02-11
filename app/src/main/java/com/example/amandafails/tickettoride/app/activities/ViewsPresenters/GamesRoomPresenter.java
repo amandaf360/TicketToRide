@@ -17,6 +17,7 @@ import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
+import ThomasStuff.Player;
 import services.CreateGameService;
 import services.JoinGameService;
 import services.Poller;
@@ -51,7 +52,8 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         return clientModel.getGameNum(game);
     }
 
-    public boolean joinGame(Game game, Context context)
+    // MAYBE PUT THE DIALOG IN THE VIEW??
+    public void joinGame(final Game game, Context context)
     {
         String joinGameName = "Are you sure you want to join " + game.getName() + "?";
         new AlertDialog.Builder(context)
@@ -60,7 +62,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
                 .setPositiveButton("Join", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        joinGameYes();
+                        joinGameYes(game);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -70,23 +72,29 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
                     }
                 })
                 .show();
-
-        if(joinGame == true)
-        {
-            JoinGameService joinGameService = new JoinGameService();
-            joinGameService.joinGame(clientModel.getGameNum(game), clientModel.getUser().getUserName());
-
-            return true;
-        }
-
-        else
-        {
-            return false;
-        }
     }
 
-    private static void joinGameYes()
+    private void joinGameYes(Game game)
     {
+        JoinGameService joinGameService = new JoinGameService();
+        joinGameService.joinGame(clientModel.getGameNum(game));
+
+        // *************** TEST FUNCTIONALITY ***************** //
+        clientModel.setActiveGame(game);
+
+        Player player = new Player();
+        player.setName("player1");
+        player.setAuthToken("auth1");
+        player.setColor("red");
+        clientModel.addPlayerToCurrentGame(player);
+
+        Player player2 = new Player();
+        player2.setName("player2");
+        player2.setAuthToken("auth2");
+        player2.setColor("green");
+        clientModel.addPlayerToCurrentGame(player2);
+
+        // *************** END OF TEST FUNCTIONALITY ********** //
         joinGame = true;
     }
 
@@ -133,8 +141,6 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
 
     public boolean createGame(Context context)
     {
-
-
         final String joinGameName = "pick the amount of players you want in your game";
         String[] singleChoiceItems = {"2","3","4","5"};
         final int itemSelected = 0;
@@ -171,7 +177,21 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     @Override
     public void update(Observable observable, Object o)
     {
-        view.updateView();
+        // if game list is updated, then update the game list on screen
+        if(o.getClass() == ArrayList.class) {
+            view.updateView();
+        }
+        else if(o.getClass() == Game.class) {
+            // delete the observer
+            this.clientModel.deleteObserver(this);
+            // switch activity
+            view.switchActivity();
+        }
+        // if current game is updated, change activities to go to game lobby
+        else if(o.getClass() == String.class) {
+            // display the most recent error message
+            view.displayErrorMessage(clientModel.getMessage());
+        }
     }
                   // create a method called "Update" implemented from observer to see when new players join
     // call displayPlayer(Player player) in view when this occurs
@@ -210,11 +230,4 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
 
         }
     }
-
-    public void stopObserving()
-    {
-        clientModel.deleteObserver(this);
-    }
-
-
 }

@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +16,6 @@ import com.example.amandafails.tickettoride.app.adaptors.LobbyRecyclerViewAdapto
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Player;
@@ -28,8 +26,9 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<String> lines;
-    int numPlayers;
+    int maxNumPlayers;
     private LobbyActivityPresenter presenter;
+    private ClientModel clientModel = ClientModel.getInstance();
 
     private TextView gameName;
 
@@ -45,7 +44,8 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
 
         gameName = findViewById(R.id.game_name_text);
-        gameName.setText(presenter.getGameName());
+        String gameText = presenter.getGameName(); // + "'s "
+        gameName.setText(gameText);
         startButton = findViewById(R.id.button_start);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,47 +54,49 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
             }
         });
 
-        //startButton.setEnabled(false);
-        startButton.setEnabled(true);
-
         mRecyclerView = findViewById(R.id.my_lobby_recycler_view);
 
+        // display the players already in the game
+        int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
+        List<Player> players = clientModel.getActiveGame().getPlayers();
+        for(int i = 0; i < numPlayers; i++) {
+            displayPlayer(players.get(i));
+        }
 
+        maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+
+        // enable start button if number of players in game is at it's max
+        if(numPlayers == maxNumPlayers) {
+            startButton.setEnabled(true);
+        }
+        else {
+            startButton.setEnabled(false);
+        }
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
-                /*
-                if(lines.size() != numPlayers) {
+                if(lines.size() != maxNumPlayers) {
                     startButton.setEnabled(false);
                 }
                 else {
                     startButton.setEnabled(true);
                 }
-                */
             }
 
             @Override
             public void onChanged() {
-                /*
-                if(lines.size() != numPlayers) {
+                if(lines.size() != maxNumPlayers) {
                     startButton.setEnabled(false);
                 }
                 else {
                     startButton.setEnabled(true);
                 }
-                */
             }
         });
         mLayoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-//        ClientModel clientModel = new ClientModel();
-//        // CHANGE THIS LINE TOO
-//        // int numPlayers = ClientModel.get().getActiveGame().getMaxPlayers();
-//        numPlayers = clientModel.getActiveGame().getMaxPlayers();
-
 
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -133,7 +135,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         lines.add(toAdd);
         mAdapter.notifyDataSetChanged();
 
-        // don't know if this works in here??
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
         mRecyclerView.setAdapter(mAdapter);
     }

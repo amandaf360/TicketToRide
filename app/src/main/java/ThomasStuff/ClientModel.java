@@ -150,6 +150,11 @@ public class ClientModel extends Observable
     public void addPlayerToGame(Game game, Player player)
     {
         game.addPlayer(player);
+        
+        if(game.getGameNum() == activeGame.getGameNum())
+        {
+            activeGame.addPlayer(player);
+        }
 
         setChanged();
         notifyObservers(this.gameList);

@@ -171,7 +171,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     @Override
     public void update(Observable observable, Object o)
     {
-        view.update();
+        view.updateView();
     }
                   // create a method called "Update" implemented from observer to see when new players join
     // call displayPlayer(Player player) in view when this occurs

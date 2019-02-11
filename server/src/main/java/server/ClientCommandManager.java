@@ -9,44 +9,111 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import commands.*;
+import responses.PollResponse;
+import servermodel.Game;
+import servermodel.ModelRoot;
+import servermodel.User;
 
 public class ClientCommandManager
 {
-    Map<String, ArrayList<ICommand>> userMap;
 
-    public ClientCommandManager()
+
+    private Map<String, ArrayList<Game>> gamesCreated;
+    private Map<String, ArrayList<String>> gamesDeleted;
+    private Map<String, ArrayList<String>> playersJoined;
+    private Map<String, ArrayList<String>> playersLeft;
+
+    private static ClientCommandManager commandManager = new ClientCommandManager();
+
+    public static ClientCommandManager getCommandManager()
     {
-        userMap = new HashMap<String, ArrayList<ICommand>>();
-        userMap.put("allCommands", new ArrayList<ICommand>());
+        return commandManager;
     }
 
-    public void addCommand(String identifier, ICommand command)
+    private ClientCommandManager()
     {
-        if(!identifier.equals("all"))
+        gamesCreated = new HashMap<>();
+        gamesDeleted = new HashMap<>();
+        playersJoined = new HashMap<>();
+        playersLeft = new HashMap<>();
+    }
+
+    public void addUser(String username)
+    {
+        gamesCreated.put(username, new ArrayList<Game>());
+        gamesDeleted.put(username, new ArrayList<String>());
+        playersJoined.put(username, new ArrayList<String>());
+        playersLeft.put(username, new ArrayList<String>());
+
+    }
+
+    public PollResponse firstPoll()
+    {
+        PollResponse response = new PollResponse();
+        ModelRoot modelRoot = ModelRoot.getModel();
+        response.setGamesCreated((ArrayList)modelRoot.getGameList());
+
+        return response;
+    }
+
+    public PollResponse poll(String username)
+    {
+        PollResponse response = new PollResponse();
+        response.setGamesCreated(gamesCreated.get(username));
+        response.setGamesDeleted(gamesDeleted.get(username));
+        response.setPlayersJoined(playersJoined.get(username));
+        response.setPlayersLeft(playersLeft.get(username));
+
+        gamesCreated.get(username).clear();
+        gamesDeleted.get(username).clear();
+        playersJoined.get(username).clear();
+        playersLeft.get(username).clear();
+
+        return response;
+    }
+
+    public void addGame(Game game)
+    {
+        Set<Map.Entry<String, ArrayList<Game>>> gameSet = gamesCreated.entrySet();
+        Iterator<Map.Entry<String, ArrayList<Game>>> iter = gameSet.iterator();
+        while(iter.hasNext())
         {
-            userMap.get(identifier).add(command);
+            Map.Entry<String, ArrayList<Game>> entry = iter.next();
+            entry.getValue().add(game);
         }
-        else
+    }
+
+    public void deleteGame(String gamename)
+    {
+        Set<Map.Entry<String, ArrayList<String>>> joinedSet = playersJoined.entrySet();
+        Iterator<Map.Entry<String, ArrayList<String>>> iter = joinedSet.iterator();
+        while(iter.hasNext())
         {
-            Set<Map.Entry<String, ArrayList<ICommand>>> mapSet = userMap.entrySet();
-            Iterator<Map.Entry<String, ArrayList<ICommand>>> iter = mapSet.iterator();
-            while(iter.hasNext())
-            {
-                Map.Entry<String, ArrayList<ICommand>> entry = iter.next();
-                entry.getValue().add(command);
-            }
+            iter.next().getValue().add(gamename);
         }
     }
 
-    public void addUser(String user)
-    {
-        ArrayList<ICommand> allCommands = userMap.get("allCommands");
-        userMap.put(user, allCommands);
+    public void join(String username, String gameName) {
+        Set<Map.Entry<String, ArrayList<String>>> joinedSet = playersJoined.entrySet();
+        Iterator<Map.Entry<String, ArrayList<String>>> iter = joinedSet.iterator();
+        while (iter.hasNext())
+        {
+            ArrayList<String> joined = iter.next().getValue();
+            joined.add(username);
+            joined.add(gameName);
+        }
     }
 
-    private void getGameList()
+    public void leaveGame(String username, String gameName)
     {
-
+        Set<Map.Entry<String, ArrayList<String>>> joinedSet = playersLeft.entrySet();
+        Iterator<Map.Entry<String, ArrayList<String>>> iter = joinedSet.iterator();
+        while (iter.hasNext())
+        {
+            ArrayList<String> left = iter.next().getValue();
+            left.add(username);
+            left.add(gameName);
+        }
     }
 
 }

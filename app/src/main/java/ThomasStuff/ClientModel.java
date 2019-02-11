@@ -34,6 +34,7 @@ public class ClientModel extends Observable
     {
         this.instance = this;
         gameList = new ArrayList<>();
+        messages = new ArrayList<>();
     }
 
     public static ClientModel getInstance() {

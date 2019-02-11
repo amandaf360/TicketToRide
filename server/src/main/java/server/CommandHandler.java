@@ -55,10 +55,17 @@ public class CommandHandler implements HttpHandler
                 command = new RegisterCommand(argumentList.get(0), argumentList.get(1));
                 break;
             case "poll":
+                String username = wrappedRequest.getStringList().get(0);
+                command = new PollCommand(username);
                 break;
             case "startGame":
                 // StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
                 command = new StartGameCommand();
+                break;
+            case "createGame":
+                ArrayList<String> createList = wrappedRequest.getStringList();
+                break;
+
         }
 
         System.out.println("Executing");

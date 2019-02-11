@@ -2,6 +2,7 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
 import android.content.Intent;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -127,9 +128,9 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
             this.clientModel.deleteObserver(this);
             view.switchActivity();
         }
-        else {
-            view.displayErrorMessage(arg.toString());
-            //clientModel.deleteMessage(arg.toString());
+        else if(arg.getClass() == String.class) {
+            // display the most recent error message
+            view.displayErrorMessage(clientModel.getMessage());
         }
     }
 

@@ -15,13 +15,22 @@ public class Poller extends AsyncTask
     @Override
     protected Object doInBackground(Object[] objects)
     {
+        boolean firstPoll = true;
         while(true)
         {
             try
             {
                 Thread.sleep(1000);
                 ServerProxy proxy = new ServerProxy();
-                proxy.poll(user);
+                if(firstPoll)
+                {
+                    proxy.poll("firstPoll", user);
+                    firstPoll = false;
+                }
+                else
+                {
+                    proxy.poll("poll", user);
+                }
             }
             catch (InterruptedException ex)
             {

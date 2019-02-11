@@ -60,12 +60,15 @@ public class CommandHandler implements HttpHandler
                 break;
             case "poll":
                 String username = wrappedRequest.getStringList().get(0);
-                System.out.println("received poll request from : " + username);
-                command = new PollCommand(username);
+                command = new PollCommand(username, false);
+                break;
+            case "firstPoll":
+                String name = wrappedRequest.getStringList().get(0);
+                command = new PollCommand(name, true);
                 break;
             case "startGame":
-                // StartGameRequest startRequest = (StartGameRequest)wrappedRequest.getRequest();
-                command = new StartGameCommand();
+                int gameNum = Integer.parseInt(wrappedRequest.getStringList().get(0));
+                command = new StartGameCommand(gameNum);
                 break;
             case "createGame":
                 ArrayList<String> createList = wrappedRequest.getStringList();

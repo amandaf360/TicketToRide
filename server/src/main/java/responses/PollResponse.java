@@ -12,6 +12,10 @@ public class PollResponse extends BaseResponse
     private ArrayList<String> playersLeft;
 
     public PollResponse() {
+        gamesCreated = new ArrayList<>();
+        gamesDeleted = new ArrayList<>();
+        playersJoined = new ArrayList<>();
+        playersLeft = new ArrayList<>();
     }
 
     public ArrayList<Game> getGamesCreated() {

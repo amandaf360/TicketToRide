@@ -4,8 +4,7 @@ public class StartGameResponse extends BaseResponse
 {
     private String errorMessage;
 
-    public StartGameResponse(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public StartGameResponse() {
     }
 
     public String getErrorMessage() {

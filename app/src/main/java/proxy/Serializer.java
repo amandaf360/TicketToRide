@@ -45,4 +45,9 @@ public class Serializer
         return gson.fromJson(response, JoinGameResponse.class);
     }
 
+    public StartGameResponse deserializeStartGameResponse(String response)
+    {
+        return gson.fromJson(response, StartGameResponse.class);
+    }
+
 }

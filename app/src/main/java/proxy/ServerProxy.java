@@ -20,7 +20,6 @@ import responses.*;
 public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     private OnTaskCompleted callerClass;
     private Serializer serializer;
-    private boolean pollSafe;
 
     public void login(String username, String password) {
         LoginRequest request = new LoginRequest(username, password);
@@ -57,11 +56,11 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         execute(wrapper);
     }
 
-    public void poll(String username) {
+    public void poll(String pollType, String username) {
 
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
-        RequestWrapper wrapper = new RequestWrapper("poll", stringList);
+        RequestWrapper wrapper = new RequestWrapper(pollType, stringList);
         callerClass = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
@@ -130,17 +129,31 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void leaveGame(String username, String gameName) {
+    public void leaveGame(String username, String gameName)
+    {
 
     }
 
-    public void beginGame(String gameName) {
+    public void beginGame(int gameNum)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(Integer.toString(gameNum));
+        RequestWrapper wrapper = new RequestWrapper("startGame", stringList);
 
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson)
+            {
+                StartGameResponse response = serializer.deserializeStartGameResponse(responseJson);
+                StartGameCommand command = new StartGameCommand(response.getErrorMessage());
+                command.execute();
+            }
+        };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
     public ServerProxy() {
         serializer = new Serializer();
-        pollSafe = true;
     }
 
     @Override
@@ -180,6 +193,5 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         callerClass.completeTask(s);
-        pollSafe = true;
     }
 }

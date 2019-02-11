@@ -1,15 +1,33 @@
 package services;
 
+import java.util.ArrayList;
+
 import responses.PollResponse;
 import server.ClientCommandManager;
+import servermodel.Game;
+import servermodel.ModelRoot;
 
 public class PollService
 {
-    public PollResponse poll(String username)
+    public PollResponse poll(String username, boolean firstPoll)
     {
-        ClientCommandManager manager = ClientCommandManager.getCommandManager();
-        PollResponse response = manager.poll(username);
-        response.setUsername(username);
-        return response;
+        PollResponse response = new PollResponse();
+        if(!firstPoll)
+        {
+            ClientCommandManager manager = ClientCommandManager.getCommandManager();
+            response = manager.poll(username);
+            response.setUsername(username);
+            return response;
+        }
+        else
+        {
+            ModelRoot model = ModelRoot.getModel();
+            response.setGamesCreated(model.getGameList());
+            if(response.getGamesCreated() == null)
+            {
+                response.setGamesCreated(new ArrayList<Game>());
+            }
+            return response;
+        }
     }
 }

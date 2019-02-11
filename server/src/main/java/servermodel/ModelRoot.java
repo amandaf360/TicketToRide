@@ -9,7 +9,7 @@ public class ModelRoot
 
     private ModelRoot()
     {
-        gameCounter = 5;
+        gameCounter = 0;
         userList = new ArrayList<>();
         gameList = new ArrayList<>();
     }

@@ -86,6 +86,10 @@ public class CommandHandler implements HttpHandler
 
         BaseResponse response = command.execute();
         String responseString = serializer.serializeResponse(response);
+        if(commandType.equals("poll"))
+        {
+            ClientCommandManager.getCommandManager().pollClear(wrappedRequest.getStringList().get(0));
+        }
         writeResponse(exchange, HttpURLConnection.HTTP_OK, responseString);
     }
 

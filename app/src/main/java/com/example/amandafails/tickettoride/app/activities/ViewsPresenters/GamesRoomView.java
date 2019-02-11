@@ -143,7 +143,7 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
             ArrayList<Game> arrayList = new ArrayList<>();
             for(Game game : gameList)
             {
-                if(game.getMaxPlayers() == game.getCurrentPlayers())
+                if(game.getMaxPlayers() <= game.getCurrentPlayers())
                 {
                     // don't add!
                 }

@@ -81,6 +81,17 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
+                int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
+                int sizeOfLines = lines.size();
+                maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+                // print out max number of people allowed in the game
+                System.out.println("Max players in game: " + maxNumPlayers);
+
+                // print out current number of people in the game
+                System.out.println("Players in game: " + numPlayers);
+
+                // print out lines size
+                System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() != maxNumPlayers) {
                     startButton.setEnabled(false);
                 }
@@ -91,6 +102,17 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
             @Override
             public void onChanged() {
+                int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
+                int sizeOfLines = lines.size();
+                maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+                // print out max number of people allowed in the game
+                System.out.println("Max players in game: " + maxNumPlayers);
+
+                // print out current number of people in the game
+                System.out.println("Players in game: " + numPlayers);
+
+                // print out lines size
+                System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() != maxNumPlayers) {
                     startButton.setEnabled(false);
                 }

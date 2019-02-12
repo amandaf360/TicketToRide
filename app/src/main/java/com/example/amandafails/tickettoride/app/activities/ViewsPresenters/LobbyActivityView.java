@@ -64,6 +64,11 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         }
 
         maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+        // print out max number of people allowed in the game
+        System.out.println("Max players in game: " + maxNumPlayers);
+
+        // print out current number of people in the game
+        System.out.println("Players in game: " + numPlayers);
 
         // enable start button if number of players in game is at it's max
         if(numPlayers == maxNumPlayers) {

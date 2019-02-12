@@ -164,6 +164,13 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
+
+        if(lines.size() != maxNumPlayers) {
+            setStartEnabled(false);
+        }
+        else {
+            setStartEnabled(true);
+        }
     }
 
     @Override

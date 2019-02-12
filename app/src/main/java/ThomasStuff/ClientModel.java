@@ -161,16 +161,16 @@ public class ClientModel extends Observable
         }
         if(!playIsPresent)
         {
-            game.addPlayer(player);
-
             if (activeGame != null)
             {
-
-
                 if (game.getGameNum() == activeGame.getGameNum())
                 {
                     activeGame.addPlayer(player);
                 }
+            }
+            else
+            {
+                game.addPlayer(player);
             }
 
             setChanged();

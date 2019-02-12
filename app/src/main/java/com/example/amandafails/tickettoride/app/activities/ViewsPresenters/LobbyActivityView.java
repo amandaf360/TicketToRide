@@ -160,9 +160,11 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
     public void displayPlayer(Player player) {
         String toAdd = player.getName() + " has entered the game.";
         lines.add(toAdd);
-        mAdapter.notifyDataSetChanged();
+        // print out lines size
+        System.out.println("Lines size: " + lines.size());
 
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
+        mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -1,7 +1,25 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
 
-public class GameplayView implements IGameplayView
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
+
+import com.example.amandafails.tickettoride.R;
+
+public class GameplayView extends AppCompatActivity implements IGameplayView
 {
+    private Button drawTrainsButton;
+    private Button drawRoutesButton;
+    private Button PlaceTrainsButton;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+    }
+
 
     public void onDrawCardsClicked()
     {

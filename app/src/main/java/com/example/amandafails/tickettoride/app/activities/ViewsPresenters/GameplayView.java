@@ -50,17 +50,17 @@ public class GameplayView extends AppCompatActivity implements IGameplayView
     //define all these buttons inside of onCreate
     public void onDrawCardsClicked()
     {
-
+        presenter.drawCards();
     }
 
     public void onDrawRoutesClicked()
     {
-
+        presenter.drawRoute();
     }
 
     public void onPlaceTrainsClicked()
     {
-
+        presenter.placeTrains();
     }
 
     public void onTrainCardDrawerExpanded()

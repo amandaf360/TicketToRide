@@ -14,6 +14,7 @@ public class GameplayView extends AppCompatActivity implements IGameplayView
     private Button drawTrainsButton;
     private Button drawRoutesButton;
     private Button placeTrainsButton;
+    private boolean firstCreate = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -44,6 +45,13 @@ public class GameplayView extends AppCompatActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
+
+        if(firstCreate)
+        {
+            presenter.chooseDestinationCards();
+            firstCreate = false;
+        }
+        firstCreate = false;
 
     }
 

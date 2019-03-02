@@ -80,11 +80,11 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
     public void onCreateGameClicked()
     {
         // for now, just show a toast
-        Context context = Objects.requireNonNull(this).getApplicationContext();
-        CharSequence text = "Create Game pressed!";
-        int duration = Toast.LENGTH_LONG;
+        //Context context = Objects.requireNonNull(this).getApplicationContext();
+        //CharSequence text = "Create Game pressed!";
+        //int duration = Toast.LENGTH_LONG;
 
-        Toast toast = Toast.makeText(context, text, duration);
+        //Toast toast = Toast.makeText(context, text, duration);
         presenter.createGame(gamesRoomView);
         gameAdapter.notifyDataSetChanged();
         updateView();

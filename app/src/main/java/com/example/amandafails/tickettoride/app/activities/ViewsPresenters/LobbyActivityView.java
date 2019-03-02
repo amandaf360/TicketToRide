@@ -64,6 +64,11 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         }
 
         maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+        // print out max number of people allowed in the game
+        System.out.println("Max players in game: " + maxNumPlayers);
+
+        // print out current number of people in the game
+        System.out.println("Players in game: " + numPlayers);
 
         // enable start button if number of players in game is at it's max
         if(numPlayers == maxNumPlayers) {
@@ -76,6 +81,17 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
+                int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
+                int sizeOfLines = lines.size();
+                maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+                // print out max number of people allowed in the game
+                System.out.println("Max players in game: " + maxNumPlayers);
+
+                // print out current number of people in the game
+                System.out.println("Players in game: " + numPlayers);
+
+                // print out lines size
+                System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() != maxNumPlayers) {
                     startButton.setEnabled(false);
                 }
@@ -86,6 +102,17 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
             @Override
             public void onChanged() {
+                int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
+                int sizeOfLines = lines.size();
+                maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
+                // print out max number of people allowed in the game
+                System.out.println("Max players in game: " + maxNumPlayers);
+
+                // print out current number of people in the game
+                System.out.println("Players in game: " + numPlayers);
+
+                // print out lines size
+                System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() != maxNumPlayers) {
                     startButton.setEnabled(false);
                 }
@@ -133,10 +160,17 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
     public void displayPlayer(Player player) {
         String toAdd = player.getName() + " has entered the game.";
         lines.add(toAdd);
-        mAdapter.notifyDataSetChanged();
 
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
+        mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
+
+        if(lines.size() != maxNumPlayers) {
+            setStartEnabled(false);
+        }
+        else {
+            setStartEnabled(true);
+        }
     }
 
     @Override

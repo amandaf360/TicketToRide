@@ -21,7 +21,7 @@ public class JoinGameService
             Game game = gameList.get(i);
             if(game.getGameNum() == gameNum)
             {
-                if(game.getMaxPlayers() >= game.getCurrentPlayers())
+                if(game.getMaxPlayers() > game.getCurrentPlayers())
                 {
                     Player player = new Player();
                     player.setName(username);

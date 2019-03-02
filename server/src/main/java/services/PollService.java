@@ -27,6 +27,7 @@ public class PollService
             {
                 response.setGamesCreated(new ArrayList<Game>());
             }
+            ClientCommandManager.getCommandManager().pollClear(username);
             return response;
         }
     }

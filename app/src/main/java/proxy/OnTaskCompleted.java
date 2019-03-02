@@ -2,5 +2,5 @@ package proxy;
 
 public interface OnTaskCompleted
 {
-    public void completeTask(String responseJson);
+    void completeTask(String responseJson);
 }

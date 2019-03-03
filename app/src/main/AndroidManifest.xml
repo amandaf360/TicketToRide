@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".app.activities.ViewsPresenters.LobbyActivityView"/>
         <activity android:name=".app.activities.ViewsPresenters.GamesRoomView"/>
+        <activity android:name=".app.activities.ViewsPresenters.GameplayView"/>
 
     </application>
 

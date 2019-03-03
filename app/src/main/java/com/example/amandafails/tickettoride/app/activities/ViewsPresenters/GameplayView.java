@@ -44,10 +44,8 @@ public class GameplayView extends AppCompatActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
-
     }
 
-    //define all these buttons inside of onCreate
     public void onDrawCardsClicked()
     {
         presenter.drawCards();

@@ -7,4 +7,5 @@ public interface ILobbyView {
     void setStartEnabled(boolean enabled);
     void displayPlayer(Player player);
     void displayErrorMessage(String error);
+    void switchActivity();
 }

@@ -152,6 +152,22 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    public void sendMessage(String message, String playerName, int gameNumber)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(message);
+        stringList.add(playerName);
+        stringList.add(Integer.toString(gameNumber));
+        RequestWrapper wrapper = new RequestWrapper("sendMessage", stringList);
+        callerClass = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+
+            }
+        };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
     public ServerProxy() {
         serializer = new Serializer();
     }

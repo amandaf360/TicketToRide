@@ -161,7 +161,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://192.168.253.104:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://10.24.200.185:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");

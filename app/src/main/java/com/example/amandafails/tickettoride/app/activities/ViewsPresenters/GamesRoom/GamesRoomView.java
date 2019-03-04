@@ -1,10 +1,6 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.GamesRoom;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,21 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
-import com.example.amandafails.tickettoride.app.adaptors.LobbyRecyclerViewAdaptor;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby.LobbyActivityView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Observable;
-import java.util.Observer;
 
 import ThomasStuff.Game;
-import services.JoinGameService;
 
 public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 {

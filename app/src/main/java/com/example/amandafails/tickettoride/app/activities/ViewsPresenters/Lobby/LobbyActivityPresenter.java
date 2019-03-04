@@ -1,12 +1,12 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
+
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
-import ThomasStuff.Player;
 
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
@@ -19,11 +19,13 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     }
 
-
     @Override
     public void startGame() {
         // disable the start game button
         view.setStartEnabled(false);
+
+        //call activity switcher in View?
+        view.switchActivity();
 
         // will call the "start game service" once it's created
         // similar to this below...
@@ -36,11 +38,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         */
 
         // once it is ready to start, change the activity
-        /* TO START A NEW ACTIVITY!!
-        Intent i = new Intent(context, EventActivity.class);
-                    i.putExtra("event", eventID);
-                    context.startActivity(i);
-         */
+        view.switchActivity();
     }
 
     @Override

@@ -8,7 +8,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
 
-        <!-- Strings related to activeGame room -->
+    <!-- Strings related to activeGame room -->
     <string name="sampleText">SAMPLE TEXT</string>
     <string name="gameNum">  #</string>
     <string name="gameName">Game Name</string>
@@ -21,10 +21,11 @@
     <string name="negativeJoinGame">No</string>
 
 
-        <!-- Strings related to activeGame lobby -->
+    <!-- Strings related to activeGame lobby -->
     <string name="waiting">Waiting for people to join game&#8230;</string>
     <string name="startGame">Start Game</string>
 
-
+    <!-- Strings related to trainDeckDrawer -->
+    <string name="trainDrawerTitle">Bank</string>
 
 </resources>

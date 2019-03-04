@@ -1,14 +1,8 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.GamesRoom;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.example.amandafails.tickettoride.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +11,6 @@ import java.util.Observer;
 
 import ThomasStuff.ClientModel;
 import ThomasStuff.Game;
-import ThomasStuff.Player;
 import services.CreateGameService;
 import services.JoinGameService;
 import services.Poller;

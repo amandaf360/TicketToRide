@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
 public interface IGameplayView
 {

@@ -8,7 +8,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
-    tools:context=".app.activities.ViewsPresenters.LobbyActivityView">
+    tools:context=".app.activities.ViewsPresenters.Lobby.LobbyActivityView">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

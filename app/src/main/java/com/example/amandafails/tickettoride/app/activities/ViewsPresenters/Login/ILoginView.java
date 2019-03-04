@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Login;
 
 public interface ILoginView {
     void onLoginClicked();
@@ -11,7 +11,5 @@ public interface ILoginView {
     String getRegisterPassword();
     String getConfirmPassword();
     void switchActivity();
-//    void setLoginUsername(String username);
-//    void setLoginPassword(String password);
     void displayErrorMessage(String error);
 }

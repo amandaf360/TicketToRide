@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.GamesRoom.GamesRoomView;
 
 import java.util.Objects;
-
-import ThomasStuff.ClientModel;
 
 public class LoginActivityView extends AppCompatActivity implements ILoginView {
     private LoginActivityPresenter presenter;

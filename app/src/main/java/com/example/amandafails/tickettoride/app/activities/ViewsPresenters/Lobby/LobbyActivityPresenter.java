@@ -1,12 +1,10 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
-import ThomasStuff.Player;
 
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
@@ -36,11 +34,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         */
 
         // once it is ready to start, change the activity
-        /* TO START A NEW ACTIVITY!!
-        Intent i = new Intent(context, EventActivity.class);
-                    i.putExtra("event", eventID);
-                    context.startActivity(i);
-         */
+        view.switchActivity();
     }
 
     @Override

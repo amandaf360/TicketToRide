@@ -1,6 +1,7 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayView;
 import com.example.amandafails.tickettoride.app.adaptors.LobbyRecyclerViewAdaptor;
 
 import java.util.ArrayList;
@@ -171,6 +173,12 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         else {
             setStartEnabled(true);
         }
+    }
+
+    @Override
+    public void switchActivity() {
+        Intent i = new Intent(LobbyActivityView.this, GameplayView.class);
+        startActivity(i);
     }
 
     @Override

@@ -1,14 +1,14 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.amandafails.tickettoride.R;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
-import ThomasStuff.ClientModel;
-import ThomasStuff.Player;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
@@ -22,6 +22,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     public void drawCards()
     {
         // is this the function to choose your first destination cards??
+
     }
 
     public void drawRoute()
@@ -38,7 +39,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
 
     }
-
 
 
     /*
@@ -76,9 +76,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 })
 
                 .show();
-
-
-
         return true;
     }
 

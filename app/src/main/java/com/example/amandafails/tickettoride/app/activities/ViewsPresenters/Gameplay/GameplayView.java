@@ -1,13 +1,17 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.amandafails.tickettoride.R;
 
-public class GameplayView extends AppCompatActivity implements IGameplayView
+public class GameplayView extends FragmentActivity implements IGameplayView
 {
     private GameplayPresenter presenter;
 
@@ -58,7 +62,16 @@ public class GameplayView extends AppCompatActivity implements IGameplayView
     //define all these buttons inside of onCreate
     public void onDrawCardsClicked()
     {
-        presenter.drawCards();
+        // set fragment to draw card fragment
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction  = manager.beginTransaction();
+        TrainCardDeckFragment trainCardDeckFragment = new TrainCardDeckFragment();
+        transaction.replace(R.id.frame, trainCardDeckFragment)
+                .addToBackStack(null)
+                .commit();
+
+        // call draw cards method in train card deck fragment
+        //trainCardDeckFragment.drawCards();
     }
 
     public void onDrawRoutesClicked()
@@ -135,4 +148,9 @@ public class GameplayView extends AppCompatActivity implements IGameplayView
     {
 
     }
+
+    public GameplayPresenter getPresenter() {
+        return presenter;
+    }
+
 }

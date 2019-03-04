@@ -112,6 +112,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         //Player player = model.getCurrentPlayer();
         //player.setDestCards(arrayList);
 
-        
+
     }
 }

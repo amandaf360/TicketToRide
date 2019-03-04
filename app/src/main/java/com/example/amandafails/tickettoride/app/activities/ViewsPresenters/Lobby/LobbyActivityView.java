@@ -34,8 +34,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
     private TextView gameName;
 
-    private Button startButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +46,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         gameName = findViewById(R.id.game_name_text);
         String gameText = presenter.getGameName(); // + "'s "
         gameName.setText(gameText);
-        startButton = findViewById(R.id.button_start);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onStartClicked();
-            }
-        });
 
         mRecyclerView = findViewById(R.id.my_lobby_recycler_view);
 
@@ -72,14 +63,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         // print out current number of people in the game
         System.out.println("Players in game: " + numPlayers);
 
-        // enable start button if number of players in game is at it's max
-        if(numPlayers == maxNumPlayers) {
-            startButton.setEnabled(true);
-        }
-        else {
-            startButton.setEnabled(true);//TRUE FOR TESTING PURPOSES, CHANGE TO FALSE LATER
-        }
-
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -94,11 +77,9 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
                 // print out lines size
                 System.out.println("Lines size: " + sizeOfLines);
-                if(lines.size() != maxNumPlayers) {
-                    startButton.setEnabled(true); //THIS IS TRUE FOR TESTING PURPOSES, CHANGE TO FALSE LATER
-                }
-                else {
-                    startButton.setEnabled(true);
+                if(lines.size() == maxNumPlayers) {
+                    presenter.disconnectObserver();
+                    switchActivity();
                 }
             }
 
@@ -115,11 +96,9 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
                 // print out lines size
                 System.out.println("Lines size: " + sizeOfLines);
-                if(lines.size() != maxNumPlayers) {
-                    startButton.setEnabled(true); //THIS IS FOR TESTING PURPOSES, IT SHOULD SET IT TO FALSE WHEN NOT ENOUGH PEOPLE HAVE JOINED
-                }
-                else {
-                    startButton.setEnabled(true);
+                if(lines.size() == maxNumPlayers) {
+                    presenter.disconnectObserver();
+                    switchActivity();
                 }
             }
         });
@@ -130,39 +109,11 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    /* DON'T KNOW IF WE NEED THIS OR NOT
-    @Override
-    public void onBackPressed() {
-        Intent data = new Intent();
-        setResult(RESULT_OK, data);
-        finish();
-    }
-    */
-
-    @Override
-    public void onStartClicked() {
-        // for now, just show a toast
-        Context context = Objects.requireNonNull(this).getApplicationContext();
-        CharSequence text = "Start Game pressed!";
-        int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
-        // call start game in presenter
-        presenter.startGame();
-    }
-
     @Override
     public void switchActivity()
     {
         Intent intent = new Intent(this, GameplayView.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void setStartEnabled(boolean enabled) {
-        startButton.setEnabled(enabled);
     }
 
     @Override
@@ -174,18 +125,10 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 
-        if(lines.size() != maxNumPlayers) {
-            setStartEnabled(false);
+        if(lines.size() == maxNumPlayers) {
+            presenter.disconnectObserver();
+            switchActivity();
         }
-        else {
-            setStartEnabled(true);
-        }
-    }
-
-    @Override
-    public void switchActivity() {
-        Intent i = new Intent(LobbyActivityView.this, GameplayView.class);
-        startActivity(i);
     }
 
     @Override

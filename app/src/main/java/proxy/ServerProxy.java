@@ -152,22 +152,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void sendMessage(String message, String playerName, int gameNumber)
-    {
-        ArrayList<String> stringList = new ArrayList<>();
-        stringList.add(message);
-        stringList.add(playerName);
-        stringList.add(Integer.toString(gameNumber));
-        RequestWrapper wrapper = new RequestWrapper("sendMessage", stringList);
-        callerClass = new OnTaskCompleted() {
-            @Override
-            public void completeTask(String responseJson) {
-
-            }
-        };
-        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
-    }
-
     public ServerProxy() {
         serializer = new Serializer();
     }
@@ -177,7 +161,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.24.198.110:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://10.34.255.68:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");

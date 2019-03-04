@@ -183,12 +183,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
     }
 
     @Override
-    public void switchActivity() {
-        Intent i = new Intent(LobbyActivityView.this, GameplayView.class);
-        startActivity(i);
-    }
-
-    @Override
     public void displayErrorMessage(String error) {
         // give a toast displaying error message
         Context context = Objects.requireNonNull(this).getApplicationContext();

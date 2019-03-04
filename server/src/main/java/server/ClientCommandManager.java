@@ -51,7 +51,7 @@ public class ClientCommandManager
     {
         PollResponse response = new PollResponse();
         ModelRoot modelRoot = ModelRoot.getModel();
-        response.setGamesCreated((ArrayList)modelRoot.getGameList());
+        response.setGamesCreated(modelRoot.getGameList());
 
         return response;
     }

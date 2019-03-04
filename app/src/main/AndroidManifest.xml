@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".app.activities.ViewsPresenters.LoginActivityView">
+        <activity android:name=".app.activities.ViewsPresenters.Login.LoginActivityView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
                     android:screenOrientation="landscape"/>
@@ -23,8 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.activities.ViewsPresenters.LobbyActivityView"/>
-        <activity android:name=".app.activities.ViewsPresenters.GamesRoomView"/>
+        <activity android:name=".app.activities.ViewsPresenters.Lobby.LobbyActivityView"/>
+        <activity android:name=".app.activities.ViewsPresenters.GamesRoom.GamesRoomView"/>
+        <activity android:name=".app.activities.ViewsPresenters.Gameplay.GameplayView"/>
 
     </application>
 

@@ -1,5 +1,7 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,11 +19,13 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     }
 
-
     @Override
     public void startGame() {
         // disable the start game button
         view.setStartEnabled(false);
+
+        //call activity switcher in View?
+        view.switchActivity();
 
         // will call the "start game service" once it's created
         // similar to this below...

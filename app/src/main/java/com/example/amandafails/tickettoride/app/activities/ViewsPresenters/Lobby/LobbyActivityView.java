@@ -77,7 +77,7 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
             startButton.setEnabled(true);
         }
         else {
-            startButton.setEnabled(false);
+            startButton.setEnabled(true);//TRUE FOR TESTING PURPOSES, CHANGE TO FALSE LATER
         }
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -95,7 +95,7 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
                 // print out lines size
                 System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() != maxNumPlayers) {
-                    startButton.setEnabled(false);
+                    startButton.setEnabled(true); //THIS IS TRUE FOR TESTING PURPOSES, CHANGE TO FALSE LATER
                 }
                 else {
                     startButton.setEnabled(true);
@@ -116,7 +116,7 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
                 // print out lines size
                 System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() != maxNumPlayers) {
-                    startButton.setEnabled(false);
+                    startButton.setEnabled(true); //THIS IS FOR TESTING PURPOSES, IT SHOULD SET IT TO FALSE WHEN NOT ENOUGH PEOPLE HAVE JOINED
                 }
                 else {
                     startButton.setEnabled(true);
@@ -151,6 +151,13 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
         // call start game in presenter
         presenter.startGame();
+    }
+
+    @Override
+    public void switchActivity()
+    {
+        Intent intent = new Intent(this, GameplayView.class);
+        startActivity(intent);
     }
 
     @Override

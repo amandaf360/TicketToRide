@@ -5,21 +5,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-
-/*
- * to get a ClientModel object do something like this where needed
- * e.x.
- * public class Dummy
- * {
- *      private ClientModel clientModel
- *      public Dummy()
- *      {
- *          this.clientModel = ClientModel.getInstance()
- *      }
- * }
- *
- */
-
 public class ClientModel extends Observable
 {
     private ArrayList<Game> gameList;
@@ -32,7 +17,7 @@ public class ClientModel extends Observable
 
     public ClientModel()
     {
-        this.instance = this;
+        instance = this;
         gameList = new ArrayList<>();
     }
 

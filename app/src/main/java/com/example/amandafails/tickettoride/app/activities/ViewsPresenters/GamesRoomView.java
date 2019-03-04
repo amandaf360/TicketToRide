@@ -80,11 +80,11 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
     public void onCreateGameClicked()
     {
         // for now, just show a toast
-        Context context = Objects.requireNonNull(this).getApplicationContext();
-        CharSequence text = "Create Game pressed!";
-        int duration = Toast.LENGTH_LONG;
+        //Context context = Objects.requireNonNull(this).getApplicationContext();
+        //CharSequence text = "Create Game pressed!";
+        //int duration = Toast.LENGTH_LONG;
 
-        Toast toast = Toast.makeText(context, text, duration);
+        //Toast toast = Toast.makeText(context, text, duration);
         presenter.createGame(gamesRoomView);
         gameAdapter.notifyDataSetChanged();
         updateView();
@@ -192,10 +192,10 @@ public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
         public GameListHolder(View view)
         {
             super(view);
-            gameNum = (TextView) view.findViewById(R.id.game_list_game_number);
-            gameName = (TextView) view.findViewById(R.id.game_list_game_name);
-            gameCreator = (TextView) view.findViewById(R.id.game_list_creator);
-            inGame = (TextView) view.findViewById(R.id.game_list_in_game);
+            gameNum = view.findViewById(R.id.game_list_game_number);
+            gameName = view.findViewById(R.id.game_list_game_name);
+            gameCreator = view.findViewById(R.id.game_list_creator);
+            inGame = view.findViewById(R.id.game_list_in_game);
 
             itemView.setOnClickListener(this);
 

@@ -13,14 +13,6 @@ import ThomasStuff.User;
 
 public class LoginActivityPresenter implements ILoginPresenter, Observer {
 
-//    private User user;
-//    private View view;
-//
-//    public LoginActivityPresenter(View v) {
-//        this.user = new User();
-//        this.view = v;
-//    }
-
     private ClientModel clientModel = ClientModel.getInstance();
     private ILoginView view;
 

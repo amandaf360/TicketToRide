@@ -19,13 +19,12 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     }
 
+    public void disconnectObserver() {
+        clientModel.deleteObserver(this);
+    }
+
     @Override
     public void startGame() {
-        // disable the start game button
-        view.setStartEnabled(false);
-
-        //call activity switcher in View?
-        view.switchActivity();
 
         // will call the "start game service" once it's created
         // similar to this below...

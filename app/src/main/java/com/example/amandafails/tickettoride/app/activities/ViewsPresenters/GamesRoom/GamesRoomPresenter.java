@@ -125,6 +125,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
             //joinGameService.joinGame(clientModel.getGameNum(game));
             createGameNo();
         }
+        setChoice(0);
     }
 
     private static void createGameNo()

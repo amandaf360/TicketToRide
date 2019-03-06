@@ -8,11 +8,13 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import java.util.ArrayList;
 
 public class TrainView extends View
 {
     private Rect rect;
     private Paint paint;
+    private ArrayList<MapCity> cities;
 
     public TrainView(Context context)
     {
@@ -40,15 +42,57 @@ public class TrainView extends View
 
     private void init(@Nullable AttributeSet set)
     {
+        cities = new ArrayList<>();
+        System.out.println("this is the init method\n");
         rect = new Rect();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        cities.add(new MapCity(100, 100, "Atlanta"));
+        cities.add(new MapCity(100, 100, "Boston"));
+        cities.add(new MapCity(100, 100, "Calgary"));
+        cities.add(new MapCity(100, 100, "Charleston"));
+        cities.add(new MapCity(100, 100, "Chicago"));
+        cities.add(new MapCity(100, 100, "Dallas"));
+        cities.add(new MapCity(100, 100, "Denver"));
+        cities.add(new MapCity(100, 100, "Duluth"));
+        cities.add(new MapCity(100, 100, "El Paso"));
+        cities.add(new MapCity(100, 100, "Helena"));
+        cities.add(new MapCity(100, 100, "Houston"));
+        cities.add(new MapCity(100, 100, "Kansas City"));
+        cities.add(new MapCity(100, 100, "Las Angeles"));
+        cities.add(new MapCity(100, 100, "Las Vegas"));
+        cities.add(new MapCity(100, 100, "Little Rock"));
+        cities.add(new MapCity(100, 100, "Miami"));
+        cities.add(new MapCity(100, 100, "Montreal"));
+        cities.add(new MapCity(100, 100, "Nashville"));
+        cities.add(new MapCity(100, 100, "New Orleans"));
+        cities.add(new MapCity(100, 100, "New York"));
+        cities.add(new MapCity(100, 100, "Oklahoma City"));
+        cities.add(new MapCity(100, 100, "Omaha"));
+        cities.add(new MapCity(100, 100, "Phoenix"));
+        cities.add(new MapCity(100, 100, "Pittsburgh"));
+        cities.add(new MapCity(100, 100, "Portland"));
+        cities.add(new MapCity(100, 100, "Raleigh"));
+        cities.add(new MapCity(100, 100, "Saint Louis"));
+        cities.add(new MapCity(100, 100, "Salt Lake City"));
+        cities.add(new MapCity(100, 100, "San Francisco"));
+        cities.add(new MapCity(100, 100, "Santa Fe"));
+        cities.add(new MapCity(100, 100, "Sault St. Marie"));
+        cities.add(new MapCity(100, 100, "Seattle"));
+        cities.add(new MapCity(100, 100, "Toronto"));
+        cities.add(new MapCity(300, 0, "Vancouver"));
+        cities.add(new MapCity(100, 100, "Washington"));
+        cities.add(new MapCity(100, 100, "Winnipeg"));
     }
 
     @Override
     protected void onDraw(Canvas canvas)
     {
+        System.out.println("this is the onDraw method\n");
         canvas.save();
-        drawCity(canvas, 100, 200);
+        for(int i = 0; i < cities.size(); i++)
+        {
+            drawCity(canvas, cities.get(i).getX(), cities.get(i).getY());
+        }
 
         //rect.set(500, 50, 650, 150);
         //canvas.rotate(45, 10, 10);
@@ -68,4 +112,36 @@ public class TrainView extends View
         paint.setColor(Color.RED);
         canvas.drawCircle(x, y, 20, paint);
     }
+
+
+    class MapCity
+    {
+        float x;
+        float y;
+        String name;
+
+        public MapCity(float x, float y, String name)
+        {
+            this.x = x;
+            this.y = y;
+            this.name = name;
+        }
+
+        public float getX()
+        {
+            return x;
+        }
+
+        public float getY()
+        {
+            return y;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
+    }
 }
+
+

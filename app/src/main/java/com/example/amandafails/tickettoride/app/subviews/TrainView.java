@@ -62,26 +62,26 @@ public class TrainView extends View
         cities.add(new MapCity(390, 860, "Las Vegas"));
         cities.add(new MapCity(1410, 1020, "Little Rock"));
         cities.add(new MapCity(2010, 1470, "Miami"));
-        cities.add(new MapCity(2120, 300, "Montreal"));
+        cities.add(new MapCity(2160, 260, "Montreal"));
         cities.add(new MapCity(1690, 950, "Nashville"));
         cities.add(new MapCity(1490, 1280, "New Orleans"));
         cities.add(new MapCity(2160, 570, "New York"));
         cities.add(new MapCity(1180, 970, "Oklahoma City"));
         cities.add(new MapCity(1240, 640, "Omaha"));
         cities.add(new MapCity(530, 1050, "Phoenix"));
-        cities.add(new MapCity(100, 100, "Pittsburgh"));
-        cities.add(new MapCity(100, 100, "Portland"));
-        cities.add(new MapCity(100, 100, "Raleigh"));
-        cities.add(new MapCity(100, 100, "Saint Louis"));
-        cities.add(new MapCity(100, 100, "Salt Lake City"));
-        cities.add(new MapCity(100, 100, "San Francisco"));
-        cities.add(new MapCity(100, 100, "Santa Fe"));
-        cities.add(new MapCity(100, 100, "Sault St. Marie"));
-        cities.add(new MapCity(100, 100, "Seattle"));
-        cities.add(new MapCity(100, 100, "Toronto"));
+        cities.add(new MapCity(1940, 640, "Pittsburgh"));
+        cities.add(new MapCity(190, 290, "Portland"));
+        cities.add(new MapCity(1960, 920, "Raleigh"));
+        cities.add(new MapCity(1450, 800, "Saint Louis"));
+        cities.add(new MapCity(560, 670, "Salt Lake City"));
+        cities.add(new MapCity(110, 710, "San Francisco"));
+        cities.add(new MapCity(780, 950, "Santa Fe"));
+        cities.add(new MapCity(1640, 350, "Sault St. Marie"));
+        cities.add(new MapCity(230, 170, "Seattle"));
+        cities.add(new MapCity(1870, 480, "Toronto"));
         cities.add(new MapCity(300, 60, "Vancouver"));
-        cities.add(new MapCity(100, 100, "Washington"));
-        cities.add(new MapCity(100, 100, "Winnipeg"));
+        cities.add(new MapCity(2090, 780, "Washington"));
+        cities.add(new MapCity(1060, 120, "Winnipeg"));
     }
 
     @Override
@@ -106,11 +106,13 @@ public class TrainView extends View
     private void drawCity(Canvas canvas, float x, float y)
     {
         paint.setColor(Color.RED);
-        canvas.drawCircle(x, y, 32, paint);
+        canvas.drawCircle(x, y, 30, paint);
         paint.setColor(Color.WHITE);
         canvas.drawCircle(x, y, 26, paint);
         paint.setColor(Color.RED);
-        canvas.drawCircle(x, y, 20, paint);
+        canvas.drawCircle(x, y, 23, paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawCircle((x-10), (y+9), 3, paint);
     }
 
 

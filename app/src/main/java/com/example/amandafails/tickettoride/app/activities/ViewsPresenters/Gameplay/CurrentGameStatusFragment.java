@@ -76,13 +76,13 @@ public class CurrentGameStatusFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_current_game_status, container, false);
 
-        exitButton = getView().findViewById(R.id.display_game_status);
+        /*exitButton = getView().findViewById(R.id.display_game_status);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onExitButtonClicked();
             }
-        });
+        });commented because I am missing the referenced id*/
 
         return rootView;
     }

@@ -9,8 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
 import requests.*;
 import commands.*;
 import responses.*;

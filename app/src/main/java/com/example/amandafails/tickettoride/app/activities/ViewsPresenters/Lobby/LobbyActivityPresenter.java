@@ -1,12 +1,10 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
-import android.content.Intent;
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import ThomasStuff.ClientModel;
+import ClientModel.ClientModel;
 
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 

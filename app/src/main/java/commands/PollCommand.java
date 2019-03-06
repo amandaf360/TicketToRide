@@ -2,10 +2,9 @@ package commands;
 
 import java.util.ArrayList;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
-import ThomasStuff.Player;
-import proxy.ServerProxy;
+import ClientModel.ClientModel;
+import ClientModel.Game;
+import ClientModel.Player;
 import responses.PollResponse;
 import services.SetActiveGameService;
 import services.SetGamelistService;

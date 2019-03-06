@@ -1,6 +1,6 @@
 package services;
 
-import ThomasStuff.ClientModel;
+import ClientModel.ClientModel;
 
 public class SetMessageService
 {

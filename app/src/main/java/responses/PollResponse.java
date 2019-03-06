@@ -2,7 +2,7 @@ package responses;
 
 import java.util.ArrayList;
 
-import ThomasStuff.Game;
+import ClientModel.Game;
 
 public class PollResponse
 {

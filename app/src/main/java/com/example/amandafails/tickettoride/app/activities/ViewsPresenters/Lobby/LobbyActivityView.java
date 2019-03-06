@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Player;
+import ClientModel.ClientModel;
+import ClientModel.Player;
 
 public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 

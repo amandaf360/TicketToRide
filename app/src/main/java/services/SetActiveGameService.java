@@ -1,7 +1,7 @@
 package services;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
+import ClientModel.ClientModel;
+import ClientModel.Game;
 
 public class SetActiveGameService
 {

@@ -1,4 +1,4 @@
-package ThomasStuff;
+package ClientModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
-import ThomasStuff.Player;
+import ClientModel.Player;
 
 public interface ILobbyView {
     void onStartClicked();

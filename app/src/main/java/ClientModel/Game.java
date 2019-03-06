@@ -1,4 +1,4 @@
-package ThomasStuff;
+package ClientModel;
 
 import java.util.ArrayList;
 
@@ -10,11 +10,13 @@ public class Game
     private int gameNum;
     private int currentPlayers;
     private String creator;
+    private int indexOfCurrentPlayer;
 
 
     public Game()
     {
         players = new ArrayList<Player>();
+        indexOfCurrentPlayer = 0;
     }
 
 
@@ -86,5 +88,19 @@ public class Game
 
     public int getGameNum() {
         return gameNum;
+    }
+
+    public int getIndexOfCurrentPlayer()
+    {
+        return indexOfCurrentPlayer;
+    }
+
+    public void updateTurnIndex()
+    {
+        indexOfCurrentPlayer += 1;
+        if(indexOfCurrentPlayer >= players.size())
+        {
+            indexOfCurrentPlayer = 0;
+        }
     }
 }

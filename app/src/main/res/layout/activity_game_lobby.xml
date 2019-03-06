@@ -54,7 +54,7 @@
             android:paddingTop="40dp"
             android:layout_weight="1"
             android:scrollbars="vertical" />
-        <!--android:background="@color/light_grey_transparent""-->
+        <!--android:background="@color/light_grey_transparent""-->q
 
     </LinearLayout>
 

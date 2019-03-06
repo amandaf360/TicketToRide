@@ -63,6 +63,11 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         // print out current number of people in the game
         System.out.println("Players in game: " + numPlayers);
 
+        if(lines.size() == maxNumPlayers) {
+            presenter.disconnectObserver();
+            switchActivity();
+        }
+
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {

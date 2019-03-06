@@ -57,11 +57,11 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         }
 
         maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
-        // print out max number of people allowed in the game
-        System.out.println("Max players in game: " + maxNumPlayers);
 
-        // print out current number of people in the game
-        System.out.println("Players in game: " + numPlayers);
+        if(lines.size() == maxNumPlayers) {
+            presenter.disconnectObserver();
+            switchActivity();
+        }
 
         if(lines.size() == maxNumPlayers) {
             presenter.disconnectObserver();
@@ -74,15 +74,9 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
                 int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
                 int sizeOfLines = lines.size();
                 maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
-                // print out max number of people allowed in the game
-                System.out.println("Max players in game: " + maxNumPlayers);
 
-                // print out current number of people in the game
-                System.out.println("Players in game: " + numPlayers);
-
-                // print out lines size
-                System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() == maxNumPlayers) {
+                    System.out.println("HERE");
                     presenter.disconnectObserver();
                     switchActivity();
                 }
@@ -93,14 +87,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
                 int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
                 int sizeOfLines = lines.size();
                 maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
-                // print out max number of people allowed in the game
-                System.out.println("Max players in game: " + maxNumPlayers);
-
-                // print out current number of people in the game
-                System.out.println("Players in game: " + numPlayers);
-
-                // print out lines size
-                System.out.println("Lines size: " + sizeOfLines);
                 if(lines.size() == maxNumPlayers) {
                     presenter.disconnectObserver();
                     switchActivity();
@@ -129,7 +115,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter = new LobbyRecyclerViewAdaptor(lines);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
-
         if(lines.size() == maxNumPlayers) {
             presenter.disconnectObserver();
             switchActivity();

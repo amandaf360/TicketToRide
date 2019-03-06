@@ -25,7 +25,20 @@
     <string name="waiting">Waiting for people to join game&#8230;</string>
     <string name="startGame">Start Game</string>
 
-    <!-- Strings related to trainDeckDrawer -->
+    <!-- Strings related to gameplay screen -->
+    <string name="displayGameStatus">Display Game Status</string>
+    <string name="drawTrains">Draw Trains</string>
+    <string name="claimRoute">Claim Route</string>
+    <string name="drawRoute">Draw Route</string>
+
+    <!-- Strings related to trainDeckFragment -->
     <string name="trainDrawerTitle">Bank</string>
+
+    <!-- Strings related to currentGameStatusFragment -->
+    <string name="chat">Chat</string>
+    <string name="gameHistory">Game History</string>
+    <string name="destCards">Destination Cards</string>
+    <string name="zero">0</string>
+    <string name="exit">Exit</string>
 
 </resources>

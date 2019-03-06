@@ -1,83 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="20dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="20dp"
     android:background="@drawable/game_lobby_screen">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:background="@color/light_grey_transparent">
 
-        <TextView
-            android:layout_width="34dp"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:text="  #"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_width="match_parent">
 
-        <TextView
-            android:layout_width="470dp"
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="wrap_content"
+                android:text="  #"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="470dp"
+                android:layout_height="wrap_content"
+                android:text=" Game Name"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="620dp"
+                android:layout_height="wrap_content"
+                android:text=" Creator"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="106dp"
+                android:layout_height="wrap_content"
+                android:text=" In Game"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_games_recycler_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" Game Name"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
 
-        <TextView
-            android:layout_width="620dp"
-            android:layout_height="wrap_content"
-            android:text=" Creator"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="106dp"
-            android:layout_height="wrap_content"
-            android:text=" In Game"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
+        <Button
+            android:id="@+id/create_game"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="40dp"
+            android:layout_weight="0"
+            android:freezesText="false"
+            android:gravity="center_horizontal"
+            android:text="@string/createGame"
+            android:textSize="20sp" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_games_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scrollbars="vertical" />
-
-
-    <Button
-        android:id="@+id/create_game"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="end"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="40dp"
-        android:layout_weight="0"
-        android:freezesText="false"
-        android:gravity="center_horizontal"
-        android:text="@string/createGame"
-        android:textSize="20sp" />
-
-
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

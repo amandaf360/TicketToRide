@@ -8,55 +8,59 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/light_blue_transparent"
+        android:background="@color/light_grey_transparent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/train_deck_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/train_deck_textView"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
             android:text="@string/trainDrawerTitle"
             android:textColor="@android:color/black"
-            android:textSize="40dp"
-            android:layout_gravity="center_horizontal"/>
+            android:textSize="35dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/train_card1_button"
             android:layout_width="200dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:text="Card 1" />
 
         <Button
             android:id="@+id/train_card2_button"
             android:layout_width="200dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:text="Card 2" />
 
         <Button
             android:id="@+id/train_card3_button"
             android:layout_width="200dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:text="Card 3" />
 
         <Button
             android:id="@+id/train_card4_button"
             android:layout_width="200dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:text="Card 4" />
 
         <Button
             android:id="@+id/train_card5_button"
             android:layout_width="200dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:text="Card 5" />
 
         <Button
             android:id="@+id/train_deck_button"
             android:layout_width="200dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
             android:text="Deck" />
 
     </LinearLayout>

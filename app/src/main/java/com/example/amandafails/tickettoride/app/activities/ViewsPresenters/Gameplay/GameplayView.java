@@ -2,19 +2,25 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Game
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.amandafails.tickettoride.R;
 
+import java.util.List;
+
 public class GameplayView extends FragmentActivity implements IGameplayView
 {
     private GameplayPresenter presenter;
 
+    private Button displayGameStatusButton;
     private Button drawTrainsButton;
     private Button drawRoutesButton;
     private Button placeTrainsButton;
@@ -27,6 +33,14 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         setContentView(R.layout.activity_gameplay);
 
         presenter = new GameplayPresenter(this);
+
+        /*displayGameStatusButton = findViewById(R.id.display_game_status);
+        displayGameStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDisplayGameStatusClicked();
+            }
+        });commented out because I'm missing the id referenced*/
 
         drawTrainsButton = findViewById(R.id.button_drawTrains);
         drawTrainsButton.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +86,16 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
         // call draw cards method in train card deck fragment
         //trainCardDeckFragment.drawCards();
+    }
+
+    public void onDisplayGameStatusClicked() {
+        // set fragment to draw card fragment
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction  = manager.beginTransaction();
+        CurrentGameStatusFragment currentGameStatusFragment = new CurrentGameStatusFragment();
+        transaction.replace(R.id.frame, currentGameStatusFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     public void onDrawRoutesClicked()

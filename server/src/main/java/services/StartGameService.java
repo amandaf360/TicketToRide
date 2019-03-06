@@ -3,8 +3,10 @@ package services;
 import java.util.ArrayList;
 
 import responses.StartGameResponse;
+import servermodel.ColorAssigner;
 import servermodel.Game;
 import servermodel.ModelRoot;
+import servermodel.Player;
 
 public class StartGameService
 {
@@ -20,6 +22,8 @@ public class StartGameService
             if(currentGame.getGameNum() == gameNum)
             {
                 gameFound = true;
+                currentGame.assignColors();
+                //need to do some client command manager stuff here
                 if(currentGame.getPlayers().size() == currentGame.getMaxPlayers())
                 {
                     response.setErrorMessage("Starting game");

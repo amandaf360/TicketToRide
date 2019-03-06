@@ -74,17 +74,30 @@ public class CurrentGameStatusFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_current_game_status, container, false);
+        View v = inflater.inflate(R.layout.fragment_current_game_status, container, false);
 
-        /*exitButton = getView().findViewById(R.id.display_game_status);
+        exitButton = v.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onExitButtonClicked();
             }
-        });commented because I am missing the referenced id*/
+        });
 
-        return rootView;
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager viewPager = (ViewPager)v.findViewById(R.id.viewpager);
+
+        // Create an adapter that knows which fragment should be shown on each page
+        ViewPagerAdaptor adapter = new ViewPagerAdaptor(getContext(), getChildFragmentManager());
+
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout)v.findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+
+        return v;
     }
 
     public void onExitButtonClicked() {

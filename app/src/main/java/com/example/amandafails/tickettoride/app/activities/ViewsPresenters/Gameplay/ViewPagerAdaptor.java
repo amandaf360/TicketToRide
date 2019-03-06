@@ -22,15 +22,13 @@ public class ViewPagerAdaptor extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new ChatFragment();
-        } /*else if (position == 1){
-            return new PlacesFragment();
-        } else if (position == 2){
-            return new FoodFragment();
-        } else {
-            return new NatureFragment();
-        }*/
-        else {
+        }
+        else if(position == 1){
             return new ChatFragment();
+            // return game history fragment
+        }
+        else {
+            return new DestCardFragment();
         }
     }
 

@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/light_blue_transparent"
+        android:background="@color/light_grey_transparent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp"

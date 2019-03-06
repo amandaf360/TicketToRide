@@ -1,5 +1,7 @@
 package com.example.amandafails.tickettoride.app.adaptors;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +14,7 @@ import com.example.amandafails.tickettoride.R;
 import java.util.List;
 
 public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRecyclerViewAdaptor.ViewHolder> {
-    private List<String> lines;
+    private List<String> lines; // make lines a list of Message objects?? -- to hold the color too?
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
@@ -35,8 +37,11 @@ public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRe
     }
 
     @Override
-    public void onBindViewHolder(GameplayRecyclerViewAdaptor.ViewHolder holder, int position) {
-        final String currentString = lines.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final String currentString = lines.get(position).toString();
+
+        // *** FIX ME!!! (depending on player color) *** //
+        holder.mTextView.setBackgroundColor(Color.parseColor("#FF4081"));
         holder.mTextView.setText(currentString);
     }
 

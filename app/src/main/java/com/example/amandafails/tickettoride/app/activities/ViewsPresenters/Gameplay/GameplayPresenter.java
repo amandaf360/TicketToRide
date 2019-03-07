@@ -56,7 +56,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         // singleChoiceItems[2] = destCards[1];
         // singleChoiceItems[3] = destCards[2];
         final int itemSelected = 0;
-        new AlertDialog.Builder(view)
+        new AlertDialog.Builder(view)   //AlertDialog.Builder(view. R.whatever.dialog)
                 .setTitle(dialogTitle)
                 .setCancelable(false)
                 //.setCanceledOnTouchOutside(false)

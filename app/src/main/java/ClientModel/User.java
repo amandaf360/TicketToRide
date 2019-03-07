@@ -1,4 +1,4 @@
-package ThomasStuff;
+package ClientModel;
 
 public class User
 {

@@ -1,10 +1,12 @@
-package ThomasStuff;
+package ClientModel;
 
 public class Player
 {
     private String color;
     private String authToken;
     private String name;
+    private PlayerHandDestinations playerHandDestinations;
+    private PlayerHandTrains playerHandTrains;
 
     public Player()
     {
@@ -40,4 +42,6 @@ public class Player
     {
         this.name = name;
     }
+
+
 }

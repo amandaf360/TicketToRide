@@ -1,6 +1,6 @@
 package services;
-import ThomasStuff.ClientModel;
-import ThomasStuff.User;
+import ClientModel.ClientModel;
+import ClientModel.User;
 
 public class SetUserService
 {

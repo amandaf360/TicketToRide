@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import ThomasStuff.Game;
+import ClientModel.Game;
 
 public class GamesRoomView extends AppCompatActivity implements IGamesRoomView
 {

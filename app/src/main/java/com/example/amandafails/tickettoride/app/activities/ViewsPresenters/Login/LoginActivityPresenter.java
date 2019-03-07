@@ -5,8 +5,8 @@ import java.util.Observer;
 
 import services.LoginService;
 import services.RegisterService;
-import ThomasStuff.ClientModel;
-import ThomasStuff.User;
+import ClientModel.ClientModel;
+import ClientModel.User;
 
 public class LoginActivityPresenter implements ILoginPresenter, Observer {
 

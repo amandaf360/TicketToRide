@@ -7,14 +7,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/us_map" >
 
-    <Button
-        android:id="@+id/display_game_status"
-        android:layout_width="wrap_content"
-        android:layout_height="96dp"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="@string/displayGameStatus"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/display_game_status"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="8dp"
+            android:text="@string/displayGameStatus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/Buttons"
@@ -50,6 +60,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/drawRoute" />
+
     </LinearLayout>
 
 

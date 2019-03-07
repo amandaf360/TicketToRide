@@ -15,6 +15,13 @@ public class ActiveGame
         players = new ArrayList<>();
     }
 
+    /*
+        draw dest card, discard dest card
+        drawfaceup, draw from deck, discard traincards,
+        chat send message,
+
+     */
+
 
 
 }

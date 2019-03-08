@@ -1,7 +1,7 @@
 package services;
 import java.util.ArrayList;
-import ThomasStuff.ClientModel;
-import ThomasStuff.Player;
+import ClientModel.ClientModel;
+import ClientModel.Player;
 
 public class SetPlayerService
 {

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
+import ClientModel.ClientModel;
+import ClientModel.Game;
 import services.CreateGameService;
 import services.JoinGameService;
 import services.Poller;

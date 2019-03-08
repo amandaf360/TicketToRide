@@ -11,9 +11,6 @@ import com.example.amandafails.tickettoride.R;
 
 import java.util.List;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Player;
-
 public class LobbyRecyclerViewAdaptor extends RecyclerView.Adapter<LobbyRecyclerViewAdaptor.ViewHolder> {
 
     private List<String> lines;

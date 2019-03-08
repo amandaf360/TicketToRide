@@ -1,8 +1,8 @@
 package services;
 import java.util.ArrayList;
 
-import ThomasStuff.ClientModel;
-import ThomasStuff.Game;
+import ClientModel.ClientModel;
+import ClientModel.Game;
 
 public class SetGamelistService
 {

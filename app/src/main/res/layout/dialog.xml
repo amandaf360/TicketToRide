@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- From: support/v7/appcompat/res/drawable/abc_dialog_material_background_light.xml -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:insetLeft="16dp"
+    android:insetTop="16dp"
+    android:insetRight="16dp"
+    android:insetBottom="16dp"
+    android:background="@drawable/game_lobby_screen"
+    >
+
+    <shape android:shape="rectangle">
+        <corners android:radius="10dp" />
+        <solid android:background="@drawable/game_lobby_screen" />
+        <stroke android:width="5dp" android:color="@android:color/black" />
+    </shape>
+</inset>

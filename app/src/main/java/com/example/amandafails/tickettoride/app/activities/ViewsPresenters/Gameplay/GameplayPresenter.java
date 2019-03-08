@@ -18,10 +18,13 @@ import ClientModel.PlayerHandDestinations;
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
     GameplayView view;
+    ClientModel clientModel;
 
     public GameplayPresenter(GameplayView view)
     {
         this.view = view;
+        clientModel = ClientModel.getInstance();
+        clientModel.addObserver(this);
     }
 
     public void drawCards()
@@ -121,8 +124,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
         else
         {
-            ClientModel.getInstance().deleteMainPlayersDestinationCardFromHand(
-                    ClientModel.getInstance().getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
+            ClientModel.deleteMainPlayersDestinationCardFromHand(
+                    ClientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }
 
         */
@@ -143,7 +146,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
 
 
-        //ClientModel model = ClientModel.getInstance();
+
         //Player player = model.getCurrentPlayer();
         //player.setDestCards(arrayList);
 

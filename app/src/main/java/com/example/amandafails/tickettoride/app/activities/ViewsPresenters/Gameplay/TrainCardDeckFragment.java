@@ -1,21 +1,22 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioGroup;
 
 import com.example.amandafails.tickettoride.R;
 
+import ClientModel.ClientModel;
+
 public class TrainCardDeckFragment extends Fragment {
+
+    // client model
+    ClientModel clientModel = ClientModel.getInstance();
 
     // presenter
     GameplayPresenter presenter;

@@ -5,9 +5,10 @@ import ClientModel.Message;
 
 public class CreateChatMessageService
 {
-    Message message;
+    private Message message;
     public CreateChatMessageService(String string)
     {
         this.message = new Message(ClientModel.getInstance().getMainPlayer().getColor(), string);
+
     }
 }

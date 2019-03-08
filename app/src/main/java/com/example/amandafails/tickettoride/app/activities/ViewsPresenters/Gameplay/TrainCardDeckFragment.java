@@ -37,7 +37,9 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
     private Button deck;
 
     //methods
-    public TrainCardDeckFragment() {} //empty public constructor
+    public TrainCardDeckFragment() {
+        this.clientModel.addObserver(this);
+    } //empty public constructor
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,12 +149,13 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
         card5.setText(faceUpCards.get(4).getColor());
 
         // set how many cards are in the deck
-        deck.setText(clientModel.getActiveGame().getNumCardsInDeck());
+        deck.setText(Integer.toString(clientModel.getActiveGame().getNumCardsInDeck()));
     }
 
     @Override
     public void update(Observable o, Object arg) {
         // update the deck and face up cards
+        System.out.println("testing");
         setCardValues();
     }
 }

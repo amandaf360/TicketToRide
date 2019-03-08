@@ -117,6 +117,7 @@ public class ChatFragment extends Fragment implements Observer {
         String message = chatEditText.getText().toString();
         CreateChatMessageService createChatMessageService = new CreateChatMessageService(message);
         // call method on createChatMessageService object
+        createChatMessageService.sendMessage();
 
         // **** DELETE ***** //
         lines.add(new Message(message, clientModel.getMainPlayer().getColor()));

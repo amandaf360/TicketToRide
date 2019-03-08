@@ -105,4 +105,34 @@ public class Game
             indexOfCurrentPlayer = 0;
         }
     }
+
+    public void setPlayers(ArrayList<Player> players)
+    {
+        this.players = players;
+    }
+
+    public void setGameNum(int gameNum)
+    {
+        this.gameNum = gameNum;
+    }
+
+    public void setIndexOfCurrentPlayer(int indexOfCurrentPlayer)
+    {
+        this.indexOfCurrentPlayer = indexOfCurrentPlayer;
+    }
+
+    public List<TrainCards> getFaceUpCards()
+    {
+        return faceUpCards;
+    }
+
+    public void setFaceUpCards(List<TrainCards> faceUpCards)
+    {
+        this.faceUpCards = faceUpCards;
+    }
+
+    public void changeCardByIndex(int index, TrainCards trainCard)
+    {
+        faceUpCards.set(index, trainCard);
+    }
 }

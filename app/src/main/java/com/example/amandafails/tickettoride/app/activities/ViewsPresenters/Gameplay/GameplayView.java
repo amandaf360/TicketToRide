@@ -1,14 +1,9 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
@@ -177,4 +172,13 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         return presenter;
     }
 
+    public boolean isFirstCreate()
+    {
+        return firstCreate;
+    }
+
+    public void setFirstCreateToFalse()
+    {
+        firstCreate = false;
+    }
 }

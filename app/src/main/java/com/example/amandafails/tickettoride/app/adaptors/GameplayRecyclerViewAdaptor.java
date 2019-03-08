@@ -8,13 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ClientModel.*;
 
 import com.example.amandafails.tickettoride.R;
 
 import java.util.List;
 
 public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRecyclerViewAdaptor.ViewHolder> {
-    private List<String> lines; // make lines a list of Message objects?? -- to hold the color too?
+    private List<Message> lines;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
@@ -24,7 +25,7 @@ public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRe
         }
     }
 
-    public GameplayRecyclerViewAdaptor(List<String> lines) {
+    public GameplayRecyclerViewAdaptor(List<Message> lines) {
         this.lines = lines;
     }
 
@@ -38,11 +39,38 @@ public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRe
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final String currentString = lines.get(position).toString();
+        final Message currentMessage = lines.get(position);
 
-        // *** FIX ME!!! (depending on player color) *** //
-        holder.mTextView.setBackgroundColor(Color.parseColor("#FF4081"));
-        holder.mTextView.setText(currentString);
+        holder.mTextView.setBackgroundColor(Color.parseColor(stringToHex(currentMessage.getColor())));
+        holder.mTextView.setText(currentMessage.getMessage());
+        if(currentMessage.getColor() == "black") {
+            holder.mTextView.setTextColor(Color.WHITE);
+        }
+
+    }
+
+    public String stringToHex(String color) {
+        String hexColor = "";
+        switch (color) {
+            case "blue":
+                hexColor = "#0000ff";
+                break;
+            case "red":
+                hexColor = "#ff0000";
+                break;
+            case "green":
+                hexColor = "#008000";
+                break;
+            case "yellow":
+                hexColor = "ffff00";
+                break;
+            case "black":
+                hexColor = "000000";
+                break;
+        }
+
+
+        return hexColor;
     }
 
     @Override

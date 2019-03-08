@@ -4,13 +4,13 @@ public class DestinationCards
 {
     private String cityOne;
     private String cityTwo;
-    private int length;
+    private int points;
 
-    public DestinationCards(String cityOne, String cityTwo, int length)
+    public DestinationCards(String cityOne, String cityTwo, int points)
     {
         this.cityOne = cityOne;
         this.cityTwo = cityTwo;
-        this.length = length;
+        this.points = points;
     }
 
     public String getCityOne()
@@ -33,13 +33,13 @@ public class DestinationCards
         this.cityTwo = cityTwo;
     }
 
-    public int getLength()
+    public int getPoints()
     {
-        return length;
+        return points;
     }
 
-    public void setLength(int length)
+    public void setPoints(int points)
     {
-        this.length = length;
+        this.points = points;
     }
 }

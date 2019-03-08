@@ -10,7 +10,9 @@ import java.util.Set;
 
 import commands.*;
 import responses.PollResponse;
+import servermodel.DecksStateData;
 import servermodel.Game;
+import servermodel.Message;
 import servermodel.ModelRoot;
 import servermodel.User;
 
@@ -22,6 +24,11 @@ public class ClientCommandManager
     private Map<String, ArrayList<String>> gamesDeleted;
     private Map<String, ArrayList<String>> playersJoined;
     private Map<String, ArrayList<String>> playersLeft;
+    private Map<String, ArrayList<String>> gameStarted;
+    private Map<String, ArrayList<Message>> chatHistory;
+    private Map<String, ArrayList<String>> destinationCardsDrawn;
+    private Map<String, ArrayList<String>> destinationCardsDiscarded;
+    private Map<String, DecksStateData> deckStateUpdate;
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
 
@@ -36,6 +43,11 @@ public class ClientCommandManager
         gamesDeleted = new HashMap<>();
         playersJoined = new HashMap<>();
         playersLeft = new HashMap<>();
+        gameStarted = new HashMap<>();
+        chatHistory = new HashMap<>();
+        destinationCardsDrawn = new HashMap<>();
+        destinationCardsDiscarded = new HashMap<>();
+        deckStateUpdate = new HashMap<>();
     }
 
     public void addUser(String username)
@@ -44,7 +56,11 @@ public class ClientCommandManager
         gamesDeleted.put(username, new ArrayList<String>());
         playersJoined.put(username, new ArrayList<String>());
         playersLeft.put(username, new ArrayList<String>());
-
+        gameStarted.put(username, new ArrayList<String>());
+        chatHistory.put(username, new ArrayList<Message>());
+        destinationCardsDrawn.put(username, new ArrayList<String>());
+        destinationCardsDiscarded.put(username, new ArrayList<String>());
+        deckStateUpdate.put(username, null);
     }
 
     public PollResponse firstPoll()
@@ -71,6 +87,8 @@ public class ClientCommandManager
         response.setGamesDeleted(gamesDeleted.get(username));
         response.setPlayersJoined(playersJoined.get(username));
         response.setPlayersLeft(playersLeft.get(username));
+        response.setDiscardedDestCards(destinationCardsDiscarded.get(username));
+        response.setDeckData(deckStateUpdate.get(username));
 
         return response;
     }
@@ -125,6 +143,27 @@ public class ClientCommandManager
             left.add(username);
             left.add(gameName);
         }
+    }
+
+    public void addChatMessage(String username, Message message)
+    {
+        chatHistory.get(username).add(message);
+    }
+
+    public void addCardsDrawn(int numCards, String thisUserDrew, String sendingTo)
+    {
+        destinationCardsDrawn.get(sendingTo).add(Integer.toString(numCards));
+        destinationCardsDrawn.get(sendingTo).add(thisUserDrew);
+    }
+
+    public void addCardDiscarded(String userDiscarded, String otherUser)
+    {
+        destinationCardsDiscarded.get(otherUser).add(userDiscarded);
+    }
+
+    public void setDeckState(String username, DecksStateData data)
+    {
+        deckStateUpdate.put(username, data);
     }
 
 }

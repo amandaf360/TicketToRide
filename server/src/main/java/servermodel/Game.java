@@ -105,4 +105,13 @@ public class Game
     public void setGameNum(int gameNum) {
         this.gameNum = gameNum;
     }
+
+    public void assignColors()
+    {
+        ColorAssigner assigner = new ColorAssigner();
+        for (Player player: players)
+        {
+            player.setColor(assigner.assignColor());
+        }
+    }
 }

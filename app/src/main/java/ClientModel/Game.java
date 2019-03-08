@@ -1,6 +1,7 @@
 package ClientModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game
 {
@@ -11,12 +12,13 @@ public class Game
     private int currentPlayers;
     private String creator;
     private int indexOfCurrentPlayer;
-
+    private List<TrainCards> faceUpCards;
 
     public Game()
     {
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
+        faceUpCards = new ArrayList<>();
     }
 
 

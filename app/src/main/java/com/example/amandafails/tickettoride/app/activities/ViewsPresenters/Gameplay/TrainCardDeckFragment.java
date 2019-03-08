@@ -11,6 +11,8 @@ import android.widget.Button;
 
 import com.example.amandafails.tickettoride.R;
 
+import java.util.List;
+
 import ClientModel.ClientModel;
 
 public class TrainCardDeckFragment extends Fragment {
@@ -39,9 +41,6 @@ public class TrainCardDeckFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_train_card_deck, container, false);
-
-//        GameplayView gameplayView = (GameplayView)getActivity();
-//        presenter = gameplayView.getPresenter();
 
         card1 = v.findViewById(R.id.train_card1_button);
         card1.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +90,8 @@ public class TrainCardDeckFragment extends Fragment {
             }
         });
 
+        //List<TrainCards>
+        //for(int i )
         // set what cards are shown - grab from model!
         card1.setText("Blue");
         card2.setText("Green");

@@ -15,6 +15,9 @@ public class TrainView extends View
     private Rect rect;
     private Paint paint;
     private Paint paint2;
+    private Paint paintBlack;
+    private Paint paintGrey;
+    private Paint paintWhite;
 
     private int rectLength;
     private int rectWidth;
@@ -52,10 +55,16 @@ public class TrainView extends View
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintBlack = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintBlack.setColor(Color.BLACK);
+        paintWhite = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintWhite.setColor(Color.WHITE);
+        paintGrey = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintGrey.setColor(Color.GRAY);
 
         rectLength = 80;
         rectWidth = 40;
-        spacing = 10;
+        spacing = 12;
         rect = new Rect(0, rectLength, 0, rectWidth);
 
         cities.add(new MapCity(1790, 1160, "Atlanta"));
@@ -94,6 +103,8 @@ public class TrainView extends View
         cities.add(new MapCity(300, 60, "Vancouver"));
         cities.add(new MapCity(2100, 860, "Washington"));
         cities.add(new MapCity(1060, 120, "Winnipeg"));
+
+
     }
 
     @Override
@@ -106,12 +117,9 @@ public class TrainView extends View
         }
 
         paint.setColor(Color.RED);
-        drawRoute(canvas, 600, 600, 110, 5, false);
+        paint2.setColor(Color.GREEN);
+        drawRoute(canvas, 980, 570, 122, 5, true);
 
-        //rect.set(500, 50, 650, 150);
-        //canvas.rotate(45, 10, 10);
-        //canvas.drawRect(rect, paint);
-        //canvas.restore();
     }
     //NOTE: You can force the UI to redraw itself with the postinvalidate method
     //NOTE: Each use of canvas.rotate() needs an instance of canvas.save() before it (to save the unrotated state)
@@ -137,14 +145,8 @@ public class TrainView extends View
             //each iteration of the for-loop makes two rectangles, one in each direction
             for(int i = 0; i < length/2; i++)
             {
-                if(doubleRoute)
-                {
-
-                }
-                else
-                {
-
-                }
+                drawRectangle(canvas, x, y + i*rectLength/2.f + i*spacing/2.f, doubleRoute);
+                drawRectangle(canvas, x, y - i*rectLength/2.f - i*spacing/2.f, doubleRoute);
             }
         }
         else
@@ -155,29 +157,40 @@ public class TrainView extends View
             //this makes the rest, in sets of two
             for(int i = 1; i < (length + 1)/2; i++)
             {
-                if(doubleRoute)
-                {
-
-                }
-                else
-                {
-                    rect.set((int)(x - rectWidth/2), (int)(y - rectLength/2 + i*rectLength + i*spacing), (int)(x + rectWidth/2), (int)(y + rectLength/2 + i*rectLength + i*spacing) );
-                    canvas.drawRect(rect, paint);
-                    rect.set((int)(x - rectWidth/2), (int)(y - rectLength/2 - i*rectLength - i*spacing), (int)(x + rectWidth/2), (int)(y + rectLength/2 - i*rectLength - i*spacing) );
-                    canvas.drawRect(rect, paint);
-                }
+                float topCenter = y + i*rectLength + i*spacing;
+                drawRectangle(canvas, x, topCenter, doubleRoute);
+                float bottomCenter = y - i*rectLength - i*spacing;
+                drawRectangle(canvas, x, bottomCenter, doubleRoute);
             }
         }
+        canvas.restore();
     }
 
     private void drawRectangle(Canvas canvas, float x, float y, boolean doubleRoute)
     {
         if(doubleRoute)
         {
-
+            //set "left" rectangle
+            rect.set((int)(x - rectWidth - 5*spacing/6), (int)(y - rectLength/2 - spacing/3), (int)(x - spacing/6), (int)(y + rectLength/2 + spacing/3) );
+            canvas.drawRect(rect, paintBlack);
+            rect.set((int)(x - rectWidth - 2*spacing/3), (int)(y - rectLength/2 - spacing/6), (int)(x - spacing/3), (int)(y + rectLength/2 + spacing/6) );
+            canvas.drawRect(rect, paintWhite);
+            rect.set((int)(x - rectWidth - spacing/2), (int)(y - rectLength/2), (int)(x - spacing/2), (int)(y + rectLength/2));
+            canvas.drawRect(rect, paint);
+            //set "right" rectangle
+            rect.set((int)(x + spacing/6), (int)(y - rectLength/2 - spacing/3), (int)(x + rectWidth + 5*spacing/6), (int)(y + rectLength/2 + spacing/3) );
+            canvas.drawRect(rect, paintBlack);
+            rect.set((int)(x + spacing/3), (int)(y - rectLength/2 - spacing/6), (int)(x + rectWidth + 2*spacing/3), (int)(y + rectLength/2 + spacing/6) );
+            canvas.drawRect(rect, paintWhite);
+            rect.set((int)(x + spacing/2), (int)(y - rectLength/2), (int)(x + rectWidth + spacing/2), (int)(y + rectLength/2));
+            canvas.drawRect(rect, paint2);
         }
         else
         {
+            rect.set((int)(x - rectWidth/2 - spacing/3), (int)(y - rectLength/2 - spacing/3), (int)(x + rectWidth/2 + spacing/3), (int)(y + rectLength/2 + spacing/3) );
+            canvas.drawRect(rect, paintBlack);
+            rect.set((int)(x - rectWidth/2 - spacing/6), (int)(y - rectLength/2 - spacing/6), (int)(x + rectWidth/2 + spacing/6), (int)(y + rectLength/2 + spacing/6) );
+            canvas.drawRect(rect, paintWhite);
             rect.set((int)(x - rectWidth/2), (int)(y - rectLength/2), (int)(x + rectWidth/2), (int)(y + rectLength/2) );
             canvas.drawRect(rect, paint);
         }
@@ -211,6 +224,14 @@ public class TrainView extends View
         {
             return name;
         }
+    }
+
+    class MapRoute
+    {
+        float x;
+        float y;
+        String name;
+        
     }
 }
 

@@ -1,6 +1,7 @@
 package ClientModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game
 {
@@ -11,12 +12,15 @@ public class Game
     private int currentPlayers;
     private String creator;
     private int indexOfCurrentPlayer;
-
+    private List<TrainCards> faceUpCards;
+    private int numCardsInDeck;
 
     public Game()
     {
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
+        faceUpCards = new ArrayList<>();
+        numCardsInDeck = 0;
     }
 
 
@@ -102,5 +106,43 @@ public class Game
         {
             indexOfCurrentPlayer = 0;
         }
+    }
+
+    public void setPlayers(ArrayList<Player> players)
+    {
+        this.players = players;
+    }
+
+    public void setGameNum(int gameNum)
+    {
+        this.gameNum = gameNum;
+    }
+
+    public void setIndexOfCurrentPlayer(int indexOfCurrentPlayer)
+    {
+        this.indexOfCurrentPlayer = indexOfCurrentPlayer;
+    }
+
+    public List<TrainCards> getFaceUpCards()
+    {
+        return faceUpCards;
+    }
+
+    public void setFaceUpCards(List<TrainCards> faceUpCards)
+    {
+        this.faceUpCards = faceUpCards;
+    }
+
+    public void changeCardByIndex(int index, TrainCards trainCard)
+    {
+        faceUpCards.set(index, trainCard);
+    }
+
+    public void setNumCardsInDeck(int numCardsInDeck) {
+        this.numCardsInDeck = numCardsInDeck;
+    }
+
+    public int getNumCardsInDeck() {
+        return numCardsInDeck;
     }
 }

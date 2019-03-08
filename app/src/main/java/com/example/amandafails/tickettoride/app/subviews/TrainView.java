@@ -82,7 +82,7 @@ public class TrainView extends View
         cities.add(new MapCity(770, 420, "Helena"));
         cities.add(new MapCity(1300, 1460, "Houston"));
         cities.add(new MapCity(1270, 860, "Kansas City"));
-        cities.add(new MapCity(230, 1160, "Las Angeles"));
+        cities.add(new MapCity(210, 1160, "Las Angeles"));
         cities.add(new MapCity(410, 1000, "Las Vegas"));
         cities.add(new MapCity(1410, 1120, "Little Rock"));
         cities.add(new MapCity(2030, 1680, "Miami"));
@@ -92,7 +92,7 @@ public class TrainView extends View
         cities.add(new MapCity(2160, 640, "New York"));
         cities.add(new MapCity(1180, 1070, "Oklahoma City"));
         cities.add(new MapCity(1210, 700, "Omaha"));
-        cities.add(new MapCity(520, 1180, "Phoenix"));
+        cities.add(new MapCity(500, 1190, "Phoenix"));
         cities.add(new MapCity(1940, 730, "Pittsburgh"));
         cities.add(new MapCity(170, 320, "Portland"));
         cities.add(new MapCity(1990, 1040, "Raleigh"));
@@ -201,9 +201,12 @@ public class TrainView extends View
         routes.add(new MapRoute(1240, 780, 165, 1, true, "gray", "gray", "KansasCity-Omaha"));
         routes.add(new MapRoute(1270, 580, 30, 2, true, "gray", "gray", "Omaha-Duluth"));
         routes.add(new MapRoute(820, 980, 10, 2, false, "gray", "none", "SantaFe-Denver"));
+        routes.add(new MapRoute(770, 1200, 10, 2, false, "gray", "none", "SantaFe-ElPaso"));
 
-
-
+        routes.add(new MapRoute(650, 1140, 60, 3, false, "gray", "none", "SantaFe-Phoenix"));
+        routes.add(new MapRoute(620, 1260, 110, 3, false, "gray", "none", "Phoenix-ElPaso"));
+        routes.add(new MapRoute(360, 1180, 92, 3, false, "gray", "none", "LA-Phoenix"));
+        routes.add(new MapRoute(310, 1080, 49, 2, false, "gray", "none", "LA-Las Vegas"));
     }
 
     @Override

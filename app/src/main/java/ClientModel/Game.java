@@ -21,6 +21,16 @@ public class Game
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();
         numCardsInDeck = 0;
+        TrainCards card1 = new TrainCards("blue");
+        faceUpCards.add(card1);
+        TrainCards card2 = new TrainCards("also blue");
+        faceUpCards.add(card2);
+        TrainCards card3 = new TrainCards("slightly less blue");
+        faceUpCards.add(card3);
+        TrainCards card4 = new TrainCards("teal..? nah that's blue");
+        faceUpCards.add(card4);
+        TrainCards card5 = new TrainCards("chartreuse");
+        faceUpCards.add(card5);
     }
 
 

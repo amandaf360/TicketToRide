@@ -13,12 +13,14 @@ public class Game
     private String creator;
     private int indexOfCurrentPlayer;
     private List<TrainCards> faceUpCards;
+    private int numCardsInDeck;
 
     public Game()
     {
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();
+        numCardsInDeck = 0;
     }
 
 
@@ -134,5 +136,13 @@ public class Game
     public void changeCardByIndex(int index, TrainCards trainCard)
     {
         faceUpCards.set(index, trainCard);
+    }
+
+    public void setNumCardsInDeck(int numCardsInDeck) {
+        this.numCardsInDeck = numCardsInDeck;
+    }
+
+    public int getNumCardsInDeck() {
+        return numCardsInDeck;
     }
 }

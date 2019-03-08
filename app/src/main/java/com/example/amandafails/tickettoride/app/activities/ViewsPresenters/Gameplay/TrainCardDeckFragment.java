@@ -11,12 +11,17 @@ import android.widget.Button;
 
 import com.example.amandafails.tickettoride.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import ClientModel.ClientModel;
+import ClientModel.*;
 
-public class TrainCardDeckFragment extends Fragment {
+public class TrainCardDeckFragment extends Fragment implements Observer {
 
+    int NUM_FACE_UP_CARDS = 5;
     // client model
     ClientModel clientModel = ClientModel.getInstance();
 
@@ -90,14 +95,13 @@ public class TrainCardDeckFragment extends Fragment {
             }
         });
 
-        //List<TrainCards>
-        //for(int i )
+        List<TrainCards> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
         // set what cards are shown - grab from model!
-        card1.setText("Blue");
-        card2.setText("Green");
-        card3.setText("Black");
-        card4.setText("White");
-        card5.setText("Yellow");
+        card1.setText(faceUpCards.get(0).getColor());
+        card2.setText(faceUpCards.get(1).getColor());
+        card3.setText(faceUpCards.get(2).getColor());
+        card4.setText(faceUpCards.get(3).getColor());
+        card5.setText(faceUpCards.get(4).getColor());
 
         // set how many cards are left in deck - grab from model!
         deck.setText("50");
@@ -106,10 +110,25 @@ public class TrainCardDeckFragment extends Fragment {
     }
 
     public void onDeckClicked() {
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        if(manager.getBackStackEntryCount() > 0) {
-            manager.popBackStack();
-        }
+        List<TrainCards> faceUpCards = new ArrayList<>();
+        TrainCards card1 = new TrainCards("yellow");
+        faceUpCards.add(card1);
+        TrainCards card2 = new TrainCards("pink");
+        faceUpCards.add(card2);
+        TrainCards card3 = new TrainCards("purple");
+        faceUpCards.add(card3);
+        TrainCards card4 = new TrainCards("indigo");
+        faceUpCards.add(card4);
+        TrainCards card5 = new TrainCards("orange");
+        faceUpCards.add(card5);
+
+        clientModel.getActiveGame().setFaceUpCards(faceUpCards);
+
+        clientModel.getActiveGame().setNumCardsInDeck(101);
+//        FragmentManager manager = getActivity().getSupportFragmentManager();
+//        if(manager.getBackStackEntryCount() > 0) {
+//            manager.popBackStack();
+//        }
     }
 
     public void drawCards() {
@@ -119,4 +138,22 @@ public class TrainCardDeckFragment extends Fragment {
 //        startActivity(i);
     }
 
+    public void setCardValues() {
+        List<TrainCards> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
+        // set what cards are shown - grab from model!
+        card1.setText(faceUpCards.get(0).getColor());
+        card2.setText(faceUpCards.get(1).getColor());
+        card3.setText(faceUpCards.get(2).getColor());
+        card4.setText(faceUpCards.get(3).getColor());
+        card5.setText(faceUpCards.get(4).getColor());
+
+        // set how many cards are in the deck
+        deck.setText(clientModel.getActiveGame().getNumCardsInDeck());
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // update the deck and face up cards
+        setCardValues();
+    }
 }

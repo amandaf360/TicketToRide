@@ -193,7 +193,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(card.getCityOne());
         stringList.add(card.getCityTwo());
-        stringList.add(Integer.toString(card.getLength()));
+        stringList.add(Integer.toString(card.getPoints()));
         stringList.add(username);
         RequestWrapper wrapper = new RequestWrapper("discardDestCard", stringList);
         callBack = new OnTaskCompleted() {

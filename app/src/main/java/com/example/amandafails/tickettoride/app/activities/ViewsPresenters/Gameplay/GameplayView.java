@@ -177,4 +177,13 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         return presenter;
     }
 
+    public boolean isFirstCreate()
+    {
+        return firstCreate;
+    }
+
+    public void setFirstCreateToFalse()
+    {
+        firstCreate = false;
+    }
 }

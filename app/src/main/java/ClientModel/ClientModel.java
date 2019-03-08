@@ -13,11 +13,16 @@ public class ClientModel extends Observable
     private static ClientModel instance;
     private User user;
     private Player mainPlayer;
+    private ArrayList<Message> gameChat;
+    private ArrayList<Message> gameHistory;
     private List<Observer> observers = new ArrayList<Observer>();
+
 
 
     public ClientModel()
     {
+        gameChat = new ArrayList<>();
+        gameHistory = new ArrayList<>();
         instance = this;
         gameList = new ArrayList<>();
     }
@@ -28,41 +33,7 @@ public class ClientModel extends Observable
         return instance;
     }
 
-    public void errorChecking()
-    {
-        Game game = new Game();
-        game.setName("Ya boi's Game");
-        game.setMaxPlayers(5);
-        game.setCreator("Ya boi");
 
-        Game game2 = new Game();
-        game2.setName("THORSTY boi's activeGame");
-        game2.setMaxPlayers(5);
-        game2.setCreator("THORSTY boi");
-
-        Game game4 = new Game();
-        game4.setName("STRONK BOI'S GAME TOO STRONK");
-        game4.setMaxPlayers(5);
-        game4.setCreator("STRONK boi");
-
-        Player player = new Player();
-        player.setName("Superman");
-        Player player2 = new Player();
-        player2.setName("My name is");
-        Player player1 = new Player();
-        player1.setName("Yo it's me");
-
-        game4.addPlayer(player);
-        game4.addPlayer(player1);
-        game4.addPlayer(player2);
-
-        gameList.add(game);
-        gameList.add(game2);
-        gameList.add(game4);
-
-
-
-    }
 
     public ArrayList<Game> getGameList()
     {
@@ -239,5 +210,56 @@ public class ClientModel extends Observable
         activeGame.changeCardByIndex(index, trainCards);
         setChanged();
         notifyObservers(this.activeGame.getFaceUpCards());
+
+    }
+
+
+    public void addDestinationCardToActivePlayersHand(DestinationCards destinationCards)
+    {
+        mainPlayer.addDestinationCardToPlayerHand(destinationCards);
+        activeGame.getPlayerByName(mainPlayer.getName()).addDestinationCardToPlayerHand(destinationCards);
+        setChanged();
+        notifyObservers(this.mainPlayer.getPlayerHandDestinations());
+    }
+
+    public void addTrainCardToActivePlayerHand(TrainCards trainCards)
+    {
+        mainPlayer.addTrainCardToHand(trainCards);
+        activeGame.getPlayerByName(mainPlayer.getName()).addTrainCardToHand(trainCards);
+        setChanged();
+        notifyObservers(this.mainPlayer.getPlayerHandTrains());
+
+    }
+
+    public void deleteMainPlayersDestinationCardFromHand(DestinationCards destinationCards)
+    {
+        mainPlayer.getPlayerHandDestinations().deleteCard(destinationCards);
+        activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
+        setChanged();
+        notifyObservers(this.mainPlayer.getPlayerHandDestinations());
+    }
+
+    public void addMessageToChat(Message message)
+    {
+        gameChat.add(message);
+        setChanged();
+        notifyObservers(this.gameChat);
+    }
+
+    public void addMessageToHistory(Message message)
+    {
+        gameHistory.add(message);
+        setChanged();
+        notifyObservers(this.gameHistory);
+    }
+
+    public ArrayList<Message> getGameChat()
+    {
+        return gameChat;
+    }
+
+    public ArrayList<Message> getGameHistory()
+    {
+        return gameHistory;
     }
 }

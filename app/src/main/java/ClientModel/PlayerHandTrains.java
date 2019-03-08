@@ -114,4 +114,42 @@ public class PlayerHandTrains
     {
         this.numLocomotives = numLocomotives;
     }
+
+    public void addCard(TrainCards trainCards)
+    {
+        addCard(trainCards.getColor());
+    }
+
+    public void addCard(String color)
+    {
+        if(color.equals("red"))
+        {
+            numRed++;
+        }
+        else if(color.equals("orange"))
+        {
+            numOrange++;
+        }else if(color.equals("yellow"))
+        {
+            numYellow++;
+        }else if(color.equals("green"))
+        {
+            numGreen++;
+        }else if(color.equals("blue"))
+        {
+            numBlue++;
+        }else if(color.equals("purple"))
+        {
+            numPurple++;
+        }else if(color.equals("black"))
+        {
+            numBlack++;
+        }else if(color.equals("white"))
+        {
+            numWhite++;
+        }else if(color.equals("locomotive"))
+        {
+            numLocomotives++;
+        }
+    }
 }

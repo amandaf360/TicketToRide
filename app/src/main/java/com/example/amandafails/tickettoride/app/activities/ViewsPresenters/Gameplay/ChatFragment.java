@@ -18,7 +18,7 @@ import com.example.amandafails.tickettoride.app.adaptors.GameplayRecyclerViewAda
 import java.util.ArrayList;
 import java.util.List;
 
-import ThomasStuff.ClientModel;
+import ClientModel.ClientModel;
 
 public class ChatFragment extends Fragment {
 

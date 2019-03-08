@@ -233,4 +233,11 @@ public class ClientModel extends Observable
         setChanged();
         notifyObservers(this.activeGame);
     }
+
+    public void setFaceUpCardByIndex(int index, TrainCards trainCards)
+    {
+        activeGame.changeCardByIndex(index, trainCards);
+        setChanged();
+        notifyObservers(this.activeGame.getFaceUpCards());
+    }
 }

@@ -24,8 +24,7 @@ public class ViewPagerAdaptor extends FragmentPagerAdapter {
             return new ChatFragment();
         }
         else if(position == 1){
-            return new ChatFragment();
-            // return game history fragment
+            return new GameHistoryFragment();
         }
         else {
             return new DestCardFragment();

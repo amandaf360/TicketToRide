@@ -12,11 +12,13 @@ public class ModelRoot
         gameCounter = 0;
         userList = new ArrayList<>();
         gameList = new ArrayList<>();
+        activeGameList = new ArrayList<>();
     }
 
     private ArrayList<User> userList;
     private int gameCounter;
     private ArrayList<Game> gameList;
+    private ArrayList<ActiveGame> activeGameList;
 
     public void addUser(User user)
     {
@@ -46,9 +48,31 @@ public class ModelRoot
         gameList.add(game);
     }
 
+    public ArrayList<ActiveGame> getActiveGameList()
+    {
+        return activeGameList;
+    }
+
+    public void addActiveGame(ActiveGame game)
+    {
+        activeGameList.add(game);
+    }
+
     public int assignNumber()
     {
         gameCounter++;
         return gameCounter;
+    }
+
+    public ActiveGame getGameByUser(String username)
+    {
+        for(int i = 0; i < activeGameList.size(); i++)
+        {
+            if(activeGameList.get(i).containsUser(username))
+            {
+                return activeGameList.get(i);
+            }
+        }
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package ClientModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game
 {
@@ -11,12 +12,25 @@ public class Game
     private int currentPlayers;
     private String creator;
     private int indexOfCurrentPlayer;
-
+    private List<TrainCards> faceUpCards;
+    private int numCardsInDeck;
 
     public Game()
     {
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
+        faceUpCards = new ArrayList<>();
+        numCardsInDeck = 0;
+        TrainCards card1 = new TrainCards("blue");
+        faceUpCards.add(card1);
+        TrainCards card2 = new TrainCards("also blue");
+        faceUpCards.add(card2);
+        TrainCards card3 = new TrainCards("slightly less blue");
+        faceUpCards.add(card3);
+        TrainCards card4 = new TrainCards("teal..? nah that's blue");
+        faceUpCards.add(card4);
+        TrainCards card5 = new TrainCards("chartreuse");
+        faceUpCards.add(card5);
     }
 
 
@@ -102,5 +116,55 @@ public class Game
         {
             indexOfCurrentPlayer = 0;
         }
+    }
+
+    public void setPlayers(ArrayList<Player> players)
+    {
+        this.players = players;
+    }
+
+    public void setGameNum(int gameNum)
+    {
+        this.gameNum = gameNum;
+    }
+
+    public void setIndexOfCurrentPlayer(int indexOfCurrentPlayer)
+    {
+        this.indexOfCurrentPlayer = indexOfCurrentPlayer;
+    }
+
+    public List<TrainCards> getFaceUpCards()
+    {
+        return faceUpCards;
+    }
+
+    public void setFaceUpCards(List<TrainCards> faceUpCards)
+    {
+        this.faceUpCards = faceUpCards;
+    }
+
+    public void changeCardByIndex(int index, TrainCards trainCard)
+    {
+        faceUpCards.set(index, trainCard);
+    }
+
+    public void setNumCardsInDeck(int numCardsInDeck) {
+        this.numCardsInDeck = numCardsInDeck;
+    }
+
+    public int getNumCardsInDeck() {
+        return numCardsInDeck;
+    }
+
+    public Player getPlayerByName(String name)
+    {
+        for(Player player : players)
+        {
+            if (player.getName().equals(name))
+            {
+                return player;
+            }
+        }
+        return null;
     }
 }

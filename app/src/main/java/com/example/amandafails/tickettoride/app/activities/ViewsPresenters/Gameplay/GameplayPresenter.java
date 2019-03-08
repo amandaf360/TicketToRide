@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import ClientModel.ClientModel;
+import ClientModel.DestinationCards;
+import services.DrawDestCardService;
+import ClientModel.PlayerHandDestinations;
+
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
     GameplayView view;
@@ -37,7 +42,21 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     public void update(Observable observable, Object o)
     {
-
+        if(o.getClass() == PlayerHandDestinations.class)
+        {
+            if(view.isFirstCreate())
+            {
+                PlayerHandDestinations hand = (PlayerHandDestinations)o;
+                ArrayList<DestinationCards> destList = hand.getCardList();
+                String zeroth = "Do Not Discard";
+                String first = destList.get(0).getCityOne() + " to " + destList.get(0).getCityTwo();
+                String second = destList.get(1).getCityOne() + " to " + destList.get(1).getCityTwo();
+                String third = destList.get(2).getCityOne() + " to " + destList.get(2).getCityTwo();
+                String[] passer = {zeroth, first, second, third};
+                view.setFirstCreateToFalse();
+                showDialog(passer);
+            }
+        }
     }
 
 
@@ -46,15 +65,21 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
      * it's kinda messy.
      */
 
-    public boolean chooseDestinationCards()
+    public void chooseDestinationCards()
+    {
+        //DrawDestCardService drawDestCardService = new DrawDestCardService();
+        //drawDestCardService.drawCards(3);
+    }
+
+
+    private boolean showDialog(String[] destCards)
     {
         final String dialogTitle = "Choose a Destination Card to discard!";
+
+
         final String[] singleChoiceItems = {"Do Not Discard","Dest1","Dest2","Dest3"};
-        // GetDestCardsService getDestCardsService = new GetDestCardsService();
-        // String[] destCards = getDestCardsService.getCardChoices
-        // singleChoiceItems[1] = destCards[0];
-        // singleChoiceItems[2] = destCards[1];
-        // singleChoiceItems[3] = destCards[2];
+
+        // singleChoiceItems = destCards;
         final int itemSelected = 0;
         new AlertDialog.Builder(view)   //AlertDialog.Builder(view. R.whatever.dialog)
                 .setTitle(dialogTitle)
@@ -88,6 +113,19 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     private void doit(String[] selection)
     {
+        /*
+
+        if(destChoiceValue == 0)
+        {
+            // do nothing
+        }
+        else
+        {
+            ClientModel.getInstance().deleteMainPlayersDestinationCardFromHand(
+                    ClientModel.getInstance().getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
+        }
+
+        */
 
         ArrayList<String> arrayList = new ArrayList<String>();
         for(int i = 0; i < 4; i++)

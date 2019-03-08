@@ -3,6 +3,7 @@ package responses;
 import java.util.ArrayList;
 
 import ClientModel.Game;
+import ClientModel.Message;
 
 public class PollResponse
 {
@@ -11,6 +12,10 @@ public class PollResponse
     private ArrayList<String> gamesDeleted;
     private ArrayList<String> playersJoined;
     private ArrayList<String> playersLeft;
+    private ArrayList<String> gameStarted;
+    private ArrayList<Message> chatHistory;
+    private ArrayList<String> discardedDestCards;
+
 
     public PollResponse() {
     }
@@ -53,5 +58,29 @@ public class PollResponse
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public ArrayList<String> getGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(ArrayList<String> gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    public ArrayList<Message> getChatHistory() {
+        return chatHistory;
+    }
+
+    public void setChatHistory(ArrayList<Message> chatHistory) {
+        this.chatHistory = chatHistory;
+    }
+
+    public ArrayList<String> getDiscardedDestCards() {
+        return discardedDestCards;
+    }
+
+    public void setDiscardedDestCards(ArrayList<String> discardedDestCards) {
+        this.discardedDestCards = discardedDestCards;
     }
 }

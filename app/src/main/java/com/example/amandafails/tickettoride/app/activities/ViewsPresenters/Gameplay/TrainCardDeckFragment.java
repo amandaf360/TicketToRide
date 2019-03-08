@@ -110,19 +110,18 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
     }
 
     public void onDeckClicked() {
-        List<TrainCards> faceUpCards = new ArrayList<>();
         TrainCards card1 = new TrainCards("yellow");
-        faceUpCards.add(card1);
         TrainCards card2 = new TrainCards("pink");
-        faceUpCards.add(card2);
         TrainCards card3 = new TrainCards("purple");
-        faceUpCards.add(card3);
         TrainCards card4 = new TrainCards("indigo");
-        faceUpCards.add(card4);
         TrainCards card5 = new TrainCards("orange");
-        faceUpCards.add(card5);
 
-        clientModel.getActiveGame().setFaceUpCards(faceUpCards);
+        clientModel.setFaceUpCardByIndex(0, card1);
+        clientModel.setFaceUpCardByIndex(1, card2);
+        clientModel.setFaceUpCardByIndex(2, card3);
+        clientModel.setFaceUpCardByIndex(3, card4);
+        clientModel.setFaceUpCardByIndex(4, card5);
+
 
         clientModel.getActiveGame().setNumCardsInDeck(101);
 //        FragmentManager manager = getActivity().getSupportFragmentManager();

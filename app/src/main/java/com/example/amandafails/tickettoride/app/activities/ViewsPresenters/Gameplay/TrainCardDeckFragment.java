@@ -155,6 +155,7 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // update the deck and face up cards
+        System.out.println("testing");
         setCardValues();
     }
 }

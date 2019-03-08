@@ -13,12 +13,24 @@ public class Game
     private String creator;
     private int indexOfCurrentPlayer;
     private List<TrainCards> faceUpCards;
+    private int numCardsInDeck;
 
     public Game()
     {
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();
+        numCardsInDeck = 0;
+        TrainCards card1 = new TrainCards("blue");
+        faceUpCards.add(card1);
+        TrainCards card2 = new TrainCards("also blue");
+        faceUpCards.add(card2);
+        TrainCards card3 = new TrainCards("slightly less blue");
+        faceUpCards.add(card3);
+        TrainCards card4 = new TrainCards("teal..? nah that's blue");
+        faceUpCards.add(card4);
+        TrainCards card5 = new TrainCards("chartreuse");
+        faceUpCards.add(card5);
     }
 
 
@@ -136,22 +148,11 @@ public class Game
         faceUpCards.set(index, trainCard);
     }
 
-    public Player getPlayerByName(String name)
-    {
-        for(Player player : players)
-        {
-            if(player.getName().equals(name))
-            {
-                return player;
-            }
-        }
-
-        return null;
+    public void setNumCardsInDeck(int numCardsInDeck) {
+        this.numCardsInDeck = numCardsInDeck;
     }
 
-
-
-
-
+    public int getNumCardsInDeck() {
+        return numCardsInDeck;
+    }
 }
-

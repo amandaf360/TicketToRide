@@ -231,7 +231,7 @@ public class TrainView extends View
         float x;
         float y;
         String name;
-        
+
     }
 }
 

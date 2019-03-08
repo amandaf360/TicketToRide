@@ -21,6 +21,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import ClientModel.*;
+import services.CreateChatMessageService;
 
 public class ChatFragment extends Fragment implements Observer {
 
@@ -113,14 +114,17 @@ public class ChatFragment extends Fragment implements Observer {
 
     public void onSendButtonClicked() {
         // send message to server model -- call chat service??
-        // **** TO CHANGE!!! ***** //
         String message = chatEditText.getText().toString();
+        CreateChatMessageService createChatMessageService = new CreateChatMessageService(message);
+
+        // **** DELETE ***** //
         lines.add(new Message(message, clientModel.getMainPlayer().getColor()));
 
         // display in recyclerview
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
+        // ****** UP TO HERE ****** //
 
         // clear the edit text field
         chatEditText.getText().clear();

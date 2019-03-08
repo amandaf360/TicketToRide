@@ -177,6 +177,11 @@ public class ClientModel extends Observable
         super.deleteObserver(o);
     }
 
+    public void setFaceUpCardByIndex(int index, TrainCards trainCards) {
+        activeGame.changeCardByIndex(index, trainCards);
+        setChanged();
+        notifyObservers();
+    }
 
     public User getUser() {
         return user;

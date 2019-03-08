@@ -17,10 +17,12 @@ import com.example.amandafails.tickettoride.app.adaptors.GameplayRecyclerViewAda
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-import ClientModel.ClientModel;
+import ClientModel.*;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements Observer {
 
     private ClientModel clientModel = ClientModel.getInstance();
 
@@ -32,9 +34,11 @@ public class ChatFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<String> lines;
+    private List<Message> lines;
 
-    public ChatFragment() {}
+    public ChatFragment() {
+        this.clientModel.addObserver(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,13 +81,10 @@ public class ChatFragment extends Fragment {
         // display the chat already in the game
         // assuming each chat message has a string and a player -- to get the color
 
-        //List<ChatMessage> chatMessages = clientModel.getActiveGame().getChatMessages();
-        List<String> chatMessages = new ArrayList<>();
-        chatMessages.add("Hello. This is the first chat message");
-        chatMessages.add("Hi, this is the second chat message");
-        for(int i = 0; i < chatMessages.size(); i++) {
-            lines.add(chatMessages.get(i));
-        }
+        List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
+        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
+        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
+        lines.addAll(chatMessages);
 
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
@@ -97,11 +98,24 @@ public class ChatFragment extends Fragment {
         return v;
     }
 
+    public void updateChatMessages() {
+        List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
+        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
+        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
+        lines.addAll(chatMessages);
+
+        // display in recyclerview
+        mAdapter = new GameplayRecyclerViewAdaptor(lines);
+        mAdapter.notifyDataSetChanged();
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
+
     public void onSendButtonClicked() {
         // send message to server model -- call chat service??
         // **** TO CHANGE!!! ***** //
         String message = chatEditText.getText().toString();
-        lines.add(message);
+        lines.add(new Message(message, clientModel.getMainPlayer().getColor()));
 
         // display in recyclerview
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
@@ -110,5 +124,10 @@ public class ChatFragment extends Fragment {
 
         // clear the edit text field
         chatEditText.getText().clear();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateChatMessages();
     }
 }

@@ -15,6 +15,7 @@ public class ClientModel extends Observable
     private Player mainPlayer;
     private ArrayList<Message> gameChat;
     private ArrayList<Message> gameHistory;
+    private List<Route> routes;
     private List<Observer> observers = new ArrayList<Observer>();
 
 
@@ -177,7 +178,8 @@ public class ClientModel extends Observable
         super.deleteObserver(o);
     }
 
-    public void setFaceUpCardByIndex(int index, TrainCards trainCards) {
+    public void setFaceUpCardByIndex(int index, TrainCards trainCards)
+    {
         activeGame.changeCardByIndex(index, trainCards);
         setChanged();
         notifyObservers();
@@ -208,14 +210,6 @@ public class ClientModel extends Observable
         activeGame.updateTurnIndex();
         setChanged();
         notifyObservers(this.activeGame);
-    }
-
-    public void setFaceUpCardByIndex(int index, TrainCards trainCards)
-    {
-        activeGame.changeCardByIndex(index, trainCards);
-        setChanged();
-        notifyObservers(this.activeGame.getFaceUpCards());
-
     }
 
 
@@ -267,4 +261,11 @@ public class ClientModel extends Observable
     {
         return gameHistory;
     }
+
+    public void initializeRoutes()
+    {
+        //Route route = new Route()
+    }
+
+
 }

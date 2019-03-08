@@ -155,4 +155,16 @@ public class Game
     public int getNumCardsInDeck() {
         return numCardsInDeck;
     }
+
+    public Player getPlayerByName(String name)
+    {
+        for(Player player : players)
+        {
+            if (player.getName().equals(name))
+            {
+                return player;
+            }
+        }
+        return null;
+    }
 }

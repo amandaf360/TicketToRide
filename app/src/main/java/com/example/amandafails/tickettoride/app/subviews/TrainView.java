@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class TrainView extends View
 {
@@ -72,7 +73,7 @@ public class TrainView extends View
         cities.add(new MapCity(1790, 1160, "Atlanta"));
         cities.add(new MapCity(2310, 470, "Boston"));
         cities.add(new MapCity(600, 50, "Calgary"));
-        cities.add(new MapCity(1990, 1190, "Charleston"));
+        cities.add(new MapCity(1990, 1230, "Charleston"));
         cities.add(new MapCity(1630, 710, "Chicago"));
         cities.add(new MapCity(1170, 1300, "Dallas"));
         cities.add(new MapCity(850, 840, "Denver"));
@@ -81,30 +82,30 @@ public class TrainView extends View
         cities.add(new MapCity(770, 420, "Helena"));
         cities.add(new MapCity(1300, 1460, "Houston"));
         cities.add(new MapCity(1270, 860, "Kansas City"));
-        cities.add(new MapCity(230, 1120, "Las Angeles"));
+        cities.add(new MapCity(230, 1160, "Las Angeles"));
         cities.add(new MapCity(410, 1000, "Las Vegas"));
         cities.add(new MapCity(1410, 1120, "Little Rock"));
         cities.add(new MapCity(2030, 1680, "Miami"));
         cities.add(new MapCity(2160, 260, "Montreal"));
-        cities.add(new MapCity(1690, 1070, "Nashville"));
+        cities.add(new MapCity(1700, 1050, "Nashville"));
         cities.add(new MapCity(1490, 1450, "New Orleans"));
         cities.add(new MapCity(2160, 640, "New York"));
         cities.add(new MapCity(1180, 1070, "Oklahoma City"));
         cities.add(new MapCity(1210, 720, "Omaha"));
-        cities.add(new MapCity(530, 1150, "Phoenix"));
+        cities.add(new MapCity(520, 1180, "Phoenix"));
         cities.add(new MapCity(1940, 730, "Pittsburgh"));
         cities.add(new MapCity(170, 320, "Portland"));
-        cities.add(new MapCity(1960, 1040, "Raleigh"));
+        cities.add(new MapCity(1990, 1040, "Raleigh"));
         cities.add(new MapCity(1480, 910, "Saint Louis"));
         cities.add(new MapCity(560, 740, "Salt Lake City"));
         cities.add(new MapCity(80, 840, "San Francisco"));
         cities.add(new MapCity(780, 1090, "Santa Fe"));
-        cities.add(new MapCity(1640, 380, "Sault St. Marie"));
+        cities.add(new MapCity(1650, 380, "Sault St. Marie"));
         cities.add(new MapCity(230, 180, "Seattle"));
-        cities.add(new MapCity(1880, 500, "Toronto"));
+        cities.add(new MapCity(1930, 470, "Toronto"));
         cities.add(new MapCity(300, 60, "Vancouver"));
         cities.add(new MapCity(2100, 860, "Washington"));
-        cities.add(new MapCity(1060, 120, "Winnipeg"));
+        cities.add(new MapCity(1150, 90, "Winnipeg"));
 
         //Total number of routes must = 77
         //each section includes doubles, but excludes doubles that have been covered by a previous section
@@ -119,14 +120,14 @@ public class TrainView extends View
 
         //yellow routes (total 5)
         routes.add(new MapRoute(500, 300, 114, 6, false, "yellow", "none", "Seattle-Helena"));
-        routes.add(new MapRoute(160, 980, 152, 3, true, "purple", "yellow", "SanFrancisco-LA"));
+        routes.add(new MapRoute(160, 1000, 152, 3, true, "purple", "yellow", "SanFrancisco-LA"));
         routes.add(new MapRoute(960, 1180, 60, 5, false, "yellow", "none", "ElPaso-OklahomaCity"));
         routes.add(new MapRoute(1640, 1300, 44, 4, true, "yellow", "orange", "NewOrleans-Atlanta"));
         routes.add(new MapRoute(1820, 900, 36, 4, false, "yellow", "none", "Nashvillel-Pittsburgh"));
 
         //blue routes (total 7)
         routes.add(new MapRoute(370, 530, 137, 6, false, "blue", "none", "Portland-SLC"));
-        routes.add(new MapRoute(920, 270, 43, 4, false, "blue", "none", "Helena-Winnipeg"));
+        routes.add(new MapRoute(950, 250, 45, 4, false, "blue", "none", "Helena-Winnipeg"));
         routes.add(new MapRoute(950, 1080, 85, 3, false, "blue", "none", "SantaFe-OklahomaCity"));
         routes.add(new MapRoute(1420, 720, 88, 4, false, "blue", "none", "Omaha-Chicago"));
         routes.add(new MapRoute(1380, 880, 101, 2, true, "blue", "purple", "KansasCity-SaintLouis"));
@@ -147,6 +148,43 @@ public class TrainView extends View
         routes.add(new MapRoute(330, 790, 80, 5, true, "orange", "white", "SanFrancisco-SLC"));
         routes.add(new MapRoute(500, 880, 31, 3, false, "orange", "none", "LasVegas-SLC"));
         routes.add(new MapRoute(1050, 850, 93, 4, true, "orange", "black", "Denver-KansasCity"));
+        routes.add(new MapRoute(1790, 700, 92, 3, true, "orange", "black", "Chicago-Pittsburgh"));
+
+        //purple routes (total 4)
+        routes.add(new MapRoute(670, 580, 26, 3, false, "purple", "none", "Helena-SLC"));
+        routes.add(new MapRoute(1020, 750, 78, 4, false, "purple", "none", "Denver-Omaha"));
+        routes.add(new MapRoute(1640, 480, 89, 6, false, "purple", "none", "Duluth-Toronto"));
+        routes.add(new MapRoute(2020, 1460, 355, 4, false, "purple", "none", "Charleston-Miami"));
+
+        //White routes (total 4)
+        routes.add(new MapRoute(870, 60, 91, 6, false, "white", "none", "Calgary-Winnipeg"));
+        routes.add(new MapRoute(680, 1020, 43, 5, false, "white", "none", "Denver-Phoenix"));
+        routes.add(new MapRoute(1780, 580, 58, 4, false, "white", "none", "Toronto-Chicago"));
+        routes.add(new MapRoute(1550, 1090, 80, 3, false, "white", "none", "LittleRock-Nashville"));
+
+        //Black routes (total 4)
+        routes.add(new MapRoute(1260, 280, 155, 4, false, "black", "none", "Winnepeg-Duluth"));
+        routes.add(new MapRoute(1890, 320, 75, 5, false, "black", "none", "SaultStMarie-Montreal"));
+        routes.add(new MapRoute(1850, 1050, 86, 3, false, "black", "none", "Nashville-Raleigh"));
+        routes.add(new MapRoute(490, 1270, 107, 6, false, "black", "none", "LA-ElPaso"));
+
+        //Gray routes (total...34?)
+        routes.add(new MapRoute(1400, 220, 125, 6, false, "gray", "none", "Winnipeg-SaultStMarie"));
+        routes.add(new MapRoute(270, 120, 30, 1, true, "gray", "gray", "Vancouver-Seattle"));
+        routes.add(new MapRoute(200, 250, 30, 1, true, "gray", "gray", "Seattle-Portland"));
+        routes.add(new MapRoute(450, 60, 88, 3, false, "gray", "none", "vancouver-Calgary"));
+        routes.add(new MapRoute(440, 130, 74, 4, false, "gray", "none", "Seattle-Calgary"));
+        routes.add(new MapRoute(680, 230, 155, 4, false, "gray", "none", "Calgary-Helena"));
+        routes.add(new MapRoute(1490, 430, 70, 3, false, "gray", "none", "SaultStMarie-Duluth"));
+        routes.add(new MapRoute(1780, 430, 105, 2, false, "gray", "none", "SaultStMarie-Toronto"));
+        routes.add(new MapRoute(2050, 370, 45, 3, false, "gray", "none", "Toronto-Montreal"));
+        routes.add(new MapRoute(2240, 360, 150, 2, true, "gray", "gray", "Montreal-Boston"));
+
+
+
+
+
+
 
 
 

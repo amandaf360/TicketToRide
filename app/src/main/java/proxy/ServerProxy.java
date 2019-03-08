@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import ClientModel.DestinationCards;
+import ClientModel.Message;
 import requests.*;
 import commands.*;
 import responses.*;
@@ -16,7 +18,7 @@ import responses.*;
 
 
 public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
-    private OnTaskCompleted callerClass;
+    private OnTaskCompleted callBack;
     private Serializer serializer;
 
     public void login(String username, String password) {
@@ -25,7 +27,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         stringList.add(username);
         stringList.add(password);
         RequestWrapper wrapper = new RequestWrapper("login", stringList);
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
                 LoginResponse response = serializer.deserializeLoginResponse(responseJson);
@@ -43,7 +45,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         stringList.add(username);
         stringList.add(password);
         RequestWrapper wrapper = new RequestWrapper("register", stringList);
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
                 RegisterResponse response = serializer.deserializeRegisterResponse(responseJson);
@@ -59,7 +61,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
         RequestWrapper wrapper = new RequestWrapper(pollType, stringList);
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
                 PollResponse response = serializer.deserializePollResponse(responseJson);
@@ -77,7 +79,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         stringList.add(Integer.toString(gameNumber));
         stringList.add(username);
         RequestWrapper wrapper = new RequestWrapper("joinGame", stringList);
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
                 JoinGameResponse response = serializer.deserializeJoinGameResponse(responseJson);
@@ -97,7 +99,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         stringList.add(Integer.toString(numPlayers));
         stringList.add(gameName);
         RequestWrapper wrapper = new RequestWrapper("createGame", stringList);
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson)
             {
@@ -118,7 +120,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         stringList.add(username);
         RequestWrapper wrapper = new RequestWrapper("clearPoll", stringList);
 
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson)
             {
@@ -138,7 +140,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         stringList.add(Integer.toString(gameNum));
         RequestWrapper wrapper = new RequestWrapper("startGame", stringList);
 
-        callerClass = new OnTaskCompleted() {
+        callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson)
             {
@@ -147,6 +149,77 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
                 command.execute();
             }
         };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void sendChatMessage(String username, Message message, int gameNum)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        stringList.add(message.getMessage());
+        stringList.add(message.getColor());
+        stringList.add(Integer.toString(gameNum));
+        RequestWrapper wrapper = new RequestWrapper("sendChatMessage", stringList);
+
+        callBack = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+
+            }
+        };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void drawDestCards(int numCards, String username)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(Integer.toString(numCards));
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("drawDestCards", stringList);
+
+        callBack = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+                DrawDestResponse response = serializer.deserializeDrawDestResponse(responseJson);
+                DrawDestCommand command = new DrawDestCommand(response.getCardsDrawn());
+                command.execute();
+            }
+        };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void discardDestCard(DestinationCards card, String username)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(card.getCityOne());
+        stringList.add(card.getCityTwo());
+        stringList.add(Integer.toString(card.getLength()));
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("discardDestCard", stringList);
+        callBack = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+                //no callback necessary because discarding always has the same effect on the client.
+            }
+        };
+
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void drawTrainCarCard(String username, int faceUpIndex)//if from deck, index should be -1
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        stringList.add(Integer.toString(faceUpIndex));
+        RequestWrapper wrapper = new RequestWrapper("drawTrainCarCard", stringList);
+
+        callBack = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+
+            }
+        };
+
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
@@ -159,7 +232,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.24.200.185:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://192.168.253.121:3000");//CHANGE IP ADDRESS HERE
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
@@ -190,6 +263,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        callerClass.completeTask(s);
+        callBack.completeTask(s);
     }
 }

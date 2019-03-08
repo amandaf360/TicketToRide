@@ -1,7 +1,10 @@
 package responses;
 
 import java.util.ArrayList;
+
+import servermodel.DecksStateData;
 import servermodel.Game;
+import servermodel.Message;
 
 public class PollResponse extends BaseResponse
 {
@@ -10,12 +13,19 @@ public class PollResponse extends BaseResponse
     private ArrayList<String> gamesDeleted;
     private ArrayList<String> playersJoined;
     private ArrayList<String> playersLeft;
+    private ArrayList<String> gameStarted;
+    private ArrayList<Message> chatHistory;
+    private ArrayList<String> discardedDestCards;
+    private DecksStateData deckData;
 
     public PollResponse() {
         gamesCreated = new ArrayList<>();
         gamesDeleted = new ArrayList<>();
         playersJoined = new ArrayList<>();
         playersLeft = new ArrayList<>();
+        gameStarted = new ArrayList<>();
+        chatHistory = new ArrayList<>();
+        discardedDestCards = new ArrayList<>();
     }
 
     public ArrayList<Game> getGamesCreated() {
@@ -56,5 +66,37 @@ public class PollResponse extends BaseResponse
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public ArrayList<String> getGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(ArrayList<String> gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    public ArrayList<Message> getChatHistory() {
+        return chatHistory;
+    }
+
+    public void setChatHistory(ArrayList<Message> chatHistory) {
+        this.chatHistory = chatHistory;
+    }
+
+    public ArrayList<String> getDiscardedDestCards() {
+        return discardedDestCards;
+    }
+
+    public void setDiscardedDestCards(ArrayList<String> discardedDestCards) {
+        this.discardedDestCards = discardedDestCards;
+    }
+
+    public DecksStateData getDeckData() {
+        return deckData;
+    }
+
+    public void setDeckData(DecksStateData deckData) {
+        this.deckData = deckData;
     }
 }

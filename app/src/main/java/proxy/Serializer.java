@@ -50,4 +50,9 @@ public class Serializer
         return gson.fromJson(response, StartGameResponse.class);
     }
 
+    public DrawDestResponse deserializeDrawDestResponse(String response)
+    {
+        return gson.fromJson(response, DrawDestResponse.class);
+    }
+
 }

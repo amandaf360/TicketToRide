@@ -16,7 +16,7 @@ import com.example.amandafails.tickettoride.app.adaptors.GameplayRecyclerViewAda
 import java.util.ArrayList;
 import java.util.List;
 
-import ClientModel.ClientModel;
+import ClientModel.*;
 
 public class DestCardFragment extends Fragment {
     private ClientModel clientModel = ClientModel.getInstance();
@@ -25,7 +25,7 @@ public class DestCardFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<String> lines;
+    private List<Message> lines;
 
     public DestCardFragment() {}
 
@@ -43,13 +43,10 @@ public class DestCardFragment extends Fragment {
 
         // somehow get the dest. cards for each player?
         //List<destCardMessage> destCardMessages = clientModel.getActiveGame().getChatMessages();
-        List<String> destCards = new ArrayList<>();
-        destCards.add("Hello. This is the first destination card");
-        destCards.add("Hi, this is the second chat message");
-        for(int i = 0; i < destCards.size(); i++) {
-            lines.add(destCards.get(i));
-        }
-
+        List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
+        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
+        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
+        lines.addAll(chatMessages);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 

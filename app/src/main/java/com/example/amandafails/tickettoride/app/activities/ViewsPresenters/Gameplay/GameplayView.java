@@ -31,13 +31,13 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
         presenter = new GameplayPresenter(this);
 
-        /*displayGameStatusButton = findViewById(R.id.display_game_status);
+        displayGameStatusButton = findViewById(R.id.display_game_status);
         displayGameStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onDisplayGameStatusClicked();
             }
-        });commented out because I'm missing the id referenced*/
+        });
 
         drawTrainsButton = findViewById(R.id.button_drawTrains);
         drawTrainsButton.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,4 @@
-package ThomasStuff;
+package ClientModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ public class ClientModel extends Observable
     private String message;
     private static ClientModel instance;
     private User user;
+    private Player mainPlayer;
     private List<Observer> observers = new ArrayList<Observer>();
 
 
@@ -216,4 +217,20 @@ public class ClientModel extends Observable
         notifyObservers(this.user);
     }
 
+    public Player getMainPlayer()
+    {
+        return mainPlayer;
+    }
+
+    public void setMainPlayer(Player mainPlayer)
+    {
+        this.mainPlayer = mainPlayer;
+    }
+
+    public void endCurrentTurn()
+    {
+        activeGame.updateTurnIndex();
+        setChanged();
+        notifyObservers(this.activeGame);
+    }
 }

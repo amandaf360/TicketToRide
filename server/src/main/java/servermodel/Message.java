@@ -1,4 +1,4 @@
-package ClientModel;
+package servermodel;
 
 public class Message
 {

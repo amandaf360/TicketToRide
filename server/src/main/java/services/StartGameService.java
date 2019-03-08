@@ -3,6 +3,8 @@ package services;
 import java.util.ArrayList;
 
 import responses.StartGameResponse;
+import server.ClientCommandManager;
+import servermodel.ActiveGame;
 import servermodel.ColorAssigner;
 import servermodel.Game;
 import servermodel.ModelRoot;
@@ -23,6 +25,14 @@ public class StartGameService
             {
                 gameFound = true;
                 currentGame.assignColors();
+                ActiveGame activeGame = new ActiveGame();
+                activeGame.setPlayers(currentGame.getPlayers());
+                activeGame.setGameNum(currentGame.getGameNum());
+                ClientCommandManager manager = ClientCommandManager.getCommandManager();
+                for(int j = 0; j < currentGame.getPlayers().size(); j++)
+                {
+
+                }
                 //need to do some client command manager stuff here
                 if(currentGame.getPlayers().size() == currentGame.getMaxPlayers())
                 {

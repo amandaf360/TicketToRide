@@ -81,9 +81,24 @@ public class CommandHandler implements HttpHandler
             case "joinGame":
                 ArrayList<String> joinGameList = wrappedRequest.getStringList();
                 command = new JoinGameCommand(Integer.parseInt(joinGameList.get(0)), joinGameList.get(1));
+                break;
             case "sendMessage":
                 ArrayList<String> messageData = wrappedRequest.getStringList();
-                command = new SendMessageCommand(messageData.get(0), messageData.get(1), Integer.parseInt(messageData.get(2)));
+                command = new SendMessageCommand(messageData.get(0), messageData.get(1), messageData.get(2), Integer.parseInt(messageData.get(3)));
+                break;
+            case "drawDestCards":
+                ArrayList<String> drawList = wrappedRequest.getStringList();
+                command = new DrawDestCommand(Integer.parseInt(drawList.get(0)), drawList.get(1));
+                break;
+            case "discardDestCard":
+                ArrayList<String> discardDestList = wrappedRequest.getStringList();
+                command = new DiscardDestCommand(discardDestList.get(0), discardDestList.get(1), Integer.parseInt(discardDestList.get(2)),
+                        discardDestList.get(3));
+                break;
+            case "drawTrainCarCard":
+                ArrayList<String> drawTrainList = wrappedRequest.getStringList();
+                command = new DrawTrainCommand(drawTrainList.get(0), Integer.parseInt(drawTrainList.get(1)));
+                break;
 
         }
 

@@ -5,7 +5,8 @@ import java.util.Collections;
 
 public class TrainCarDeck
 {
-    ArrayList<TrainCarCard> deck;
+    private ArrayList<TrainCarCard> deck;
+    private TrainCarDiscard discardPile;
 
     public TrainCarDeck()
     {
@@ -57,23 +58,24 @@ public class TrainCarDeck
     public TrainCarCard draw()
     {
         TrainCarCard drawnCard;
-        if(deck.size() != 0)
+        if(deck.size() == 0)
         {
-            drawnCard = deck.get(0);
-            deck.remove(0);
+            combineWithDiscard();
         }
-        else
-        {
-            drawnCard = null;
-        }
+        drawnCard = deck.get(0);
+        deck.remove(0);
 
         return drawnCard;
     }
 
-    public void combineWithDiscard(TrainCarDiscard discardPile)
+    public void combineWithDiscard()
     {
-        ArrayList<TrainCarCard> discardCards = discardPile.getDiscardPile();
-
+        deck.addAll(discardPile.getDiscardPile());
+        discardPile.clearPile();
+        shuffle();
     }
 
+    public void setDiscardPile(TrainCarDiscard discardPile) {
+        this.discardPile = discardPile;
+    }
 }

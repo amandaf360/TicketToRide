@@ -465,7 +465,7 @@ public class ClientModel extends Observable
     {
         activeGameStarted = true;
         setChanged();
-        notifyObservers(Boolean.valueOf(activeGameStarted));
+        notifyObservers(new Boolean(activeGameStarted));
     }
 
 

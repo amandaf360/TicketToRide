@@ -25,6 +25,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         this.view = view;
         clientModel = ClientModel.getInstance();
         clientModel.addObserver(this);
+        clientModel.initializeRoutes();
     }
 
     public void drawCards()
@@ -43,6 +44,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     }
 
+    public String currentTurn()
+    {
+        return clientModel.getActiveGame().getCurrentPlayersTurn();
+    }
+
     public void update(Observable observable, Object o)
     {
         if(o.getClass() == PlayerHandDestinations.class)
@@ -52,9 +58,9 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 PlayerHandDestinations hand = (PlayerHandDestinations)o;
                 ArrayList<DestinationCards> destList = hand.getCardList();
                 String zeroth = "Do Not Discard";
-                String first = destList.get(0).getCityOne() + " to " + destList.get(0).getCityTwo();
-                String second = destList.get(1).getCityOne() + " to " + destList.get(1).getCityTwo();
-                String third = destList.get(2).getCityOne() + " to " + destList.get(2).getCityTwo();
+                String first = destList.get(0).toString();
+                String second = destList.get(1).toString();
+                String third = destList.get(2).toString();
                 String[] passer = {zeroth, first, second, third};
                 view.setFirstCreateToFalse();
                 showDialog(passer);
@@ -70,26 +76,26 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     public void chooseDestinationCards()
     {
-        //DrawDestCardService drawDestCardService = new DrawDestCardService();
-        //drawDestCardService.drawCards(3);
+        DrawDestCardService drawDestCardService = new DrawDestCardService();
+        drawDestCardService.drawCards(3);
     }
 
 
-    private boolean showDialog(String[] destCards)
+    private boolean showDialog(final String[] destCards)
     {
         final String dialogTitle = "Choose a Destination Card to discard!";
 
 
         final String[] singleChoiceItems = {"Do Not Discard","Dest1","Dest2","Dest3"};
 
-        // singleChoiceItems = destCards;
+        //singleChoiceItems = destCards;
         final int itemSelected = 0;
         new AlertDialog.Builder(view)   //AlertDialog.Builder(view. R.whatever.dialog)
                 .setTitle(dialogTitle)
                 .setCancelable(false)
                 //.setCanceledOnTouchOutside(false)
                 //.setMessage(joinGameName)
-                .setSingleChoiceItems(singleChoiceItems, itemSelected, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(destCards, itemSelected, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int selectedIndex) {
                         setChoice(selectedIndex);
@@ -99,7 +105,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        doit(singleChoiceItems);
+                        doit(destCards);
                     }
                 })
 
@@ -114,22 +120,26 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         destChoiceValue = index;
     }
 
+    private int getDestChoiceValue()
+    {
+        return destChoiceValue;
+    }
+
     private void doit(String[] selection)
     {
-        /*
 
-        if(destChoiceValue == 0)
+
+        if(getDestChoiceValue() == 0)
         {
             // do nothing
         }
         else
         {
-            ClientModel.deleteMainPlayersDestinationCardFromHand(
-                    ClientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
+            clientModel.deleteMainPlayersDestinationCardFromHand(
+                    clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }
 
-        */
-
+        /*
         ArrayList<String> arrayList = new ArrayList<String>();
         for(int i = 0; i < 4; i++)
         {
@@ -146,6 +156,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
 
 
+        */
 
         //Player player = model.getCurrentPlayer();
         //player.setDestCards(arrayList);

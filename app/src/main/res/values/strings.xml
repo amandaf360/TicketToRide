@@ -30,6 +30,8 @@
     <string name="drawTrains">Draw Trains</string>
     <string name="claimRoute">Claim Route</string>
     <string name="drawRoute">Draw Route</string>
+    <string name="demo">Demo</string>
+    <string name="playersTurn">Player\'s turn</string>
 
     <!-- Strings related to trainDeckFragment -->
     <string name="trainDrawerTitle">Bank</string>

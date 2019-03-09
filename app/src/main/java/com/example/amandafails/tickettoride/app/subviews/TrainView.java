@@ -123,7 +123,7 @@ public class TrainView extends View
         routes.add(new MapRoute(160, 1000, 152, 3, true, "purple", "yellow", "SanFrancisco-LA"));
         routes.add(new MapRoute(960, 1180, 60, 5, false, "yellow", "none", "ElPaso-OklahomaCity"));
         routes.add(new MapRoute(1640, 1300, 44, 4, true, "yellow", "orange", "NewOrleans-Atlanta"));
-        routes.add(new MapRoute(1820, 900, 36, 4, false, "yellow", "none", "Nashvillel-Pittsburgh"));
+        routes.add(new MapRoute(1820, 900, 36, 4, false, "yellow", "none", "Nashville-Pittsburgh"));
 
         //blue routes (total 7)
         routes.add(new MapRoute(370, 530, 137, 6, false, "blue", "none", "Portland-SLC"));
@@ -132,7 +132,7 @@ public class TrainView extends View
         routes.add(new MapRoute(1420, 720, 88, 4, false, "blue", "none", "Omaha-Chicago"));
         routes.add(new MapRoute(1380, 880, 101, 2, true, "blue", "purple", "KansasCity-SaintLouis"));
         routes.add(new MapRoute(1900, 1410, 157, 5, false, "blue", "none", "Atlanta-Miami"));
-        routes.add(new MapRoute(2160, 450, 2, 3, false, "blue", "none", "NY-Montreal"));
+        routes.add(new MapRoute(2160, 450, 2, 3, false, "blue", "none", "NYC-Montreal"));
 
         //green routes (total 7)
         routes.add(new MapRoute(130, 570, 7, 5, true, "green", "purple", "Portland-SanFrancisco"));
@@ -140,7 +140,7 @@ public class TrainView extends View
         routes.add(new MapRoute(1020, 1400, 104, 6, false, "green", "none", "ElPaso-Houston"));
         routes.add(new MapRoute(1560, 820, 35, 2, true, "green", "white", "SaintLouis-Chicago"));
         routes.add(new MapRoute(1710, 830, 63, 4, false, "green", "none", "SaintLouis-Pittsburgh"));
-        routes.add(new MapRoute(2040, 670, 67, 2, true, "green", "white", "Pittsburgh-NY"));
+        routes.add(new MapRoute(2040, 670, 67, 2, true, "green", "white", "Pittsburgh-NYC"));
         routes.add(new MapRoute(1450, 1280, 350, 3, false, "green", "none", "LittleRock-NewOrleans"));
 
         //orange routes (total 6)
@@ -149,7 +149,7 @@ public class TrainView extends View
         routes.add(new MapRoute(500, 880, 31, 3, false, "orange", "none", "LasVegas-SLC"));
         routes.add(new MapRoute(1050, 850, 93, 4, true, "orange", "black", "Denver-KansasCity"));
         routes.add(new MapRoute(1790, 700, 92, 3, true, "orange", "black", "Chicago-Pittsburgh"));
-        routes.add(new MapRoute(2150, 750, 7, 2, true, "orange", "black", "NY-Washington"));
+        routes.add(new MapRoute(2150, 750, 7, 2, true, "orange", "black", "NYC-Washington"));
 
         //purple routes (total 4)
         routes.add(new MapRoute(670, 580, 26, 3, false, "purple", "none", "Helena-SLC"));
@@ -164,7 +164,7 @@ public class TrainView extends View
         routes.add(new MapRoute(1550, 1090, 80, 3, false, "white", "none", "LittleRock-Nashville"));
 
         //Black routes (total 4)
-        routes.add(new MapRoute(1260, 280, 155, 4, false, "black", "none", "Winnepeg-Duluth"));
+        routes.add(new MapRoute(1260, 280, 155, 4, false, "black", "none", "Winnipeg-Duluth"));
         routes.add(new MapRoute(1890, 320, 75, 5, false, "black", "none", "SaultStMarie-Montreal"));
         routes.add(new MapRoute(1850, 1040, 86, 3, false, "black", "none", "Nashville-Raleigh"));
         routes.add(new MapRoute(490, 1270, 107, 6, false, "black", "none", "LA-ElPaso"));
@@ -197,7 +197,7 @@ public class TrainView extends View
         routes.add(new MapRoute(1250, 1380, 140, 1, true, "gray", "gray", "Dallas-Houston"));
         routes.add(new MapRoute(1400, 1480, 87, 2, false, "gray", "none", "Houston-NewOrleans"));
         routes.add(new MapRoute(1180, 1190, 185, 2, true, "gray", "gray", "Dallas-OklahomaCity"));
-        routes.add(new MapRoute(1230, 970, 20, 2, true, "gray", "gray", "OklahomaCity-KansisCity"));
+        routes.add(new MapRoute(1230, 970, 20, 2, true, "gray", "gray", "OklahomaCity-KansasCity"));
         routes.add(new MapRoute(1240, 780, 165, 1, true, "gray", "gray", "KansasCity-Omaha"));
         routes.add(new MapRoute(1270, 580, 30, 2, true, "gray", "gray", "Omaha-Duluth"));
         routes.add(new MapRoute(820, 980, 10, 2, false, "gray", "none", "SantaFe-Denver"));

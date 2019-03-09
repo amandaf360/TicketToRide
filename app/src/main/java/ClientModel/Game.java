@@ -33,6 +33,11 @@ public class Game
         faceUpCards.add(card5);
     }
 
+    public String getCurrentPlayersTurn()
+    {
+        return players.get(indexOfCurrentPlayer).getName() +"\'s turn";
+    }
+
 
     public String getPlayerColor(Player player)
     {

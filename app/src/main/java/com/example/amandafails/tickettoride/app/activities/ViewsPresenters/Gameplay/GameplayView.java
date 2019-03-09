@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.amandafails.tickettoride.R;
 
@@ -21,6 +22,8 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     private Button drawTrainsButton;
     private Button drawRoutesButton;
     private Button placeTrainsButton;
+    private Button demoButton;
+    private TextView currentTurn;
     private boolean firstCreate = true;
 
     @Override
@@ -60,7 +63,20 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
+        demoButton = findViewById(R.id.demo_button);
+        demoButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onDemoClicked();
+            }
+        });
+
+        currentTurn = findViewById(R.id.turn_text_indicator);
+        currentTurn.setText(presenter.currentTurn());
+
         ClientModel.getInstance().initializeRoutes();
+
 
         if(firstCreate)
         {
@@ -69,6 +85,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         }
         firstCreate = false;
 
+    }
+
+    public void onDemoClicked()
+    {
+        //implement.
     }
 
     //define all these buttons inside of onCreate

@@ -29,6 +29,7 @@ public class ClientModel extends Observable
         instance = this;
         gameList = new ArrayList<>();
         routes = new ArrayList<>();
+        mainPlayer = new Player();
     }
 
     public static ClientModel getInstance() {

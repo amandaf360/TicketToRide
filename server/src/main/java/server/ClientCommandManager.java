@@ -12,6 +12,7 @@ import commands.*;
 import responses.PollResponse;
 import servermodel.DecksStateData;
 import servermodel.Game;
+import servermodel.GameStartInfo;
 import servermodel.Message;
 import servermodel.ModelRoot;
 import servermodel.User;
@@ -29,6 +30,7 @@ public class ClientCommandManager
     private Map<String, ArrayList<String>> destinationCardsDrawn;
     private Map<String, ArrayList<String>> destinationCardsDiscarded;
     private Map<String, DecksStateData> deckStateUpdate;
+    private Map<String, GameStartInfo> startGameInfo;
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
 
@@ -48,6 +50,7 @@ public class ClientCommandManager
         destinationCardsDrawn = new HashMap<>();
         destinationCardsDiscarded = new HashMap<>();
         deckStateUpdate = new HashMap<>();
+        startGameInfo = new HashMap<>();
     }
 
     public void addUser(String username)
@@ -61,6 +64,7 @@ public class ClientCommandManager
         destinationCardsDrawn.put(username, new ArrayList<String>());
         destinationCardsDiscarded.put(username, new ArrayList<String>());
         deckStateUpdate.put(username, null);
+        startGameInfo.put(username, null);
     }
 
     public PollResponse firstPoll()
@@ -82,6 +86,11 @@ public class ClientCommandManager
             polledGamesCreated.add(new Game(currentGamesCreated.get(i)));
         }
 
+        if(startGameInfo.get(username) != null)
+        {
+            int i = 0;
+        }
+
         response.setGamesCreated(gamesCreated.get(username));
 
         response.setGamesDeleted(gamesDeleted.get(username));
@@ -90,6 +99,7 @@ public class ClientCommandManager
         response.setChatHistory(chatHistory.get(username));
         response.setDiscardedDestCards(destinationCardsDiscarded.get(username));
         response.setDeckData(deckStateUpdate.get(username));
+        response.setGameStartInfo(startGameInfo.get(username));
 
         return response;
     }
@@ -102,6 +112,7 @@ public class ClientCommandManager
         playersLeft.get(username).clear();
         chatHistory.get(username).clear();
         deckStateUpdate.put(username, null);
+        startGameInfo.put(username, null);
     }
 
     public void addGame(Game game)
@@ -167,6 +178,11 @@ public class ClientCommandManager
     public void setDeckState(String username, DecksStateData data)
     {
         deckStateUpdate.put(username, data);
+    }
+
+    public void startGame(String username, GameStartInfo info)
+    {
+        startGameInfo.put(username, info);
     }
 
 }

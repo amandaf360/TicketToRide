@@ -64,6 +64,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
+                if(responseJson.contains("blue"))
+                {
+                    int i = 0;
+                }
                 PollResponse response = serializer.deserializePollResponse(responseJson);
                 PollCommand command = new PollCommand(response);
                 ServerProxy proxy = new ServerProxy();

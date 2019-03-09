@@ -9,6 +9,7 @@ public class ColorAssigner
 
     public ColorAssigner()
     {
+        colorList = new ArrayList<>();
         colorList.add("blue");
         colorList.add("red");
         colorList.add("green");

@@ -198,6 +198,18 @@ public class ClientModel extends Observable
 
     public Player getMainPlayer()
     {
+        if(mainPlayer == null)
+        {
+            ArrayList<Player> players = activeGame.getPlayers();
+            for(int i = 0; i < players.size(); i++)
+            {
+                if(user.getUserName().equals(players.get(i).getName()))
+                {
+                    mainPlayer = players.get(i);
+                    break;
+                }
+            }
+        }
         return mainPlayer;
     }
 

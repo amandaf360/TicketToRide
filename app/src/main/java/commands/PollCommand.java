@@ -93,6 +93,7 @@ public class PollCommand implements ICommand
             {
                 SetActiveGameService service = new SetActiveGameService();
                 service.setActiveGame(game);
+                model.setMainPlayer(player);
             }
         }
     }

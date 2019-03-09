@@ -44,6 +44,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     }
 
+    public String currentTurn()
+    {
+        return clientModel.getActiveGame().getCurrentPlayersTurn();
+    }
+
     public void update(Observable observable, Object o)
     {
         if(o.getClass() == PlayerHandDestinations.class)

@@ -12,7 +12,8 @@ public class Player
 
     public Player()
     {
-
+        destCards = new ArrayList<>();
+        trainCarCards = new ArrayList<>();
     }
 
     public Player(Player player)

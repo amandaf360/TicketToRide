@@ -57,6 +57,7 @@ public class StartGameService
                 {
                     response.setErrorMessage("Not enough players");
                 }
+                model.addActiveGame(activeGame);
             }
         }
         if(!gameFound)

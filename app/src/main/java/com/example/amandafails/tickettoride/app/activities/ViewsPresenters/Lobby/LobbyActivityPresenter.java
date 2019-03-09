@@ -48,6 +48,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     @Override
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
+        int i = 0;
         if(arg.getClass() == ArrayList.class) {
             if(clientModel.getActiveGame().getCurrentPlayers() != 0) {
                 view.displayPlayer(clientModel.getActiveGame().getPlayers().get(clientModel.getActiveGame().getCurrentPlayers() - 1));

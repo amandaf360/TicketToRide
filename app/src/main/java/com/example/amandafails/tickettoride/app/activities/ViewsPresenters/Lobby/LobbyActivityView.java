@@ -60,7 +60,7 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
 
         if(lines.size() == maxNumPlayers) {
-            presenter.disconnectObserver();
+            //presenter.disconnectObserver();
             ServerProxy proxy = new ServerProxy();
             proxy.beginGame(ClientModel.getInstance().getActiveGame().getGameNum());
         }

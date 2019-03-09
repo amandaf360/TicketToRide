@@ -68,9 +68,9 @@ public class Player
         this.playerHandTrains = playerHandTrains;
     }
 
-    public void addTrainCardToHand(TrainCards trainCards)
+    public void addTrainCardToHand(TrainCarCard trainCarCard)
     {
-        playerHandTrains.addCard(trainCards);
+        playerHandTrains.addCard(trainCarCard);
     }
 
     public void addDestinationCardToPlayerHand(DestinationCards destinationCards)

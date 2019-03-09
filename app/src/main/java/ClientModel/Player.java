@@ -13,6 +13,8 @@ public class Player
 
     public Player()
     {
+        playerHandTrains = new PlayerHandTrains(0,0,0,0,0,0,0,0,0);
+        playerHandDestinations = new PlayerHandDestinations();
         points = 0;
         numRoutes = 0;
         numTrains = 45;

@@ -14,7 +14,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     public LobbyActivityPresenter(ILobbyView view) {
         this.view = view;
         this.clientModel.addObserver(this);
-
+        clientModel.getMainPlayer();
     }
 
     public void disconnectObserver() {

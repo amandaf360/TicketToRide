@@ -85,7 +85,7 @@ public class TrainView extends View
         cities.add(new MapCity(210, 1160, "Las Angeles"));
         cities.add(new MapCity(410, 1000, "Las Vegas"));
         cities.add(new MapCity(1410, 1120, "Little Rock"));
-        cities.add(new MapCity(2030, 1680, "Miami"));
+        cities.add(new MapCity(1990, 1610, "Miami"));
         cities.add(new MapCity(2160, 260, "Montreal"));
         cities.add(new MapCity(1700, 1050, "Nashville"));
         cities.add(new MapCity(1490, 1450, "New Orleans"));

@@ -11,6 +11,8 @@ import com.example.amandafails.tickettoride.R;
 
 import java.util.List;
 
+import ClientModel.ClientModel;
+
 public class GameplayView extends FragmentActivity implements IGameplayView
 {
     private GameplayPresenter presenter;
@@ -58,6 +60,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
+        ClientModel.getInstance().initializeRoutes();
 
         if(firstCreate)
         {

@@ -57,6 +57,15 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
             // display the most recent error message
             view.displayErrorMessage(clientModel.getMessage());
         }
+        else if(arg.getClass() == Boolean.class)
+        {
+            Boolean bool = (Boolean)arg;
+            if(((Boolean) arg).booleanValue())
+            {
+                clientModel.deleteObserver(this);
+                startGame();
+            }
+        }
         // BEFORE SWITCHING ACTIVITIES, DELETE OBSERVER!!!
     }
 

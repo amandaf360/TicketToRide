@@ -17,11 +17,13 @@ public class ClientModel extends Observable
     private ArrayList<Message> gameHistory;
     private List<Route> routes;
     private List<Observer> observers = new ArrayList<Observer>();
+    boolean activeGameStarted;
 
 
 
     public ClientModel()
     {
+        activeGameStarted = false;
         gameChat = new ArrayList<>();
         gameHistory = new ArrayList<>();
         instance = this;
@@ -457,6 +459,13 @@ public class ClientModel extends Observable
             routes.add(new Route(360, 1180, 92, 3, "gray", "none", "LA-Phoenix"));
             routes.add(new Route(310, 1080, 49, 2, "gray", "none", "LA-Las Vegas"));
         }
+    }
+
+    public void startGame()
+    {
+        activeGameStarted = true;
+        setChanged();
+        notifyObservers(Boolean.valueOf(activeGameStarted));
     }
 
 

@@ -62,7 +62,7 @@ public class PollCommand implements ICommand
             {
                 model.addTrainCardToActivePlayerHand(card);
             }
-
+            ClientModel.getInstance().startGame();
         }
     }
 

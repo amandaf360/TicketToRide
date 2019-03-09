@@ -83,8 +83,8 @@ public class ChatFragment extends Fragment implements Observer {
         // assuming each chat message has a string and a player -- to get the color
 
         List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
-        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
+        chatMessages.add(new Message("blue", "Hello. This is the first chat message"));
+        chatMessages.add(new Message("blue", "Hi. This is the second chat message"));
         lines.addAll(chatMessages);
 
         mAdapter.notifyDataSetChanged();
@@ -101,8 +101,8 @@ public class ChatFragment extends Fragment implements Observer {
 
     public void updateChatMessages() {
         List<Message> chatMessages = clientModel.getGameChat();
-        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
-        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
+        chatMessages.add(new Message("blue", "Hello. This is the first chat message"));
+        chatMessages.add(new Message("yellow", "Hi. This is the second chat message"));
         lines.addAll(chatMessages);
 
         // display in recyclerview
@@ -120,12 +120,12 @@ public class ChatFragment extends Fragment implements Observer {
         createChatMessageService.sendMessage();
 
         // **** DELETE ***** //
-        lines.add(new Message(message, clientModel.getMainPlayer().getColor()));
+       /* lines.add(new Message(clientModel.getMainPlayer().getColor(), message));
 
         // display in recyclerview
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
         mAdapter.notifyDataSetChanged();
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);*/
         // ****** UP TO HERE ****** //
 
         // clear the edit text field

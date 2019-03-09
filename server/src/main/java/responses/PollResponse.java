@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import servermodel.DecksStateData;
 import servermodel.Game;
+import servermodel.GameStartInfo;
 import servermodel.Message;
 
 public class PollResponse extends BaseResponse
@@ -17,6 +18,7 @@ public class PollResponse extends BaseResponse
     private ArrayList<Message> chatHistory;
     private ArrayList<String> discardedDestCards;
     private DecksStateData deckData;
+    private GameStartInfo gameStartInfo;
 
     public PollResponse() {
         gamesCreated = new ArrayList<>();
@@ -98,5 +100,13 @@ public class PollResponse extends BaseResponse
 
     public void setDeckData(DecksStateData deckData) {
         this.deckData = deckData;
+    }
+
+    public GameStartInfo getGameStartInfo() {
+        return gameStartInfo;
+    }
+
+    public void setGameStartInfo(GameStartInfo gameStartInfo) {
+        this.gameStartInfo = gameStartInfo;
     }
 }

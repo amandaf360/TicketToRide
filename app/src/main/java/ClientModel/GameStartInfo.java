@@ -1,4 +1,4 @@
-package servermodel;
+package ClientModel;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ public class GameStartInfo
 {
     private ArrayList<String> playersAndColors;
     private ArrayList<TrainCarCard> cardsInHand;
+    private String currentTurnPlayer;
 
     public GameStartInfo()
     {
@@ -26,5 +27,13 @@ public class GameStartInfo
 
     public void setCardsInHand(ArrayList<TrainCarCard> cardsInHand) {
         this.cardsInHand = cardsInHand;
+    }
+
+    public String getCurrentTurnPlayer() {
+        return currentTurnPlayer;
+    }
+
+    public void setCurrentTurnPlayer(String currentTurnPlayer) {
+        this.currentTurnPlayer = currentTurnPlayer;
     }
 }

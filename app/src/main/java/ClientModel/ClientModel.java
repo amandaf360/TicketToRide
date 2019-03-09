@@ -178,9 +178,9 @@ public class ClientModel extends Observable
         super.deleteObserver(o);
     }
 
-    public void setFaceUpCardByIndex(int index, TrainCards trainCards)
+    public void setFaceUpCardByIndex(int index, TrainCarCard trainCarCard)
     {
-        activeGame.changeCardByIndex(index, trainCards);
+        activeGame.changeCardByIndex(index, trainCarCard);
         setChanged();
         notifyObservers();
     }
@@ -197,6 +197,18 @@ public class ClientModel extends Observable
 
     public Player getMainPlayer()
     {
+        if(mainPlayer == null)
+        {
+            ArrayList<Player> players = activeGame.getPlayers();
+            for(int i = 0; i < players.size(); i++)
+            {
+                if(user.getUserName().equals(players.get(i).getName()))
+                {
+                    mainPlayer = players.get(i);
+                    break;
+                }
+            }
+        }
         return mainPlayer;
     }
 
@@ -221,10 +233,10 @@ public class ClientModel extends Observable
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
     }
 
-    public void addTrainCardToActivePlayerHand(TrainCards trainCards)
+    public void addTrainCardToActivePlayerHand(TrainCarCard trainCarCard)
     {
-        mainPlayer.addTrainCardToHand(trainCards);
-        activeGame.getPlayerByName(mainPlayer.getName()).addTrainCardToHand(trainCards);
+        mainPlayer.addTrainCardToHand(trainCarCard);
+        activeGame.getPlayerByName(mainPlayer.getName()).addTrainCardToHand(trainCarCard);
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandTrains());
 
@@ -266,6 +278,7 @@ public class ClientModel extends Observable
     {
         //Route route = new Route()
     }
+
 
 
 }

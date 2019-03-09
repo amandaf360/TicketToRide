@@ -115,9 +115,9 @@ public class PlayerHandTrains
         this.numLocomotives = numLocomotives;
     }
 
-    public void addCard(TrainCards trainCards)
+    public void addCard(TrainCarCard trainCarCard)
     {
-        addCard(trainCards.getColor());
+        addCard(trainCarCard.getColor());
     }
 
     public void addCard(String color)

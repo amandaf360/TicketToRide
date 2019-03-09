@@ -9,6 +9,8 @@ import responses.PollResponse;
 import services.SetActiveGameService;
 import services.SetGamelistService;
 import ClientModel.Message;
+import ClientModel.GameStartInfo;
+import ClientModel.TrainCarCard;
 
 public class PollCommand implements ICommand
 {
@@ -20,7 +22,8 @@ public class PollCommand implements ICommand
         {
             if (response.getGamesCreated().size() != 0 || response.getGamesDeleted().size() != 0 ||
                     response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0
-                    || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0)
+                    || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0
+                    || response.getGameStartInfo() != null)
             {
                 //ServerProxy proxy = new ServerProxy();
                 //proxy.clearPoll(response.getUsername());
@@ -28,9 +31,39 @@ public class PollCommand implements ICommand
                 addGames(response.getGamesCreated());
                 startGame(response.getGameStarted());
                 updateChat(response.getChatHistory());
+                if(response.getGameStartInfo() != null)
+                {
+                    int i = 0;
+                }
+                startMyGame(response.getGameStartInfo());
             }
         }
         //updates players in a given game
+    }
+
+    private void startMyGame(GameStartInfo info)
+    {
+        if(info != null)
+        {
+            ClientModel model = ClientModel.getInstance();
+            ArrayList<String> playersAndColors = info.getPlayersAndColors();
+            Game activeGame = model.getActiveGame();
+            ArrayList<Player> players = activeGame.getPlayers();
+            for (int i = 0; i < playersAndColors.size(); i += 2) {
+                for (int j = 0; j < players.size(); j++) {
+                    if (players.get(j).getName().equals(playersAndColors.get(i))) {
+                        players.get(j).setColor(playersAndColors.get(i + 1));
+                    }
+                }
+            }
+
+            ArrayList<TrainCarCard> playerHand = info.getCardsInHand();
+            for (TrainCarCard card : playerHand)
+            {
+                model.addTrainCardToActivePlayerHand(card);
+            }
+
+        }
     }
 
     private void discardDestCards(ArrayList<String> usersDiscarded)

@@ -3,7 +3,6 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Game
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.Button;
 
 import com.example.amandafails.tickettoride.R;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -97,7 +95,7 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
             }
         });
 
-        List<TrainCards> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
+        List<TrainCarCard> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
         // set what cards are shown - grab from model!
         card1.setText(faceUpCards.get(0).getColor());
         card2.setText(faceUpCards.get(1).getColor());
@@ -112,11 +110,11 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
     }
 
     public void onDeckClicked() {
-        TrainCards card1 = new TrainCards("yellow");
-        TrainCards card2 = new TrainCards("pink");
-        TrainCards card3 = new TrainCards("purple");
-        TrainCards card4 = new TrainCards("indigo");
-        TrainCards card5 = new TrainCards("orange");
+        TrainCarCard card1 = new TrainCarCard("yellow");
+        TrainCarCard card2 = new TrainCarCard("pink");
+        TrainCarCard card3 = new TrainCarCard("purple");
+        TrainCarCard card4 = new TrainCarCard("indigo");
+        TrainCarCard card5 = new TrainCarCard("orange");
 
         clientModel.setFaceUpCardByIndex(0, card1);
         clientModel.setFaceUpCardByIndex(1, card2);
@@ -140,7 +138,7 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
     }
 
     public void setCardValues() {
-        List<TrainCards> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
+        List<TrainCarCard> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
         // set what cards are shown - grab from model!
         card1.setText(faceUpCards.get(0).getColor());
         card2.setText(faceUpCards.get(1).getColor());

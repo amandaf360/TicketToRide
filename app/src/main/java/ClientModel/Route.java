@@ -101,4 +101,13 @@ public class Route
     {
         this.claimedBy = claimedBy;
     }
+
+    public boolean isClaimed()
+    {
+        if (claimedBy == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

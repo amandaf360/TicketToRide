@@ -13,7 +13,14 @@ import android.widget.TextView;
 
 import com.example.amandafails.tickettoride.R;
 
-public class CurrentGameStatusFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
+import ClientModel.ClientModel;
+
+public class CurrentGameStatusFragment extends Fragment implements Observer
+{
 
     private Button exitButton;
 
@@ -52,11 +59,14 @@ public class CurrentGameStatusFragment extends Fragment {
     private TextView player4Routes;
     private TextView player5Routes;
 
+    private ClientModel clientModel;
     public CurrentGameStatusFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        clientModel = ClientModel.getInstance();
+        clientModel.addObserver(this);
 //
 //        // Find the view pager that will allow the user to swipe between fragments
 //        ViewPager viewPager = (ViewPager)getView().findViewById(R.id.viewpager);
@@ -76,6 +86,7 @@ public class CurrentGameStatusFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_current_game_status, container, false);
 
+
         exitButton = v.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +94,49 @@ public class CurrentGameStatusFragment extends Fragment {
                 onExitButtonClicked();
             }
         });
+        player1Name = v.findViewById(R.id.player1_name_text);
+        player2Name = v.findViewById(R.id.player2_name_text);
+        player3Name = v.findViewById(R.id.player3_name_text);
+        player4Name = v.findViewById(R.id.player4_name_text);
+        player5Name = v.findViewById(R.id.player5_name_text);
+
+        populatePlayerNames();
+
+        player1Points = v.findViewById(R.id.player1_points_text);
+        player2Points = v.findViewById(R.id.player2_points_text);
+        player3Points = v.findViewById(R.id.player3_points_text);
+        player4Points = v.findViewById(R.id.player4_points_text);
+        player5Points = v.findViewById(R.id.player5_points_text);
+
+        populatePlayerPoints();
+
+        player1Trains = v.findViewById(R.id.player1_trains_text);
+        player2Trains = v.findViewById(R.id.player2_trains_text);
+        player3Trains = v.findViewById(R.id.player3_trains_text);
+        player4Trains = v.findViewById(R.id.player4_trains_text);
+        player5Trains = v.findViewById(R.id.player5_trains_text);
+
+        populatePlayerTrains();
+
+        player1Routes = v.findViewById(R.id.player1_routes_text);
+        player2Routes = v.findViewById(R.id.player2_routes_text);
+        player3Routes = v.findViewById(R.id.player3_routes_text);
+        player4Routes = v.findViewById(R.id.player4_routes_text);
+        player5Routes = v.findViewById(R.id.player5_routes_text);
+
+        populatePlayerRoutes();
+
+        player1Cards = v.findViewById(R.id.player1_cards_text);
+        player2Cards = v.findViewById(R.id.player2_cards_text);
+        player3Cards = v.findViewById(R.id.player3_cards_text);
+        player4Cards = v.findViewById(R.id.player4_cards_text);
+        player5Cards = v.findViewById(R.id.player5_cards_text);
+
+        populatePlayerCards();
+
+
+
+
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager)v.findViewById(R.id.viewpager);
@@ -101,9 +155,228 @@ public class CurrentGameStatusFragment extends Fragment {
     }
 
     public void onExitButtonClicked() {
+        clientModel.deleteObserver(this);
         FragmentManager manager = getActivity().getSupportFragmentManager();
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }
     }
+
+    public void update(Observable observable, Object o)
+    {
+        populateEverything();
+    }
+
+    private void populateEverything()
+    {
+        populatePlayerNames();
+        populatePlayerCards();
+        populatePlayerPoints();
+        populatePlayerRoutes();
+        populatePlayerTrains();
+    }
+
+
+    private void populatePlayerNames()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+        {
+            String name;
+            if(clientModel.getActiveGame().getPlayers().size() > i)
+            {
+                name = clientModel.getActiveGame().getPlayers().get(i).getName();
+            }
+            else
+            {
+                name = null;
+            }
+
+            arrayList.add(name);
+        }
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Name);
+        texts.add(player2Name);
+        texts.add(player3Name);
+        texts.add(player4Name);
+        texts.add(player5Name);
+
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(arrayList.get(i) != null)
+            {
+                texts.get(i).setText(arrayList.get(i));
+            }
+            else
+            {
+                texts.get(i).setText("");
+            }
+        }
+    }
+
+    private void populatePlayerPoints()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+        {
+            int points;
+            if(clientModel.getActiveGame().getPlayers().size() > i)
+            {
+                points = clientModel.getActiveGame().getPlayers().get(i).getPoints();
+            }
+            else
+            {
+                points = -1;
+            }
+
+            arrayList.add(Integer.toString(points));
+        }
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Points);
+        texts.add(player2Points);
+        texts.add(player3Points);
+        texts.add(player4Points);
+        texts.add(player5Points);
+
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(!arrayList.get(i).equals("-1"))
+            {
+                texts.get(i).setText(arrayList.get(i));
+            }
+            else
+            {
+                texts.get(i).setText("");
+            }
+        }
+    }
+
+
+    private void populatePlayerTrains()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+        {
+            int numTrains;
+            if(clientModel.getActiveGame().getPlayers().size() > i)
+            {
+                numTrains = clientModel.getActiveGame().getPlayers().get(i).getNumTrains();
+            }
+            else
+            {
+                numTrains = -1;
+            }
+
+            arrayList.add(Integer.toString(numTrains));
+        }
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Trains);
+        texts.add(player2Trains);
+        texts.add(player3Trains);
+        texts.add(player4Trains);
+        texts.add(player5Trains);
+
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(!arrayList.get(i).equals("-1"))
+            {
+                texts.get(i).setText(arrayList.get(i));
+            }
+            else
+            {
+                texts.get(i).setText("");
+            }
+        }
+    }
+
+    private void populatePlayerRoutes()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+        {
+            int numRoutes;
+            if(clientModel.getActiveGame().getPlayers().size() > i)
+            {
+                numRoutes = clientModel.getActiveGame().getPlayers().get(i).getNumRoutes();
+            }
+            else
+            {
+                numRoutes = -1;
+            }
+
+            arrayList.add(Integer.toString(numRoutes));
+        }
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Routes);
+        texts.add(player2Routes);
+        texts.add(player3Routes);
+        texts.add(player4Routes);
+        texts.add(player5Routes);
+
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(!arrayList.get(i).equals("-1"))
+            {
+                texts.get(i).setText(arrayList.get(i));
+            }
+            else
+            {
+                texts.get(i).setText("");
+            }
+        }
+    }
+
+    private void populatePlayerCards()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+        {
+            int numCards;
+            if(clientModel.getActiveGame().getPlayers().size() > i)
+            {
+                numCards = clientModel.getActiveGame().getPlayers().get(i).getNumCards();
+            }
+            else
+            {
+                numCards = -1;
+            }
+
+            arrayList.add(Integer.toString(numCards));
+        }
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Cards);
+        texts.add(player2Cards);
+        texts.add(player3Cards);
+        texts.add(player4Cards);
+        texts.add(player5Cards);
+
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(!arrayList.get(i).equals("-1"))
+            {
+                texts.get(i).setText(arrayList.get(i));
+            }
+            else
+            {
+                texts.get(i).setText("");
+            }
+        }
+    }
+
+
 }

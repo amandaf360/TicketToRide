@@ -7,10 +7,15 @@ public class Player
     private String name;
     private PlayerHandDestinations playerHandDestinations;
     private PlayerHandTrains playerHandTrains;
+    private int points;
+    private int numTrains;
+    private int numRoutes;
 
     public Player()
     {
-
+        points = 0;
+        numRoutes = 0;
+        numTrains = 45;
     }
 
     public String getColor()
@@ -78,5 +83,53 @@ public class Player
         playerHandDestinations.deleteCard(destinationCards);
     }
 
+    public int getPoints()
+    {
+        return points;
+    }
 
+    public void setPoints(int points)
+    {
+        this.points = points;
+    }
+
+    public void addPoints(int add)
+    {
+        points += add;
+    }
+
+    public int getNumTrains()
+    {
+        return numTrains;
+    }
+
+    public void setNumTrains(int numTrains)
+    {
+        this.numTrains = numTrains;
+    }
+
+    public void takeTrains(int take)
+    {
+        numTrains -= take;
+    }
+
+    public int getNumRoutes()
+    {
+        return numRoutes;
+    }
+
+    public void setNumRoutes(int numRoutes)
+    {
+        this.numRoutes = numRoutes;
+    }
+
+    public void addRoute()
+    {
+        numRoutes++;
+    }
+
+    public int getNumCards()
+    {
+        return playerHandTrains.getTotalCards();
+    }
 }

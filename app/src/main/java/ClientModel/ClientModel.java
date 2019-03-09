@@ -262,6 +262,56 @@ public class ClientModel extends Observable
         return gameHistory;
     }
 
+    public void addPointsToMainPlayer(int points)
+    {
+        mainPlayer.addPoints(points);
+        activeGame.getPlayerByName(mainPlayer.getName()).addPoints(points);
+        setChanged();
+        notifyObservers(this.mainPlayer);
+    }
+
+    public void addPointsToPlayerByName(String name, int points)
+    {
+        if(name.equals(mainPlayer.getName()))
+        {
+            addPointsToMainPlayer(points);
+            return;
+        }
+
+        activeGame.getPlayerByName(name).addPoints(points);
+        setChanged();
+        notifyObservers(this.activeGame.getPlayerByName(name));
+    }
+
+    public void takeTrainsFromMainPlayer(int howMany)
+    {
+        mainPlayer.takeTrains(howMany);
+        activeGame.getPlayerByName(mainPlayer.getName()).takeTrains(howMany);
+        setChanged();
+        notifyObservers(this.mainPlayer);
+    }
+
+    public void takeTrainsFromPlayerByName(String name, int howMany)
+    {
+        if(name.equals(mainPlayer.getName()))
+        {
+            takeTrainsFromMainPlayer(howMany);
+            return;
+        }
+
+        activeGame.getPlayerByName(name).takeTrains(howMany);
+        setChanged();
+        notifyObservers(this.activeGame.getPlayerByName(name));
+    }
+
+    public void claimRouteByPlayerName() // What should this method take??
+    {
+        //add routes to player claiming the route
+        //add a claimed by player who claimed it.
+        // TODO:: implement this function;
+
+    }
+
     public void initializeRoutes()
     {
         if(routes.size() == 0)

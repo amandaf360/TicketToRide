@@ -87,6 +87,7 @@ public class ClientCommandManager
         response.setGamesDeleted(gamesDeleted.get(username));
         response.setPlayersJoined(playersJoined.get(username));
         response.setPlayersLeft(playersLeft.get(username));
+        response.setChatHistory(chatHistory.get(username));
         response.setDiscardedDestCards(destinationCardsDiscarded.get(username));
         response.setDeckData(deckStateUpdate.get(username));
 
@@ -99,6 +100,8 @@ public class ClientCommandManager
         gamesDeleted.get(username).clear();
         playersJoined.get(username).clear();
         playersLeft.get(username).clear();
+        chatHistory.get(username).clear();
+        deckStateUpdate.put(username, null);
     }
 
     public void addGame(Game game)

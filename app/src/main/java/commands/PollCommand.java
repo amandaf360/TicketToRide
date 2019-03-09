@@ -76,9 +76,13 @@ public class PollCommand implements ICommand
 
     private void updateChat(ArrayList<Message> chatHistory)
     {
-        for(Message message: chatHistory)
+        if(chatHistory.size() != 0)
         {
-            //add to model
+            ClientModel model = ClientModel.getInstance();
+            for (Message message : chatHistory)
+            {
+                model.addMessageToChat(message);
+            }
         }
     }
 

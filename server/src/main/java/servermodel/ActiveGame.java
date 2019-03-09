@@ -89,6 +89,11 @@ public class ActiveGame
         this.faceUpCards = faceUpCards;
     }
 
+    public void addMessage(Message message)
+    {
+        chatHistory.add(message);
+    }
+
     public boolean containsUser(String username)
     {
         for(int i = 0; i < players.size(); i++)

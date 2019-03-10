@@ -1,6 +1,7 @@
-package ClientModel;
+package servermodel;
 
-import java.util.ArrayList;
+
+
 import java.util.StringTokenizer;
 
 public class Route
@@ -125,7 +126,7 @@ public class Route
     {
         if(this.getCityOne().equals(route.getCityOne()) &&
                 this.getCityTwo().equals(route.getCityTwo()) &&
-                this.getColor().equals(route.getColor()) )
+                this.getCityTwo().equals(route.getColor()) )
         {
             return true;
         }

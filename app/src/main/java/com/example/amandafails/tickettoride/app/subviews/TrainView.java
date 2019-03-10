@@ -356,7 +356,7 @@ public class TrainView extends View
         }
     }
 
-    class MapRoute
+    public class MapRoute
     {
         float x;
         float y;

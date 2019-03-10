@@ -55,4 +55,9 @@ public class Serializer
         return gson.fromJson(response, DrawDestResponse.class);
     }
 
+    public ClaimRouteResponse deserializeClaimRouteResponse(String response)
+    {
+        return gson.fromJson(response, ClaimRouteResponse.class);
+    }
+
 }

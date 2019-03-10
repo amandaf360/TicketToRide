@@ -99,6 +99,9 @@ public class CommandHandler implements HttpHandler
                 ArrayList<String> drawTrainList = wrappedRequest.getStringList();
                 command = new DrawTrainCommand(drawTrainList.get(0), Integer.parseInt(drawTrainList.get(1)));
                 break;
+            case "claimRoute":
+                ArrayList<String> claimRouteList = wrappedRequest.getStringList();
+                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1));
 
         }
 

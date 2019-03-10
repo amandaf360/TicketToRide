@@ -43,8 +43,16 @@ public class DestCardFragment extends Fragment {
 
         // somehow get the dest. cards for each player?
         //List<destCardMessage> destCardMessages = clientModel.getActiveGame().getChatMessages();
-        List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        lines.addAll(chatMessages);
+
+        ClientModel model = ClientModel.getInstance();
+        ArrayList<DestinationCards> cards = model.getMainPlayer().getPlayerHandDestinations().getCardList();
+        List<Message> destinationMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
+        for(int i = 0; i < cards.size(); i++)
+        {
+            Message message = new Message(model.getMainPlayer().getColor(), cards.get(i).toString());
+            destinationMessages.add(message);
+        }
+        lines.addAll(destinationMessages);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 

@@ -59,6 +59,7 @@ public class Player
     public void setPlayerHandDestinations(PlayerHandDestinations playerHandDestinations)
     {
         this.playerHandDestinations = playerHandDestinations;
+        this.numDestCards = playerHandDestinations.getSize();
     }
 
     public PlayerHandTrains getPlayerHandTrains()
@@ -79,11 +80,13 @@ public class Player
     public void addDestinationCardToPlayerHand(DestinationCards destinationCards)
     {
         playerHandDestinations.addCard(destinationCards);
+        numDestCards = playerHandDestinations.getSize();
     }
 
     public void deleteDestinationCardFromPlayersHand(DestinationCards destinationCards)
     {
         playerHandDestinations.deleteCard(destinationCards);
+        numDestCards = playerHandDestinations.getSize();
     }
 
     public int getPoints()

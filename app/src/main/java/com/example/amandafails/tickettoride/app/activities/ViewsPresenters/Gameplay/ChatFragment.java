@@ -85,6 +85,7 @@ public class ChatFragment extends Fragment implements Observer {
         List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
         lines.addAll(chatMessages);
 
+
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 

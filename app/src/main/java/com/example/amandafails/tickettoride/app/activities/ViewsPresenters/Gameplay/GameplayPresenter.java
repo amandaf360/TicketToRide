@@ -14,6 +14,7 @@ import ClientModel.ClientModel;
 import ClientModel.DestinationCards;
 import services.DrawDestCardService;
 import ClientModel.PlayerHandDestinations;
+import ClientModel.TrainCarCard;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
@@ -68,6 +69,30 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 showDialog(passer);
             }
         }
+    }
+
+
+    private int numDemoClicks = 0;
+    public void demo()
+    {
+        switch (numDemoClicks)
+        {
+            case 0:
+                clientModel.getMainPlayer().addPoints(1000);
+                //
+                break;
+            case 1:
+                clientModel.getMainPlayer().addTrainCardToHand(new TrainCarCard("locomotive"));
+                break;
+            case 2:
+                clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
+                clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
+                clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+
+
+        }
+        numDemoClicks++;
     }
 
 

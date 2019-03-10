@@ -85,9 +85,12 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     }
 
+
+
+
     public void onDemoClicked()
     {
-        //implement.
+        presenter.demo();
     }
 
     //define all these buttons inside of onCreate

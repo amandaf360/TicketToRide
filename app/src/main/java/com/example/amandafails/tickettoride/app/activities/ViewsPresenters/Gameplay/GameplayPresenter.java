@@ -24,7 +24,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         this.view = view;
         clientModel = ClientModel.getInstance();
-        clientModel.addObserver(this);
+        this.clientModel.addObserver(this);
         clientModel.initializeRoutes();
     }
 
@@ -49,6 +49,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         return clientModel.getActiveGame().getCurrentPlayersTurn();
     }
 
+
+    @Override
     public void update(Observable observable, Object o)
     {
         if(o.getClass() == PlayerHandDestinations.class)

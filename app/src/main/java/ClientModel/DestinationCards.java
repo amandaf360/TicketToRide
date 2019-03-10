@@ -45,6 +45,6 @@ public class DestinationCards
 
     public String toString()
     {
-        return cityOne + " - " + cityTwo + ":" + points;
+        return cityOne + " - " + cityTwo + ":" + Integer.toString(points);
     }
 }

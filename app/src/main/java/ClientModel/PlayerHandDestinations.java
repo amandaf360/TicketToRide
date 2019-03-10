@@ -40,4 +40,9 @@ public class PlayerHandDestinations
         }
         cardList.remove(cardToRemove);
     }
+
+    public int getSize()
+    {
+        return cardList.size();
+    }
 }

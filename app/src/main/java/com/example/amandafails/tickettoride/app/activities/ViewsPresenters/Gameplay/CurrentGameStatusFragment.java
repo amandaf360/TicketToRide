@@ -59,6 +59,12 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
     private TextView player4Routes;
     private TextView player5Routes;
 
+    private TextView player1Destinations;
+    private TextView player2Destinations;
+    private TextView player3Destinations;
+    private TextView player4Destinations;
+    private TextView player5Destinations;
+
     private ClientModel clientModel;
     public CurrentGameStatusFragment() {}
 
@@ -134,6 +140,14 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
         populatePlayerCards();
 
+        player1Destinations = v.findViewById(R.id.player1_destinations_text);
+        player2Destinations = v.findViewById(R.id.player2_destinations_text);
+        player3Destinations = v.findViewById(R.id.player3_destinations_text);
+        player4Destinations = v.findViewById(R.id.player4_destinations_text);
+        player5Destinations = v.findViewById(R.id.player5_destinations_text);
+
+        populatePlayerDestinations();
+
 
 
 
@@ -174,6 +188,7 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         populatePlayerPoints();
         populatePlayerRoutes();
         populatePlayerTrains();
+        populatePlayerDestinations();
     }
 
 
@@ -362,6 +377,47 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         texts.add(player3Cards);
         texts.add(player4Cards);
         texts.add(player5Cards);
+
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(!arrayList.get(i).equals("-1"))
+            {
+                texts.get(i).setText(arrayList.get(i));
+            }
+            else
+            {
+                texts.get(i).setText("");
+            }
+        }
+    }
+
+    private void populatePlayerDestinations()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+        {
+            int numDestinations;
+            if(clientModel.getActiveGame().getPlayers().size() > i)
+            {
+                numDestinations = clientModel.getActiveGame().getPlayers().get(i)
+                        .getPlayerHandDestinations().getSize();
+            }
+            else
+            {
+                numDestinations = -1;
+            }
+
+            arrayList.add(Integer.toString(numDestinations));
+        }
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Destinations);
+        texts.add(player2Destinations);
+        texts.add(player3Destinations);
+        texts.add(player4Destinations);
+        texts.add(player5Destinations);
 
 
 

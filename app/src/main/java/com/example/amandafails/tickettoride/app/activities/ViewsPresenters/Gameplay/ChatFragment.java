@@ -83,8 +83,6 @@ public class ChatFragment extends Fragment implements Observer {
         // assuming each chat message has a string and a player -- to get the color
 
         List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        chatMessages.add(new Message("blue", "Hello. This is the first chat message"));
-        chatMessages.add(new Message("blue", "Hi. This is the second chat message"));
         lines.addAll(chatMessages);
 
         mAdapter.notifyDataSetChanged();
@@ -101,6 +99,7 @@ public class ChatFragment extends Fragment implements Observer {
 
     public void updateChatMessages() {
         List<Message> chatMessages = clientModel.getGameChat();
+        lines.clear();
         lines.addAll(chatMessages);
 
         // display in recyclerview

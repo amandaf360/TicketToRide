@@ -4,12 +4,12 @@ public class DestCard
 {
     private String cityOne;
     private String cityTwo;
-    private int length;
+    private int points;
 
     public DestCard(String cityOne, String cityTwo, int pointVal) {
         this.cityOne = cityOne;
         this.cityTwo = cityTwo;
-        this.length = pointVal;
+        this.points = pointVal;
     }
 
     public String getCityOne() {
@@ -28,11 +28,11 @@ public class DestCard
         this.cityTwo = cityTwo;
     }
 
-    public int getLength() {
-        return length;
+    public int getPoints() {
+        return points;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setPoints(int points) {
+        this.points = points;
     }
 }

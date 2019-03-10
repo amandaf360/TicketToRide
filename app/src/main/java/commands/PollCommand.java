@@ -23,7 +23,7 @@ public class PollCommand implements ICommand
             if (response.getGamesCreated().size() != 0 || response.getGamesDeleted().size() != 0 ||
                     response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0
                     || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0
-                    || response.getGameStartInfo() != null)
+                    || response.getGameStartInfo() != null || response.getDestinationCardsDrawn().size() != 0)
             {
                 //ServerProxy proxy = new ServerProxy();
                 //proxy.clearPoll(response.getUsername());
@@ -31,6 +31,7 @@ public class PollCommand implements ICommand
                 addGames(response.getGamesCreated());
                 startGame(response.getGameStarted());
                 updateChat(response.getChatHistory());
+                updateDestCardsDrawn(response.getDestinationCardsDrawn());
                 if(response.getGameStartInfo() != null)
                 {
                     int i = 0;
@@ -39,6 +40,23 @@ public class PollCommand implements ICommand
             }
         }
         //updates players in a given game
+    }
+
+    private void updateDestCardsDrawn(ArrayList<String> data)
+    {
+        if(data.size() != 0)
+        {
+            ClientModel model = ClientModel.getInstance();
+            String mainPlayerName = model.getMainPlayer().getName();
+            for(int i = 0; i < data.size(); i+= 2)
+            {
+                int cardsDrawn = Integer.parseInt(data.get(i));
+                if(mainPlayerName.equals(data.get(i + 1)))
+                {
+                    model.increaseDestCards(data.get(i + 1), cardsDrawn);
+                }
+            }
+        }
     }
 
     private void startMyGame(GameStartInfo info)

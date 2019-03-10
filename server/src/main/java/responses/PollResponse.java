@@ -17,6 +17,7 @@ public class PollResponse extends BaseResponse
     private ArrayList<String> gameStarted;
     private ArrayList<Message> chatHistory;
     private ArrayList<String> discardedDestCards;
+    private ArrayList<String> destinationCardsDrawn;
     private DecksStateData deckData;
     private GameStartInfo gameStartInfo;
 
@@ -28,6 +29,7 @@ public class PollResponse extends BaseResponse
         gameStarted = new ArrayList<>();
         chatHistory = new ArrayList<>();
         discardedDestCards = new ArrayList<>();
+        destinationCardsDrawn = new ArrayList<>();
     }
 
     public ArrayList<Game> getGamesCreated() {
@@ -108,5 +110,13 @@ public class PollResponse extends BaseResponse
 
     public void setGameStartInfo(GameStartInfo gameStartInfo) {
         this.gameStartInfo = gameStartInfo;
+    }
+
+    public ArrayList<String> getDestinationCardsDrawn() {
+        return destinationCardsDrawn;
+    }
+
+    public void setDestinationCardsDrawn(ArrayList<String> destinationCardsDrawn) {
+        this.destinationCardsDrawn = destinationCardsDrawn;
     }
 }

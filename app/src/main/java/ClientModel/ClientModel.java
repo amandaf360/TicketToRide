@@ -301,6 +301,14 @@ public class ClientModel extends Observable
         notifyObservers(this.mainPlayer);
     }
 
+    public void increaseDestCards(String username, int numCards)
+    {
+        Player player = getActiveGame().getPlayerByName(username);
+        player.addDestCards(numCards);
+        setChanged();
+        notifyObservers(player);
+    }
+
     public void addPointsToPlayerByName(String name, int points)
     {
         if(name.equals(mainPlayer.getName()))

@@ -100,6 +100,7 @@ public class ClientCommandManager
         response.setDiscardedDestCards(destinationCardsDiscarded.get(username));
         response.setDeckData(deckStateUpdate.get(username));
         response.setGameStartInfo(startGameInfo.get(username));
+        response.setDestinationCardsDrawn(destinationCardsDrawn.get(username));
 
         return response;
     }
@@ -112,6 +113,8 @@ public class ClientCommandManager
         playersLeft.get(username).clear();
         chatHistory.get(username).clear();
         deckStateUpdate.put(username, null);
+        destinationCardsDiscarded.get(username).clear();
+        destinationCardsDrawn.get(username).clear();
         startGameInfo.put(username, null);
     }
 

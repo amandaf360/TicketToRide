@@ -380,7 +380,7 @@ public class ClientModel extends Observable
         routes.get(index).setClaimedBy(player);
         player.addRoute();
         setChanged();
-        notifyObservers(this.routes);
+        notifyObservers(this.routes.get(index));
     }
 
     public void initializeRoutes()

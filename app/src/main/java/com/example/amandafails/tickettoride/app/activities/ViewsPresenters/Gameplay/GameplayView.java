@@ -81,9 +81,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         if(firstCreate)
         {
             presenter.chooseDestinationCards();
-            firstCreate = false;
         }
-        firstCreate = false;
 
     }
 

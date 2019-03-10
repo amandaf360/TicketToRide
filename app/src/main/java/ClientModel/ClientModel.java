@@ -186,7 +186,7 @@ public class ClientModel extends Observable
     {
         activeGame.changeCardByIndex(index, trainCarCard);
         setChanged();
-        notifyObservers();
+        notifyObservers(); // maybe ought to send something.
     }
 
     public User getUser() {
@@ -242,7 +242,7 @@ public class ClientModel extends Observable
         for(DestinationCards destinationCard : destinationCards)
         {
             mainPlayer.addDestinationCardToPlayerHand(destinationCard);
-            activeGame.getPlayerByName(mainPlayer.getName()).addDestinationCardToPlayerHand(destinationCard);
+            //activeGame.getPlayerByName(mainPlayer.getName()).addDestinationCardToPlayerHand(destinationCard);
         }
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
@@ -259,7 +259,7 @@ public class ClientModel extends Observable
     public void deleteMainPlayersDestinationCardFromHand(DestinationCards destinationCards)
     {
         mainPlayer.getPlayerHandDestinations().deleteCard(destinationCards);
-        activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
+        //activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
     }

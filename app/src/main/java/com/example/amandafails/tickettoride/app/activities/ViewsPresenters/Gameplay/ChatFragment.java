@@ -101,8 +101,6 @@ public class ChatFragment extends Fragment implements Observer {
 
     public void updateChatMessages() {
         List<Message> chatMessages = clientModel.getGameChat();
-        chatMessages.add(new Message("blue", "Hello. This is the first chat message"));
-        chatMessages.add(new Message("yellow", "Hi. This is the second chat message"));
         lines.addAll(chatMessages);
 
         // display in recyclerview

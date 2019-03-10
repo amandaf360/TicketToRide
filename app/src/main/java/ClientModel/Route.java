@@ -110,4 +110,26 @@ public class Route
         }
         return true;
     }
+
+    public String getColor()
+    {
+        return color;
+    }
+
+    public void setColor(String color)
+    {
+        this.color = color;
+    }
+
+    public boolean almostEquals(Route route)
+    {
+        if(this.getCityOne().equals(route.getCityOne()) &&
+                this.getCityTwo().equals(route.getCityTwo()) &&
+                this.getCityTwo().equals(route.getColor()) )
+        {
+            return true;
+        }
+        return false;
+    }
 }
+

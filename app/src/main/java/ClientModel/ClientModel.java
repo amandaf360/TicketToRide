@@ -358,6 +358,31 @@ public class ClientModel extends Observable
 
     }
 
+    public int getIndexOfMatchingUnclaimedRoute(Route route)
+    {
+        for(int i = 0; i < routes.size(); i++)
+        {
+            if(routes.get(i).almostEquals(route) && !routes.get(i).isClaimed())
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void claimRouteByIndex(int index, Player player)
+    {
+        if(index == -1)
+        {
+            return;
+        }
+        player = activeGame.getPlayerByName(player.getName());
+        routes.get(index).setClaimedBy(player);
+        player.addRoute();
+        setChanged();
+        notifyObservers(this.routes);
+    }
+
     public void initializeRoutes()
     {
         if(routes.size() == 0)

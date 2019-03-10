@@ -10,6 +10,7 @@ public class Player
     private int points;
     private int numTrains;
     private int numRoutes;
+    private int numDestCards;
 
     public Player()
     {
@@ -133,5 +134,18 @@ public class Player
     public int getNumCards()
     {
         return playerHandTrains.getTotalCards();
+    }
+
+    public int getNumDestCards() {
+        return numDestCards;
+    }
+
+    public void setNumDestCards(int numDestCards) {
+        this.numDestCards = numDestCards;
+    }
+
+    public void addDestCards(int numDestCards)
+    {
+        this.numDestCards += numDestCards;
     }
 }

@@ -16,10 +16,19 @@ public class PollResponse
     private ArrayList<String> gameStarted;
     private ArrayList<Message> chatHistory;
     private ArrayList<String> discardedDestCards;
+    private ArrayList<String> destinationCardsDrawn;
     private GameStartInfo gameStartInfo;
 
 
     public PollResponse() {
+    }
+
+    public ArrayList<String> getDestinationCardsDrawn() {
+        return destinationCardsDrawn;
+    }
+
+    public void setDestinationCardsDrawn(ArrayList<String> destinationCardsDrawn) {
+        this.destinationCardsDrawn = destinationCardsDrawn;
     }
 
     public ArrayList<Game> getGamesCreated() {

@@ -65,6 +65,16 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
     private TextView player4Destinations;
     private TextView player5Destinations;
 
+    private TextView numRed;
+    private TextView numBlue;
+    private TextView numGreen;
+    private TextView numYellow;
+    private TextView numWhite;
+    private TextView numBlack;
+    private TextView numWild;
+    private TextView numOrange;
+    private TextView numPurple;
+
     private ClientModel clientModel;
     public CurrentGameStatusFragment() {}
 
@@ -148,6 +158,18 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
         populatePlayerDestinations();
 
+        numRed = v.findViewById(R.id.red_cards_value);
+        numBlue = v.findViewById(R.id.blue_cards_value);
+        numGreen = v.findViewById(R.id.green_cards_value);
+        numYellow = v.findViewById(R.id.yellow_cards_value);
+        numWhite = v.findViewById(R.id.white_cards_value);
+        numBlack = v.findViewById(R.id.black_cards_value);
+        numWild = v.findViewById(R.id.wild_cards_value);
+        numOrange = v.findViewById(R.id.orange_cards_value);
+        numPurple = v.findViewById(R.id.purple_cards_value);
+
+        populatePlayerCardsValues();
+
 
 
 
@@ -189,6 +211,7 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         populatePlayerRoutes();
         populatePlayerTrains();
         populatePlayerDestinations();
+        populatePlayerCardsValues();
     }
 
 
@@ -431,6 +454,43 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
             {
                 texts.get(i).setText("");
             }
+        }
+    }
+
+    private void populatePlayerCardsValues()
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumRed()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumBlue()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumGreen()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumYellow()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumWhite()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumBlack()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange()));
+        arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple()));
+
+
+        ArrayList<TextView> texts = new ArrayList<>();
+
+        texts.add(numRed);
+        texts.add(numBlue);
+        texts.add(numGreen);
+        texts.add(numYellow);
+        texts.add(numWhite);
+        texts.add(numBlack);
+        texts.add(numWild);
+        texts.add(numOrange);
+        texts.add(numPurple);
+
+
+
+        for(int i = 0; i < 9; i++)
+        {
+
+            texts.get(i).setText(arrayList.get(i));
+
         }
     }
 

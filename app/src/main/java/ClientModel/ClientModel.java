@@ -343,8 +343,15 @@ public class ClientModel extends Observable
         notifyObservers(this.activeGame.getPlayerByName(name));
     }
 
-    public void claimRouteByPlayerName() // What should this method take??
+    public void claimRouteByPlayerName(String name, Route route) // What should this method take??
     {
+        /*
+        Player player = activeGame.getPlayerByName(name);
+        for(Route r : routes)
+        {
+            if(r.getCityOne().equals(route.getCityOne()) && r.getCityTwo().equals(route.getCityTwo()))
+        }
+        */
         //add routes to player claiming the route
         //add a claimed by player who claimed it.
         // TODO:: implement this function;

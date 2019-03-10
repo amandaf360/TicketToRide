@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import services.DiscardDestCardService;
+
 public class ClientModel extends Observable
 {
     private ArrayList<Game> gameList;
@@ -258,6 +260,9 @@ public class ClientModel extends Observable
 
     public void deleteMainPlayersDestinationCardFromHand(DestinationCards destinationCards)
     {
+
+        DiscardDestCardService discardDestCardService = new DiscardDestCardService();
+        discardDestCardService.discardCard(destinationCards);
         mainPlayer.getPlayerHandDestinations().deleteCard(destinationCards);
         //activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
         setChanged();

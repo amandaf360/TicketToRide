@@ -51,10 +51,7 @@ public class PollCommand implements ICommand
             for(int i = 0; i < data.size(); i+= 2)
             {
                 int cardsDrawn = Integer.parseInt(data.get(i));
-                if(mainPlayerName.equals(data.get(i + 1)))
-                {
-                    model.increaseDestCards(data.get(i + 1), cardsDrawn);
-                }
+                model.increaseDestCards(data.get(i + 1), cardsDrawn);
             }
         }
     }

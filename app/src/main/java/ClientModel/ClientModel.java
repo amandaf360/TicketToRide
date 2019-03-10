@@ -232,7 +232,7 @@ public class ClientModel extends Observable
     public void addDestinationCardToActivePlayersHand(DestinationCards destinationCards)
     {
         mainPlayer.addDestinationCardToPlayerHand(destinationCards);
-        activeGame.getPlayerByName(mainPlayer.getName()).addDestinationCardToPlayerHand(destinationCards);
+        //activeGame.getPlayerByName(mainPlayer.getName()).addDestinationCardToPlayerHand(destinationCards);
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
     }
@@ -251,7 +251,7 @@ public class ClientModel extends Observable
     public void addTrainCardToActivePlayerHand(TrainCarCard trainCarCard)
     {
         mainPlayer.addTrainCardToHand(trainCarCard);
-        activeGame.getPlayerByName(mainPlayer.getName()).addTrainCardToHand(trainCarCard);
+        //activeGame.getPlayerByName(mainPlayer.getName()).addTrainCardToHand(trainCarCard);
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandTrains());
     }
@@ -291,7 +291,7 @@ public class ClientModel extends Observable
     public void addPointsToMainPlayer(int points)
     {
         mainPlayer.addPoints(points);
-        activeGame.getPlayerByName(mainPlayer.getName()).addPoints(points);
+        //activeGame.getPlayerByName(mainPlayer.getName()).addPoints(points);
         setChanged();
         notifyObservers(this.mainPlayer);
     }
@@ -312,7 +312,7 @@ public class ClientModel extends Observable
     public void takeTrainsFromMainPlayer(int howMany)
     {
         mainPlayer.takeTrains(howMany);
-        activeGame.getPlayerByName(mainPlayer.getName()).takeTrains(howMany);
+        //activeGame.getPlayerByName(mainPlayer.getName()).takeTrains(howMany);
         setChanged();
         notifyObservers(this.mainPlayer);
     }

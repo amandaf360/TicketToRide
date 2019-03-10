@@ -31,6 +31,8 @@ public class ClientCommandManager
     private Map<String, ArrayList<String>> destinationCardsDiscarded;
     private Map<String, DecksStateData> deckStateUpdate;
     private Map<String, GameStartInfo> startGameInfo;
+    private Map<String, ArrayList<String>> routesClaimed;
+
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
 
@@ -51,6 +53,7 @@ public class ClientCommandManager
         destinationCardsDiscarded = new HashMap<>();
         deckStateUpdate = new HashMap<>();
         startGameInfo = new HashMap<>();
+        routesClaimed = new HashMap<>();
     }
 
     public void addUser(String username)
@@ -65,6 +68,7 @@ public class ClientCommandManager
         destinationCardsDiscarded.put(username, new ArrayList<String>());
         deckStateUpdate.put(username, null);
         startGameInfo.put(username, null);
+        routesClaimed.put(username, new ArrayList<String>());
     }
 
     public PollResponse firstPoll()
@@ -101,6 +105,7 @@ public class ClientCommandManager
         response.setDeckData(deckStateUpdate.get(username));
         response.setGameStartInfo(startGameInfo.get(username));
         response.setDestinationCardsDrawn(destinationCardsDrawn.get(username));
+        response.setRoutesClaimed(routesClaimed.get(username));
 
         return response;
     }
@@ -116,6 +121,7 @@ public class ClientCommandManager
         destinationCardsDiscarded.get(username).clear();
         destinationCardsDrawn.get(username).clear();
         startGameInfo.put(username, null);
+        routesClaimed.put(username, null);
     }
 
     public void addGame(Game game)
@@ -186,6 +192,12 @@ public class ClientCommandManager
     public void startGame(String username, GameStartInfo info)
     {
         startGameInfo.put(username, info);
+    }
+
+    public void claimRoute(int index, String userClaiming, String otherUserName)
+    {
+        destinationCardsDrawn.get(otherUserName).add(Integer.toString(index));
+        destinationCardsDrawn.get(otherUserName).add(userClaiming);
     }
 
 }

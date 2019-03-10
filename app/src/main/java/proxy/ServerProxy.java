@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import ClientModel.DestinationCards;
 import ClientModel.Message;
+import ClientModel.Player;
 import requests.*;
 import commands.*;
 import responses.*;
@@ -192,6 +193,27 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    public void claimRoute(int index, String name)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(Integer.toString(index));
+        stringList.add(name);
+        RequestWrapper wrapper = new RequestWrapper("claimRoute", stringList);
+
+        callBack = new OnTaskCompleted()
+        {
+            @Override
+            public void completeTask(String responseJson)
+            {
+                ClaimRouteResponse response = serializer.deserializeClaimRouteResponse(responseJson);
+                ClaimRouteCommand command = new ClaimRouteCommand(response.getIndex(), response.getName());
+                command.execute();
+            }
+        };
+
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
     public void discardDestCard(DestinationCards card, String username)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -236,7 +258,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.37.96.31:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://192.168.1.102:3000");//CHANGE IP ADDRESS HERE
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);

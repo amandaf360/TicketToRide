@@ -28,13 +28,17 @@ public class ClaimRouteHelper
 
     }
 
+    public ClaimRouteHelper(Route route)
+    {
+        indexOfRouteClaimed = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
+    }
 
     public void claimRoute()    // make sure to use this claimRoute if you use the route constructor
     {
 
         PossibleWayToDoClaimRouteService claimRouteService;
         claimRouteService = new PossibleWayToDoClaimRouteService();
-        claimRouteService.claimRoute(ClientModel.getInstance().getMainPlayer(), indexOfRouteClaimed);
+        claimRouteService.claimRoute(ClientModel.getInstance().getMainPlayer().getName(), indexOfRouteClaimed);
     }
 
 
@@ -52,6 +56,6 @@ public class ClaimRouteHelper
 
         PossibleWayToDoClaimRouteService claimRouteService;
         claimRouteService = new PossibleWayToDoClaimRouteService();
-        claimRouteService.claimRoute(ClientModel.getInstance().getMainPlayer(), indexOfRouteClaimed);
+        claimRouteService.claimRoute(ClientModel.getInstance().getMainPlayer().getName(), indexOfRouteClaimed);
     }
 }

@@ -370,13 +370,13 @@ public class ClientModel extends Observable
         return -1;
     }
 
-    public void claimRouteByIndex(int index, Player player)
+    public void claimRouteByIndex(int index, String name)
     {
         if(index == -1)
         {
             return;
         }
-        player = activeGame.getPlayerByName(player.getName());
+        Player player = activeGame.getPlayerByName(name);
         routes.get(index).setClaimedBy(player);
         player.addRoute();
         setChanged();

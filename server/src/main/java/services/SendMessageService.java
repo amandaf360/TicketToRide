@@ -1,5 +1,12 @@
 package services;
 
+import java.util.ArrayList;
+
+import server.ClientCommandManager;
+import servermodel.ActiveGame;
+import servermodel.Message;
+import servermodel.ModelRoot;
+
 public class SendMessageService
 {
     private String message;
@@ -17,6 +24,18 @@ public class SendMessageService
 
     public void sendMessage()
     {
+        ModelRoot root = ModelRoot.getModel();
+        ActiveGame game = root.getGameByUser(user);
+        game.addMessage(new Message(color, message));
+
+        ClientCommandManager manager = ClientCommandManager.getCommandManager();
+        ArrayList<String> allUsers = game.getAllUsernames();
+        for(String username : allUsers)
+        {
+            Message formedMessage = new Message(color, message);
+            manager.addChatMessage(username, formedMessage);
+        }
 
     }
 }
+

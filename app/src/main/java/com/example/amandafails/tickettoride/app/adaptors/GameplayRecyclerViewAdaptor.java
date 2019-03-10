@@ -46,7 +46,6 @@ public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRe
         if(currentMessage.getColor() == "black") {
             holder.mTextView.setTextColor(Color.WHITE);
         }
-
     }
 
     public String stringToHex(String color) {
@@ -62,10 +61,10 @@ public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRe
                 hexColor = "#008000";
                 break;
             case "yellow":
-                hexColor = "ffff00";
+                hexColor = "#ffff00";
                 break;
             case "black":
-                hexColor = "000000";
+                hexColor = "#000000";
                 break;
         }
 

@@ -1,10 +1,10 @@
 package ClientModel;
 
-public class TrainCards
+public class TrainCarCard
 {
     private String color;
 
-    public TrainCards(String color)
+    public TrainCarCard(String color)
     {
         this.color = color;
     }

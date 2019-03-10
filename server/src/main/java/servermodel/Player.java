@@ -9,10 +9,13 @@ public class Player
     private String name;
     private ArrayList<DestCard> destCards;
     private ArrayList<TrainCarCard> trainCarCards;
+    private int numRoutes;
 
     public Player()
     {
-
+        destCards = new ArrayList<>();
+        trainCarCards = new ArrayList<>();
+        numRoutes = 0;
     }
 
     public Player(Player player)
@@ -22,6 +25,7 @@ public class Player
         this.name = player.name;
         destCards = new ArrayList<>();
         trainCarCards = new ArrayList<>();
+        numRoutes = 0;
     }
 
     public String getColor()
@@ -64,17 +68,18 @@ public class Player
         trainCarCards.add(card);
     }
 
-    public ArrayList<DestCard> getDestCards() {
+    public ArrayList<DestCard> getDestCards()
+    {
         return destCards;
     }
 
     public DestCard discardDestCard(String cityOne, String cityTwo)
     {
-        for(int i = 0; i < destCards.size(); i++)
+        for (int i = 0; i < destCards.size(); i++)
         {
-            if(destCards.get(i).getCityOne().equals(cityOne))
+            if (destCards.get(i).getCityOne().equals(cityOne))
             {
-                if(destCards.get(i).getCityTwo().equals(cityTwo))
+                if (destCards.get(i).getCityTwo().equals(cityTwo))
                 {
                     DestCard card = destCards.get(i);
                     destCards.remove(i);
@@ -83,5 +88,20 @@ public class Player
             }
         }
         return null;
+    }
+
+    public int getNumRoutes()
+    {
+        return numRoutes;
+    }
+
+    public void setNumRoutes(int numRoutes)
+    {
+        this.numRoutes = numRoutes;
+    }
+
+    public void addRoute()
+    {
+        numRoutes++;
     }
 }

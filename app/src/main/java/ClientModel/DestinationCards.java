@@ -42,4 +42,9 @@ public class DestinationCards
     {
         this.points = points;
     }
+
+    public String toString()
+    {
+        return cityOne + " - " + cityTwo + ":" + Integer.toString(points);
+    }
 }

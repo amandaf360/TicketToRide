@@ -23,7 +23,8 @@ import java.util.Observer;
 import ClientModel.*;
 import services.CreateChatMessageService;
 
-public class ChatFragment extends Fragment implements Observer {
+public class ChatFragment extends Fragment implements Observer
+{
 
     private ClientModel clientModel = ClientModel.getInstance();
 
@@ -37,39 +38,48 @@ public class ChatFragment extends Fragment implements Observer {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Message> lines;
 
-    public ChatFragment() {
+    public ChatFragment()
+    {
         this.clientModel.addObserver(this);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
         sendButton = v.findViewById(R.id.chat_send_button);
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 onSendButtonClicked();
             }
         });
 
         chatEditText = v.findViewById(R.id.chat_edit_text);
         // add text changed listener to login username
-        chatEditText.addTextChangedListener(new TextWatcher() {
+        chatEditText.addTextChangedListener(new TextWatcher()
+        {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
                 sendButton.setEnabled(false);
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(chatEditText.getText().toString().length() != 0) {
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if (chatEditText.getText().toString().length() != 0)
+                {
                     sendButton.setEnabled(true);
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable s)
+            {
 
             }
         });
@@ -83,15 +93,14 @@ public class ChatFragment extends Fragment implements Observer {
         // assuming each chat message has a string and a player -- to get the color
 
         List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
-        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
         lines.addAll(chatMessages);
+
 
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager)mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
+        ((LinearLayoutManager) mLayoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -99,10 +108,10 @@ public class ChatFragment extends Fragment implements Observer {
         return v;
     }
 
-    public void updateChatMessages() {
+    public void updateChatMessages()
+    {
         List<Message> chatMessages = clientModel.getGameChat();
-        chatMessages.add(new Message("Hello. This is the first chat message", "blue"));
-        chatMessages.add(new Message("Hi. This is the second chat message", "yellow"));
+        lines.clear();
         lines.addAll(chatMessages);
 
         // display in recyclerview
@@ -112,7 +121,8 @@ public class ChatFragment extends Fragment implements Observer {
 
     }
 
-    public void onSendButtonClicked() {
+    public void onSendButtonClicked()
+    {
         // send message to server model -- call chat service??
         String message = chatEditText.getText().toString();
         CreateChatMessageService createChatMessageService = new CreateChatMessageService(message);
@@ -120,12 +130,12 @@ public class ChatFragment extends Fragment implements Observer {
         createChatMessageService.sendMessage();
 
         // **** DELETE ***** //
-        lines.add(new Message(message, clientModel.getMainPlayer().getColor()));
+       /* lines.add(new Message(clientModel.getMainPlayer().getColor(), message));
 
         // display in recyclerview
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
         mAdapter.notifyDataSetChanged();
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);*/
         // ****** UP TO HERE ****** //
 
         // clear the edit text field
@@ -133,7 +143,15 @@ public class ChatFragment extends Fragment implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg)
+    {
         updateChatMessages();
+    }
+
+    @Override
+    public void onResume()
+    {
+        updateChatMessages();
+        super.onResume();
     }
 }

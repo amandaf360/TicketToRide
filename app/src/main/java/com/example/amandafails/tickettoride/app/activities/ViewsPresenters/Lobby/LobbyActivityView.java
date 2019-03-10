@@ -21,6 +21,7 @@ import java.util.Objects;
 
 import ClientModel.ClientModel;
 import ClientModel.Player;
+import proxy.ServerProxy;
 
 public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
@@ -59,14 +60,15 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
 
         if(lines.size() == maxNumPlayers) {
-            presenter.disconnectObserver();
-            switchActivity();
+            //presenter.disconnectObserver();
+            ServerProxy proxy = new ServerProxy();
+            proxy.beginGame(ClientModel.getInstance().getActiveGame().getGameNum());
         }
 
-        if(lines.size() == maxNumPlayers) {
+        /*if(lines.size() == maxNumPlayers) {
             presenter.disconnectObserver();
             switchActivity();
-        }
+        }*/
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override

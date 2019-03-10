@@ -3,6 +3,7 @@ package responses;
 import java.util.ArrayList;
 
 import ClientModel.Game;
+import ClientModel.GameStartInfo;
 import ClientModel.Message;
 
 public class PollResponse
@@ -15,9 +16,19 @@ public class PollResponse
     private ArrayList<String> gameStarted;
     private ArrayList<Message> chatHistory;
     private ArrayList<String> discardedDestCards;
+    private ArrayList<String> destinationCardsDrawn;
+    private GameStartInfo gameStartInfo;
 
 
     public PollResponse() {
+    }
+
+    public ArrayList<String> getDestinationCardsDrawn() {
+        return destinationCardsDrawn;
+    }
+
+    public void setDestinationCardsDrawn(ArrayList<String> destinationCardsDrawn) {
+        this.destinationCardsDrawn = destinationCardsDrawn;
     }
 
     public ArrayList<Game> getGamesCreated() {
@@ -82,5 +93,13 @@ public class PollResponse
 
     public void setDiscardedDestCards(ArrayList<String> discardedDestCards) {
         this.discardedDestCards = discardedDestCards;
+    }
+
+    public GameStartInfo getGameStartInfo() {
+        return gameStartInfo;
+    }
+
+    public void setGameStartInfo(GameStartInfo gameStartInfo) {
+        this.gameStartInfo = gameStartInfo;
     }
 }

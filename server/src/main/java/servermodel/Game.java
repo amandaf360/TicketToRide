@@ -114,4 +114,15 @@ public class Game
             player.setColor(assigner.assignColor());
         }
     }
+
+    public ArrayList<String> getPlayersAndColors()
+    {
+        ArrayList<String> playersAndColors = new ArrayList<>();
+        for(int i = 0; i < players.size(); i++)
+        {
+            playersAndColors.add(players.get(i).getName());
+            playersAndColors.add(players.get(i).getColor());
+        }
+        return playersAndColors;
+    }
 }

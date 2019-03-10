@@ -2,6 +2,7 @@ package commands;
 
 import java.util.ArrayList;
 
+import ClientModel.ClientModel;
 import ClientModel.DestinationCards;
 import responses.DrawDestResponse;
 
@@ -16,6 +17,7 @@ public class DrawDestCommand implements ICommand
 
     public void execute()
     {
-        //put the cards given back into the active players model.
+        ClientModel model = ClientModel.getInstance();
+        model.addDestinationCardToActivePlayersHand(cardsDrawn);
     }
 }

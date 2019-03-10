@@ -138,6 +138,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
 
     public boolean createGame(Context context)
     {
+        setChoice(0);
         //final String joinGameName = "pick the amount of players you want in your game";
         String[] singleChoiceItems = {"1","2","3","4"};                     // FIX HERE FOR GAME CREATION (2,3,4,5 instead of 1,2,3,4)
         final int itemSelected = 0;

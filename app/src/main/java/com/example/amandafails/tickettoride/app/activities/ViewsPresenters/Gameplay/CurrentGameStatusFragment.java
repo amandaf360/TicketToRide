@@ -75,7 +75,7 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
     private TextView numOrange;
     private TextView numPurple;
 
-    private ClientModel clientModel;
+    private ClientModel clientModel = ClientModel.getInstance();
     public CurrentGameStatusFragment() {
         this.clientModel.addObserver(this);
     }

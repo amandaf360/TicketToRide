@@ -91,6 +91,10 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     }
 
 
+    public void changeTurnName(String name)
+    {
+        currentTurn.setText(name);
+    }
 
 
     public void onDemoClicked()

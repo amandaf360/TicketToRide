@@ -19,6 +19,7 @@ import services.DrawDestCardService;
 import ClientModel.PlayerHandDestinations;
 import ClientModel.TrainCarCard;
 import ClientModel.Route;
+import ClientModel.Game;
 import ClientModel.AsyncDemo;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
@@ -78,6 +79,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         if(o.getClass() == Route.class)
         {
             view.drawRoutetoScreen((Route)o);
+        }
+
+        if(o.getClass() == Game.class)
+        {
+            view.changeTurnName(clientModel.getActiveGame().getCurrentPlayersTurn());
         }
         view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
     }

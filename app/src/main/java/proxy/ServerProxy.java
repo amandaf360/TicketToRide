@@ -232,6 +232,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
+
                 //no callback necessary because discarding always has the same effect on the client.
             }
         };

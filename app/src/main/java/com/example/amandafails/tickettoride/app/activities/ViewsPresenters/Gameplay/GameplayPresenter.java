@@ -85,8 +85,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     private int numDemoClicks = 0;
     public void demo()
     {
-        //AsyncDemo demo = new AsyncDemo(this);
-        //demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        AsyncDemo demo = new AsyncDemo(this);
+        demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         switch (numDemoClicks)
         {
             case 0:

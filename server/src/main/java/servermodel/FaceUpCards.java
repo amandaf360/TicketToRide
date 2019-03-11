@@ -44,6 +44,16 @@ public class FaceUpCards
         }
     }
 
+    public ArrayList<String> getColors()
+    {
+        ArrayList<String> colors = new ArrayList<>();
+        for(int i = 0; i < cards.size(); i++)
+        {
+            colors.add(cards.get(i).getColor());
+        }
+        return colors;
+    }
+
 
 
 }

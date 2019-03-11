@@ -7,15 +7,19 @@ public class DecksStateData
     private int destDeckSize;
     private int trainDeckSize;
     private int trainDiscardSize;
-    private ArrayList<String> faceUpCards;
+    private ArrayList<TrainCarCard> faceUpCards;
 
-    public DecksStateData(int dSize, int tSize, int tDSize, ArrayList<String> faceUpCards)
+    public DecksStateData(int dSize, int tSize, int tDSize, ArrayList<TrainCarCard> faceUpCards)
     {
         destDeckSize = dSize;
         trainDeckSize = tSize;
         trainDiscardSize = tDSize;
         this.faceUpCards = faceUpCards;
     }
+
+    public DecksStateData()
+    {}
+
 
     public int getDestDeckSize() {
         return destDeckSize;
@@ -41,11 +45,11 @@ public class DecksStateData
         this.trainDiscardSize = trainDiscardSize;
     }
 
-    public ArrayList<String> getFaceUpCards() {
+    public ArrayList<TrainCarCard> getFaceUpCards() {
         return faceUpCards;
     }
 
-    public void setFaceUpCards(ArrayList<String> faceUpCards) {
+    public void setFaceUpCards(ArrayList<TrainCarCard> faceUpCards) {
         this.faceUpCards = faceUpCards;
     }
 }

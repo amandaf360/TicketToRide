@@ -14,10 +14,11 @@ public class SendMessageCommand implements ICommand
     public BaseResponse execute()
     {
         SendMessageService service = new SendMessageService(message, username, color, gameNum);
+        service.sendMessage();
         return null;
     }
 
-    public SendMessageCommand(String message, String username, String color, int gameNum) {
+    public SendMessageCommand(String username, String message, String color, int gameNum) {
         this.message = message;
         this.username = username;
         this.color = color;

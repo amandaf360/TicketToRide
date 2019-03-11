@@ -9,6 +9,9 @@ import responses.PollResponse;
 import services.SetActiveGameService;
 import services.SetGamelistService;
 import ClientModel.Message;
+import ClientModel.GameStartInfo;
+import ClientModel.TrainCarCard;
+import ClientModel.DecksStateData;
 
 public class PollCommand implements ICommand
 {
@@ -20,7 +23,9 @@ public class PollCommand implements ICommand
         {
             if (response.getGamesCreated().size() != 0 || response.getGamesDeleted().size() != 0 ||
                     response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0
-                    || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0)
+                    || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0
+                    || response.getGameStartInfo() != null || response.getDestinationCardsDrawn().size() != 0
+                    || response.getDeckData() != null)
             {
                 //ServerProxy proxy = new ServerProxy();
                 //proxy.clearPoll(response.getUsername());
@@ -28,9 +33,78 @@ public class PollCommand implements ICommand
                 addGames(response.getGamesCreated());
                 startGame(response.getGameStarted());
                 updateChat(response.getChatHistory());
+                updateDestCardsDrawn(response.getDestinationCardsDrawn());
+                if(response.getGameStartInfo() != null)
+                {
+                    int i = 0;
+                }
+                startMyGame(response.getGameStartInfo());
+                updateDeckData(response.getDeckData());
             }
         }
         //updates players in a given game
+    }
+
+    private void updateDeckData(DecksStateData data)
+    {
+        if(data != null)
+        {
+            ClientModel model = ClientModel.getInstance();
+            ArrayList<TrainCarCard> faceUpCards = data.getFaceUpCards();
+            if (faceUpCards != null) {
+                for (int i = 0; i < faceUpCards.size(); i++) {
+                    model.setFaceUpCardByIndex(i, faceUpCards.get(i));
+                }
+            }
+            model.setActiveGameTrainCards(data.getTrainDeckSize());
+            model.setActiveGameDestCards(data.getDestDeckSize());
+            return;
+        }
+    }
+
+    private void updateDestCardsDrawn(ArrayList<String> data)
+    {
+        if(data.size() != 0)
+        {
+            ClientModel model = ClientModel.getInstance();
+            String mainPlayerName = model.getMainPlayer().getName();
+            for(int i = 0; i < data.size(); i+= 2)
+            {
+                int cardsDrawn = Integer.parseInt(data.get(i));
+                model.increaseDestCards(data.get(i + 1), cardsDrawn);
+            }
+        }
+    }
+
+    private void startMyGame(GameStartInfo info)
+    {
+        if(info != null)
+        {
+            ClientModel model = ClientModel.getInstance();
+            ArrayList<String> playersAndColors = info.getPlayersAndColors();
+            Game activeGame = model.getActiveGame();
+            ArrayList<Player> players = activeGame.getPlayers();
+            for (int i = 0; i < playersAndColors.size(); i += 2) {
+                for (int j = 0; j < players.size(); j++) {
+                    if (players.get(j).getName().equals(playersAndColors.get(i))) {
+                        players.get(j).setColor(playersAndColors.get(i + 1));
+                    }
+                }
+            }
+
+            ArrayList<TrainCarCard> playerHand = info.getCardsInHand();
+            for (TrainCarCard card : playerHand)
+            {
+                model.addTrainCardToActivePlayerHand(card);
+            }
+
+            ArrayList<TrainCarCard> faceUps = info.getStartingFaceUps();
+            ClientModel.getInstance().startGame();
+            for(int i = 0; i < faceUps.size(); i++)
+            {
+                model.setFaceUpCardByIndex(i, faceUps.get(i));
+            }
+        }
     }
 
     private void discardDestCards(ArrayList<String> usersDiscarded)
@@ -60,6 +134,7 @@ public class PollCommand implements ICommand
             {
                 SetActiveGameService service = new SetActiveGameService();
                 service.setActiveGame(game);
+                model.setMainPlayer(player);
             }
         }
     }
@@ -76,9 +151,13 @@ public class PollCommand implements ICommand
 
     private void updateChat(ArrayList<Message> chatHistory)
     {
-        for(Message message: chatHistory)
+        if(chatHistory.size() != 0)
         {
-            //add to model
+            ClientModel model = ClientModel.getInstance();
+            for (Message message : chatHistory)
+            {
+                model.addMessageToChat(message);
+            }
         }
     }
 

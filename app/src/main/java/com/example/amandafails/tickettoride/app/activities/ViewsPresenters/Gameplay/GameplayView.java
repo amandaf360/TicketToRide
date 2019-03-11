@@ -6,10 +6,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
-
+import com.example.amandafails.tickettoride.app.subviews.TrainView;
+import ClientModel.Route;
 import java.util.List;
+
+import ClientModel.ClientModel;
 
 public class GameplayView extends FragmentActivity implements IGameplayView
 {
@@ -19,7 +24,10 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     private Button drawTrainsButton;
     private Button drawRoutesButton;
     private Button placeTrainsButton;
+    private Button demoButton;
+    private TextView currentTurn;
     private boolean firstCreate = true;
+    private TrainView trainView;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -58,14 +66,36 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
+        demoButton = findViewById(R.id.demo_button);
+        demoButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onDemoClicked();
+            }
+        });
+
+        trainView = findViewById(R.id.view_trains);
+
+        currentTurn = findViewById(R.id.turn_text_indicator);
+        currentTurn.setText(presenter.currentTurn());
+
+        ClientModel.getInstance().initializeRoutes();
+
 
         if(firstCreate)
         {
             presenter.chooseDestinationCards();
-            firstCreate = false;
         }
-        firstCreate = false;
 
+    }
+
+
+
+
+    public void onDemoClicked()
+    {
+        presenter.demo();
     }
 
     //define all these buttons inside of onCreate
@@ -101,6 +131,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     public void onPlaceTrainsClicked()
     {
         presenter.placeTrains();
+    }
+
+    public void drawRoutetoScreen(Route route)
+    {
+        trainView.claimRoute(route);
     }
 
     public void onTrainCardDrawerExpanded()
@@ -180,5 +215,16 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     public void setFirstCreateToFalse()
     {
         firstCreate = false;
+    }
+
+    public void setDiscardNumber(int num)
+    {
+        String display = "Draw Route (" + Integer.toString(num) + ")";
+        drawRoutesButton.setText(display);
+    }
+
+    public void showToast(String message)
+    {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

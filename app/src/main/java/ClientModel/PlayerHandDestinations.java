@@ -29,12 +29,20 @@ public class PlayerHandDestinations
 
     public void deleteCard(DestinationCards destinationCards)
     {
+        DestinationCards cardToRemove = null;
         for(DestinationCards card : cardList)
         {
             if(card.getCityOne().equals(destinationCards.getCityOne()) && card.getCityTwo().equals(destinationCards.getCityTwo()))
             {
-                cardList.remove(card);
+                cardToRemove = card;
+                break;
             }
         }
+        cardList.remove(cardToRemove);
+    }
+
+    public int getSize()
+    {
+        return cardList.size();
     }
 }

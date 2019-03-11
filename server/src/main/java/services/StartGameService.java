@@ -6,9 +6,14 @@ import responses.StartGameResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
 import servermodel.ColorAssigner;
+import servermodel.DecksStateData;
+import servermodel.FaceUpCards;
 import servermodel.Game;
+import servermodel.GameStartInfo;
 import servermodel.ModelRoot;
 import servermodel.Player;
+import servermodel.TrainCarCard;
+import servermodel.TrainCarDeck;
 
 public class StartGameService
 {
@@ -21,19 +26,47 @@ public class StartGameService
         for(int i = 0; i < gameList.size(); i++)
         {
             Game currentGame = gameList.get(i);
-            if(currentGame.getGameNum() == gameNum)
+            if(currentGame.getGameNum() == gameNum && !currentGame.isHasStarted())
             {
+                currentGame.setHasStarted(true);
                 gameFound = true;
                 currentGame.assignColors();
+                ArrayList<String> playersAndColors = currentGame.getPlayersAndColors();
                 ActiveGame activeGame = new ActiveGame();
                 activeGame.setPlayers(currentGame.getPlayers());
                 activeGame.setGameNum(currentGame.getGameNum());
                 ClientCommandManager manager = ClientCommandManager.getCommandManager();
-                for(int j = 0; j < currentGame.getPlayers().size(); j++)
+                ArrayList<String> usernames = activeGame.getAllUsernames();
+                TrainCarDeck deck = activeGame.getTrainDeck();
+                ArrayList<TrainCarCard> faceUps = new ArrayList<>();
+                for(int j = 0; j < 5; j++)
+                {
+                    faceUps.add(deck.draw());
+                }
+                for(String username: usernames)
                 {
 
+                    ArrayList<TrainCarCard> playerHand = new ArrayList<>();
+                    for(int j = 0; j < 4; j++)
+                    {
+                        playerHand.add(deck.draw());
+                    }
+                    ArrayList<TrainCarCard> personalFaceUps = new ArrayList<>();//don't want to risk pointing to the same stuff
+                    for(int j = 0; j < 5; j++)
+                    {
+                        personalFaceUps.add(new TrainCarCard(faceUps.get(j).getColor()));
+                    }
+
+                    GameStartInfo info = new GameStartInfo();
+                    info.setCardsInHand(playerHand);
+                    info.setCurrentTurnPlayer(activeGame.getPlayers().get(0).getName());
+                    info.setPlayersAndColors(playersAndColors);
+                    info.setStartingFaceUps(personalFaceUps);
+
+                    manager.startGame(username, info);
                 }
-                //need to do some client command manager stuff here
+
+
                 if(currentGame.getPlayers().size() == currentGame.getMaxPlayers())
                 {
                     response.setErrorMessage("Starting game");
@@ -42,6 +75,7 @@ public class StartGameService
                 {
                     response.setErrorMessage("Not enough players");
                 }
+                model.addActiveGame(activeGame);
             }
         }
         if(!gameFound)

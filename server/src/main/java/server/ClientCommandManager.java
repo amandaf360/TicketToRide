@@ -10,10 +10,13 @@ import java.util.Set;
 
 import commands.*;
 import responses.PollResponse;
+import servermodel.ActiveGame;
 import servermodel.DecksStateData;
 import servermodel.Game;
+import servermodel.GameStartInfo;
 import servermodel.Message;
 import servermodel.ModelRoot;
+import servermodel.TrainCarCard;
 import servermodel.User;
 
 public class ClientCommandManager
@@ -29,6 +32,9 @@ public class ClientCommandManager
     private Map<String, ArrayList<String>> destinationCardsDrawn;
     private Map<String, ArrayList<String>> destinationCardsDiscarded;
     private Map<String, DecksStateData> deckStateUpdate;
+    private Map<String, GameStartInfo> startGameInfo;
+    private Map<String, ArrayList<String>> routesClaimed;
+
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
 
@@ -48,6 +54,8 @@ public class ClientCommandManager
         destinationCardsDrawn = new HashMap<>();
         destinationCardsDiscarded = new HashMap<>();
         deckStateUpdate = new HashMap<>();
+        startGameInfo = new HashMap<>();
+        routesClaimed = new HashMap<>();
     }
 
     public void addUser(String username)
@@ -61,6 +69,8 @@ public class ClientCommandManager
         destinationCardsDrawn.put(username, new ArrayList<String>());
         destinationCardsDiscarded.put(username, new ArrayList<String>());
         deckStateUpdate.put(username, null);
+        startGameInfo.put(username, null);
+        routesClaimed.put(username, new ArrayList<String>());
     }
 
     public PollResponse firstPoll()
@@ -82,13 +92,22 @@ public class ClientCommandManager
             polledGamesCreated.add(new Game(currentGamesCreated.get(i)));
         }
 
+        if(startGameInfo.get(username) != null)
+        {
+            int i = 0;
+        }
+
         response.setGamesCreated(gamesCreated.get(username));
 
         response.setGamesDeleted(gamesDeleted.get(username));
         response.setPlayersJoined(playersJoined.get(username));
         response.setPlayersLeft(playersLeft.get(username));
+        response.setChatHistory(chatHistory.get(username));
         response.setDiscardedDestCards(destinationCardsDiscarded.get(username));
         response.setDeckData(deckStateUpdate.get(username));
+        response.setGameStartInfo(startGameInfo.get(username));
+        response.setDestinationCardsDrawn(destinationCardsDrawn.get(username));
+        response.setRoutesClaimed(routesClaimed.get(username));
 
         return response;
     }
@@ -99,6 +118,12 @@ public class ClientCommandManager
         gamesDeleted.get(username).clear();
         playersJoined.get(username).clear();
         playersLeft.get(username).clear();
+        chatHistory.get(username).clear();
+        deckStateUpdate.put(username, null);
+        destinationCardsDiscarded.get(username).clear();
+        destinationCardsDrawn.get(username).clear();
+        startGameInfo.put(username, null);
+        routesClaimed.put(username, null);
     }
 
     public void addGame(Game game)
@@ -161,9 +186,33 @@ public class ClientCommandManager
         destinationCardsDiscarded.get(otherUser).add(userDiscarded);
     }
 
-    public void setDeckState(String username, DecksStateData data)
+    public void setDeckState(String username)
     {
+        ModelRoot root = ModelRoot.getModel();
+        ActiveGame game = root.getGameByUser(username);
+        ArrayList<String> colors = game.getFaceUpCards().getColors();
+        ArrayList<TrainCarCard> cards = new ArrayList<>();
+        for(int i = 0; i < colors.size(); i++)
+        {
+            cards.add(new TrainCarCard(colors.get(i)));
+        }
+        DecksStateData data = new DecksStateData();
+        data.setFaceUpCards(cards);
+        data.setTrainDeckSize(game.getTrainDeck().size());
+        data.setTrainDiscardSize(game.getTrainCarDiscard().size());
+        data.setDestDeckSize(game.getDestinationDeck().size());
         deckStateUpdate.put(username, data);
+    }
+
+    public void startGame(String username, GameStartInfo info)
+    {
+        startGameInfo.put(username, info);
+    }
+
+    public void claimRoute(int index, String userClaiming, String otherUserName)
+    {
+        destinationCardsDrawn.get(otherUserName).add(Integer.toString(index));
+        destinationCardsDrawn.get(otherUserName).add(userClaiming);
     }
 
 }

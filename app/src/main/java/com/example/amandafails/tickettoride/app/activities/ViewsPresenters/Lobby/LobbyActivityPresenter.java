@@ -14,7 +14,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     public LobbyActivityPresenter(ILobbyView view) {
         this.view = view;
         this.clientModel.addObserver(this);
-
+        clientModel.getMainPlayer();
     }
 
     public void disconnectObserver() {
@@ -48,6 +48,7 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
     @Override
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
+        int i = 0;
         if(arg.getClass() == ArrayList.class) {
             if(clientModel.getActiveGame().getCurrentPlayers() != 0) {
                 view.displayPlayer(clientModel.getActiveGame().getPlayers().get(clientModel.getActiveGame().getCurrentPlayers() - 1));
@@ -56,6 +57,15 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         else if(arg.getClass() == String.class) {
             // display the most recent error message
             view.displayErrorMessage(clientModel.getMessage());
+        }
+        else if(arg.getClass() == Boolean.class)
+        {
+            Boolean bool = (Boolean)arg;
+            if(((Boolean) arg).booleanValue())
+            {
+                clientModel.deleteObserver(this);
+                startGame();
+            }
         }
         // BEFORE SWITCHING ACTIVITIES, DELETE OBSERVER!!!
     }

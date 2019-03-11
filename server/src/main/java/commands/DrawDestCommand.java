@@ -18,6 +18,6 @@ public class DrawDestCommand implements ICommand
     {
         DrawDestService service = new DrawDestService();
         DrawDestResponse response = service.drawCards(numCards, username);
-        return null;
+        return response;
     }
 }

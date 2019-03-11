@@ -82,7 +82,7 @@ public class CommandHandler implements HttpHandler
                 ArrayList<String> joinGameList = wrappedRequest.getStringList();
                 command = new JoinGameCommand(Integer.parseInt(joinGameList.get(0)), joinGameList.get(1));
                 break;
-            case "sendMessage":
+            case "sendChatMessage":
                 ArrayList<String> messageData = wrappedRequest.getStringList();
                 command = new SendMessageCommand(messageData.get(0), messageData.get(1), messageData.get(2), Integer.parseInt(messageData.get(3)));
                 break;
@@ -99,6 +99,9 @@ public class CommandHandler implements HttpHandler
                 ArrayList<String> drawTrainList = wrappedRequest.getStringList();
                 command = new DrawTrainCommand(drawTrainList.get(0), Integer.parseInt(drawTrainList.get(1)));
                 break;
+            case "claimRoute":
+                ArrayList<String> claimRouteList = wrappedRequest.getStringList();
+                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1));
 
         }
 

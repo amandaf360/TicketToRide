@@ -12,8 +12,9 @@ public class Game
     private int currentPlayers;
     private String creator;
     private int indexOfCurrentPlayer;
-    private List<TrainCards> faceUpCards;
+    private List<TrainCarCard> faceUpCards;
     private int numCardsInDeck;
+    private int numDestCardsInDeck;
 
     public Game()
     {
@@ -21,16 +22,22 @@ public class Game
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();
         numCardsInDeck = 0;
-        TrainCards card1 = new TrainCards("blue");
+        numDestCardsInDeck = 0;
+        TrainCarCard card1 = new TrainCarCard("blue");
         faceUpCards.add(card1);
-        TrainCards card2 = new TrainCards("also blue");
+        TrainCarCard card2 = new TrainCarCard("also blue");
         faceUpCards.add(card2);
-        TrainCards card3 = new TrainCards("slightly less blue");
+        TrainCarCard card3 = new TrainCarCard("slightly less blue");
         faceUpCards.add(card3);
-        TrainCards card4 = new TrainCards("teal..? nah that's blue");
+        TrainCarCard card4 = new TrainCarCard("teal..? nah that's blue");
         faceUpCards.add(card4);
-        TrainCards card5 = new TrainCards("chartreuse");
+        TrainCarCard card5 = new TrainCarCard("chartreuse");
         faceUpCards.add(card5);
+    }
+
+    public String getCurrentPlayersTurn()
+    {
+        return players.get(indexOfCurrentPlayer).getName() +"\'s turn";
     }
 
 
@@ -133,17 +140,17 @@ public class Game
         this.indexOfCurrentPlayer = indexOfCurrentPlayer;
     }
 
-    public List<TrainCards> getFaceUpCards()
+    public List<TrainCarCard> getFaceUpCards()
     {
         return faceUpCards;
     }
 
-    public void setFaceUpCards(List<TrainCards> faceUpCards)
+    public void setFaceUpCards(List<TrainCarCard> faceUpCards)
     {
         this.faceUpCards = faceUpCards;
     }
 
-    public void changeCardByIndex(int index, TrainCards trainCard)
+    public void changeCardByIndex(int index, TrainCarCard trainCard)
     {
         faceUpCards.set(index, trainCard);
     }
@@ -166,5 +173,13 @@ public class Game
             }
         }
         return null;
+    }
+
+    public int getNumDestCardsInDeck() {
+        return numDestCardsInDeck;
+    }
+
+    public void setNumDestCardsInDeck(int numDestCardsInDeck) {
+        this.numDestCardsInDeck = numDestCardsInDeck;
     }
 }

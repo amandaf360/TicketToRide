@@ -6,10 +6,12 @@ import responses.BaseResponse;
 import responses.DrawDestResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
+import servermodel.DecksStateData;
 import servermodel.DestCard;
 import servermodel.DestCardDeck;
 import servermodel.ModelRoot;
 import servermodel.Player;
+import servermodel.TrainCarCard;
 
 public class DrawDestService
 {
@@ -44,6 +46,7 @@ public class DrawDestService
             {
                 manager.addCardsDrawn(numCards, username, usernames.get(i));
             }
+            manager.setDeckState(username);
         }
 
         DrawDestResponse response = new DrawDestResponse(cardsDrawn);

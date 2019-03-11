@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import ClientModel.DestinationCards;
 import ClientModel.Message;
+import ClientModel.Player;
 import requests.*;
 import commands.*;
 import responses.*;
@@ -64,6 +65,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
+                if(responseJson.contains("blue"))
+                {
+                    int i = 0;
+                }
                 PollResponse response = serializer.deserializePollResponse(responseJson);
                 PollCommand command = new PollCommand(response);
                 ServerProxy proxy = new ServerProxy();
@@ -185,6 +190,27 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
                 command.execute();
             }
         };
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void claimRoute(int index, String name)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(Integer.toString(index));
+        stringList.add(name);
+        RequestWrapper wrapper = new RequestWrapper("claimRoute", stringList);
+
+        callBack = new OnTaskCompleted()
+        {
+            @Override
+            public void completeTask(String responseJson)
+            {
+                ClaimRouteResponse response = serializer.deserializeClaimRouteResponse(responseJson);
+                ClaimRouteCommand command = new ClaimRouteCommand(response.getIndex(), response.getName());
+                command.execute();
+            }
+        };
+
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 

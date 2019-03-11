@@ -170,10 +170,6 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
         populatePlayerCardsValues();
 
-
-
-
-
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager)v.findViewById(R.id.viewpager);
 

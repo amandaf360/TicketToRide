@@ -40,6 +40,7 @@ public class PollCommand implements ICommand
                 }
                 startMyGame(response.getGameStartInfo());
                 updateDeckData(response.getDeckData());
+                discardDestCards(response.getDiscardedDestCards());
             }
         }
         //updates players in a given game

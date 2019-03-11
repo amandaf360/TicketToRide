@@ -76,7 +76,9 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
     private TextView numPurple;
 
     private ClientModel clientModel;
-    public CurrentGameStatusFragment() {}
+    public CurrentGameStatusFragment() {
+        this.clientModel.addObserver(this);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

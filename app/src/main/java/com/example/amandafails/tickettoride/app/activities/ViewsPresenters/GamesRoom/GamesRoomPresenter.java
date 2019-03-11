@@ -121,7 +121,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         if(createGame)
         {
             CreateGameService createGameService = new CreateGameService();
-            createGameService.createGame(clientModel.getUser().getUserName(), value + 1, makeGameName()); // FIX HERE FOR GAME CREATION (value + 2 instead of value + 1)
+            createGameService.createGame(clientModel.getUser().getUserName(), value + 2, makeGameName()); // FIX HERE FOR GAME CREATION (value + 2 instead of value + 1)
             //joinGameService.joinGame(clientModel.getGameNum(game));
             createGameNo();
         }

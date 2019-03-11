@@ -25,7 +25,7 @@ public class PollCommand implements ICommand
                     response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0
                     || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0
                     || response.getGameStartInfo() != null || response.getDestinationCardsDrawn().size() != 0
-                    || response.getDeckData() != null)
+                    || response.getDeckData() != null || response.getDiscardedDestCards().size() != 0)
             {
                 //ServerProxy proxy = new ServerProxy();
                 //proxy.clearPoll(response.getUsername());

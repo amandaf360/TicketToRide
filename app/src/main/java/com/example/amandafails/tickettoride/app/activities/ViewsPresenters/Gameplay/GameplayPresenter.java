@@ -85,8 +85,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     private int numDemoClicks = 0;
     public void demo()
     {
-        AsyncDemo demo = new AsyncDemo(this);
-        demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        //AsyncDemo demo = new AsyncDemo(this);
+        //demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         switch (numDemoClicks)
         {
             case 0:
@@ -97,7 +97,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().addTrainCardToHand(new TrainCarCard("locomotive"));
                 break;
             case 2:
-
                 clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
                 break;
             case 3:

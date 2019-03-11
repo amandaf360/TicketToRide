@@ -175,7 +175,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void drawDestCards(int numCards, String username)
+    public void drawDestCards(final int numCards, final String username)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(Integer.toString(numCards));
@@ -185,9 +185,16 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
-                DrawDestResponse response = serializer.deserializeDrawDestResponse(responseJson);
-                DrawDestCommand command = new DrawDestCommand(response.getCardsDrawn());
-                command.execute();
+                if(responseJson != null) {
+                    DrawDestResponse response = serializer.deserializeDrawDestResponse(responseJson);
+                    DrawDestCommand command = new DrawDestCommand(response.getCardsDrawn());
+                    command.execute();
+                }
+                else
+                {
+                    ServerProxy proxy = new ServerProxy();
+                    proxy.drawDestCards(numCards, username);
+                }
             }
         };
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);

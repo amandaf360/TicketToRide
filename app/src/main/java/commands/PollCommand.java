@@ -112,7 +112,6 @@ public class PollCommand implements ICommand
 
     }
 
-
     private void joinPlayers(ArrayList<String> joinedList)
     {
         String currentUser = ClientModel.getInstance().getUser().getUserName();

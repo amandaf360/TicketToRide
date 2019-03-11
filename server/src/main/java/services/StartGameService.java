@@ -6,6 +6,7 @@ import responses.StartGameResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
 import servermodel.ColorAssigner;
+import servermodel.FaceUpCards;
 import servermodel.Game;
 import servermodel.GameStartInfo;
 import servermodel.ModelRoot;
@@ -35,17 +36,31 @@ public class StartGameService
                 ClientCommandManager manager = ClientCommandManager.getCommandManager();
                 ArrayList<String> usernames = activeGame.getAllUsernames();
                 TrainCarDeck deck = activeGame.getTrainDeck();
+                ArrayList<TrainCarCard> faceUps = new ArrayList<>();
+                for(int j = 0; j < 5; j++)
+                {
+                    faceUps.add(deck.draw());
+                }
                 for(String username: usernames)
                 {
+
                     ArrayList<TrainCarCard> playerHand = new ArrayList<>();
                     for(int j = 0; j < 4; j++)
                     {
                         playerHand.add(deck.draw());
                     }
+                    ArrayList<TrainCarCard> personalFaceUps = new ArrayList<>();//don't want to risk pointing to the same stuff
+                    for(int j = 0; j < 5; j++)
+                    {
+                        personalFaceUps.add(new TrainCarCard(faceUps.get(j).getColor()));
+                    }
+
                     GameStartInfo info = new GameStartInfo();
                     info.setCardsInHand(playerHand);
                     info.setCurrentTurnPlayer(activeGame.getPlayers().get(0).getName());
                     info.setPlayersAndColors(playersAndColors);
+                    info.setStartingFaceUps(personalFaceUps);
+
                     manager.startGame(username, info);
                 }
                 //need to do some client command manager stuff here

@@ -77,7 +77,13 @@ public class PollCommand implements ICommand
             {
                 model.addTrainCardToActivePlayerHand(card);
             }
+
+            ArrayList<TrainCarCard> faceUps = info.getStartingFaceUps();
             ClientModel.getInstance().startGame();
+            for(int i = 0; i < faceUps.size(); i++)
+            {
+                model.setFaceUpCardByIndex(i, faceUps.get(i));
+            }
         }
     }
 

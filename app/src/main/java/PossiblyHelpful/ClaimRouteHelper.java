@@ -28,6 +28,11 @@ public class ClaimRouteHelper
 
     }
 
+    public ClaimRouteHelper(int indexInModelOfRouteToBeClaimed)
+    {
+        indexOfRouteClaimed = indexInModelOfRouteToBeClaimed;
+    }
+
     public ClaimRouteHelper(Route route)
     {
         indexOfRouteClaimed = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);

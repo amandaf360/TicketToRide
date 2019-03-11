@@ -57,7 +57,7 @@ public class Route
                 sb.append(charArrayOfOriginal[i]);
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
 

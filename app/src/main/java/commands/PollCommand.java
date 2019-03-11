@@ -109,8 +109,7 @@ public class PollCommand implements ICommand
 
     private void discardDestCards(ArrayList<String> usersDiscarded)
     {
-        //the list is the names of people who have discarded one card (username repeats possible).
-        // subtract 1 dest card from each of these users in the model
+
     }
 
 
@@ -138,7 +137,6 @@ public class PollCommand implements ICommand
             }
         }
     }
-
 
     private void addGames(ArrayList<Game> gameList)
     {

@@ -113,6 +113,7 @@ public class CommandHandler implements HttpHandler
         }
         if(commandType.equals("drawDestCards"))
         {
+            System.out.println("HELLO");
             if(responseString == null)
             {
                 System.out.println("PLEEESE don't get here");

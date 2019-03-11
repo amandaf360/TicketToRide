@@ -275,6 +275,14 @@ public class ClientModel extends Observable
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
     }
 
+    public void decrementPlayerDestCardNum(String name)
+    {
+        int in = activeGame.getPlayerByName(name).getNumDestCards() - 1;
+        activeGame.getPlayerByName(name).setNumDestCards(in);
+        setChanged();
+        notifyObservers(this.activeGame.getPlayerByName(name));
+    }
+
     public void addMessageToChat(Message message)
     {
         gameChat.add(message);

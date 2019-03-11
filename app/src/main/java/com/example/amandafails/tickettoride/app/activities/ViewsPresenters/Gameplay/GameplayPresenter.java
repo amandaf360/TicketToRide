@@ -1,6 +1,7 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,6 +18,7 @@ import services.DrawDestCardService;
 import ClientModel.PlayerHandDestinations;
 import ClientModel.TrainCarCard;
 import ClientModel.Route;
+import ClientModel.AsyncDemo;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
@@ -71,12 +73,15 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 showDialog(passer);
             }
         }
+        view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
     }
 
 
     private int numDemoClicks = 0;
     public void demo()
     {
+        //AsyncDemo demo = new AsyncDemo(this);
+        //demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         switch (numDemoClicks)
         {
             case 0:
@@ -103,6 +108,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
         }
         numDemoClicks++;
+    }
+
+    public void displayToast(String toastString)
+    {
+        view.showToast(toastString);
     }
 
 

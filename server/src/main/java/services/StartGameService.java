@@ -6,6 +6,7 @@ import responses.StartGameResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
 import servermodel.ColorAssigner;
+import servermodel.DecksStateData;
 import servermodel.FaceUpCards;
 import servermodel.Game;
 import servermodel.GameStartInfo;
@@ -25,8 +26,9 @@ public class StartGameService
         for(int i = 0; i < gameList.size(); i++)
         {
             Game currentGame = gameList.get(i);
-            if(currentGame.getGameNum() == gameNum)
+            if(currentGame.getGameNum() == gameNum && !currentGame.isHasStarted())
             {
+                currentGame.setHasStarted(true);
                 gameFound = true;
                 currentGame.assignColors();
                 ArrayList<String> playersAndColors = currentGame.getPlayersAndColors();
@@ -63,7 +65,8 @@ public class StartGameService
 
                     manager.startGame(username, info);
                 }
-                //need to do some client command manager stuff here
+
+
                 if(currentGame.getPlayers().size() == currentGame.getMaxPlayers())
                 {
                     response.setErrorMessage("Starting game");

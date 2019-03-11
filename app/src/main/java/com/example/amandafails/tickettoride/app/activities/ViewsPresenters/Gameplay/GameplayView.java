@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 
@@ -205,5 +206,16 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     public void setFirstCreateToFalse()
     {
         firstCreate = false;
+    }
+
+    public void setDiscardNumber(int num)
+    {
+        String display = "Draw Route (" + Integer.toString(num) + ")";
+        drawRoutesButton.setText(display);
+    }
+
+    public void showToast(String message)
+    {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

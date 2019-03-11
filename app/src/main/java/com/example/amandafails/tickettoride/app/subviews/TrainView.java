@@ -302,7 +302,7 @@ public class TrainView extends View
 
         for(int i = 0; i < cities.size(); i++)
         {
-            drawCityName(canvas, cities.get(i).getX() - 30, cities.get(i).getY() - 50, cities.get(i).getName());
+            drawCityName(canvas, cities.get(i).getX() - 30, cities.get(i).getY() - 30, cities.get(i).getName());
         }
 
     }

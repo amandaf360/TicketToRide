@@ -112,9 +112,9 @@ public class PollCommand implements ICommand
         //the list is the names of people who have discarded one card (username repeats possible).
         // subtract 1 dest card from each of these users in the model
         ClientModel model = ClientModel.getInstance();
-        for(String user : usersDiscarded)
+        for(String userToDeleteFrom : usersDiscarded)
         {
-            model.decrementPlayerDestCardNum(user);
+            model.decrementPlayerDestCardNum(userToDeleteFrom);
 
         }
         

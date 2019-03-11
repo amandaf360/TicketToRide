@@ -14,6 +14,7 @@ import java.util.Observer;
 import ClientModel.ClientModel;
 import ClientModel.DestinationCards;
 import PossiblyHelpful.ClaimRouteHelper;
+import services.DiscardDestCardService;
 import services.DrawDestCardService;
 import ClientModel.PlayerHandDestinations;
 import ClientModel.TrainCarCard;
@@ -98,7 +99,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             case 2:
                 clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
-                
+
                 break;
             case 3:
                 clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
@@ -188,6 +189,9 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
         else
         {
+            DiscardDestCardService discardDestCardService = new DiscardDestCardService();
+            discardDestCardService.discardCard(clientModel.getMainPlayer().getPlayerHandDestinations()
+                    .getCardList().get(destChoiceValue - 1));
             clientModel.deleteMainPlayersDestinationCardFromHand(
                     clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }

@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 import java.util.ArrayList;
@@ -297,6 +299,12 @@ public class TrainView extends View
                 drawClaimedRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());
             }
         }
+
+        for(int i = 0; i < cities.size(); i++)
+        {
+            drawCityName(canvas, cities.get(i).getX() - 30, cities.get(i).getY() - 50, cities.get(i).getName());
+        }
+
     }
     //NOTE: You can force the UI to redraw itself with the postinvalidate method
     //NOTE: Each use of canvas.rotate() needs an instance of canvas.save() before it (to save the unrotated state)
@@ -310,6 +318,15 @@ public class TrainView extends View
         canvas.drawCircle(x, y, 26, paint);
         paint.setColor(Color.RED);
         canvas.drawCircle(x, y, 23, paint);
+    }
+
+    private void drawCityName(Canvas canvas, float x, float y, String text) {
+        TextPaint textPaint = new TextPaint();
+        textPaint.setTextSize(30);
+        textPaint.setTextAlign(Paint.Align.LEFT);
+        textPaint.setColor(Color.BLUE);
+        textPaint.setTypeface(Typeface.create("Arial", Typeface.BOLD));
+        canvas.drawText(text, x, y, textPaint);
     }
 
     //PRE: Set the paint and paint2 objects to the colors of the route(s)

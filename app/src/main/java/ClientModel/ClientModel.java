@@ -258,6 +258,13 @@ public class ClientModel extends Observable
         notifyObservers(this.mainPlayer.getPlayerHandTrains());
     }
 
+    public void addTrainCardToPlayerByHand(String name, TrainCarCard trainCarCard)
+    {
+        activeGame.getPlayerByName(name).addTrainCardToHand(trainCarCard);
+        setChanged();
+        notifyObservers(this.activeGame.getPlayerByName(name).getPlayerHandTrains());
+    }
+
     public void deleteMainPlayersDestinationCardFromHand(DestinationCards destinationCards)
     {
 

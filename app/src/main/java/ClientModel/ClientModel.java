@@ -57,7 +57,6 @@ public class ClientModel extends Observable
 
     public void addGame(Game newGame)
     {
-
         boolean isPresent = false;
         int check = newGame.getGameNum();
         for(Game game : gameList)

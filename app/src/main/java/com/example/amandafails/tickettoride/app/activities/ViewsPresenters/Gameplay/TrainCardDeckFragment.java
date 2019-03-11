@@ -3,6 +3,7 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Game
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,10 +125,10 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
 
 
         clientModel.getActiveGame().setNumCardsInDeck(101);
-//        FragmentManager manager = getActivity().getSupportFragmentManager();
-//        if(manager.getBackStackEntryCount() > 0) {
-//            manager.popBackStack();
-//        }
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        if(manager.getBackStackEntryCount() > 0) {
+            manager.popBackStack();
+        }
     }
 
     public void drawCards() {

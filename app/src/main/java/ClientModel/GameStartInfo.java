@@ -7,6 +7,7 @@ public class GameStartInfo
     private ArrayList<String> playersAndColors;
     private ArrayList<TrainCarCard> cardsInHand;
     private String currentTurnPlayer;
+    private ArrayList<TrainCarCard> startingFaceUps;
 
     public GameStartInfo()
     {
@@ -35,5 +36,13 @@ public class GameStartInfo
 
     public void setCurrentTurnPlayer(String currentTurnPlayer) {
         this.currentTurnPlayer = currentTurnPlayer;
+    }
+
+    public ArrayList<TrainCarCard> getStartingFaceUps() {
+        return startingFaceUps;
+    }
+
+    public void setStartingFaceUps(ArrayList<TrainCarCard> startingFaceUps) {
+        this.startingFaceUps = startingFaceUps;
     }
 }

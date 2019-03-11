@@ -26,4 +26,9 @@ public class TrainCarDiscard
         discardPile.clear();
     }
 
+    public int size()
+    {
+        return discardPile.size();
+    }
+
 }

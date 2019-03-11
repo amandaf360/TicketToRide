@@ -10,11 +10,13 @@ import java.util.Set;
 
 import commands.*;
 import responses.PollResponse;
+import servermodel.ActiveGame;
 import servermodel.DecksStateData;
 import servermodel.Game;
 import servermodel.GameStartInfo;
 import servermodel.Message;
 import servermodel.ModelRoot;
+import servermodel.TrainCarCard;
 import servermodel.User;
 
 public class ClientCommandManager
@@ -184,8 +186,21 @@ public class ClientCommandManager
         destinationCardsDiscarded.get(otherUser).add(userDiscarded);
     }
 
-    public void setDeckState(String username, DecksStateData data)
+    public void setDeckState(String username)
     {
+        ModelRoot root = ModelRoot.getModel();
+        ActiveGame game = root.getGameByUser(username);
+        ArrayList<String> colors = game.getFaceUpCards().getColors();
+        ArrayList<TrainCarCard> cards = new ArrayList<>();
+        for(int i = 0; i < colors.size(); i++)
+        {
+            cards.add(new TrainCarCard(colors.get(i)));
+        }
+        DecksStateData data = new DecksStateData();
+        data.setFaceUpCards(cards);
+        data.setTrainDeckSize(game.getTrainDeck().size());
+        data.setTrainDiscardSize(game.getTrainCarDiscard().size());
+        data.setDestDeckSize(game.getDestinationDeck().size());
         deckStateUpdate.put(username, data);
     }
 

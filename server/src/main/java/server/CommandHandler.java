@@ -111,6 +111,14 @@ public class CommandHandler implements HttpHandler
         {
             ClientCommandManager.getCommandManager().pollClear(wrappedRequest.getStringList().get(0));
         }
+        if(commandType.equals("drawDestCards"))
+        {
+            System.out.println("HELLO");
+            if(responseString == null)
+            {
+                System.out.println("PLEEESE don't get here");
+            }
+        }
         writeResponse(exchange, HttpURLConnection.HTTP_OK, responseString);
     }
 

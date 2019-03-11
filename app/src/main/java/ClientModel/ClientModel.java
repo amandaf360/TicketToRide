@@ -57,7 +57,6 @@ public class ClientModel extends Observable
 
     public void addGame(Game newGame)
     {
-
         boolean isPresent = false;
         int check = newGame.getGameNum();
         for(Game game : gameList)
@@ -274,6 +273,14 @@ public class ClientModel extends Observable
         //activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
+    }
+
+    public void decrementPlayerDestCardNum(String name)
+    {
+        int in = activeGame.getPlayerByName(name).getNumDestCards() - 1;
+        activeGame.getPlayerByName(name).setNumDestCards(in);
+        setChanged();
+        notifyObservers(this.activeGame.getPlayerByName(name));
     }
 
     public void addMessageToChat(Message message)

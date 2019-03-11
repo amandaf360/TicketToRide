@@ -98,6 +98,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             case 2:
                 clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
+                
                 break;
             case 3:
                 clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));

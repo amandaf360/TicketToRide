@@ -210,7 +210,6 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         populatePlayerCardsValues();
     }
 
-
     private void populatePlayerNames()
     {
         ArrayList<String> arrayList = new ArrayList<>();
@@ -420,7 +419,7 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
             int numDestinations;
             if(clientModel.getActiveGame().getPlayers().size() > i)
             {
-                numDestinations = clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().size();
+                numDestinations = clientModel.getActiveGame().getPlayers().get(i).getNumDestCards();
             }
             else
             {

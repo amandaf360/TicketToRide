@@ -83,8 +83,6 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        clientModel = ClientModel.getInstance();
-        clientModel.addObserver(this);
 //
 //        // Find the view pager that will allow the user to swipe between fragments
 //        ViewPager viewPager = (ViewPager)getView().findViewById(R.id.viewpager);

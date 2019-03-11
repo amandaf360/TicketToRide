@@ -26,7 +26,7 @@
         <activity android:name=".app.activities.ViewsPresenters.Lobby.LobbyActivityView"/>
         <activity android:name=".app.activities.ViewsPresenters.GamesRoom.GamesRoomView"/>
         <activity android:name=".app.activities.ViewsPresenters.Gameplay.GameplayView"/>
-
+            #android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
     </application>
 
 </manifest>

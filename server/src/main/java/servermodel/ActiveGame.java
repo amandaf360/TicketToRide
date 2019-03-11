@@ -6,6 +6,7 @@ public class ActiveGame
 {
     private DestCardDeck destinationDeck;
     private TrainCarDeck trainDeck;
+    private TrainCarDiscard trainCarDiscard;
     private ArrayList<Player> players;
     private ArrayList<Message> chatHistory;
     private ArrayList<Message> gameHistory;
@@ -22,6 +23,8 @@ public class ActiveGame
         gameHistory = new ArrayList<>();
         faceUpCards = new FaceUpCards();
         routes = new ArrayList<>();
+        trainCarDiscard = new TrainCarDiscard();
+
         initializeRoutes();
         for(int i = 0; i < 5; i ++)
         {
@@ -95,6 +98,14 @@ public class ActiveGame
     public void addMessage(Message message)
     {
         chatHistory.add(message);
+    }
+
+    public TrainCarDiscard getTrainCarDiscard() {
+        return trainCarDiscard;
+    }
+
+    public void setTrainCarDiscard(TrainCarDiscard trainCarDiscard) {
+        this.trainCarDiscard = trainCarDiscard;
     }
 
     public boolean containsUser(String username)

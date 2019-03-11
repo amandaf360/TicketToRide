@@ -188,7 +188,7 @@ public class ClientModel extends Observable
     {
         activeGame.changeCardByIndex(index, trainCarCard);
         setChanged();
-        notifyObservers(); // maybe ought to send something.
+        notifyObservers(this); // maybe ought to send something.
     }
 
     public User getUser() {
@@ -523,6 +523,27 @@ public class ClientModel extends Observable
         setChanged();
         notifyObservers(new Boolean(activeGameStarted));
     }
+
+    public void setActiveGameTrainCards(int numCards)
+    {
+        getActiveGame().setNumCardsInDeck(numCards);
+        setChanged();
+        notifyObservers(this);
+    }
+
+    public void setActiveGameDestCards(int numCards)
+    {
+        getActiveGame().setNumDestCardsInDeck(numCards);
+        setChanged();
+        notifyObservers(this);
+    }
+
+    public void manuallyNotifyObservers()
+    {
+        setChanged();
+        notifyObservers(this);
+    }
+
 
 
 

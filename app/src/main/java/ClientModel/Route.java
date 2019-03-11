@@ -34,7 +34,6 @@ public class Route
         this.color = colorOne;
         this.length = length;
         claimedBy = null;
-
     }
 
     private String stringLogic(String cityString)

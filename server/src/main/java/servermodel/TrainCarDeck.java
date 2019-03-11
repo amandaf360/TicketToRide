@@ -78,4 +78,9 @@ public class TrainCarDeck
     public void setDiscardPile(TrainCarDiscard discardPile) {
         this.discardPile = discardPile;
     }
+
+    public int size()
+    {
+        return deck.size();
+    }
 }

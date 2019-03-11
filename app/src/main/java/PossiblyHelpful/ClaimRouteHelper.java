@@ -18,7 +18,7 @@ public class ClaimRouteHelper
     public ClaimRouteHelper(TrainView.MapRoute mapRoute)
     {
         Route route = new Route(mapRoute.getLength(), mapRoute.getLength(), mapRoute.getLength(),
-                mapRoute.getLength(), mapRoute.getPaint(), mapRoute.getPaint2(), mapRoute.getName());
+                mapRoute.getLength(), mapRoute.getPaint(), mapRoute.getPaint2(), mapRoute.getCity1());
 
         indexOfRouteClaimed = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
     }
@@ -50,7 +50,7 @@ public class ClaimRouteHelper
     public void claimRoute(TrainView.MapRoute mapRoute) // use this function if you use the empty constructor
     {
         Route route = new Route(mapRoute.getLength(), mapRoute.getLength(), mapRoute.getLength(),
-                mapRoute.getLength(), mapRoute.getPaint(), mapRoute.getPaint2(), mapRoute.getName());
+                mapRoute.getLength(), mapRoute.getPaint(), mapRoute.getPaint2(), mapRoute.getCity1());
 
         indexOfRouteClaimed = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
 

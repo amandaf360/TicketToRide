@@ -2,6 +2,7 @@ package responses;
 
 import java.util.ArrayList;
 
+import ClientModel.DecksStateData;
 import ClientModel.Game;
 import ClientModel.GameStartInfo;
 import ClientModel.Message;
@@ -18,6 +19,7 @@ public class PollResponse
     private ArrayList<String> discardedDestCards;
     private ArrayList<String> destinationCardsDrawn;
     private GameStartInfo gameStartInfo;
+    private DecksStateData deckData;
 
 
     public PollResponse() {
@@ -101,5 +103,13 @@ public class PollResponse
 
     public void setGameStartInfo(GameStartInfo gameStartInfo) {
         this.gameStartInfo = gameStartInfo;
+    }
+
+    public DecksStateData getDeckData() {
+        return deckData;
+    }
+
+    public void setDeckData(DecksStateData deckData) {
+        this.deckData = deckData;
     }
 }

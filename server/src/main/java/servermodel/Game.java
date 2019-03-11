@@ -10,10 +10,12 @@ public class Game
     private int gameNum;
     private int currentPlayers;
     private String creator;
+    private boolean hasStarted;
 
 
     public Game()
     {
+        hasStarted = false;
         players = new ArrayList<Player>();
     }
 
@@ -124,5 +126,13 @@ public class Game
             playersAndColors.add(players.get(i).getColor());
         }
         return playersAndColors;
+    }
+
+    public boolean isHasStarted() {
+        return hasStarted;
+    }
+
+    public void setHasStarted(boolean hasStarted) {
+        this.hasStarted = hasStarted;
     }
 }

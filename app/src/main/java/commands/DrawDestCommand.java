@@ -19,5 +19,6 @@ public class DrawDestCommand implements ICommand
     {
         ClientModel model = ClientModel.getInstance();
         model.addDestinationCardToActivePlayersHand(cardsDrawn);
+
     }
 }

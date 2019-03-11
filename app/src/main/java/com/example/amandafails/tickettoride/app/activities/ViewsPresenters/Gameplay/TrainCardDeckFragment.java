@@ -104,7 +104,7 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
         card5.setText(faceUpCards.get(4).getColor());
 
         // set how many cards are left in deck - grab from model!
-        deck.setText("50");
+        deck.setText(Integer.toString(clientModel.getActiveGame().getNumCardsInDeck()));
 
         return v;
     }

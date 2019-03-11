@@ -41,6 +41,7 @@ public class DiscardDestService
             {
                 manager.addCardDiscarded(username, allUsers.get(i));
             }
+            manager.setDeckState(username);
         }
         return null;
     }

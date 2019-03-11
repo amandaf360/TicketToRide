@@ -14,6 +14,7 @@ public class Game
     private int indexOfCurrentPlayer;
     private List<TrainCarCard> faceUpCards;
     private int numCardsInDeck;
+    private int numDestCardsInDeck;
 
     public Game()
     {
@@ -21,6 +22,7 @@ public class Game
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();
         numCardsInDeck = 0;
+        numDestCardsInDeck = 0;
         TrainCarCard card1 = new TrainCarCard("blue");
         faceUpCards.add(card1);
         TrainCarCard card2 = new TrainCarCard("also blue");
@@ -171,5 +173,13 @@ public class Game
             }
         }
         return null;
+    }
+
+    public int getNumDestCardsInDeck() {
+        return numDestCardsInDeck;
+    }
+
+    public void setNumDestCardsInDeck(int numDestCardsInDeck) {
+        this.numDestCardsInDeck = numDestCardsInDeck;
     }
 }

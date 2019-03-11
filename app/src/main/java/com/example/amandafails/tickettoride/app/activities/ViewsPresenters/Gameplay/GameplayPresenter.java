@@ -1,6 +1,7 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,6 +18,7 @@ import services.DrawDestCardService;
 import ClientModel.PlayerHandDestinations;
 import ClientModel.TrainCarCard;
 import ClientModel.Route;
+import ClientModel.AsyncDemo;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
@@ -71,12 +73,20 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 showDialog(passer);
             }
         }
+
+        if(o.getClass() == Route.class)
+        {
+            view.drawRoutetoScreen((Route)o);
+        }
+        view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
     }
 
 
     private int numDemoClicks = 0;
     public void demo()
     {
+        //AsyncDemo demo = new AsyncDemo(this);
+        //demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         switch (numDemoClicks)
         {
             case 0:
@@ -87,22 +97,28 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().addTrainCardToHand(new TrainCarCard("locomotive"));
                 break;
             case 2:
-                ClaimRouteHelper claim;
-                claim = new ClaimRouteHelper(
-                        new Route("Denver", "Oklahoma City", "red", 4));
-                claim.claimRoute();
+
+                clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
                 break;
             case 3:
                 clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
-                clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                if(clientModel.getActiveGame().getPlayers().size() > 1)
+                {
+                    clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                }
                 clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
-                clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                if(clientModel.getActiveGame().getPlayers().size() > 1)
+                {
+                    clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                }
                 break;
-
-
-
         }
         numDemoClicks++;
+    }
+
+    public void displayToast(String toastString)
+    {
+        view.showToast(toastString);
     }
 
 

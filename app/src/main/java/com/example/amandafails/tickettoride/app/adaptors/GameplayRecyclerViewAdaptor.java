@@ -62,10 +62,13 @@ public class GameplayRecyclerViewAdaptor extends RecyclerView.Adapter<GameplayRe
                 hexColor = "#008000";
                 break;
             case "yellow":
-                hexColor = "ffff00";
+                hexColor = "#ffff00";
                 break;
             case "black":
-                hexColor = "000000";
+                hexColor = "#000000";
+                break;
+            default:
+                hexColor = "#00ff00";
                 break;
         }
 

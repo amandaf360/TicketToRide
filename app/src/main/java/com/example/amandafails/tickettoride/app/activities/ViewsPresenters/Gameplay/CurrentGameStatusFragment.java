@@ -420,8 +420,7 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
             int numDestinations;
             if(clientModel.getActiveGame().getPlayers().size() > i)
             {
-                numDestinations = clientModel.getActiveGame().getPlayers().get(i)
-                        .getNumDestCards();
+                numDestinations = clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().size();
             }
             else
             {

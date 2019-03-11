@@ -292,7 +292,10 @@ public class TrainView extends View
                     default:break;
                 }
             }
-            drawClaimedRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());
+            if(routes.get(i).getClaimedColor2() != null || routes.get(i).getClaimedColor1() != null)
+            {
+                drawClaimedRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());
+            }
         }
     }
     //NOTE: You can force the UI to redraw itself with the postinvalidate method
@@ -344,15 +347,41 @@ public class TrainView extends View
     {
         canvas.save();
         canvas.rotate(angle, x, y);
+
+        int tempRectLength = rectLength;
+        int tempRectWidth = rectWidth;
+
+        rectLength = claimedRectLength;
+        rectWidth = claimedRectWidth;
+
         if(length % 2 == 0)
         {
             //each iteration of the for-loop makes two rectangles, one in each direction
             for(int i = 0; i < length/2; i++)
             {
-                drawRectangle(canvas, x, y + (i + 0.5f)*rectLength + (i + 0.5f)*spacing, doubleRoute);
-                drawRectangle(canvas, x, y - (i + 0.5f)*rectLength - (i + 0.5f)*spacing, doubleRoute);
+                drawRectangle(canvas, x, y + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, doubleRoute);
+                drawRectangle(canvas, x, y - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, doubleRoute);
             }
         }
+        else
+        {
+            //this makes the first rectangle
+            drawRectangle(canvas, x, y, doubleRoute);
+
+            //this makes the rest, in sets of two
+            for(int i = 1; i < (length + 1)/2; i++)
+            {
+                float topCenter = y + i*tempRectLength + i*spacing;
+                drawRectangle(canvas, x, topCenter, doubleRoute);
+                float bottomCenter = y - i*tempRectLength - i*spacing;
+                drawRectangle(canvas, x, bottomCenter, doubleRoute);
+            }
+        }
+
+        rectLength = tempRectLength;
+        rectWidth = tempRectWidth;
+
+        canvas.restore();
     }
 
     private void drawRectangle(Canvas canvas, float x, float y, boolean doubleRoute)
@@ -395,17 +424,20 @@ public class TrainView extends View
             {
                 if(routes.get(i).getCity2().equals(route.getCityTwo()))
                 {
-                    //drawClaimedRoute(new Canvas(), routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength());
+                    routes.get(i).setClaimed1(true);
+                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
                 }
             }
             else if(routes.get(i).getCity2().equals(route.getCityOne()))
             {
                 if(routes.get(i).getCity1().equals(route.getCityTwo()))
                 {
-                    //drawClaimedRoute(new Canvas(), routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength());
+                    routes.get(i).setClaimed1(true);
+                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
                 }
             }
         }
+        postInvalidate();
     }
 
 

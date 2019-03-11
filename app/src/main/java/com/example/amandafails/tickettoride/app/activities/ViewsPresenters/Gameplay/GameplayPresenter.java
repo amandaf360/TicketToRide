@@ -92,11 +92,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().addTrainCardToHand(new TrainCarCard("locomotive"));
                 break;
             case 2:
-                /*ClaimRouteHelper claim;
-                claim = new ClaimRouteHelper(
-                        new Route("Denver", "Oklahoma City", "red", 4));
-                claim.claimRoute();*/
-                clientModel.claimRouteByIndex(1, clientModel.getActiveGame().getPlayers().get(0).getName());
+
+                clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
                 break;
             case 3:
                 clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));

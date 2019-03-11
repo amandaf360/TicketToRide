@@ -69,7 +69,8 @@ public class AsyncDemo extends AsyncTask<Void, DemoCallback, Void>
                 @Override
                 public void execute() {
                     presenter.displayToast("Claiming route");
-                    ClaimRouteHelper = new ClaimRouteHelper(2);
+                    ClaimRouteHelper helper = new ClaimRouteHelper(2);
+                    helper.claimRoute();
                 }
             });
             Thread.sleep(3000);

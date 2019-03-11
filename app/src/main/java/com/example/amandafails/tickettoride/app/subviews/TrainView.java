@@ -121,103 +121,103 @@ public class TrainView extends View
         //Total number of routes must = 77
         //each section includes doubles, but excludes doubles that have been covered by a previous section
         //red routes (total 7)
-        routes.add(new MapRoute(980, 570, 124, 5, false, "red", "none", " Helena", " Omaha"));
-        routes.add(new MapRoute(700, 790, 110, 3, true, "red", "yellow", " Salt Lake City", " Denver"));
-        routes.add(new MapRoute(1000, 970, 125, 4, false, "red", "none", " Denver", " Oklahoma City"));
-        routes.add(new MapRoute(960, 1310, 88, 4, false, "red", "none", " El Paso", " Dallas"));
-        routes.add(new MapRoute(1760, 1560, 114, 6, false, "red", "none", " New Orleans", " Miami"));
-        routes.add(new MapRoute(1490, 600, 130, 3, false, "red", "none", " Duluth", " Chicago"));
-        routes.add(new MapRoute(2240, 560, 40, 2, true, "red", "yellow", " Boston", " New York City"));
+        routes.add(new MapRoute(980, 570, 124, 5, false, "red", "none", "Helena", "Omaha"));
+        routes.add(new MapRoute(700, 790, 110, 3, true, "red", "yellow", "Salt Lake City", "Denver"));
+        routes.add(new MapRoute(1000, 970, 125, 4, false, "red", "none", "Denver", "Oklahoma City"));
+        routes.add(new MapRoute(960, 1310, 88, 4, false, "red", "none", "El Paso", "Dallas"));
+        routes.add(new MapRoute(1760, 1560, 114, 6, false, "red", "none", "New Orleans", "Miami"));
+        routes.add(new MapRoute(1490, 600, 130, 3, false, "red", "none", "Duluth", "Chicago"));
+        routes.add(new MapRoute(2240, 560, 40, 2, true, "red", "yellow", "Boston", "New York City"));
 
         //yellow routes (total 5)
-        routes.add(new MapRoute(500, 300, 114, 6, false, "yellow", "none", " Seattle", " Helena"));
-        routes.add(new MapRoute(160, 1000, 152, 3, true, "purple", "yellow", " San Francisco", " Los Angeles"));
-        routes.add(new MapRoute(960, 1180, 60, 5, false, "yellow", "none", " El Paso", " Oklahoma City"));
-        routes.add(new MapRoute(1640, 1300, 44, 4, true, "yellow", "orange", " New Orleans", " Atlanta"));
-        routes.add(new MapRoute(1820, 900, 36, 4, false, "yellow", "none", " Nashville", " Pittsburgh"));
+        routes.add(new MapRoute(500, 300, 114, 6, false, "yellow", "none", "Seattle", "Helena"));
+        routes.add(new MapRoute(160, 1000, 152, 3, true, "purple", "yellow", "San Francisco", "Los Angeles"));
+        routes.add(new MapRoute(960, 1180, 60, 5, false, "yellow", "none", "El Paso", "Oklahoma City"));
+        routes.add(new MapRoute(1640, 1300, 44, 4, true, "yellow", "orange", "New Orleans", "Atlanta"));
+        routes.add(new MapRoute(1820, 900, 36, 4, false, "yellow", "none", "Nashville", "Pittsburgh"));
 
         //blue routes (total 7)
-        routes.add(new MapRoute(370, 530, 137, 6, false, "blue", "none", " Portland", " Salt Lake City"));
-        routes.add(new MapRoute(950, 250, 45, 4, false, "blue", "none", " Helena", " Winnipeg"));
-        routes.add(new MapRoute(950, 1080, 85, 3, false, "blue", "none", " Santa Fe", " Oklahoma City"));
-        routes.add(new MapRoute(1420, 720, 88, 4, false, "blue", "none", " Omaha", " Chicago"));
-        routes.add(new MapRoute(1380, 880, 101, 2, true, "blue", "purple", " Kansas City", " Saint Louis"));
-        routes.add(new MapRoute(1900, 1410, 157, 5, false, "blue", "none", " Atlanta", " Miami"));
-        routes.add(new MapRoute(2160, 450, 2, 3, false, "blue", "none", " New York City", " Montreal"));
+        routes.add(new MapRoute(370, 530, 137, 6, false, "blue", "none", "Portland", "Salt Lake City"));
+        routes.add(new MapRoute(950, 250, 45, 4, false, "blue", "none", "Helena", "Winnipeg"));
+        routes.add(new MapRoute(950, 1080, 85, 3, false, "blue", "none", "Santa Fe", "Oklahoma City"));
+        routes.add(new MapRoute(1420, 720, 88, 4, false, "blue", "none", "Omaha", "Chicago"));
+        routes.add(new MapRoute(1380, 880, 101, 2, true, "blue", "purple", "Kansas City", "Saint Louis"));
+        routes.add(new MapRoute(1900, 1410, 157, 5, false, "blue", "none", "Atlanta", "Miami"));
+        routes.add(new MapRoute(2160, 450, 2, 3, false, "blue", "none", "New York City", "Montreal"));
 
         //green routes (total 7)
-        routes.add(new MapRoute(130, 570, 7, 5, true, "green", "purple", " Portland", " San Francisco"));
-        routes.add(new MapRoute(800, 630, 170, 4, false, "green", "none", " Helena", " Denver"));
-        routes.add(new MapRoute(1020, 1400, 104, 6, false, "green", "none", " El Paso", " Houston"));
-        routes.add(new MapRoute(1560, 820, 35, 2, true, "green", "white", " Saint Louis", " Chicago"));
-        routes.add(new MapRoute(1710, 830, 63, 4, false, "green", "none", " Saint Louis", " Pittsburgh"));
-        routes.add(new MapRoute(2040, 670, 67, 2, true, "green", "white", " Pittsburgh", " New York City"));
-        routes.add(new MapRoute(1450, 1280, 350, 3, false, "green", "none", " Little Rock", " New Orleans"));
+        routes.add(new MapRoute(130, 570, 7, 5, true, "green", "purple", "Portland", "San Francisco"));
+        routes.add(new MapRoute(800, 630, 170, 4, false, "green", "none", "Helena", "Denver"));
+        routes.add(new MapRoute(1020, 1400, 104, 6, false, "green", "none", "El Paso", "Houston"));
+        routes.add(new MapRoute(1560, 820, 35, 2, true, "green", "white", "Saint Louis", "Chicago"));
+        routes.add(new MapRoute(1710, 830, 63, 4, false, "green", "none", "Saint Louis", "Pittsburgh"));
+        routes.add(new MapRoute(2040, 670, 67, 2, true, "green", "white", "Pittsburgh", "New York City"));
+        routes.add(new MapRoute(1450, 1280, 350, 3, false, "green", "none", "Little Rock", "New Orleans"));
 
         //orange routes (total 6)
-        routes.add(new MapRoute(1060, 440, 95, 6, false, "orange", "none", " Helena", " Duluth"));
-        routes.add(new MapRoute(330, 790, 80, 5, true, "orange", "white", " San Francisco", " Salt Lake City"));
-        routes.add(new MapRoute(500, 880, 31, 3, false, "orange", "none", " Las Vegas", " Salt Lake City"));
-        routes.add(new MapRoute(1050, 850, 93, 4, true, "orange", "black", " Denver", " Kansas City"));
-        routes.add(new MapRoute(1790, 700, 92, 3, true, "orange", "black", " Chicago", " Pittsburgh"));
-        routes.add(new MapRoute(2150, 750, 7, 2, true, "orange", "black", " New York City", " Washington"));
+        routes.add(new MapRoute(1060, 440, 95, 6, false, "orange", "none", "Helena", "Duluth"));
+        routes.add(new MapRoute(330, 790, 80, 5, true, "orange", "white", "San Francisco", "Salt Lake City"));
+        routes.add(new MapRoute(500, 880, 31, 3, false, "orange", "none", "Las Vegas", "Salt Lake City"));
+        routes.add(new MapRoute(1050, 850, 93, 4, true, "orange", "black", "Denver", "Kansas City"));
+        routes.add(new MapRoute(1790, 700, 92, 3, true, "orange", "black", "Chicago", "Pittsburgh"));
+        routes.add(new MapRoute(2150, 750, 7, 2, true, "orange", "black", "New York City", "Washington"));
 
         //purple routes (total 4)
-        routes.add(new MapRoute(670, 580, 26, 3, false, "purple", "none", " Helena", " Salt Lake City"));
-        routes.add(new MapRoute(1020, 750, 78, 4, false, "purple", "none", " Denver", " Omaha"));
-        routes.add(new MapRoute(1640, 480, 89, 6, false, "purple", "none", " Duluth", " Toronto"));
-        routes.add(new MapRoute(2020, 1460, 355, 4, false, "purple", "none", " Charleston", " Miami"));
+        routes.add(new MapRoute(670, 580, 26, 3, false, "purple", "none", "Helena", "Salt Lake City"));
+        routes.add(new MapRoute(1020, 750, 78, 4, false, "purple", "none", "Denver", "Omaha"));
+        routes.add(new MapRoute(1640, 480, 89, 6, false, "purple", "none", "Duluth", "Toronto"));
+        routes.add(new MapRoute(2020, 1460, 355, 4, false, "purple", "none", "Charleston", "Miami"));
 
         //White routes (total 4)
-        routes.add(new MapRoute(870, 60, 91, 6, false, "white", "none", " Calgary", " Winnipeg"));
-        routes.add(new MapRoute(680, 1020, 43, 5, false, "white", "none", " Denver", " Phoenix"));
-        routes.add(new MapRoute(1780, 580, 58, 4, false, "white", "none", " Toronto", " Chicago"));
-        routes.add(new MapRoute(1550, 1090, 80, 3, false, "white", "none", " Little Rock", " Nashville"));
+        routes.add(new MapRoute(870, 60, 91, 6, false, "white", "none", "Calgary", "Winnipeg"));
+        routes.add(new MapRoute(680, 1020, 43, 5, false, "white", "none", "Denver", "Phoenix"));
+        routes.add(new MapRoute(1780, 580, 58, 4, false, "white", "none", "Toronto", "Chicago"));
+        routes.add(new MapRoute(1550, 1090, 80, 3, false, "white", "none", "Little Rock", "Nashville"));
 
         //Black routes (total 4)
-        routes.add(new MapRoute(1260, 280, 155, 4, false, "black", "none", " Winnipeg", " Duluth"));
-        routes.add(new MapRoute(1890, 320, 75, 5, false, "black", "none", " Sault St Marie", " Montreal"));
-        routes.add(new MapRoute(1850, 1040, 86, 3, false, "black", "none", " Nashville", " Raleigh"));
-        routes.add(new MapRoute(490, 1270, 107, 6, false, "black", "none", " Los Angeles", " El Paso"));
+        routes.add(new MapRoute(1260, 280, 155, 4, false, "black", "none", "Winnipeg", "Duluth"));
+        routes.add(new MapRoute(1890, 320, 75, 5, false, "black", "none", "Sault St Marie", "Montreal"));
+        routes.add(new MapRoute(1850, 1040, 86, 3, false, "black", "none", "Nashville", "Raleigh"));
+        routes.add(new MapRoute(490, 1270, 107, 6, false, "black", "none", "Los Angeles", "El Paso"));
 
         //Gray routes (total...34?)
-        routes.add(new MapRoute(1400, 220, 125, 6, false, "gray", "none", " Winnipeg", " Sault St Marie"));
-        routes.add(new MapRoute(270, 120, 30, 1, true, "gray", "gray", " Vancouver", " Seattle"));
-        routes.add(new MapRoute(200, 250, 30, 1, true, "gray", "gray", " Seattle", " Portland"));
-        routes.add(new MapRoute(450, 60, 88, 3, false, "gray", "none", " Vancouver", " Calgary"));
-        routes.add(new MapRoute(440, 130, 74, 4, false, "gray", "none", " Seattle", " Calgary"));
-        routes.add(new MapRoute(680, 230, 155, 4, false, "gray", "none", " Calgary", " Helena"));
-        routes.add(new MapRoute(1490, 430, 70, 3, false, "gray", "none", " Sault St Marie", " Duluth"));
-        routes.add(new MapRoute(1780, 430, 105, 2, false, "gray", "none", " Sault St Marie", " Toronto"));
-        routes.add(new MapRoute(2050, 370, 45, 3, false, "gray", "none", " Toronto", " Montreal"));
-        routes.add(new MapRoute(2240, 360, 150, 2, true, "gray", "gray", " Montreal", " Boston"));
+        routes.add(new MapRoute(1400, 220, 125, 6, false, "gray", "none", "Winnipeg", "Sault St Marie"));
+        routes.add(new MapRoute(270, 120, 30, 1, true, "gray", "gray", "Vancouver", "Seattle"));
+        routes.add(new MapRoute(200, 250, 30, 1, true, "gray", "gray", "Seattle", "Portland"));
+        routes.add(new MapRoute(450, 60, 88, 3, false, "gray", "none", "Vancouver", "Calgary"));
+        routes.add(new MapRoute(440, 130, 74, 4, false, "gray", "none", "Seattle", "Calgary"));
+        routes.add(new MapRoute(680, 230, 155, 4, false, "gray", "none", "Calgary", "Helena"));
+        routes.add(new MapRoute(1490, 430, 70, 3, false, "gray", "none", "Sault St Marie", "Duluth"));
+        routes.add(new MapRoute(1780, 430, 105, 2, false, "gray", "none", "Sault St Marie", "Toronto"));
+        routes.add(new MapRoute(2050, 370, 45, 3, false, "gray", "none", "Toronto", "Montreal"));
+        routes.add(new MapRoute(2240, 360, 150, 2, true, "gray", "gray", "Montreal", "Boston"));
 
-        routes.add(new MapRoute(1930, 600,0, 2, false, "gray", "none", " Toronto", " Pittsburgh"));
-        routes.add(new MapRoute(2060, 950, 36, 2, true, "gray", "gray", " Washington", " Raleigh"));
-        routes.add(new MapRoute(1960, 890, 174, 2, false, "gray", "none", " Pittsburgh", " Raleigh"));
-        routes.add(new MapRoute(2030, 800, 125, 2, false, "gray", "none", " Pittsburgh", " Washington"));
-        routes.add(new MapRoute(1890, 1110, 60, 2, true, "gray", "gray", " Atlanta", " Raleigh"));
-        routes.add(new MapRoute(2020, 1130, 1, 2, false, "gray", "none", " Raleigh", " Charleston"));
-        routes.add(new MapRoute(1890, 1210, 105, 2, false, "gray", "none", " Atlanta", " Charleston"));
-        routes.add(new MapRoute(1740, 1110, 145, 1, false, "gray", "none", " Atlanta", " Nashville"));
-        routes.add(new MapRoute(1590, 980, 123, 2, false, "gray", "gray", " Saint Louis", " Nashville"));
-        routes.add(new MapRoute(1440, 1020, 22, 2, false, "gray", "none", " Little Rock", " Saint Louis"));
+        routes.add(new MapRoute(1930, 600,0, 2, false, "gray", "none", "Toronto", "Pittsburgh"));
+        routes.add(new MapRoute(2060, 950, 36, 2, true, "gray", "gray", "Washington", "Raleigh"));
+        routes.add(new MapRoute(1960, 890, 174, 2, false, "gray", "none", "Pittsburgh", "Raleigh"));
+        routes.add(new MapRoute(2030, 800, 125, 2, false, "gray", "none", "Pittsburgh", "Washington"));
+        routes.add(new MapRoute(1890, 1110, 60, 2, true, "gray", "gray", "Atlanta", "Raleigh"));
+        routes.add(new MapRoute(2020, 1130, 1, 2, false, "gray", "none", "Raleigh", "Charleston"));
+        routes.add(new MapRoute(1890, 1210, 105, 2, false, "gray", "none", "Atlanta", "Charleston"));
+        routes.add(new MapRoute(1740, 1110, 145, 1, false, "gray", "none", "Atlanta", "Nashville"));
+        routes.add(new MapRoute(1590, 980, 123, 2, false, "gray", "gray", "Saint Louis", "Nashville"));
+        routes.add(new MapRoute(1440, 1020, 22, 2, false, "gray", "none", "Little Rock", "Saint Louis"));
 
-        routes.add(new MapRoute(1290, 1100, 100, 2, false, "gray", "none", " Little Rock", " Oklahoma City"));
-        routes.add(new MapRoute(1290, 1220, 51, 2, false, "gray", "none", " Dallas", " Little Rock"));
-        routes.add(new MapRoute(1250, 1380, 140, 1, true, "gray", "gray", " Dallas", " Houston"));
-        routes.add(new MapRoute(1400, 1480, 87, 2, false, "gray", "none", " Houston", " New Orleans"));
-        routes.add(new MapRoute(1180, 1190, 185, 2, true, "gray", "gray", " Dallas", " Oklahoma City"));
-        routes.add(new MapRoute(1230, 970, 20, 2, true, "gray", "gray", " Oklahoma City", " Kansas City"));
-        routes.add(new MapRoute(1240, 780, 165, 1, true, "gray", "gray", " Kansas City", " Omaha"));
-        routes.add(new MapRoute(1270, 580, 30, 2, true, "gray", "gray", " Omaha", " Duluth"));
-        routes.add(new MapRoute(820, 980, 10, 2, false, "gray", "none", " Santa Fe", " Denver"));
-        routes.add(new MapRoute(770, 1200, 10, 2, false, "gray", "none", " Santa Fe", " El Paso"));
+        routes.add(new MapRoute(1290, 1100, 100, 2, false, "gray", "none", "Little Rock", "Oklahoma City"));
+        routes.add(new MapRoute(1290, 1220, 51, 2, false, "gray", "none", "Dallas", "Little Rock"));
+        routes.add(new MapRoute(1250, 1380, 140, 1, true, "gray", "gray", "Dallas", "Houston"));
+        routes.add(new MapRoute(1400, 1480, 87, 2, false, "gray", "none", "Houston", "New Orleans"));
+        routes.add(new MapRoute(1180, 1190, 185, 2, true, "gray", "gray", "Dallas", "Oklahoma City"));
+        routes.add(new MapRoute(1230, 970, 20, 2, true, "gray", "gray", "Oklahoma City", "Kansas City"));
+        routes.add(new MapRoute(1240, 780, 165, 1, true, "gray", "gray", "Kansas City", "Omaha"));
+        routes.add(new MapRoute(1270, 580, 30, 2, true, "gray", "gray", "Omaha", "Duluth"));
+        routes.add(new MapRoute(820, 980, 10, 2, false, "gray", "none", "Santa Fe", "Denver"));
+        routes.add(new MapRoute(770, 1200, 10, 2, false, "gray", "none", "Santa Fe", "El Paso"));
 
-        routes.add(new MapRoute(650, 1140, 60, 3, false, "gray", "none", " Santa Fe", " Phoenix"));
-        routes.add(new MapRoute(620, 1260, 110, 3, false, "gray", "none", " Phoenix", " El Paso"));
-        routes.add(new MapRoute(360, 1180, 92, 3, false, "gray", "none", " Los Angeles", " Phoenix"));
-        routes.add(new MapRoute(310, 1080, 49, 2, false, "gray", "none", " Los Angeles", " Las Vegas"));
+        routes.add(new MapRoute(650, 1140, 60, 3, false, "gray", "none", "Santa Fe", "Phoenix"));
+        routes.add(new MapRoute(620, 1260, 110, 3, false, "gray", "none", "Phoenix", "El Paso"));
+        routes.add(new MapRoute(360, 1180, 92, 3, false, "gray", "none", "Los Angeles", "Phoenix"));
+        routes.add(new MapRoute(310, 1080, 49, 2, false, "gray", "none", "Los Angeles", "Las Vegas"));
     }
 
     @Override
@@ -302,7 +302,7 @@ public class TrainView extends View
 
         for(int i = 0; i < cities.size(); i++)
         {
-            drawCityName(canvas, cities.get(i).getX() - 30, cities.get(i).getY() - 50, cities.get(i).getName());
+            drawCityName(canvas, cities.get(i).getX() - 30, cities.get(i).getY() - 30, cities.get(i).getName());
         }
 
     }
@@ -434,9 +434,13 @@ public class TrainView extends View
 
     public void claimRoute(Route route)
     {
+        System.out.println("*" + route.getCityOne() + "*");
+        System.out.println("*" + route.getCityTwo() + "*");
         paint.setColor(Color.parseColor(route.getClaimedBy().getColor()));
         for(int i = 0; i < routes.size(); i++)
         {
+            System.out.println("*" + routes.get(i).getCity1() + "*");
+            System.out.println("*" + routes.get(i).getCity2() + "*");
             if(routes.get(i).getCity1().equals(route.getCityOne()))
             {
                 if(routes.get(i).getCity2().equals(route.getCityTwo()))

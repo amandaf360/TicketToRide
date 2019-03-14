@@ -356,7 +356,7 @@ public class ClientModel extends Observable
         setChanged();
         notifyObservers(this.activeGame.getPlayerByName(name));
     }
-    
+
 
     public int getIndexOfMatchingUnclaimedRoute(Route route)
     {

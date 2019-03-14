@@ -21,7 +21,7 @@ public class ClaimRouteService
         ActiveGame game = root.getGameByUser(name);
 
 
-        Player player = game.getPlayerByUsername(name);
+
 
         game.claimRoute(index, name);
 
@@ -33,7 +33,7 @@ public class ClaimRouteService
         {
             if(!usernames.get(i).equals(name))
             {
-                manager.addCardsDrawn(index, name, usernames.get(i));
+                manager.claimRoute(index, name, usernames.get(i));
             }
         }
 

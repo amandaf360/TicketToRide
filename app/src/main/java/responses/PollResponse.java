@@ -20,6 +20,7 @@ public class PollResponse
     private ArrayList<String> destinationCardsDrawn;
     private GameStartInfo gameStartInfo;
     private DecksStateData deckData;
+    private ArrayList<String> routesClaimed;
 
 
     public PollResponse() {
@@ -111,5 +112,15 @@ public class PollResponse
 
     public void setDeckData(DecksStateData deckData) {
         this.deckData = deckData;
+    }
+
+    public ArrayList<String> getRoutesClaimed()
+    {
+        return routesClaimed;
+    }
+
+    public void setRoutesClaimed(ArrayList<String> routesClaimed)
+    {
+        this.routesClaimed = routesClaimed;
     }
 }

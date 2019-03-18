@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
-                android:text="Your Cards"
+                android:text="@string/yourCards"
                 android:textColor="@android:color/black"
                 android:textSize="35sp"
                 android:textStyle="bold" />
@@ -47,9 +47,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Red: "
+                    android:text="@string/red"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -58,9 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -78,9 +77,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Blue: "
+                    android:text="@string/blue"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -89,9 +88,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -109,9 +107,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Green: "
+                    android:text="@string/green"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -120,9 +118,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -140,9 +137,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Purple: "
+                    android:text="@string/purple"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -151,9 +148,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -171,9 +167,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Orange: "
+                    android:text="@string/orange"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -182,9 +178,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -202,9 +197,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="White: "
+                    android:text="@string/white"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -213,9 +208,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -233,9 +227,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Black: "
+                    android:text="@string/black"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -244,9 +238,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -264,9 +257,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Yellow: "
+                    android:text="@string/yellow"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -275,9 +268,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -295,9 +287,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="Wild: "
+                    android:text="@string/wild"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -306,9 +298,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
                     android:textColor="@android:color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -345,7 +336,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@android:color/black"
                 android:textSize="35sp"
                 android:textStyle="bold" />
@@ -367,7 +358,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Player"
+                        android:text="@string/player"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -379,7 +370,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Points"
+                        android:text="@string/points"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -391,7 +382,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Trains"
+                        android:text="@string/trains"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -403,7 +394,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Cards"
+                        android:text="@string/cards"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -415,7 +406,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Routes"
+                        android:text="@string/routes"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -427,7 +418,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Destinations"
+                        android:text="@string/dests"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -445,7 +436,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Player 1"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
@@ -518,7 +508,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Player 2"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
@@ -564,7 +553,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/player2_destinations_text"
@@ -575,7 +564,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </TableRow>
 
@@ -591,7 +580,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Player 3"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
@@ -637,7 +625,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/player3_destinations_text"
@@ -648,7 +636,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </TableRow>
 
@@ -664,7 +652,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Player 4"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
@@ -710,7 +697,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/player4_destinations_text"
@@ -721,7 +708,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </TableRow>
 
@@ -737,7 +724,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Player 5"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
@@ -783,7 +769,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/player5_destinations_text"
@@ -794,7 +780,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </TableRow>
             </TableLayout>
@@ -821,17 +807,17 @@
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chat" />
+                    android:text="@string/chat" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Game History" />
+                    android:text="@string/gameHistory" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Destination Cards" />
+                    android:text="@string/destCards" />
 
             </android.support.design.widget.TabLayout>
 

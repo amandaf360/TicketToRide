@@ -83,19 +83,6 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
-//        // Find the view pager that will allow the user to swipe between fragments
-//        ViewPager viewPager = (ViewPager)getView().findViewById(R.id.viewpager);
-//
-//        // Create an adapter that knows which fragment should be shown on each page
-//        ViewPagerAdaptor adapter = new ViewPagerAdaptor(getContext(), getFragmentManager());
-//
-//        // Set the adapter onto the view pager
-//        viewPager.setAdapter(adapter);
-//
-//        // Give the TabLayout the ViewPager
-//        TabLayout tabLayout = (TabLayout)getView().findViewById(R.id.tabLayout);
-//        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -194,13 +181,11 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         }
     }
 
-    public void update(Observable observable, Object o)
-    {
+    public void update(Observable observable, Object o) {
         populateEverything();
     }
 
-    private void populateEverything()
-    {
+    private void populateEverything() {
         populatePlayerNames();
         populatePlayerCards();
         populatePlayerPoints();
@@ -210,18 +195,14 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         populatePlayerCardsValues();
     }
 
-    private void populatePlayerNames()
-    {
+    private void populatePlayerNames() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             String name;
-            if(clientModel.getActiveGame().getPlayers().size() > i)
-            {
+            if(clientModel.getActiveGame().getPlayers().size() > i) {
                 name = clientModel.getActiveGame().getPlayers().get(i).getName();
             }
-            else
-            {
+            else {
                 name = null;
             }
 
@@ -237,31 +218,24 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
 
 
-        for(int i = 0; i < 5; i++)
-        {
-            if(arrayList.get(i) != null)
-            {
+        for(int i = 0; i < 5; i++) {
+            if(arrayList.get(i) != null) {
                 texts.get(i).setText(arrayList.get(i));
             }
-            else
-            {
+            else {
                 texts.get(i).setText("");
             }
         }
     }
 
-    private void populatePlayerPoints()
-    {
+    private void populatePlayerPoints() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             int points;
-            if(clientModel.getActiveGame().getPlayers().size() > i)
-            {
+            if(clientModel.getActiveGame().getPlayers().size() > i) {
                 points = clientModel.getActiveGame().getPlayers().get(i).getPoints();
             }
-            else
-            {
+            else {
                 points = -1;
             }
 
@@ -277,35 +251,26 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
 
 
-        for(int i = 0; i < 5; i++)
-        {
-            if(!arrayList.get(i).equals("-1"))
-            {
+        for(int i = 0; i < 5; i++) {
+            if(!arrayList.get(i).equals("-1")) {
                 texts.get(i).setText(arrayList.get(i));
             }
-            else
-            {
+            else {
                 texts.get(i).setText("");
             }
         }
     }
 
-
-    private void populatePlayerTrains()
-    {
+    private void populatePlayerTrains() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             int numTrains;
-            if(clientModel.getActiveGame().getPlayers().size() > i)
-            {
+            if(clientModel.getActiveGame().getPlayers().size() > i) {
                 numTrains = clientModel.getActiveGame().getPlayers().get(i).getNumTrains();
             }
-            else
-            {
+            else {
                 numTrains = -1;
             }
-
             arrayList.add(Integer.toString(numTrains));
         }
 
@@ -316,36 +281,25 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         texts.add(player4Trains);
         texts.add(player5Trains);
 
-
-
-        for(int i = 0; i < 5; i++)
-        {
-            if(!arrayList.get(i).equals("-1"))
-            {
-                texts.get(i).setText(arrayList.get(i));
-            }
-            else
-            {
+        for(int i = 0; i < 5; i++) {
+            if(!arrayList.get(i).equals("-1")) {
+                texts.get(i).setText(arrayList.get(i)); }
+            else {
                 texts.get(i).setText("");
             }
         }
     }
 
-    private void populatePlayerRoutes()
-    {
+    private void populatePlayerRoutes() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             int numRoutes;
-            if(clientModel.getActiveGame().getPlayers().size() > i)
-            {
+            if(clientModel.getActiveGame().getPlayers().size() > i) {
                 numRoutes = clientModel.getActiveGame().getPlayers().get(i).getNumRoutes();
             }
-            else
-            {
+            else {
                 numRoutes = -1;
             }
-
             arrayList.add(Integer.toString(numRoutes));
         }
 
@@ -356,36 +310,25 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         texts.add(player4Routes);
         texts.add(player5Routes);
 
-
-
-        for(int i = 0; i < 5; i++)
-        {
-            if(!arrayList.get(i).equals("-1"))
-            {
-                texts.get(i).setText(arrayList.get(i));
-            }
-            else
-            {
+        for(int i = 0; i < 5; i++) {
+            if(!arrayList.get(i).equals("-1")) {
+                texts.get(i).setText(arrayList.get(i)); }
+            else {
                 texts.get(i).setText("");
             }
         }
     }
 
-    private void populatePlayerCards()
-    {
+    private void populatePlayerCards() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             int numCards;
-            if(clientModel.getActiveGame().getPlayers().size() > i)
-            {
+            if(clientModel.getActiveGame().getPlayers().size() > i) {
                 numCards = clientModel.getActiveGame().getPlayers().get(i).getNumCards();
             }
-            else
-            {
+            else {
                 numCards = -1;
             }
-
             arrayList.add(Integer.toString(numCards));
         }
 
@@ -398,34 +341,26 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
 
 
-        for(int i = 0; i < 5; i++)
-        {
-            if(!arrayList.get(i).equals("-1"))
-            {
+        for(int i = 0; i < 5; i++) {
+            if(!arrayList.get(i).equals("-1")) {
                 texts.get(i).setText(arrayList.get(i));
             }
-            else
-            {
+            else {
                 texts.get(i).setText("");
             }
         }
     }
 
-    private void populatePlayerDestinations()
-    {
+    private void populatePlayerDestinations() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             int numDestinations;
-            if(clientModel.getActiveGame().getPlayers().size() > i)
-            {
+            if(clientModel.getActiveGame().getPlayers().size() > i) {
                 numDestinations = clientModel.getActiveGame().getPlayers().get(i).getNumDestCards();
             }
-            else
-            {
+            else {
                 numDestinations = -1;
             }
-
             arrayList.add(Integer.toString(numDestinations));
         }
 
@@ -438,21 +373,17 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
 
 
-        for(int i = 0; i < 5; i++)
-        {
-            if(!arrayList.get(i).equals("-1"))
-            {
+        for(int i = 0; i < 5; i++) {
+            if(!arrayList.get(i).equals("-1")) {
                 texts.get(i).setText(arrayList.get(i));
             }
-            else
-            {
+            else {
                 texts.get(i).setText("");
             }
         }
     }
 
-    private void populatePlayerCardsValues()
-    {
+    private void populatePlayerCardsValues() {
         ArrayList<String> arrayList = new ArrayList<>();
 
         arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumRed()));
@@ -464,7 +395,6 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
         arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives()));
         arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange()));
         arrayList.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple()));
-
 
         ArrayList<TextView> texts = new ArrayList<>();
 
@@ -480,13 +410,8 @@ public class CurrentGameStatusFragment extends Fragment implements Observer
 
 
 
-        for(int i = 0; i < 9; i++)
-        {
-
+        for(int i = 0; i < 9; i++) {
             texts.get(i).setText(arrayList.get(i));
-
         }
     }
-
-
 }

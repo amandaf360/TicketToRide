@@ -21,7 +21,7 @@ public class ViewPagerAdaptor extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new ChatFragment();
+            return new ChatFragmentView();
         }
         else if(position == 1){
             return new GameHistoryFragment();

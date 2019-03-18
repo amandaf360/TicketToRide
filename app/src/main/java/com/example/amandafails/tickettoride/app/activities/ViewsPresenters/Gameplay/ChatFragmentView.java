@@ -23,7 +23,7 @@ import java.util.Observer;
 import ClientModel.*;
 import services.CreateChatMessageService;
 
-public class ChatFragment extends Fragment implements Observer
+public class ChatFragmentView extends Fragment implements Observer
 {
 
     private ClientModel clientModel = ClientModel.getInstance();
@@ -38,7 +38,7 @@ public class ChatFragment extends Fragment implements Observer
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Message> lines;
 
-    public ChatFragment()
+    public ChatFragmentView()
     {
         this.clientModel.addObserver(this);
     }

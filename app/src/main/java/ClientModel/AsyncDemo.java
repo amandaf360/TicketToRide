@@ -129,7 +129,7 @@ public class AsyncDemo extends AsyncTask<Void, DemoCallback, Void>
             publishProgress(new DemoCallback() {
                 @Override
                 public void execute() {
-                    presenter.displayToast("Increasing opponent destination cards");
+                    presenter.displayToast("Increasing destination cards");
                 }
             });
             Thread.sleep(3000);

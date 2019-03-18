@@ -47,9 +47,7 @@ public class ClientModel extends Observable
         return gameList;
     }
 
-    public void setGameList(ArrayList<Game> gameList)
-    {
-
+    public void setGameList(ArrayList<Game> gameList) {
         this.gameList = gameList;
         setChanged();
         notifyObservers(this.gameList);

@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DestCard;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,7 +18,7 @@ import java.util.List;
 
 import ClientModel.*;
 
-public class DestCardFragment extends Fragment {
+public class DestCardFragmentView extends Fragment {
     private ClientModel clientModel = ClientModel.getInstance();
 
     // Recycler View stuff
@@ -27,7 +27,7 @@ public class DestCardFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Message> lines;
 
-    public DestCardFragment() {}
+    public DestCardFragmentView() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameHistory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +16,9 @@ import java.util.List;
 
 import ClientModel.*;
 
-public class GameHistoryFragment extends Fragment {
+public class GameHistoryFragmentView extends Fragment implements IGameHistoryFragmentView {
 
-    private ClientModel clientModel = ClientModel.getInstance();
+    private IGameHistoryFragmentPresenter presenter;
 
     // Recycler View stuff
     private RecyclerView mRecyclerView;
@@ -26,26 +26,23 @@ public class GameHistoryFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Message> lines;
 
-    public GameHistoryFragment() {}
+    public GameHistoryFragmentView() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dest_and_history, container, false);
+
+        presenter = new GameHistoryFragmentPresenter(this);
 
         lines = new ArrayList<>();
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
 
         mRecyclerView = v.findViewById(R.id.gameplay_recycler_view);
 
-        // display the chat already in the game
-        // assuming each chat message has a string and a player -- to get the color
-
-        // somehow get the dest. cards for each player?
-        //List<destCardMessage> destCardMessages = clientModel.getActiveGame().getChatMessages();
-        List<Message> chatMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        chatMessages.add(new Message("blue", "Hello. This is the first game history message"));
-        chatMessages.add(new Message("yellow", "Hi. This is the second games history message"));
-        lines.addAll(chatMessages);
+        List<Message> gameHistoryMessages = presenter.getGameHistory();
+        //gameHistoryMessages.add(new Message("blue", "Hello. This is the first game history message"));
+        //gameHistoryMessages.add(new Message("yellow", "Hi. This is the second games history message"));
+        lines.addAll(gameHistoryMessages);
 
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);

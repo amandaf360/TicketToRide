@@ -18,8 +18,9 @@ import java.util.List;
 
 import ClientModel.*;
 
-public class DestCardFragmentView extends Fragment {
-    private ClientModel clientModel = ClientModel.getInstance();
+public class DestCardFragmentView extends Fragment implements IDestCardFragmentView {
+
+    IDestCardFragmentPresenter presenter;
 
     // Recycler View stuff
     private RecyclerView mRecyclerView;
@@ -33,26 +34,14 @@ public class DestCardFragmentView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dest_and_history, container, false);
 
+        presenter = new DestCardFragmentPresenter(this);
+
         lines = new ArrayList<>();
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
 
         mRecyclerView = v.findViewById(R.id.gameplay_recycler_view);
 
-        // display the chat already in the game
-        // assuming each chat message has a string and a player -- to get the color
-
-        // somehow get the dest. cards for each player?
-        //List<destCardMessage> destCardMessages = clientModel.getActiveGame().getChatMessages();
-
-        ClientModel model = ClientModel.getInstance();
-        ArrayList<DestinationCards> cards = model.getMainPlayer().getPlayerHandDestinations().getCardList();
-        List<Message> destinationMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        for(int i = 0; i < cards.size(); i++)
-        {
-            Message message = new Message(model.getMainPlayer().getColor(), cards.get(i).toString());
-            destinationMessages.add(message);
-        }
-        lines.addAll(destinationMessages);
+        lines.addAll(presenter.getListDestCardMessages());
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -63,5 +52,16 @@ public class DestCardFragmentView extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         return v;
+    }
+
+    @Override
+    public void updateDestCardMessages() {
+        lines.clear();
+        lines.addAll(presenter.getListDestCardMessages());
+
+        // display in recyclerview
+        mAdapter = new GameplayRecyclerViewAdaptor(lines);
+        mAdapter.notifyDataSetChanged();
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

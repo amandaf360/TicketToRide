@@ -9,4 +9,5 @@ public interface ITrainCardDeckFragmentPresenter {
     int getNumCardsLeftInDeck();
     void drawCard();
     void demoFunction();
+    void exit();
 }

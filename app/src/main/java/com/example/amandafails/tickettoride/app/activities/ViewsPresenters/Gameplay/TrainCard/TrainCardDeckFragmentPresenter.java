@@ -56,5 +56,11 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
 
 
         clientModel.getActiveGame().setNumCardsInDeck(101);
+
+    }
+
+    @Override
+    public void exit() {
+        view.popFragment();
     }
 }

@@ -32,6 +32,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
     private Button card4;
     private Button card5;
     private Button deck;
+    private Button exit;
 
     //methods
 
@@ -93,6 +94,14 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
             }
         });
 
+        exit = v.findViewById(R.id.train_card_exit_button);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onExitClicked();
+            }
+        });
+
         List<TrainCarCard> faceUpCards = presenter.getTrainCarCards();
         // set what cards are shown - grab from model!
         card1.setText(faceUpCards.get(0).getColor());
@@ -107,6 +116,10 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         return v;
     }
 
+    public void onExitClicked() {
+
+    }
+
     // TEMPORARY FUNCTIONALITY!!!
     @Override
     public void onDeckClicked() {
@@ -116,11 +129,19 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         // FOR NOW, CALL DEMO FUNCTION
         presenter.demoFunction();
 
-        // FOR NOW, TREAT THIS AS AN "EXIT" BUTTON
+    }
+
+    @Override
+    public void popFragment() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }
+    }
+
+    @Override
+    public void setExitEnabled(boolean enabled) {
+        exit.setEnabled(enabled);
     }
 
     @Override

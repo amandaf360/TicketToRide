@@ -21,6 +21,11 @@ public class PlayerHandDestinations
 
 
     /**
+     * Default constructor
+     */
+    public PlayerHandDestinations() {}
+
+    /**
      * constructs a new PlayerHandDestinations object with cards already in
      * the list.
      * @param cardList this is the list of cards in the hand
@@ -84,5 +89,10 @@ public class PlayerHandDestinations
     public int getSize()
     {
         return cardList.size();
+    }
+
+
+    public ArrayList<DestinationCards> getCardList() {
+        return cardList;
     }
 }

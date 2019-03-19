@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
 import ClientModel.Route;
@@ -121,7 +122,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         // set fragment to draw card fragment
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction  = manager.beginTransaction();
-        CurrentGameStatusFragment currentGameStatusFragment = new CurrentGameStatusFragment();
+        CurrentGameStatusFragmentView currentGameStatusFragment = new CurrentGameStatusFragmentView();
         transaction.replace(R.id.frame, currentGameStatusFragment)
                 .addToBackStack(null)
                 .commit();

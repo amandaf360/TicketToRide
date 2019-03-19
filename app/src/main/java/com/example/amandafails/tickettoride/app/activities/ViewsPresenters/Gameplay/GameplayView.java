@@ -10,9 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
 import ClientModel.Route;
-import java.util.List;
 
 import ClientModel.ClientModel;
 
@@ -108,7 +108,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         // set fragment to draw card fragment
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction  = manager.beginTransaction();
-        TrainCardDeckFragment trainCardDeckFragment = new TrainCardDeckFragment();
+        TrainCardDeckFragmentView trainCardDeckFragment = new TrainCardDeckFragmentView();
         transaction.replace(R.id.frame, trainCardDeckFragment)
                 .addToBackStack(null)
                 .commit();

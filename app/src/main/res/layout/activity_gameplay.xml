@@ -108,7 +108,7 @@
 
     <!--<fragment-->
         <!--android:id="@+id/fragment_train_card_deck"-->
-        <!--android:name="com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCardDeckFragment"-->
+        <!--android:name="com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragment"-->
         <!--android:layout_width="0dp"-->
         <!--android:layout_height="match_parent"-->
         <!--android:layout_weight="1"-->

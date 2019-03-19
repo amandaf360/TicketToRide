@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.adaptors.ViewPagerAdaptor;
 
 import java.util.ArrayList;
 import java.util.Observable;

@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,22 +10,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayPresenter;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
 import ClientModel.ClientModel;
 import ClientModel.*;
 
-public class TrainCardDeckFragment extends Fragment implements Observer {
-
-    int NUM_FACE_UP_CARDS = 5;
-    // client model
-    ClientModel clientModel = ClientModel.getInstance();
+public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDeckFragmentView {
 
     // presenter
-    GameplayPresenter presenter;
+    ITrainCardDeckFragmentPresenter presenter;
 
     // buttons
     private Button card1;
@@ -36,9 +34,6 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
     private Button deck;
 
     //methods
-    public TrainCardDeckFragment() {
-        this.clientModel.addObserver(this);
-    } //empty public constructor
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +42,8 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_train_card_deck, container, false);
+
+        presenter = new TrainCardDeckFragmentPresenter(this);
 
         card1 = v.findViewById(R.id.train_card1_button);
         card1.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +93,7 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
             }
         });
 
-        List<TrainCarCard> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
+        List<TrainCarCard> faceUpCards = presenter.getTrainCarCards();
         // set what cards are shown - grab from model!
         card1.setText(faceUpCards.get(0).getColor());
         card2.setText(faceUpCards.get(1).getColor());
@@ -105,41 +102,30 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
         card5.setText(faceUpCards.get(4).getColor());
 
         // set how many cards are left in deck - grab from model!
-        deck.setText(Integer.toString(clientModel.getActiveGame().getNumCardsInDeck()));
+        deck.setText(String.format(Locale.getDefault(), "%d", presenter.getNumCardsLeftInDeck()));
 
         return v;
     }
 
+    // TEMPORARY FUNCTIONALITY!!!
+    @Override
     public void onDeckClicked() {
-        TrainCarCard card1 = new TrainCarCard("yellow");
-        TrainCarCard card2 = new TrainCarCard("pink");
-        TrainCarCard card3 = new TrainCarCard("purple");
-        TrainCarCard card4 = new TrainCarCard("indigo");
-        TrainCarCard card5 = new TrainCarCard("orange");
+        // will eventually just draw a card when the deck is clicked
+        // presenter.drawCard();
 
-        clientModel.setFaceUpCardByIndex(0, card1);
-        clientModel.setFaceUpCardByIndex(1, card2);
-        clientModel.setFaceUpCardByIndex(2, card3);
-        clientModel.setFaceUpCardByIndex(3, card4);
-        clientModel.setFaceUpCardByIndex(4, card5);
+        // FOR NOW, CALL DEMO FUNCTION
+        presenter.demoFunction();
 
-
-        clientModel.getActiveGame().setNumCardsInDeck(101);
+        // FOR NOW, TREAT THIS AS AN "EXIT" BUTTON
         FragmentManager manager = getActivity().getSupportFragmentManager();
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }
     }
 
-    public void drawCards() {
-        // call draw card service?
-        // once 2 cards are drawn, switch fragments?
-//        Intent i = new Intent(getActivity(), GameplayView.class);
-//        startActivity(i);
-    }
-
+    @Override
     public void setCardValues() {
-        List<TrainCarCard> faceUpCards = clientModel.getActiveGame().getFaceUpCards();
+        List<TrainCarCard> faceUpCards = presenter.getTrainCarCards();
         // set what cards are shown - grab from model!
         card1.setText(faceUpCards.get(0).getColor());
         card2.setText(faceUpCards.get(1).getColor());
@@ -148,13 +134,7 @@ public class TrainCardDeckFragment extends Fragment implements Observer {
         card5.setText(faceUpCards.get(4).getColor());
 
         // set how many cards are in the deck
-        deck.setText(Integer.toString(clientModel.getActiveGame().getNumCardsInDeck()));
+        deck.setText(String.format(Locale.getDefault(), "%d", presenter.getNumCardsLeftInDeck()));
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        // update the deck and face up cards
-        System.out.println("testing");
-        setCardValues();
-    }
 }

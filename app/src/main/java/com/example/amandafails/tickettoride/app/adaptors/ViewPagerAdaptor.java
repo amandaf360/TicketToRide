@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
+package com.example.amandafails.tickettoride.app.adaptors;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

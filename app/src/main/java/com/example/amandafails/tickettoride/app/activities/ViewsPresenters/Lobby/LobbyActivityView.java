@@ -30,8 +30,9 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<String> lines;
     int maxNumPlayers;
+    int currentNumPlayers;
+
     private LobbyActivityPresenter presenter;
-    private ClientModel clientModel = ClientModel.getInstance();
 
     private TextView gameName;
 
@@ -50,14 +51,14 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
         mRecyclerView = findViewById(R.id.my_lobby_recycler_view);
 
+        presenter.setNumCurrentPlayers();
+        presenter.getMaxNumPlayers();
+
         // display the players already in the game
-        int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
-        List<Player> players = clientModel.getActiveGame().getPlayers();
-        for(int i = 0; i < numPlayers; i++) {
+        List<Player> players = presenter.getCurrentPlayers();
+        for(int i = 0; i < currentNumPlayers; i++) {
             displayPlayer(players.get(i));
         }
-
-        maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
 
         if(lines.size() == maxNumPlayers) {
             ServerProxy proxy = new ServerProxy();
@@ -67,10 +68,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
-                int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
-                int sizeOfLines = lines.size();
-                maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
-
                 if(lines.size() == maxNumPlayers) {
                     System.out.println("HERE");
                     presenter.disconnectObserver();
@@ -80,9 +77,6 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
             @Override
             public void onChanged() {
-                int numPlayers = clientModel.getActiveGame().getCurrentPlayers();
-                int sizeOfLines = lines.size();
-                maxNumPlayers = clientModel.getActiveGame().getMaxPlayers();
                 if(lines.size() == maxNumPlayers) {
                     presenter.disconnectObserver();
                     switchActivity();
@@ -125,5 +119,15 @@ public class LobbyActivityView extends AppCompatActivity implements ILobbyView {
 
         Toast toast = Toast.makeText(context, error, duration);
         toast.show();
+    }
+
+    @Override
+    public void setMaxNumPlayers(int maxNumPlayers) {
+        this.maxNumPlayers = maxNumPlayers;
+    }
+
+    @Override
+    public void setCurrentNumPlayers(int currentNumPlayers) {
+        this.currentNumPlayers = currentNumPlayers;
     }
 }

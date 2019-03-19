@@ -1,10 +1,11 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import ClientModel.ClientModel;
+import ClientModel.*;
 
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
@@ -52,5 +53,20 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
                 startGame();
             }
         }
+    }
+
+    @Override
+    public void setNumCurrentPlayers() {
+        view.setCurrentNumPlayers(clientModel.getActiveGame().getCurrentPlayers());
+    }
+
+    @Override
+    public List<Player> getCurrentPlayers() {
+        return clientModel.getActiveGame().getPlayers();
+    }
+
+    @Override
+    public void getMaxNumPlayers() {
+        view.setMaxNumPlayers(clientModel.getActiveGame().getMaxPlayers());
     }
 }

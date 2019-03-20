@@ -20,6 +20,14 @@ public class DecksStateData
     public DecksStateData()
     {}
 
+    public DecksStateData(ActiveGame game)
+    {
+        destDeckSize = game.getDestinationDeck().size();
+        trainDiscardSize = game.getTrainCarDiscard().size();
+        trainDiscardSize = game.getTrainCarDiscard().size();
+        faceUpCards = game.getFaceUpCards().getCards();
+    }
+
 
     public int getDestDeckSize() {
         return destDeckSize;

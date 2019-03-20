@@ -13,6 +13,7 @@ import commands.*;
 import responses.BaseResponse;
 import requests.*;
 import responses.*;
+import servermodel.Message;
 
 public class CommandHandler implements HttpHandler
 {
@@ -102,6 +103,11 @@ public class CommandHandler implements HttpHandler
             case "claimRoute":
                 ArrayList<String> claimRouteList = wrappedRequest.getStringList();
                 command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1));
+                break;
+            case "gameHistory":
+                ArrayList<String> historyList = wrappedRequest.getStringList();
+                command = new GameHistoryCommand(new Message(historyList.get(1), historyList.get(2)), historyList.get(0));
+                break;
 
         }
 

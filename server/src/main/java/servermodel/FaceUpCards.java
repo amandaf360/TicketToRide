@@ -54,6 +54,8 @@ public class FaceUpCards
         return colors;
     }
 
-
-
+    public ArrayList<TrainCarCard> getCards()
+    {
+        return cards;
+    }
 }

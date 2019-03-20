@@ -105,6 +105,12 @@ public class ChatFragmentView extends Fragment implements IChatFragmentView {
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
+        int pos = mAdapter.getItemCount() - 1;
+        if(pos < 0)
+        {
+            pos = 0;
+        }
+        mRecyclerView.smoothScrollToPosition(pos);
     }
 
     @Override

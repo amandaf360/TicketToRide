@@ -283,14 +283,14 @@ public class ClientModel extends Observable
 
     public void addMessageToChat(Message message)
     {
-        gameChat.add(0, message);
+        gameChat.add(message);
         setChanged();
         notifyObservers(this.gameChat);
     }
 
     public void addMessageToHistory(Message message)
     {
-        gameHistory.add(0, message);
+        gameHistory.add(message);
         setChanged();
         notifyObservers(this.gameHistory);
     }

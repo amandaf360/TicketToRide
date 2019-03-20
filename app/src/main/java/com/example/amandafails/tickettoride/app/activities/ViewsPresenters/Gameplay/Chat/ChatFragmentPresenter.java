@@ -33,7 +33,9 @@ public class ChatFragmentPresenter implements IChatFragmentPresenter, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+
         view.updateChatMessages();
+
     }
 
 }

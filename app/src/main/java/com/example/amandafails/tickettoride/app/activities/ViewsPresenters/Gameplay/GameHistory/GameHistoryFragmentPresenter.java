@@ -23,8 +23,6 @@ public class GameHistoryFragmentPresenter implements IGameHistoryFragmentPresent
 
     @Override
     public List<Message> getGameHistory() {
-        // FIX ME!!!
-        // will return game history that it grabs from the model
-        return null;
+        return clientModel.getGameHistory();
     }
 }

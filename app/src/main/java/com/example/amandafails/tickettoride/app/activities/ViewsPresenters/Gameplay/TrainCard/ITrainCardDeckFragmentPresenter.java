@@ -7,7 +7,8 @@ import ClientModel.TrainCarCard;
 public interface ITrainCardDeckFragmentPresenter {
     List<TrainCarCard> getTrainCarCards();
     int getNumCardsLeftInDeck();
-    void drawCard();
+    void drawCard(int cardIndex);
     void demoFunction();
     void exit();
+    void deleteObserver();
 }

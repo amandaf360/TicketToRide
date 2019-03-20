@@ -95,7 +95,7 @@ public class CurrentGameStatusFragmentView extends Fragment implements ICurrentG
 
         presenter = new CurrentGameStatusFragmentPresenter(this);
 
-        exitButton = v.findViewById(R.id.button_exit);
+        exitButton = v.findViewById(R.id.button_game_status_exit);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

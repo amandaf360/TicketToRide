@@ -50,7 +50,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onCardClicked(0);
             }
         });
 
@@ -58,7 +58,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onCardClicked(1);
             }
         });
 
@@ -66,7 +66,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onCardClicked(2);
             }
         });
 
@@ -74,7 +74,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         card4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onCardClicked(3);
             }
         });
 
@@ -82,7 +82,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         card5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //onLoginClicked();
+                onCardClicked(4);
             }
         });
 
@@ -90,7 +90,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         deck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onDeckClicked();
+                onCardClicked(-1);
             }
         });
 
@@ -102,33 +102,17 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
             }
         });
 
-        List<TrainCarCard> faceUpCards = presenter.getTrainCarCards();
-        // set what cards are shown - grab from model!
-        card1.setText(faceUpCards.get(0).getColor());
-        card2.setText(faceUpCards.get(1).getColor());
-        card3.setText(faceUpCards.get(2).getColor());
-        card4.setText(faceUpCards.get(3).getColor());
-        card5.setText(faceUpCards.get(4).getColor());
-
-        // set how many cards are left in deck - grab from model!
-        deck.setText(String.format(Locale.getDefault(), "%d", presenter.getNumCardsLeftInDeck()));
+        setCardValues();
 
         return v;
     }
 
-    public void onExitClicked() {
-
+    public void onCardClicked(int cardIndex) {
+        presenter.drawCard(cardIndex);
     }
 
-    // TEMPORARY FUNCTIONALITY!!!
-    @Override
-    public void onDeckClicked() {
-        // will eventually just draw a card when the deck is clicked
-        // presenter.drawCard();
-
-        // FOR NOW, CALL DEMO FUNCTION
-        presenter.demoFunction();
-
+    public void onExitClicked() {
+        presenter.exit();
     }
 
     @Override

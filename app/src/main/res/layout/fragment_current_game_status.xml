@@ -305,7 +305,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button_exit"
+                android:id="@+id/button_game_status_exit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"

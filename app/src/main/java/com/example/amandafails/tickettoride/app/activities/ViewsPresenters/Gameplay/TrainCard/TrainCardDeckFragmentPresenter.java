@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import ClientModel.*;
+import services.DrawTrainCardService;
 
 public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPresenter, Observer {
 
@@ -32,12 +33,14 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     }
 
     @Override
-    public void drawCard() {
-        // call draw card service?
-        // once 2 cards are drawn, switch fragments?
-//        Intent i = new Intent(getActivity(), GameplayView.class);
-//        startActivity(i);
+    public void drawCard(int cardIndex) {
+        // check to see if it's a valid draw
+        // don't call the service if they've already drawn a card and try to draw a wild
+        // maybe set a bool??
 
+        // call draw card service
+        DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
+        drawTrainCardService.drawCard(cardIndex);
     }
 
     @Override
@@ -69,5 +72,8 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     @Override
     public void update(Observable o, Object arg) {
         view.setCardValues();
+        // check to see what they've drawn
+        // if only 1 card has been drawn (not a locomotive), then disable the exit button
+        // if it was a locomotive,
     }
 }

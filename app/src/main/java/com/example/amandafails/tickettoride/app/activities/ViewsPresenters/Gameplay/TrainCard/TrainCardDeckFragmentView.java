@@ -102,22 +102,13 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
             }
         });
 
-        List<TrainCarCard> faceUpCards = presenter.getTrainCarCards();
-        // set what cards are shown - grab from model!
-        card1.setText(faceUpCards.get(0).getColor());
-        card2.setText(faceUpCards.get(1).getColor());
-        card3.setText(faceUpCards.get(2).getColor());
-        card4.setText(faceUpCards.get(3).getColor());
-        card5.setText(faceUpCards.get(4).getColor());
-
-        // set how many cards are left in deck - grab from model!
-        deck.setText(String.format(Locale.getDefault(), "%d", presenter.getNumCardsLeftInDeck()));
+        setCardValues();
 
         return v;
     }
 
     public void onExitClicked() {
-
+        presenter.exit();
     }
 
     // TEMPORARY FUNCTIONALITY!!!
@@ -127,7 +118,7 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         // presenter.drawCard();
 
         // FOR NOW, CALL DEMO FUNCTION
-        presenter.demoFunction();
+        //presenter.demoFunction();
 
     }
 

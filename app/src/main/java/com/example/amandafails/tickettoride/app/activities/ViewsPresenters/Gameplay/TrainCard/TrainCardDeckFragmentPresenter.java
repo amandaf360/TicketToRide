@@ -17,11 +17,6 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        view.setCardValues();
-    }
-
-    @Override
     public List<TrainCarCard> getTrainCarCards() {
         return clientModel.getActiveGame().getFaceUpCards();
     }
@@ -32,6 +27,11 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     }
 
     @Override
+    public void deleteObserver() {
+        clientModel.deleteObserver(this);
+    }
+
+    @Override
     public void drawCard() {
         // call draw card service?
         // once 2 cards are drawn, switch fragments?
@@ -39,6 +39,13 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
 //        startActivity(i);
 
     }
+
+    @Override
+    public void exit() {
+        deleteObserver();
+        view.popFragment();
+    }
+
 
     @Override
     public void demoFunction() {
@@ -60,7 +67,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     }
 
     @Override
-    public void exit() {
-        view.popFragment();
+    public void update(Observable o, Object arg) {
+        view.setCardValues();
     }
 }

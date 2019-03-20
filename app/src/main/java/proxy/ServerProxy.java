@@ -2,6 +2,7 @@ package proxy;
 
 import android.os.AsyncTask;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -17,11 +18,38 @@ import commands.*;
 import responses.*;
 
 
-
-public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
+/**
+ * Sends requests to the server to carry out the many possible commands required by the client
+ *
+ * @invariant serializer != null
+ */
+public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
+{
+    /**
+     * The callback given to the asynctask which is set depending on which method on ServerProxy is called
+     * and it will be called from onPostExecute in the main thread after the response comes back from
+     * the server.
+     */
     private OnTaskCompleted callBack;
+
+    /**
+     * The class that the doInBackground will use to serialize the RequestWrapper class before sending
+     * it, and the class that most callBacks will use to deserialize the server repsonse.
+     */
     private Serializer serializer;
 
+    /**
+     * Sends username and password to server to see whether the user already exists and will log the
+     * user in if they user exists and the password is correct.
+     *
+     *
+     * @param username The name of the user trying to log in.
+     * @param password The password that
+     *
+     * @pre username != null
+     * @pre password != null
+     * @post LoginCommand filled with appropriate data from server will be executed
+     */
     public void login(String username, String password) {
         LoginRequest request = new LoginRequest(username, password);
         ArrayList<String> stringList = new ArrayList<String>();
@@ -39,8 +67,18 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         execute(wrapper);
     }
 
+    /**
+     * Attempts to register the user on the server
+     *
+     * @param username The name of the user trying to register
+     * @param password The password the user desires to be associated with their username
+     *
+     * @pre username != null
+     * @pre password != null
+     *
+     * @post RegisterCommand filled with appropriate data from server wlil be executed.
+     */
     public void register(String username, String password) {
-        System.out.println("In register proxy command");
         RegisterRequest request = new RegisterRequest(username, password);
         ArrayList<String> stringList = new ArrayList<String>();
         stringList.add(username);
@@ -57,6 +95,17 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         execute(wrapper);
     }
 
+    /**
+     * Fetches commands from the server that have not yet been seen by the client.
+     *
+     * @param pollType The type of poll that the client wants back
+     * @param username The username associated with the current client polling
+     *
+     * @pre pollType == "poll" || pollType == "firstPoll"
+     * @pre username != null
+     *
+     * @post A PollCommand filled with the data associated with username on the server will be executed
+     */
     public void poll(String pollType, String username) {
 
         ArrayList<String> stringList = new ArrayList<>();
@@ -65,10 +114,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         callBack = new OnTaskCompleted() {
             @Override
             public void completeTask(String responseJson) {
-                if(responseJson.contains("blue"))
-                {
-                    int i = 0;
-                }
                 PollResponse response = serializer.deserializePollResponse(responseJson);
                 PollCommand command = new PollCommand(response);
                 ServerProxy proxy = new ServerProxy();
@@ -78,6 +123,17 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Attempts to have join the game with the specified gameNumber
+     *
+     * @param gameNumber The number of the game the client is trying to join
+     * @param username The username associated with the logged in state of the client
+     *
+     * @pre gameNumber > 0
+     * @pre username != null
+     *
+     * @post JoinGameCommand will be executed
+     */
     public void joinGame(int gameNumber, String username)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -97,6 +153,19 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Sends a request to the server to create a game
+     *
+     * @param username Name of the user creating the game
+     * @param numPlayers The number of players that will be allowed in the game once created
+     * @param gameName The name of the game which will be displayed in the lobby and gameJoin screen
+     *
+     * @pre numPlayers > 1 && numPlayers < 6
+     * @pre username != null
+     * @pre gameName != null
+     *
+     * @post Will execute a createGameResponse
+     */
     public void createGame(String username, int numPlayers, String gameName)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -119,26 +188,16 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void clearPoll(String username)
-    {
-        ArrayList<String> stringList = new ArrayList<>();
-        stringList.add(username);
-        RequestWrapper wrapper = new RequestWrapper("clearPoll", stringList);
 
-        callBack = new OnTaskCompleted() {
-            @Override
-            public void completeTask(String responseJson)
-            {
-            }
-        };
-        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
-    }
-
-    public void leaveGame(String username, String gameName)
-    {
-
-    }
-
+    /**
+     * Starts a game with the specified game number
+     *
+     * @param gameNum The number of the game to be started
+     *
+     * @pre gameNum > 0
+     *
+     * @post A StartGameCommand will be executed
+     */
     public void beginGame(int gameNum)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -157,6 +216,18 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Sends a chat message to the server. The poller handles sending the response back, so this method
+     * has no response.
+     *
+     * @param username Name of the user
+     * @param message Message object to be displayed in the chat window
+     * @param gameNum The number of the game the user is currently in
+     *
+     * @pre username != null
+     * @pre message != null
+     * @pre gameNum > 0
+     */
     public void sendChatMessage(String username, Message message, int gameNum)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -175,6 +246,17 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Specified user draws the specified number of destination cards
+     *
+     * @param numCards The number of cards to be drawn
+     * @param username Name of the user drawing cards
+     *
+     * @pre numCards > 0 && numCards < 4
+     * @pre username != null
+     *
+     * @post Will execute a DrawDestCommand populated with the appropriate info from the server.
+     */
     public void drawDestCards(final int numCards, final String username)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -200,6 +282,17 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Claims the route of the specified index, assigning it to the user of the name specified
+     *
+     * @param index Index of the route to be claimed in the respective data structure on the server model
+     * @param name name of the user drawing
+     *
+     * @pre index > -1 && index < 96
+     * @pre name != null
+     *
+     * @post A ClaimRouteCommand will be executed.
+     */
     public void claimRoute(int index, String name)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -221,6 +314,15 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Sends request to the server to discard specified destination card
+     *
+     * @param card The destination card to be discarded
+     * @param username The name of the user discarding the card
+     *
+     * @pre card != null
+     * @pre username != null
+     */
     public void discardDestCard(DestinationCards card, String username)
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -239,6 +341,16 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     * Sends request to server to draw
+     *
+     * @param username Name of the user
+     * @param faceUpIndex Index of the card being drawn in the face up card pile (or -1 if drawing from
+     *                    face down deck
+     *
+     * @pre faceUpIndex >= -1 && faceUpIndex <= 4
+     * @pre username != null
+     */
     public void drawTrainCarCard(String username, int faceUpIndex)//if from deck, index should be -1
     {
         ArrayList<String> stringList = new ArrayList<>();
@@ -256,12 +368,27 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    /**
+     *  Initializes the ServerProxy object, and sets the serializer.
+     * @post serializer will not be null
+     */
     public ServerProxy() {
         serializer = new Serializer();
     }
 
+    /**
+     * @throws IOException
+     *
+     * @param requests While the method accepts any number of RequestWrapper objects, only requests[0]
+     *                 will be serialized and sent to the server
+     *
+     * @return The string value of the deserialized response from the server
+     * @pre requests.length != 0
+     * @post Will connect to the server or print out why the connection was unsuccesful
+     */
     @Override
-    protected String doInBackground(RequestWrapper... requests) {
+    protected String doInBackground(RequestWrapper... requests)
+    {
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
@@ -290,14 +417,22 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String> {
             }
             is.close();
             return resultBuilder.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
+    /**
+     * This method is called after the doInBackground method finishes. Has no preconditions because
+     * the callback can expect a variety of things from null to specific serialized objects
+     *
+     * @param response The response string from the server after it has been
+     *
+     * @post The callback will be called
+     */
     @Override
-    protected void onPostExecute(String s) {
-        callBack.completeTask(s);
+    protected void onPostExecute(String response) {
+        callBack.completeTask(response);
     }
 }

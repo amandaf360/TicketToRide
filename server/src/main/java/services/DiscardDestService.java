@@ -6,6 +6,7 @@ import responses.BaseResponse;
 import responses.DrawDestResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
+import servermodel.DecksStateData;
 import servermodel.DestCard;
 import servermodel.ModelRoot;
 import servermodel.Player;
@@ -41,7 +42,7 @@ public class DiscardDestService
             {
                 manager.addCardDiscarded(username, allUsers.get(i));
             }
-            manager.setDeckState(username);
+            manager.setDeckState(new DecksStateData(game), username);
         }
         return null;
     }

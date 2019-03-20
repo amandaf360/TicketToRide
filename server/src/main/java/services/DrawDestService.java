@@ -46,7 +46,7 @@ public class DrawDestService
             {
                 manager.addCardsDrawn(numCards, username, usernames.get(i));
             }
-            manager.setDeckState(username);
+            manager.setDeckState(new DecksStateData(game), username);
         }
 
         DrawDestResponse response = new DrawDestResponse(cardsDrawn);

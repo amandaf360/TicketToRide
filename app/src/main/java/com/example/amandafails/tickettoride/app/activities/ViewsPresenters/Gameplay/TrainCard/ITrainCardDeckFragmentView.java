@@ -2,7 +2,7 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Game
 
 public interface ITrainCardDeckFragmentView {
     void setCardValues();
-    void onDeckClicked();
+    void onCardClicked(int index);
     void onExitClicked();
     void setExitEnabled(boolean enabled);
     void popFragment();

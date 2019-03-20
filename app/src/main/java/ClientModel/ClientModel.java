@@ -380,7 +380,7 @@ public class ClientModel extends Observable
         setChanged();
         notifyObservers(this.routes.get(index));
     }
-
+    
     public void initializeRoutes()
     {
         if(routes.size() == 0)

@@ -1,4 +1,4 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
+package com.example.amandafails.tickettoride.app.adaptors;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.Chat.ChatFragmentView;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DestCard.DestCardFragmentView;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameHistory.GameHistoryFragmentView;
 
 public class ViewPagerAdaptor extends FragmentPagerAdapter {
 
@@ -21,13 +24,13 @@ public class ViewPagerAdaptor extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new ChatFragment();
+            return new ChatFragmentView();
         }
         else if(position == 1){
-            return new GameHistoryFragment();
+            return new GameHistoryFragmentView();
         }
         else {
-            return new DestCardFragment();
+            return new DestCardFragmentView();
         }
     }
 

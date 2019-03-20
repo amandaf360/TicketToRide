@@ -1,10 +1,11 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Lobby;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import ClientModel.ClientModel;
+import ClientModel.*;
 
 public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
@@ -23,32 +24,18 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
 
     @Override
     public void startGame() {
-
-        // will call the "start game service" once it's created
-        // similar to this below...
-        // will want to return a result from start game service??
-        /*
-        // call login service connected to model??
-        LoginService loginService = new LoginService();
-        // will get both username and password and attempt to login
-        loginService.login(view.getLoginUsername(), view.getLoginPassword());
-        */
-
         // once it is ready to start, change the activity
         view.switchActivity();
     }
 
     @Override
     public String getGameName() {
-
         return clientModel.getActiveGame().getName();
     }
-
 
     @Override
     public void update(Observable o, Object arg) {
         // if new player object is created, display that this player has joined game
-        int i = 0;
         if(arg.getClass() == ArrayList.class) {
             if(clientModel.getActiveGame().getCurrentPlayers() != 0) {
                 view.displayPlayer(clientModel.getActiveGame().getPlayers().get(clientModel.getActiveGame().getCurrentPlayers() - 1));
@@ -60,14 +47,26 @@ public class LobbyActivityPresenter implements ILobbyPresenter, Observer {
         }
         else if(arg.getClass() == Boolean.class)
         {
-            Boolean bool = (Boolean)arg;
-            if(((Boolean) arg).booleanValue())
+            if((Boolean) arg)
             {
                 clientModel.deleteObserver(this);
                 startGame();
             }
         }
-        // BEFORE SWITCHING ACTIVITIES, DELETE OBSERVER!!!
     }
 
+    @Override
+    public void setNumCurrentPlayers() {
+        view.setCurrentNumPlayers(clientModel.getActiveGame().getCurrentPlayers());
+    }
+
+    @Override
+    public List<Player> getCurrentPlayers() {
+        return clientModel.getActiveGame().getPlayers();
+    }
+
+    @Override
+    public void getMaxNumPlayers() {
+        view.setMaxNumPlayers(clientModel.getActiveGame().getMaxPlayers());
+    }
 }

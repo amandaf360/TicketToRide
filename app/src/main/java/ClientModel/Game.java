@@ -37,7 +37,7 @@ public class Game
 
     public String getCurrentPlayersTurn()
     {
-        return players.get(indexOfCurrentPlayer).getName() +"\'s turn";
+        return players.get(indexOfCurrentPlayer).getName();
     }
 
 

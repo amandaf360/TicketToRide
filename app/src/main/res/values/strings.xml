@@ -42,5 +42,32 @@
     <string name="destCards">Destination Cards</string>
     <string name="zero">0</string>
     <string name="exit">Exit</string>
+    <string name="yourCards">Your Cards</string>
+
+    <string name="red">Red: </string>
+    <string name="blue">Blue: </string>
+    <string name="green">Green: </string>
+    <string name="purple">Purple: </string>
+    <string name="orange">Orange: </string>
+    <string name="white">White: </string>
+    <string name="black">Black: </string>
+    <string name="yellow">Yellow: </string>
+    <string name="wild">Wild: </string>
+
+    <string name="name">Name</string>
+    <string name="player">Player</string>
+    <string name="points">Points</string>
+    <string name="trains">Trains</string>
+    <string name="cards">Cards</string>
+    <string name="routes">Routes</string>
+    <string name="dests">Destinations</string>
+
+    <!-- Strings related to game over screen -->
+    <string name="gameOver">GAME OVER</string>
+    <string name="winner">WINNER: </string>
+    <string name="totalPoints">Total Points</string>
+    <string name="pointsDC">Dest. Card Points</string>
+    <string name="pointsLostDC">Dest. Card Points Lost</string>
+    <string name="longestPath">Longest Path: </string>
 
 </resources>

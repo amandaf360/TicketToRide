@@ -25,7 +25,8 @@ public class PollCommand implements ICommand
                     response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0
                     || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0
                     || response.getGameStartInfo() != null || response.getDestinationCardsDrawn().size() != 0
-                    || response.getDeckData() != null)
+                    || response.getDeckData() != null || response.getDiscardedDestCards().size() != 0
+                    || response.getRoutesClaimed().size() != 0)
             {
                 //ServerProxy proxy = new ServerProxy();
                 //proxy.clearPoll(response.getUsername());
@@ -34,6 +35,7 @@ public class PollCommand implements ICommand
                 startGame(response.getGameStarted());
                 updateChat(response.getChatHistory());
                 updateDestCardsDrawn(response.getDestinationCardsDrawn());
+                updateRoutesClaimed(response.getRoutesClaimed());
                 if(response.getGameStartInfo() != null)
                 {
                     int i = 0;
@@ -120,6 +122,22 @@ public class PollCommand implements ICommand
         }
         
     }
+
+    private void updateRoutesClaimed(ArrayList<String> routesClaimed)
+    {
+        int indexOfRoute;
+        String userClaiming;
+        for(int i = 0; i < routesClaimed.size(); i++)
+        {
+            indexOfRoute = Integer.parseInt(routesClaimed.get(i));
+            i++;
+            userClaiming = routesClaimed.get(i);
+
+            ClientModel.getInstance().claimRouteByIndex(indexOfRoute, userClaiming);
+
+        }
+    }
+
 
     private void joinPlayers(ArrayList<String> joinedList)
     {

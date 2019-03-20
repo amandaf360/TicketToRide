@@ -1,11 +1,9 @@
-package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
+package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameHistory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +16,9 @@ import java.util.List;
 
 import ClientModel.*;
 
-public class DestCardFragment extends Fragment {
-    private ClientModel clientModel = ClientModel.getInstance();
+public class GameHistoryFragmentView extends Fragment implements IGameHistoryFragmentView {
+
+    private IGameHistoryFragmentPresenter presenter;
 
     // Recycler View stuff
     private RecyclerView mRecyclerView;
@@ -27,32 +26,24 @@ public class DestCardFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Message> lines;
 
-    public DestCardFragment() {}
+    public GameHistoryFragmentView() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dest_and_history, container, false);
+
+        presenter = new GameHistoryFragmentPresenter(this);
 
         lines = new ArrayList<>();
         mAdapter = new GameplayRecyclerViewAdaptor(lines);
 
         mRecyclerView = v.findViewById(R.id.gameplay_recycler_view);
 
-        // display the chat already in the game
-        // assuming each chat message has a string and a player -- to get the color
+        List<Message> gameHistoryMessages = presenter.getGameHistory();
+        //gameHistoryMessages.add(new Message("blue", "Hello. This is the first game history message"));
+        //gameHistoryMessages.add(new Message("yellow", "Hi. This is the second games history message"));
+        lines.addAll(gameHistoryMessages);
 
-        // somehow get the dest. cards for each player?
-        //List<destCardMessage> destCardMessages = clientModel.getActiveGame().getChatMessages();
-
-        ClientModel model = ClientModel.getInstance();
-        ArrayList<DestinationCards> cards = model.getMainPlayer().getPlayerHandDestinations().getCardList();
-        List<Message> destinationMessages = new ArrayList<>(); // = clientModel.getActiveGame().getChatMessages();
-        for(int i = 0; i < cards.size(); i++)
-        {
-            Message message = new Message(model.getMainPlayer().getColor(), cards.get(i).toString());
-            destinationMessages.add(message);
-        }
-        lines.addAll(destinationMessages);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 

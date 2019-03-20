@@ -1,7 +1,11 @@
 package services;
 
+import java.util.ArrayList;
+
 import responses.DrawTrainResponse;
+import server.ClientCommandManager;
 import servermodel.ActiveGame;
+import servermodel.DecksStateData;
 import servermodel.FaceUpCards;
 import servermodel.ModelRoot;
 import servermodel.TrainCarCard;
@@ -33,11 +37,19 @@ public class DrawTrainService
             FaceUpCards faceUpCards = game.getFaceUpCards();
             cardDrawn = faceUpCards.draw(index, deck);
         }
+        ArrayList<String> allUsernames = game.getAllUsernames();
+        DecksStateData data = new DecksStateData(game);
+        ClientCommandManager manager = ClientCommandManager.getCommandManager();
+        for(String name: allUsernames)
+        {
+            manager.setDeckState(data, name);
+            if(!name.equals(username))
+            {
+                manager.addTrainCardDrawn(username, name);
+            }
+        }
         game.getPlayerByUsername(username).addTrainCarCard(cardDrawn);
         DrawTrainResponse response = new DrawTrainResponse(cardDrawn.getColor());
-
-
-
 
         return response;
     }

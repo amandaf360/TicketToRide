@@ -2,12 +2,19 @@ package services;
 
 import ClientModel.ClientModel;
 import ClientModel.Message;
+import ClientModel.Player;
+import proxy.ServerProxy;
 
 public class CreateHistoryMessageService
 {
-    Message message;
-    public CreateHistoryMessageService(String string)
+    public CreateHistoryMessageService()
+    {}
+
+    public void sendMessage(String string)
     {
-        this.message = new Message(ClientModel.getInstance().getMainPlayer().getColor(), string);
+        Player mainPlayer = ClientModel.getInstance().getMainPlayer();
+        Message message = new Message(mainPlayer.getColor(), string);
+        ServerProxy proxy = new ServerProxy();
+        proxy.sendGameHistoryMessage(mainPlayer.getName(), message);
     }
 }

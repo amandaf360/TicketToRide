@@ -23,7 +23,10 @@ public class PlayerHandDestinations
     /**
      * Default constructor
      */
-    public PlayerHandDestinations() {}
+    public PlayerHandDestinations()
+    {
+        cardList = new ArrayList<>();
+    }
 
     /**
      * constructs a new PlayerHandDestinations object with cards already in

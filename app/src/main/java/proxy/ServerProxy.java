@@ -2,6 +2,8 @@ package proxy;
 
 import android.os.AsyncTask;
 
+import com.example.amandafails.tickettoride.R;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -361,6 +363,27 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
 
         callBack = new OnTaskCompleted() {
             @Override
+            public void completeTask(String responseJson)
+            {
+                DrawTrainResponse response = serializer.deserializeDrawTrainResponse(responseJson);
+                DrawTrainCardCommand command = new DrawTrainCardCommand(response.getCardColor());
+                command.execute();
+            }
+        };
+
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
+    public void sendGameHistoryMessage(String username, Message message)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        stringList.add(message.getColor());
+        stringList.add(message.getMessage());
+        RequestWrapper wrapper = new RequestWrapper("gameHistory", stringList);
+
+        callBack = new OnTaskCompleted() {
+            @Override
             public void completeTask(String responseJson) {
 
             }
@@ -393,7 +416,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://192.168.1.179:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://10.24.198.110:3000");//CHANGE IP ADDRESS HERE
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);

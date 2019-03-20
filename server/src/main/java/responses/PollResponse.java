@@ -21,6 +21,8 @@ public class PollResponse extends BaseResponse
     private DecksStateData deckData;
     private GameStartInfo gameStartInfo;
     private ArrayList<String> routesClaimed;
+    private ArrayList<String> trainCardsDrawn;
+    private ArrayList<Message> gameHistory;
 
     public PollResponse() {
         gamesCreated = new ArrayList<>();
@@ -32,6 +34,8 @@ public class PollResponse extends BaseResponse
         discardedDestCards = new ArrayList<>();
         destinationCardsDrawn = new ArrayList<>();
         routesClaimed = new ArrayList<>();
+        trainCardsDrawn = new ArrayList<>();
+        gameHistory = new ArrayList<>();
     }
 
     public ArrayList<Game> getGamesCreated() {
@@ -130,5 +134,21 @@ public class PollResponse extends BaseResponse
     public void setRoutesClaimed(ArrayList<String> routesClaimed)
     {
         this.routesClaimed = routesClaimed;
+    }
+
+    public ArrayList<String> getTrainCardsDrawn() {
+        return trainCardsDrawn;
+    }
+
+    public void setTrainCardsDrawn(ArrayList<String> trainCardsDrawn) {
+        this.trainCardsDrawn = trainCardsDrawn;
+    }
+
+    public ArrayList<Message> getGameHistory() {
+        return gameHistory;
+    }
+
+    public void setGameHistory(ArrayList<Message> gameHistory) {
+        this.gameHistory = gameHistory;
     }
 }

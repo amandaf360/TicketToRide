@@ -34,6 +34,8 @@ public class ClientCommandManager
     private Map<String, DecksStateData> deckStateUpdate;
     private Map<String, GameStartInfo> startGameInfo;
     private Map<String, ArrayList<String>> routesClaimed;
+    private Map<String, ArrayList<String>> trainCardsDrawn;
+    private Map<String, ArrayList<Message>> gameHistory;
 
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
@@ -56,6 +58,8 @@ public class ClientCommandManager
         deckStateUpdate = new HashMap<>();
         startGameInfo = new HashMap<>();
         routesClaimed = new HashMap<>();
+        trainCardsDrawn = new HashMap<>();
+        gameHistory = new HashMap<>();
     }
 
     public void addUser(String username)
@@ -71,6 +75,8 @@ public class ClientCommandManager
         deckStateUpdate.put(username, null);
         startGameInfo.put(username, null);
         routesClaimed.put(username, new ArrayList<String>());
+        trainCardsDrawn.put(username, new ArrayList<String>());
+        gameHistory.put(username, new ArrayList<Message>());
     }
 
     public PollResponse firstPoll()
@@ -108,6 +114,8 @@ public class ClientCommandManager
         response.setGameStartInfo(startGameInfo.get(username));
         response.setDestinationCardsDrawn(destinationCardsDrawn.get(username));
         response.setRoutesClaimed(routesClaimed.get(username));
+        response.setTrainCardsDrawn(trainCardsDrawn.get(username));
+        response.setGameHistory(gameHistory.get(username));
 
         return response;
     }
@@ -124,6 +132,8 @@ public class ClientCommandManager
         destinationCardsDrawn.get(username).clear();
         startGameInfo.put(username, null);
         routesClaimed.put(username, null);
+        trainCardsDrawn.get(username).clear();
+        gameHistory.get(username).clear();
     }
 
     public void addGame(Game game)
@@ -186,21 +196,8 @@ public class ClientCommandManager
         destinationCardsDiscarded.get(otherUser).add(userDiscarded);
     }
 
-    public void setDeckState(String username)
+    public void setDeckState(DecksStateData data, String username)
     {
-        ModelRoot root = ModelRoot.getModel();
-        ActiveGame game = root.getGameByUser(username);
-        ArrayList<String> colors = game.getFaceUpCards().getColors();
-        ArrayList<TrainCarCard> cards = new ArrayList<>();
-        for(int i = 0; i < colors.size(); i++)
-        {
-            cards.add(new TrainCarCard(colors.get(i)));
-        }
-        DecksStateData data = new DecksStateData();
-        data.setFaceUpCards(cards);
-        data.setTrainDeckSize(game.getTrainDeck().size());
-        data.setTrainDiscardSize(game.getTrainCarDiscard().size());
-        data.setDestDeckSize(game.getDestinationDeck().size());
         deckStateUpdate.put(username, data);
     }
 
@@ -213,6 +210,16 @@ public class ClientCommandManager
     {
         destinationCardsDrawn.get(otherUserName).add(Integer.toString(index));
         destinationCardsDrawn.get(otherUserName).add(userClaiming);
+    }
+
+    public void addTrainCardDrawn(String userDrew, String sendingTo)
+    {
+        trainCardsDrawn.get(sendingTo).add(userDrew);
+    }
+
+    public void addGameHistoryMessage(String username, Message message)
+    {
+        gameHistory.get(username).add(message);
     }
 
 }

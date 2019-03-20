@@ -60,4 +60,9 @@ public class Serializer
         return gson.fromJson(response, ClaimRouteResponse.class);
     }
 
+    public DrawTrainResponse deserializeDrawTrainResponse(String response)
+    {
+        return gson.fromJson(response, DrawTrainResponse.class);
+    }
+
 }

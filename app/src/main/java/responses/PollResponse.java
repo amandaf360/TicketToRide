@@ -21,6 +21,8 @@ public class PollResponse
     private GameStartInfo gameStartInfo;
     private DecksStateData deckData;
     private ArrayList<String> routesClaimed;
+    private ArrayList<String> trainCardsDrawn;
+    private ArrayList<Message> gameHistory;
 
 
     public PollResponse() {
@@ -122,5 +124,21 @@ public class PollResponse
     public void setRoutesClaimed(ArrayList<String> routesClaimed)
     {
         this.routesClaimed = routesClaimed;
+    }
+
+    public ArrayList<String> getTrainCardsDrawn() {
+        return trainCardsDrawn;
+    }
+
+    public void setTrainCardsDrawn(ArrayList<String> trainCardsDrawn) {
+        this.trainCardsDrawn = trainCardsDrawn;
+    }
+
+    public ArrayList<Message> getGameHistory() {
+        return gameHistory;
+    }
+
+    public void setGameHistory(ArrayList<Message> gameHistory) {
+        this.gameHistory = gameHistory;
     }
 }

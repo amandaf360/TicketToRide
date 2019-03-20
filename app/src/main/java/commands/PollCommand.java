@@ -21,31 +21,47 @@ public class PollCommand implements ICommand
     {
         if(response != null)
         {
-            if (response.getGamesCreated().size() != 0 || response.getGamesDeleted().size() != 0 ||
-                    response.getPlayersJoined().size() != 0 || response.getPlayersLeft().size() != 0
-                    || response.getChatHistory().size() != 0 || response.getGameStarted().size() != 0
-                    || response.getGameStartInfo() != null || response.getDestinationCardsDrawn().size() != 0
-                    || response.getDeckData() != null || response.getDiscardedDestCards().size() != 0
-                    || response.getRoutesClaimed().size() != 0)
+            joinPlayers(response.getPlayersJoined());
+            addGames(response.getGamesCreated());
+            startGame(response.getGameStarted());
+            updateChat(response.getChatHistory());
+            updateDestCardsDrawn(response.getDestinationCardsDrawn());
+            updateRoutesClaimed(response.getRoutesClaimed());
+            startMyGame(response.getGameStartInfo());
+            updateDeckData(response.getDeckData());
+            discardDestCards(response.getDiscardedDestCards());
+            updateTrainCardsDrawn(response.getTrainCardsDrawn());
+        }
+    }
+
+    private void updateGameHistory(ArrayList<Message> messages)
+    {
+        if(messages != null)
+        {
+            if(messages.size() != 0)
             {
-                //ServerProxy proxy = new ServerProxy();
-                //proxy.clearPoll(response.getUsername());
-                joinPlayers(response.getPlayersJoined());
-                addGames(response.getGamesCreated());
-                startGame(response.getGameStarted());
-                updateChat(response.getChatHistory());
-                updateDestCardsDrawn(response.getDestinationCardsDrawn());
-                updateRoutesClaimed(response.getRoutesClaimed());
-                if(response.getGameStartInfo() != null)
-                {
-                    int i = 0;
-                }
-                startMyGame(response.getGameStartInfo());
-                updateDeckData(response.getDeckData());
-                discardDestCards(response.getDiscardedDestCards());
+                //do stuff
             }
         }
-        //updates players in a given game
+    }
+    private void updateTrainCardsDrawn(ArrayList<String> usersDrew)
+    {
+        if(usersDrew != null)
+        {
+            if(usersDrew.size() != 0)
+            {
+                for(int i = 0; i < usersDrew.size(); i++)
+                {
+                    ClientModel model = ClientModel.getInstance();
+                    /*Ideally, i would just have to increment a number here, but there is no difference
+                      between the active player and other player models, so I have to give them an actual
+                      train card, but this client shouldn't know what color cards the other players have
+                      so im just putting them all as locomotives.
+                    */
+                    model.addTrainCardToPlayerByHand(usersDrew.get(i), new TrainCarCard("locomotive"));
+                }
+            }
+        }
     }
 
     private void updateDeckData(DecksStateData data)
@@ -70,7 +86,7 @@ public class PollCommand implements ICommand
         if(data.size() != 0)
         {
             ClientModel model = ClientModel.getInstance();
-            String mainPlayerName = model.getMainPlayer().getName();
+            //String mainPlayerName = model.getMainPlayer().getName();
             for(int i = 0; i < data.size(); i+= 2)
             {
                 int cardsDrawn = Integer.parseInt(data.get(i));
@@ -114,52 +130,67 @@ public class PollCommand implements ICommand
     {
         //the list is the names of people who have discarded one card (username repeats possible).
         // subtract 1 dest card from each of these users in the model
-        ClientModel model = ClientModel.getInstance();
-        for(String userToDeleteFrom : usersDiscarded)
+        if(usersDiscarded != null)
         {
-            model.decrementPlayerDestCardNum(userToDeleteFrom);
-
+            if(usersDiscarded.size() != 0)
+            {
+                ClientModel model = ClientModel.getInstance();
+                for (String userToDeleteFrom : usersDiscarded)
+                {
+                    model.decrementPlayerDestCardNum(userToDeleteFrom);
+                }
+            }
         }
-        
     }
 
     private void updateRoutesClaimed(ArrayList<String> routesClaimed)
     {
-        int indexOfRoute;
-        String userClaiming;
-        for(int i = 0; i < routesClaimed.size(); i++)
+        if(routesClaimed != null)
         {
-            indexOfRoute = Integer.parseInt(routesClaimed.get(i));
-            i++;
-            userClaiming = routesClaimed.get(i);
+            if(routesClaimed.size() != 0)
+            {
+                int indexOfRoute;
+                String userClaiming;
+                for (int i = 0; i < routesClaimed.size(); i++)
+                {
+                    indexOfRoute = Integer.parseInt(routesClaimed.get(i));
+                    i++;
+                    userClaiming = routesClaimed.get(i);
 
-            ClientModel.getInstance().claimRouteByIndex(indexOfRoute, userClaiming);
+                    ClientModel.getInstance().claimRouteByIndex(indexOfRoute, userClaiming);
 
+                }
+            }
         }
     }
 
 
     private void joinPlayers(ArrayList<String> joinedList)
     {
-        String currentUser = ClientModel.getInstance().getUser().getUserName();
-        ClientModel model = ClientModel.getInstance();
-        for(int i = 0; i < joinedList.size(); i += 2)
+        if(joinedList != null)
         {
-            String username = joinedList.get(i);
-            int gameNum = Integer.parseInt(joinedList.get(i + 1));
-
-            Player player = new Player();
-            player.setName(username);
-            player.setAuthToken(username);
-            player.setColor("blue");
-
-            Game game = model.getGameByNumber(gameNum);
-            model.addPlayerToGame(game, player);
-            if(username.equals(currentUser))
+            if(joinedList.size() != 0)
             {
-                SetActiveGameService service = new SetActiveGameService();
-                service.setActiveGame(game);
-                model.setMainPlayer(player);
+                String currentUser = ClientModel.getInstance().getUser().getUserName();
+                ClientModel model = ClientModel.getInstance();
+                for (int i = 0; i < joinedList.size(); i += 2) {
+                    String username = joinedList.get(i);
+                    int gameNum = Integer.parseInt(joinedList.get(i + 1));
+
+                    Player player = new Player();
+                    player.setName(username);
+                    player.setAuthToken(username);
+                    player.setColor("blue");
+
+                    Game game = model.getGameByNumber(gameNum);
+                    model.addPlayerToGame(game, player);
+                    if (username.equals(currentUser))
+                    {
+                        SetActiveGameService service = new SetActiveGameService();
+                        service.setActiveGame(game);
+                        model.setMainPlayer(player);
+                    }
+                }
             }
         }
     }
@@ -167,43 +198,50 @@ public class PollCommand implements ICommand
 
     private void addGames(ArrayList<Game> gameList)
     {
-        SetGamelistService listService = new SetGamelistService();
-        for (int i = 0; i < gameList.size(); i++)
+        if(gameList != null)
         {
-            listService.addGame(gameList.get(i));
+            if(gameList.size() != 0)
+            {
+                SetGamelistService listService = new SetGamelistService();
+                for (int i = 0; i < gameList.size(); i++) {
+                    listService.addGame(gameList.get(i));
+                }
+            }
         }
     }
 
     private void updateChat(ArrayList<Message> chatHistory)
     {
-        if(chatHistory.size() != 0)
+        if(chatHistory != null)
         {
-            ClientModel model = ClientModel.getInstance();
-            for (Message message : chatHistory)
+            if (chatHistory.size() != 0)
             {
-                model.addMessageToChat(message);
+                ClientModel model = ClientModel.getInstance();
+                for (Message message : chatHistory)
+                {
+                    model.addMessageToChat(message);
+                }
             }
         }
     }
 
     private void startGame(ArrayList<String> gameStarted)
     {
-        if(gameStarted != null && gameStarted.size() != 0)
+        if(gameStarted != null)
         {
-            ArrayList<Player> playerList = ClientModel.getInstance().getActiveGame().getPlayers();
-            for(int i = 0; i < gameStarted.size(); i+=2)
+            if(gameStarted.size() != 0)
             {
-                for(int j = 0; j < playerList.size(); j++)
-                {
-                    if(playerList.get(j).getName().equals(gameStarted.get(i)))
-                    {
-                        playerList.get(j).setColor(gameStarted.get(i + 1));
+                ArrayList<Player> playerList = ClientModel.getInstance().getActiveGame().getPlayers();
+                for (int i = 0; i < gameStarted.size(); i += 2) {
+                    for (int j = 0; j < playerList.size(); j++) {
+                        if (playerList.get(j).getName().equals(gameStarted.get(i))) {
+                            playerList.get(j).setColor(gameStarted.get(i + 1));
+                        }
                     }
                 }
             }
         }
     }
-
 
     public PollCommand(PollResponse response)
     {

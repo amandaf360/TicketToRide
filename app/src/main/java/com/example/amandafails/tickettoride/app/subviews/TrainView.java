@@ -15,6 +15,8 @@ import java.util.Map;
 
 import ClientModel.Route;
 
+import static java.sql.Types.NULL;
+
 public class TrainView extends View
 {
     private Rect rect;
@@ -275,7 +277,7 @@ public class TrainView extends View
                     case "yellow": paint.setColor(Color.YELLOW); break;
                     case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
                     case "purple": paint.setColor(Color.parseColor("purple")); break;
-                    default:break;
+                    default:       break;
                 }
             }
             if(routes.get(i).getClaimedColor2() != null)
@@ -291,9 +293,10 @@ public class TrainView extends View
                     case "yellow": paint2.setColor(Color.YELLOW); break;
                     case "orange": paint2.setColor(Color.parseColor("#FFA500")); break;
                     case "purple": paint2.setColor(Color.parseColor("purple")); break;
-                    default:break;
+                    default:       break;
                 }
             }
+
             if(routes.get(i).getClaimedColor2() != null || routes.get(i).getClaimedColor1() != null)
             {
                 drawClaimedRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());

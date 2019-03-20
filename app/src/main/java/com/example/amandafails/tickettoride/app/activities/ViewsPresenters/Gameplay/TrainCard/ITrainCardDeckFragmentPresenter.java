@@ -10,4 +10,5 @@ public interface ITrainCardDeckFragmentPresenter {
     void drawCard();
     void demoFunction();
     void exit();
+    void deleteObserver();
 }

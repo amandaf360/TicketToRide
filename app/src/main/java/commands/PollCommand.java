@@ -49,6 +49,7 @@ public class PollCommand implements ICommand
             }
         }
     }
+
     private void updateTrainCardsDrawn(ArrayList<String> usersDrew)
     {
         if(usersDrew != null)

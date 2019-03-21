@@ -24,6 +24,7 @@ public class ActiveGame
         faceUpCards = new FaceUpCards();
         routes = new ArrayList<>();
         trainCarDiscard = new TrainCarDiscard();
+        faceUpCards.setDiscardPile(trainCarDiscard);
 
         initializeRoutes();
         for(int i = 0; i < 5; i ++)
@@ -32,12 +33,6 @@ public class ActiveGame
         }
     }
 
-    /*
-        draw dest card, discard dest card
-        drawfaceup, draw from deck, discard traincards,
-        chat send message,
-
-     */
 
     public DestCardDeck getDestinationDeck() {
         return destinationDeck;

@@ -24,7 +24,7 @@ public class DecksStateData
     {
         destDeckSize = game.getDestinationDeck().size();
         trainDiscardSize = game.getTrainCarDiscard().size();
-        trainDiscardSize = game.getTrainCarDiscard().size();
+        trainDeckSize = game.getTrainDeck().size();
         faceUpCards = game.getFaceUpCards().getCards();
     }
 

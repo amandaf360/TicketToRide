@@ -265,8 +265,8 @@ public class ClientModel extends Observable
     public void deleteMainPlayersDestinationCardFromHand(DestinationCards destinationCards)
     {
 
-        DiscardDestCardService discardDestCardService = new DiscardDestCardService();
-        discardDestCardService.discardCard(destinationCards);
+        //DiscardDestCardService discardDestCardService = new DiscardDestCardService();
+        //discardDestCardService.discardCard(destinationCards);
         mainPlayer.getPlayerHandDestinations().deleteCard(destinationCards);
         //activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
         setChanged();
@@ -283,14 +283,14 @@ public class ClientModel extends Observable
 
     public void addMessageToChat(Message message)
     {
-        gameChat.add(0, message);
+        gameChat.add(message);
         setChanged();
         notifyObservers(this.gameChat);
     }
 
     public void addMessageToHistory(Message message)
     {
-        gameHistory.add(0, message);
+        gameHistory.add(message);
         setChanged();
         notifyObservers(this.gameHistory);
     }

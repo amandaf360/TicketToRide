@@ -388,6 +388,7 @@ public class TrainView extends View
                 //route 2
                 else if(route.isDoubleRoute() && route.isClaimed2())
                 {
+                    setColorOnClaimedDoubleRoute(route);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY() + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, false);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
                 }
@@ -407,6 +408,7 @@ public class TrainView extends View
             }
             else if(route.isDoubleRoute() && route.isClaimed2())
             {
+                setColorOnClaimedDoubleRoute(route);
                 drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY(), false);
             }
             else
@@ -426,6 +428,7 @@ public class TrainView extends View
                 }
                 else if(route.isDoubleRoute() && route.isClaimed2())
                 {
+                    setColorOnClaimedDoubleRoute(route);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, topCenter, false);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, bottomCenter, false);
                 }
@@ -441,6 +444,23 @@ public class TrainView extends View
         rectWidth = tempRectWidth;
 
         canvas.restore();
+    }
+
+    private void setColorOnClaimedDoubleRoute(MapRoute route)
+    {
+        switch(route.getClaimedColor2())
+        {
+            case "gray":   paint.setColor(Color.GRAY); break;
+            case "white":  paint.setColor(Color.WHITE); break;
+            case "black":  paint.setColor(Color.BLACK); break;
+            case "red":    paint.setColor(Color.RED); break;
+            case "blue":   paint.setColor(Color.parseColor("cyan")); break;
+            case "green":  paint.setColor(Color.GREEN); break;
+            case "yellow": paint.setColor(Color.YELLOW); break;
+            case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
+            case "purple": paint.setColor(Color.parseColor("purple")); break;
+            default:       break;
+        }
     }
 
     private void drawRectangle(Canvas canvas, float x, float y, boolean doubleRoute)
@@ -483,16 +503,32 @@ public class TrainView extends View
             {
                 if(routes.get(i).getCity2().equals(route.getCityTwo()))
                 {
-                    routes.get(i).setClaimed1(true);
-                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    if(routes.get(i).getPaint().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed1(true);
+                        routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    }
+                    if(routes.get(i).getPaint2().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed2(true);
+                        routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
+                    }
                 }
             }
             else if(routes.get(i).getCity2().equals(route.getCityOne()))
             {
                 if(routes.get(i).getCity1().equals(route.getCityTwo()))
                 {
-                    routes.get(i).setClaimed1(true);
-                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    if(routes.get(i).getPaint().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed1(true);
+                        routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    }
+                    if(routes.get(i).getPaint2().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed2(true);
+                        routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
+                    }
                 }
             }
         }

@@ -142,6 +142,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         presenter.drawRoute();
     }
 
+    public void setDrawRoutesClickable(boolean canClick)
+    {
+        drawRoutesButton.setEnabled(canClick);
+    }
+
     public void onPlaceTrainsClicked()
     {
         presenter.placeTrains();

@@ -11,4 +11,5 @@ public interface ITrainCardDeckFragmentPresenter {
     void demoFunction();
     void exit();
     void deleteObserver();
+    void displayToast(String toastString);
 }

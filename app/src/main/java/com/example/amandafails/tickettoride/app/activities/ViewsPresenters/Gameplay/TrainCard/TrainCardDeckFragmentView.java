@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayPresenter;
@@ -107,10 +108,12 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         return v;
     }
 
+    @Override
     public void onCardClicked(int cardIndex) {
         presenter.drawCard(cardIndex);
     }
 
+    @Override
     public void onExitClicked() {
         presenter.exit();
     }
@@ -121,6 +124,11 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -70,6 +70,20 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     public void drawRoute()
     {
+        view.setDrawRoutesClickable(false);
+        DrawDestCardService drawDestCardService = new DrawDestCardService();
+        drawDestCardService.drawCards(3);
+        ArrayList<DestinationCards> cards = clientModel.getNewlyAddedDestinationCardsFromMainPlayer();
+
+        String zeroth = "Do Not Discard";
+        String first = cards.get(0).toString();
+        String second = cards.get(1).toString();
+        String third = cards.get(2).toString();
+        String[] options = {zeroth, first, second, third};
+        String dialogTitle = "Choose a route to discard.";
+        int itemSelected = 0;
+
+
 
     }
 

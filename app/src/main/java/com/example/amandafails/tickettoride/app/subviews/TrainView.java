@@ -15,6 +15,8 @@ import java.util.Map;
 
 import ClientModel.Route;
 
+import static java.sql.Types.NULL;
+
 public class TrainView extends View
 {
     private Rect rect;
@@ -275,7 +277,7 @@ public class TrainView extends View
                     case "yellow": paint.setColor(Color.YELLOW); break;
                     case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
                     case "purple": paint.setColor(Color.parseColor("purple")); break;
-                    default:break;
+                    default:       break;
                 }
             }
             if(routes.get(i).getClaimedColor2() != null)
@@ -291,12 +293,13 @@ public class TrainView extends View
                     case "yellow": paint2.setColor(Color.YELLOW); break;
                     case "orange": paint2.setColor(Color.parseColor("#FFA500")); break;
                     case "purple": paint2.setColor(Color.parseColor("purple")); break;
-                    default:break;
+                    default:       break;
                 }
             }
+
             if(routes.get(i).getClaimedColor2() != null || routes.get(i).getClaimedColor1() != null)
             {
-                drawClaimedRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());
+                drawClaimedRoute(canvas, routes.get(i));
             }
         }
 
@@ -360,10 +363,10 @@ public class TrainView extends View
         canvas.restore();
     }
 
-    public void drawClaimedRoute(Canvas canvas, float x, float y, float angle, int length, boolean doubleRoute)
+    public void drawClaimedRoute(Canvas canvas, MapRoute route)
     {
         canvas.save();
-        canvas.rotate(angle, x, y);
+        canvas.rotate(route.getAngle(), route.getX(), route.getY());
 
         int tempRectLength = rectLength;
         int tempRectWidth = rectWidth;
@@ -371,27 +374,69 @@ public class TrainView extends View
         rectLength = claimedRectLength;
         rectWidth = claimedRectWidth;
 
-        if(length % 2 == 0)
+        if(route.getLength() % 2 == 0)
         {
             //each iteration of the for-loop makes two rectangles, one in each direction
-            for(int i = 0; i < length/2; i++)
+            for(int i = 0; i < route.getLength()/2; i++)
             {
-                drawRectangle(canvas, x, y + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, doubleRoute);
-                drawRectangle(canvas, x, y - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, doubleRoute);
+                //route 1
+                if(route.isDoubleRoute() && route.isClaimed1())
+                {
+                    drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, route.getY() + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, false);
+                    drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
+                }
+                //route 2
+                else if(route.isDoubleRoute() && route.isClaimed2())
+                {
+                    setColorOnClaimedDoubleRoute(route);
+                    drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY() + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, false);
+                    drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
+                }
+                else //if it's not a double route
+                {
+                    drawRectangle(canvas, route.getX(), route.getY() + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, false);
+                    drawRectangle(canvas, route.getX(), route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
+                }
             }
         }
         else
         {
             //this makes the first rectangle
-            drawRectangle(canvas, x, y, doubleRoute);
+            if(route.isDoubleRoute() && route.isClaimed1())
+            {
+                drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, route.getY(), false);
+            }
+            else if(route.isDoubleRoute() && route.isClaimed2())
+            {
+                setColorOnClaimedDoubleRoute(route);
+                drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY(), false);
+            }
+            else
+            {
+                drawRectangle(canvas, route.getX(), route.getY(), route.isDoubleRoute());
+            }
 
             //this makes the rest, in sets of two
-            for(int i = 1; i < (length + 1)/2; i++)
+            for(int i = 1; i < (route.getLength() + 1)/2; i++)
             {
-                float topCenter = y + i*tempRectLength + i*spacing;
-                drawRectangle(canvas, x, topCenter, doubleRoute);
-                float bottomCenter = y - i*tempRectLength - i*spacing;
-                drawRectangle(canvas, x, bottomCenter, doubleRoute);
+                float topCenter = route.getY() + i*tempRectLength + i*spacing;
+                float bottomCenter = route.getY() - i*tempRectLength - i*spacing;
+                if(route.isDoubleRoute() && route.isClaimed1())
+                {
+                    drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, topCenter, false);
+                    drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, bottomCenter, false);
+                }
+                else if(route.isDoubleRoute() && route.isClaimed2())
+                {
+                    setColorOnClaimedDoubleRoute(route);
+                    drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, topCenter, false);
+                    drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, bottomCenter, false);
+                }
+                else
+                {
+                    drawRectangle(canvas, route.getX(), topCenter, route.isDoubleRoute());
+                    drawRectangle(canvas, route.getX(), bottomCenter, route.isDoubleRoute());
+                }
             }
         }
 
@@ -399,6 +444,23 @@ public class TrainView extends View
         rectWidth = tempRectWidth;
 
         canvas.restore();
+    }
+
+    private void setColorOnClaimedDoubleRoute(MapRoute route)
+    {
+        switch(route.getClaimedColor2())
+        {
+            case "gray":   paint.setColor(Color.GRAY); break;
+            case "white":  paint.setColor(Color.WHITE); break;
+            case "black":  paint.setColor(Color.BLACK); break;
+            case "red":    paint.setColor(Color.RED); break;
+            case "blue":   paint.setColor(Color.parseColor("cyan")); break;
+            case "green":  paint.setColor(Color.GREEN); break;
+            case "yellow": paint.setColor(Color.YELLOW); break;
+            case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
+            case "purple": paint.setColor(Color.parseColor("purple")); break;
+            default:       break;
+        }
     }
 
     private void drawRectangle(Canvas canvas, float x, float y, boolean doubleRoute)
@@ -434,27 +496,39 @@ public class TrainView extends View
 
     public void claimRoute(Route route)
     {
-        System.out.println("*" + route.getCityOne() + "*");
-        System.out.println("*" + route.getCityTwo() + "*");
         paint.setColor(Color.parseColor(route.getClaimedBy().getColor()));
         for(int i = 0; i < routes.size(); i++)
         {
-            System.out.println("*" + routes.get(i).getCity1() + "*");
-            System.out.println("*" + routes.get(i).getCity2() + "*");
             if(routes.get(i).getCity1().equals(route.getCityOne()))
             {
                 if(routes.get(i).getCity2().equals(route.getCityTwo()))
                 {
-                    routes.get(i).setClaimed1(true);
-                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    if(routes.get(i).getPaint().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed1(true);
+                        routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    }
+                    if(routes.get(i).getPaint2().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed2(true);
+                        routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
+                    }
                 }
             }
             else if(routes.get(i).getCity2().equals(route.getCityOne()))
             {
                 if(routes.get(i).getCity1().equals(route.getCityTwo()))
                 {
-                    routes.get(i).setClaimed1(true);
-                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    if(routes.get(i).getPaint().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed1(true);
+                        routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                    }
+                    if(routes.get(i).getPaint2().equals(route.getColor()))
+                    {
+                        routes.get(i).setClaimed2(true);
+                        routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
+                    }
                 }
             }
         }

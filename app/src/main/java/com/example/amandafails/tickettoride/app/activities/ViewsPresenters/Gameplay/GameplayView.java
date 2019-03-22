@@ -1,5 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -35,8 +36,6 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
-
-        presenter = new GameplayPresenter(this);
 
         displayGameStatusButton = findViewById(R.id.display_game_status);
         displayGameStatusButton.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +77,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
         trainView = findViewById(R.id.view_trains);
 
+        ClientModel.getInstance().initializeRoutes();
+        presenter = new GameplayPresenter(this);
+
         currentTurn = findViewById(R.id.turn_text_indicator);
         currentTurn.setText(presenter.currentTurn());
-
-        ClientModel.getInstance().initializeRoutes();
 
 
         if(firstCreate)
@@ -89,6 +89,15 @@ public class GameplayView extends FragmentActivity implements IGameplayView
             presenter.chooseDestinationCards();
         }
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
     }
 
 
@@ -148,71 +157,6 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         trainView.claimRoute(route);
     }
 
-    public void onTrainCardDrawerExpanded()
-    {
-
-    }
-
-    public void onGameStatusDrawerExpanded()
-    {
-
-    }
-
-    public void createStartDialog()
-    {
-
-    }
-
-    public void onTrainCarClicked()
-    {
-
-    }
-
-    public void onTrainDeckClicked()
-    {
-
-    }
-
-    public void onDestinationCardSelected()
-    {
-
-    }
-
-    public void onDiscardClicked()
-    {
-
-    }
-
-    public void onChatTabClicked()
-    {
-
-    }
-
-    public void onGameHistoryTabClicked()
-    {
-
-    }
-
-    public void onDestCardTabClicked()
-    {
-
-    }
-
-    public void display_chat_message(String message)
-    {
-
-    }
-
-    public void set_chat_enabled(boolean isEnabled)
-    {
-
-    }
-
-    public void display_error_message(String message)
-    {
-
-    }
-
     public GameplayPresenter getPresenter() {
         return presenter;
     }
@@ -236,5 +180,20 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     public void showToast(String message)
     {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    public void setDrawTrainCardsEnabled(boolean enabled)
+    {
+        drawTrainsButton.setEnabled(enabled);
+    }
+
+    public void setDrawDestCardsEnabled(boolean enabled)
+    {
+        drawRoutesButton.setEnabled(enabled);
+    }
+
+    public void setClaimRouteEnabled(boolean enabled)
+    {
+        placeTrainsButton.setEnabled(enabled);
     }
 }

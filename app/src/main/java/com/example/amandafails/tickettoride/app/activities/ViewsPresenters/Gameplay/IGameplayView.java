@@ -5,20 +5,10 @@ public interface IGameplayView
     void onDrawCardsClicked();
     void onDrawRoutesClicked();
     void onPlaceTrainsClicked();
-    void onTrainCardDrawerExpanded();
-    void onGameStatusDrawerExpanded();
-    void createStartDialog();
 
-    void onTrainCarClicked();
-    void onTrainDeckClicked();
+    void showToast(String message);
 
-    void onDestinationCardSelected();
-    void onDiscardClicked();
-
-    void onChatTabClicked();
-    void onGameHistoryTabClicked();
-    void onDestCardTabClicked();
-    void display_chat_message(String message);
-    void set_chat_enabled(boolean isEnabled);
-    void display_error_message(String message);
+    void setDrawTrainCardsEnabled(boolean enabled);
+    void setDrawDestCardsEnabled(boolean enabled);
+    void setClaimRouteEnabled(boolean enabled);
 }

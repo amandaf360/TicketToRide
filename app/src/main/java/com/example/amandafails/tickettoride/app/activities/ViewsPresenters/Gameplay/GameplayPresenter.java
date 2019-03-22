@@ -46,7 +46,22 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         view.setDrawRoutesClickable(false);
         DrawDestCardService drawDestCardService = new DrawDestCardService();
         drawDestCardService.drawCards(3);
+
+        while(!isNumDestCardsMoreThanThree())
+        {
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch(InterruptedException ex)
+            {
+                System.out.println("Hello there! An InterruptedException has been thrown!");
+            }
+        }
+
         ArrayList<DestinationCards> cards = clientModel.getNewlyAddedDestinationCardsFromMainPlayer();
+
+
 
         String zeroth = "Do Not Discard";
         String first = cards.get(0).toString();
@@ -58,6 +73,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
 
 
+
+        view.setDrawRoutesClickable(true);
     }
 
     public void placeTrains()
@@ -69,6 +86,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         return clientModel.getActiveGame().getCurrentPlayersTurn();
     }
+
 
 
     @Override
@@ -88,6 +106,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 view.setFirstCreateToFalse();
                 showDialog(passer);
             }
+            else
+            {
+                addNumDestCardsAdded();
+            }
+
         }
 
         if(o.getClass() == Route.class)
@@ -102,6 +125,26 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
     }
 
+
+    private int numDestCardsAdded = 0;
+
+    private void addNumDestCardsAdded()
+    {
+        numDestCardsAdded++;
+    }
+
+    private boolean isNumDestCardsMoreThanThree()
+    {
+        if(numDestCardsAdded >= 3)
+        {
+            numDestCardsAdded = 0;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private int numDemoClicks = 0;
     public void demo()

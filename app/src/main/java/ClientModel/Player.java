@@ -140,6 +140,7 @@ public class Player
     }
 
     public int getNumDestCards() {
+        numDestCards = playerHandDestinations.getSize();
         return numDestCards;
     }
 

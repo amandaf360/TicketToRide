@@ -43,6 +43,7 @@ public class StartGameService
                 {
                     faceUps.add(deck.draw());
                 }
+                activeGame.getFaceUpCards().setCards(faceUps);
                 for(String username: usernames)
                 {
 

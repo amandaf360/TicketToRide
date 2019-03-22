@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.GameplayState;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.MyTurnState;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.NotMyTurnState;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -26,6 +29,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 {
     GameplayView view;
     ClientModel clientModel;
+    GameplayState currentState;
 
     public GameplayPresenter(GameplayView view)
     {
@@ -33,7 +37,31 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         clientModel = ClientModel.getInstance();
         this.clientModel.addObserver(this);
         clientModel.initializeRoutes();
+        if(currentTurn().equals(clientModel.getMainPlayer().getName()))
+        {
+            System.out.println("It is my turn!");
+            setState(MyTurnState.getInstance());
+        }
+        else
+        {
+            System.out.println("It is not my turn!");
+            setState(NotMyTurnState.getInstance());
+        }
     }
+
+    public void setState(GameplayState newState)
+    {
+        if(currentState != null)
+        {
+            currentState.exit(this);
+        }
+        currentState = newState;
+        if(currentState != null)
+        {
+            currentState.enter(this);
+        }
+    }
+
 
     public void drawCards()
     {
@@ -121,7 +149,18 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         if(o.getClass() == Game.class)
         {
             view.changeTurnName(clientModel.getActiveGame().getCurrentPlayersTurn());
+            if(currentTurn().equals(clientModel.getMainPlayer().getName()))
+            {
+                System.out.println("It is my turn!");
+                setState(MyTurnState.getInstance());
+            }
+            else
+            {
+                System.out.println("It is not my turn!");
+                setState(NotMyTurnState.getInstance());
+            }
         }
+
         view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
     }
 
@@ -241,6 +280,22 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         return destChoiceValue;
     }
+
+    public void setDrawTrainCardsEnabled(boolean enabled)
+    {
+        view.setDrawTrainCardsEnabled(enabled);
+    }
+
+    public void setDrawDestCardsEnabled(boolean enabled)
+    {
+        view.setDrawDestCardsEnabled(enabled);
+    }
+
+    public void setClaimRouteEnabled(boolean enabled)
+    {
+        view.setClaimRouteEnabled(enabled);
+    }
+
 
     private void doit(String[] selection)
     {

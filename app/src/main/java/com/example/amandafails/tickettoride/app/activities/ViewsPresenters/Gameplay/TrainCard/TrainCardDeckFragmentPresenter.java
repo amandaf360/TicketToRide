@@ -38,17 +38,15 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     @Override
     public void drawCard(int cardIndex) {
         // check to see if it's a valid draw
-        if(cardDrawn) {
+        if(cardDrawn && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
             // don't let them draw a wild if it's their second card to draw
-            if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
-                view.showToast("Can't draw a wild as the second card");
-            }
-            // otherwise, call the service
-            else {
-                // call draw card service
-                DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
-                drawTrainCardService.drawCard(cardIndex);
-            }
+            view.showToast("Can't draw a wild as the second card");
+        }
+        // otherwise, call the service
+        else {
+            // call draw card service
+            DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
+            drawTrainCardService.drawCard(cardIndex);
         }
     }
 

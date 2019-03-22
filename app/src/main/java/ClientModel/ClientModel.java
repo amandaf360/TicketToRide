@@ -247,6 +247,12 @@ public class ClientModel extends Observable
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());
     }
 
+    public ArrayList<DestinationCards> getNewlyAddedDestinationCardsFromMainPlayer()
+    {
+        return mainPlayer.getNewlyAddedDestCards();
+    }
+
+
     public void addTrainCardToActivePlayerHand(TrainCarCard trainCarCard)
     {
         mainPlayer.addTrainCardToHand(trainCarCard);
@@ -275,8 +281,7 @@ public class ClientModel extends Observable
 
     public void decrementPlayerDestCardNum(String name)
     {
-        int in = activeGame.getPlayerByName(name).getNumDestCards() - 1;
-        activeGame.getPlayerByName(name).setNumDestCards(in);
+        activeGame.getPlayerByName(name).decrementNumDestCards();
         setChanged();
         notifyObservers(this.activeGame.getPlayerByName(name));
     }

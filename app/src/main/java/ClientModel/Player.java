@@ -1,5 +1,7 @@
 package ClientModel;
 
+import java.util.ArrayList;
+
 public class Player
 {
     private String color;
@@ -139,9 +141,14 @@ public class Player
         return playerHandTrains.getTotalCards();
     }
 
-    public int getNumDestCards() {
-        numDestCards = playerHandDestinations.getSize();
+    public int getNumDestCards()
+    {
         return numDestCards;
+    }
+
+    public void decrementNumDestCards()
+    {
+        numDestCards -= 1;
     }
 
     public void setNumDestCards(int numDestCards) {
@@ -153,5 +160,9 @@ public class Player
         this.numDestCards += numDestCards;
     }
 
+    public ArrayList<DestinationCards> getNewlyAddedDestCards()
+    {
+        return playerHandDestinations.getNewlyAddedCards();
+    }
 
 }

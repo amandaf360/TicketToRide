@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class FaceUpCards
 {
     private ArrayList<TrainCarCard> cards;
+    private TrainCarDiscard discardPile;
 
     public FaceUpCards()
     {
@@ -15,10 +16,11 @@ public class FaceUpCards
     {
         TrainCarCard drawnCard = cards.get(index);
         cards.set(index, deck.draw());
+        checkValidity(deck);
         return drawnCard;
     }
 
-    public void checkValidity(TrainCarDiscard discardPile, TrainCarDeck deck)//
+    public void checkValidity(TrainCarDeck deck)
     {
         int numLocomotives = 0;
         for(int i = 0; i < 5; i++)
@@ -40,7 +42,7 @@ public class FaceUpCards
                 TrainCarCard drawnCard = deck.draw();
                 cards.add(drawnCard);
             }
-            checkValidity(discardPile, deck);
+            checkValidity(deck);
         }
     }
 
@@ -57,5 +59,18 @@ public class FaceUpCards
     public ArrayList<TrainCarCard> getCards()
     {
         return cards;
+    }
+
+    public void setCards(ArrayList<TrainCarCard> cards)
+    {
+        this.cards = cards;
+    }
+
+    public TrainCarDiscard getDiscardPile() {
+        return discardPile;
+    }
+
+    public void setDiscardPile(TrainCarDiscard discardPile) {
+        this.discardPile = discardPile;
     }
 }

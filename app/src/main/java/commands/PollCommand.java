@@ -31,6 +31,7 @@ public class PollCommand implements ICommand
             updateDeckData(response.getDeckData());
             discardDestCards(response.getDiscardedDestCards());
             updateTrainCardsDrawn(response.getTrainCardsDrawn());
+            updateGameHistory(response.getGameHistory());
         }
     }
 
@@ -40,10 +41,15 @@ public class PollCommand implements ICommand
         {
             if(messages.size() != 0)
             {
-                //do stuff
+                ClientModel model = ClientModel.getInstance();
+                for(Message message: messages)
+                {
+                    model.addMessageToHistory(message);
+                }
             }
         }
     }
+
     private void updateTrainCardsDrawn(ArrayList<String> usersDrew)
     {
         if(usersDrew != null)

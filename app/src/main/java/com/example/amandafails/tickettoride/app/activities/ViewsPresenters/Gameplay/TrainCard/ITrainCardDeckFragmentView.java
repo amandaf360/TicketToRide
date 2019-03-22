@@ -6,4 +6,5 @@ public interface ITrainCardDeckFragmentView {
     void onExitClicked();
     void setExitEnabled(boolean enabled);
     void popFragment();
+    void showToast(String toastString);
 }

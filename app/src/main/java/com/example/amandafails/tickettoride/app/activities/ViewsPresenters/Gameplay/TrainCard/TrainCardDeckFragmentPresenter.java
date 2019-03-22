@@ -39,7 +39,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     public void drawCard(int cardIndex) {
         // if it's the SECOND draw...
         if(cardDrawn) {
-            if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
+            if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
                 // don't let them draw a wild if it's their second card to draw
                 view.showToast("Can't draw a wild as the second card");
             }
@@ -55,7 +55,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
         // if it's the FIRST draw...
         else {
             // if it's a wild, then pop
-            if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
+            if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
                 view.popFragment();
             }
             // otherwise draw a card and set cardDrawn

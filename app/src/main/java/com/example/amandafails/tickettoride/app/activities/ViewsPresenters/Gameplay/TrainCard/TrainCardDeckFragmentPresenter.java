@@ -43,8 +43,16 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
             // don't let them draw a wild if it's their second card to draw
             view.showToast("Can't draw a wild as the second card");
         }
+        // if their first card they draw is a wild, pop the fragment
+        else if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
+            view.popFragment();
+        }
         // otherwise, call the service
         else {
+            // disable the exit button
+            view.setExitEnabled(false);
+            // acknowledge that they've drawn their first card
+            cardDrawn = true;
             // call draw card service
             DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
             drawTrainCardService.drawCard(cardIndex);
@@ -80,22 +88,6 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     @Override
     public void update(Observable o, Object arg) {
         view.setCardValues();
-        // if they've already drawn one,
-        // check to see what they've drawn
-        if(arg.getClass() == TrainCarCard.class) {
-            // if this is their second card, (then bool will already be true), or if it's a wild
-            // pop the fragment
-            TrainCarCard newCard = (TrainCarCard)arg;
-            if(cardDrawn || newCard.getColor().equals("locomotive")) {
-                view.popFragment();
-            }
-            // otherwise this is their first card drawn and it's not a wild,
-            // so disable the "exit" button
-            else {
-                cardDrawn = true;
-                view.setExitEnabled(false);
-            }
-        }
     }
 
     @Override

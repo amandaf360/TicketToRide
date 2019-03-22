@@ -29,7 +29,7 @@ public class AsyncDemo extends AsyncTask<Void, DemoCallback, Void>
     {
         try
         {
-            Thread.sleep(1000);
+            /*Thread.sleep(1000);
             publishProgress(new DemoCallback() {
                 @Override
                 public void execute() {
@@ -63,13 +63,13 @@ public class AsyncDemo extends AsyncTask<Void, DemoCallback, Void>
                     clientModel.manuallyNotifyObservers();
                 }
             });
-            Thread.sleep(3000);
+            Thread.sleep(3000);*/
 
             publishProgress(new DemoCallback() {
                 @Override
                 public void execute() {
                     presenter.displayToast("Claiming route");
-                    ClaimRouteHelper helper = new ClaimRouteHelper(2);
+                    ClaimRouteHelper helper = new ClaimRouteHelper(25);
                     helper.claimRoute();
                 }
             });
@@ -78,7 +78,7 @@ public class AsyncDemo extends AsyncTask<Void, DemoCallback, Void>
             publishProgress(new DemoCallback() {
                 @Override
                 public void execute() {
-                    clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
+                    //clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
                 }
             });
             Thread.sleep(3000);

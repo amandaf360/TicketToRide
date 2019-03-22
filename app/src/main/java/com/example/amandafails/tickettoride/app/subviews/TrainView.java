@@ -434,7 +434,6 @@ public class TrainView extends View
                     drawRectangle(canvas, route.getX(), topCenter, route.isDoubleRoute());
                     drawRectangle(canvas, route.getX(), bottomCenter, route.isDoubleRoute());
                 }
-
             }
         }
 

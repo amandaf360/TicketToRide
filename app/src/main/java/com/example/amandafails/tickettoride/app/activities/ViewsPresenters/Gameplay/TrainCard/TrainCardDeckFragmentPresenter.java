@@ -37,25 +37,37 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
 
     @Override
     public void drawCard(int cardIndex) {
-        // check to see if it's a valid draw
-        System.out.println("Color: " + clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor());
-        if(cardDrawn && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
-            // don't let them draw a wild if it's their second card to draw
-            view.showToast("Can't draw a wild as the second card");
+        // if it's the SECOND draw...
+        if(cardDrawn) {
+            if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
+                // don't let them draw a wild if it's their second card to draw
+                view.showToast("Can't draw a wild as the second card");
+            }
+            // otherwise draw a card and pop
+            else {
+                // call draw card service
+                DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
+                drawTrainCardService.drawCard(cardIndex);
+                // pop fragment
+                view.popFragment();
+            }
         }
-        // if their first card they draw is a wild, pop the fragment
-        else if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
-            view.popFragment();
-        }
-        // otherwise, call the service
+        // if it's the FIRST draw...
         else {
-            // disable the exit button
-            view.setExitEnabled(false);
-            // acknowledge that they've drawn their first card
-            cardDrawn = true;
-            // call draw card service
-            DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
-            drawTrainCardService.drawCard(cardIndex);
+            // if it's a wild, then pop
+            if(clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
+                view.popFragment();
+            }
+            // otherwise draw a card and set cardDrawn
+            else {
+                // disable the exit button
+                view.setExitEnabled(false);
+                // acknowledge that they've drawn their first card
+                cardDrawn = true;
+                // call draw card service
+                DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
+                drawTrainCardService.drawCard(cardIndex);
+            }
         }
     }
 

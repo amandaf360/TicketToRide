@@ -313,29 +313,5 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             clientModel.deleteMainPlayersDestinationCardFromHand(
                     clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }
-
-        /*
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for(int i = 0; i < 4; i++)
-        {
-            arrayList.add(selection[i]);
-        }
-        if(destChoiceValue == 0)
-        {
-            arrayList.remove(0);
-        }
-        else
-        {
-            arrayList.remove(destChoiceValue);
-            arrayList.remove(0);
-        }
-
-
-        */
-
-        //Player player = model.getCurrentPlayer();
-        //player.setDestCards(arrayList);
-
-
     }
 }

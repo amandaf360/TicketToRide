@@ -1,10 +1,12 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
+import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -76,6 +78,14 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         });
 
         trainView = findViewById(R.id.view_trains);
+        trainView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+            }
+        });
 
         ClientModel.getInstance().initializeRoutes();
         presenter = new GameplayPresenter(this);

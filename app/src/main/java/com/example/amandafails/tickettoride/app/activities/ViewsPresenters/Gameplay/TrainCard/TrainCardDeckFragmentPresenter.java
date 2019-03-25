@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import ClientModel.*;
+import proxy.ServerProxy;
 import services.DrawTrainCardService;
 
 public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPresenter, Observer {
@@ -49,6 +50,8 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
                 DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
                 drawTrainCardService.drawCard(cardIndex);
                 // pop fragment
+                ServerProxy proxy = new ServerProxy();
+                proxy.endCurrentTurn(clientModel.getMainPlayer().getName());
                 view.popFragment();
             }
         }
@@ -58,7 +61,10 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
             if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
                 DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
                 drawTrainCardService.drawCard(cardIndex);
+                ServerProxy proxy = new ServerProxy();
+                proxy.endCurrentTurn(clientModel.getMainPlayer().getName());
                 view.popFragment();
+
             }
             // otherwise draw a card and set cardDrawn
             else {

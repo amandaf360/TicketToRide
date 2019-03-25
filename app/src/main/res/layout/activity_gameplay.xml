@@ -41,16 +41,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/demo_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="8dp"
-                android:text="@string/demo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+            android:orientation="horizontal"
+            android:layout_gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,15 +96,6 @@
             android:layout_weight="1"
             android:text="@string/drawRoute" />
     </LinearLayout>
-
-
-    <!--<fragment-->
-        <!--android:id="@+id/fragment_train_card_deck"-->
-        <!--android:name="com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragment"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
 
 </android.support.constraint.ConstraintLayout>

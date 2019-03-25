@@ -28,7 +28,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     private Button drawTrainsButton;
     private Button drawRoutesButton;
     private Button placeTrainsButton;
-    private Button demoButton;
+    //private Button demoButton;
     private TextView currentTurn;
     private boolean firstCreate = true;
     private TrainView trainView;
@@ -68,14 +68,14 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
-        demoButton = findViewById(R.id.demo_button);
-        demoButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                onDemoClicked();
-            }
-        });
+        //demoButton = findViewById(R.id.demo_button);
+        //demoButton.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View view) {
+//                onDemoClicked();
+//            }
+//        });
 
         trainView = findViewById(R.id.view_trains);
         trainView.setOnClickListener(new View.OnClickListener()
@@ -94,9 +94,9 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         currentTurn.setText(presenter.currentTurn());
 
 
-        if(firstCreate)
-        {
+        if(firstCreate) {
             presenter.chooseDestinationCards();
+            presenter.setPlayerCards();
         }
 
     }

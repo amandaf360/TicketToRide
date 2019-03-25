@@ -5,4 +5,5 @@ public interface IGameplayPresenter
     void drawCards();
     void drawRoute();
     void placeTrains();
+    void setPlayerCards();
 }

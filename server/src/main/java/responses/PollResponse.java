@@ -23,6 +23,9 @@ public class PollResponse extends BaseResponse
     private ArrayList<String> routesClaimed;
     private ArrayList<String> trainCardsDrawn;
     private ArrayList<Message> gameHistory;
+    private int turnsEnded;
+    private ArrayList<String> trainsUsed;
+    private ArrayList<String> pointsGained;
 
     public PollResponse() {
         gamesCreated = new ArrayList<>();
@@ -36,6 +39,8 @@ public class PollResponse extends BaseResponse
         routesClaimed = new ArrayList<>();
         trainCardsDrawn = new ArrayList<>();
         gameHistory = new ArrayList<>();
+        trainsUsed = new ArrayList<>();
+        pointsGained = new ArrayList<>();
     }
 
     public ArrayList<Game> getGamesCreated() {
@@ -150,5 +155,29 @@ public class PollResponse extends BaseResponse
 
     public void setGameHistory(ArrayList<Message> gameHistory) {
         this.gameHistory = gameHistory;
+    }
+
+    public int getTurnsEnded() {
+        return turnsEnded;
+    }
+
+    public void setTurnsEnded(int turnsEnded) {
+        this.turnsEnded = turnsEnded;
+    }
+
+    public ArrayList<String> getTrainsUsed() {
+        return trainsUsed;
+    }
+
+    public void setTrainsUsed(ArrayList<String> trainsUsed) {
+        this.trainsUsed = trainsUsed;
+    }
+
+    public ArrayList<String> getPointsGained() {
+        return pointsGained;
+    }
+
+    public void setPointsGained(ArrayList<String> pointsGained) {
+        this.pointsGained = pointsGained;
     }
 }

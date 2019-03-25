@@ -56,6 +56,8 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
         else {
             // if it's a wild, then pop
             if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
+                DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
+                drawTrainCardService.drawCard(cardIndex);
                 view.popFragment();
             }
             // otherwise draw a card and set cardDrawn

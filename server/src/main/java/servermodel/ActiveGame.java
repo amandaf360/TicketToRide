@@ -13,6 +13,7 @@ public class ActiveGame
     private int gameNum;
     private FaceUpCards faceUpCards;
     private ArrayList<Route> routes;
+    private int currentTurnIndex = 0;
 
     public ActiveGame()
     {
@@ -27,10 +28,11 @@ public class ActiveGame
         faceUpCards.setDiscardPile(trainCarDiscard);
 
         initializeRoutes();
-        for(int i = 0; i < 5; i ++)
-        {
+    }
 
-        }
+    public void advanceTurn()
+    {
+        currentTurnIndex = (currentTurnIndex + 1) % players.size();
     }
 
 

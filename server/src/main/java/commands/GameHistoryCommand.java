@@ -2,6 +2,7 @@ package commands;
 
 import responses.BaseResponse;
 import servermodel.Message;
+import services.GameHistoryService;
 
 public class GameHistoryCommand implements ICommand
 {
@@ -10,7 +11,8 @@ public class GameHistoryCommand implements ICommand
 
     public BaseResponse execute()
     {
-
+        GameHistoryService service = new GameHistoryService();
+        service.sendGameHistoryMessage(message, user);
         return null;
     }
 

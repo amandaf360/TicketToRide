@@ -392,6 +392,22 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
+    public void endCurrentTurn(String username)
+    {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add(username);
+        RequestWrapper wrapper = new RequestWrapper("endTurn", stringList);
+
+        callBack = new OnTaskCompleted() {
+            @Override
+            public void completeTask(String responseJson) {
+
+            }
+        };
+
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
+    }
+
     /**
      *  Initializes the ServerProxy object, and sets the serializer.
      * @post serializer will not be null
@@ -416,7 +432,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://10.37.166.225:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://192.168.255.247:3000");//CHANGE IP ADDRESS HERE
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);

@@ -340,4 +340,18 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                     clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }
     }
+
+    @Override
+    public void setPlayerCards() {
+        final int CARDS_TO_ADD = 4;
+        for(int i = 0; i < clientModel.getActiveGame().getCurrentPlayers(); i++) {
+            if(clientModel.getMainPlayer() != clientModel.getActiveGame().getPlayers().get(i)) {
+                for(int j = 0; j < CARDS_TO_ADD; j++) {
+                    TrainCarCard trainCarCard = new TrainCarCard("locomotive");
+                    clientModel.getActiveGame().getPlayers().get(i).addTrainCardToHand(trainCarCard);
+                }
+
+            }
+        }
+    }
 }

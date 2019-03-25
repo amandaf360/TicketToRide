@@ -10,4 +10,5 @@ public interface IGameplayPresenter
     void drawRoute();
     void claimRouteByTap(ArrayList<Route> routes);
     void placeTrains();
+    void setPlayerCards();
 }

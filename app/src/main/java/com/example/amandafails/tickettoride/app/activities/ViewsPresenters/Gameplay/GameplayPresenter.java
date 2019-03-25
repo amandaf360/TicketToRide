@@ -27,9 +27,9 @@ import ClientModel.AsyncDemo;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
-    private GameplayView view;
-    private ClientModel clientModel;
-    private GameplayState currentState;
+    GameplayView view;
+    ClientModel clientModel;
+    GameplayState currentState;
 
     public GameplayPresenter(GameplayView view)
     {
@@ -62,6 +62,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
     }
 
+
     public void drawCards()
     {
         // is this the function to choose your first destination cards??
@@ -73,7 +74,22 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         view.setDrawRoutesClickable(false);
         DrawDestCardService drawDestCardService = new DrawDestCardService();
         drawDestCardService.drawCards(3);
+
+        while(!isNumDestCardsMoreThanThree())
+        {
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch(InterruptedException ex)
+            {
+                System.out.println("Hello there! An InterruptedException has been thrown!");
+            }
+        }
+
         ArrayList<DestinationCards> cards = clientModel.getNewlyAddedDestinationCardsFromMainPlayer();
+
+
 
         String zeroth = "Do Not Discard";
         String first = cards.get(0).toString();
@@ -85,6 +101,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
 
 
+
+        view.setDrawRoutesClickable(true);
     }
 
     public void placeTrains()
@@ -96,6 +114,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         return clientModel.getActiveGame().getCurrentPlayersTurn();
     }
+
 
 
     @Override
@@ -115,6 +134,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 view.setFirstCreateToFalse();
                 showDialog(passer);
             }
+            else
+            {
+                addNumDestCardsAdded();
+            }
+
         }
 
         if(o.getClass() == Route.class)
@@ -136,7 +160,63 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 setState(NotMyTurnState.getInstance());
             }
         }
+
         view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
+    }
+
+
+    private int numDestCardsAdded = 0;
+
+    private void addNumDestCardsAdded()
+    {
+        numDestCardsAdded++;
+    }
+
+    private boolean isNumDestCardsMoreThanThree()
+    {
+        if(numDestCardsAdded >= 3)
+        {
+            numDestCardsAdded = 0;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private int numDemoClicks = 0;
+    public void demo()
+    {
+        AsyncDemo demo = new AsyncDemo(this);
+        demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        switch (numDemoClicks)
+        {
+            case 0:
+                clientModel.getMainPlayer().addPoints(1000);
+                //
+                break;
+            case 1:
+                clientModel.getMainPlayer().addTrainCardToHand(new TrainCarCard("locomotive"));
+                break;
+            case 2:
+                clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
+
+                break;
+            case 3:
+                clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
+                if(clientModel.getActiveGame().getPlayers().size() > 1)
+                {
+                    clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                }
+                clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
+                if(clientModel.getActiveGame().getPlayers().size() > 1)
+                {
+                    clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
+                }
+                break;
+        }
+        numDemoClicks++;
     }
 
     public void displayToast(String toastString)
@@ -201,6 +281,22 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         return destChoiceValue;
     }
 
+    public void setDrawTrainCardsEnabled(boolean enabled)
+    {
+        view.setDrawTrainCardsEnabled(enabled);
+    }
+
+    public void setDrawDestCardsEnabled(boolean enabled)
+    {
+        view.setDrawDestCardsEnabled(enabled);
+    }
+
+    public void setClaimRouteEnabled(boolean enabled)
+    {
+        view.setClaimRouteEnabled(enabled);
+    }
+
+
     private void doit(String[] selection)
     {
 
@@ -217,76 +313,5 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             clientModel.deleteMainPlayersDestinationCardFromHand(
                     clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }
-
-        /*
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for(int i = 0; i < 4; i++)
-        {
-            arrayList.add(selection[i]);
-        }
-        if(destChoiceValue == 0)
-        {
-            arrayList.remove(0);
-        }
-        else
-        {
-            arrayList.remove(destChoiceValue);
-            arrayList.remove(0);
-        }
-
-
-        */
-
-        //Player player = model.getCurrentPlayer();
-        //player.setDestCards(arrayList);
-    }
-
-    public void setDrawTrainCardsEnabled(boolean enabled)
-    {
-        view.setDrawTrainCardsEnabled(enabled);
-    }
-
-    public void setDrawDestCardsEnabled(boolean enabled)
-    {
-        view.setDrawDestCardsEnabled(enabled);
-    }
-
-    public void setClaimRouteEnabled(boolean enabled)
-    {
-        view.setClaimRouteEnabled(enabled);
-    }
-
-    private int numDemoClicks = 0;
-    public void demo()
-    {
-        AsyncDemo demo = new AsyncDemo(this);
-        demo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        switch (numDemoClicks)
-        {
-            case 0:
-                clientModel.getMainPlayer().addPoints(1000);
-                //
-                break;
-            case 1:
-                clientModel.getMainPlayer().addTrainCardToHand(new TrainCarCard("locomotive"));
-                break;
-            case 2:
-                clientModel.claimRouteByIndex(3, clientModel.getActiveGame().getPlayers().get(0).getName());
-
-                break;
-            case 3:
-                clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
-                if(clientModel.getActiveGame().getPlayers().size() > 1)
-                {
-                    clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
-                }
-                clientModel.getActiveGame().getPlayers().get(0).addTrainCardToHand(new TrainCarCard("locomotive"));
-                if(clientModel.getActiveGame().getPlayers().size() > 1)
-                {
-                    clientModel.getActiveGame().getPlayers().get(1).addTrainCardToHand(new TrainCarCard("locomotive"));
-                }
-                break;
-        }
-        numDemoClicks++;
     }
 }

@@ -273,7 +273,7 @@ public class ClientModel extends Observable
 
         //DiscardDestCardService discardDestCardService = new DiscardDestCardService();
         //discardDestCardService.discardCard(destinationCards);
-        mainPlayer.getPlayerHandDestinations().deleteCard(destinationCards);
+        mainPlayer.deleteDestinationCardFromPlayersHand(destinationCards);
         //activeGame.getPlayerByName(mainPlayer.getName()).getPlayerHandDestinations().deleteCard(destinationCards);
         setChanged();
         notifyObservers(this.mainPlayer.getPlayerHandDestinations());

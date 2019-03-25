@@ -9,12 +9,15 @@ import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.Map;
 
 import ClientModel.Route;
 
+import static java.lang.Math.sin;
+import static java.lang.Math.tan;
 import static java.sql.Types.NULL;
 
 public class TrainView extends View
@@ -194,7 +197,7 @@ public class TrainView extends View
         routes.add(new MapRoute(2050, 370, 45, 3, false, "gray", "none", "Toronto", "Montreal"));
         routes.add(new MapRoute(2240, 360, 150, 2, true, "gray", "gray", "Montreal", "Boston"));
 
-        routes.add(new MapRoute(1930, 600,0, 2, false, "gray", "none", "Toronto", "Pittsburgh"));
+        routes.add(new MapRoute(1930, 600,1, 2, false, "gray", "none", "Toronto", "Pittsburgh"));
         routes.add(new MapRoute(2060, 950, 36, 2, true, "gray", "gray", "Washington", "Raleigh"));
         routes.add(new MapRoute(1960, 890, 174, 2, false, "gray", "none", "Pittsburgh", "Raleigh"));
         routes.add(new MapRoute(2030, 800, 125, 2, false, "gray", "none", "Pittsburgh", "Washington"));
@@ -312,6 +315,54 @@ public class TrainView extends View
     //NOTE: You can force the UI to redraw itself with the postinvalidate method
     //NOTE: Each use of canvas.rotate() needs an instance of canvas.save() before it (to save the unrotated state)
     //and an instance of canvas.restore() afterwards (to return the canvas to an unrotated state)
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        double x = event.getX();
+        double y = event.getY();
+        System.out.println("X = " + x);
+        System.out.println("Y = " + y);
+
+        switch(event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                for(int i = 0; i < routes.size(); i++)
+                {
+                    if(routes.get(i) == routes.get(10))
+                    {
+                        System.out.println("The target route is the one between " + routes.get(10).getCity1() + " and " + routes.get(10).getCity2());
+                        System.out.println("The x value range is " + (routes.get(i).getX() - getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle())))
+                                            + " and " + (routes.get(i).getX() + getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle()))));
+                    }
+                    if(routes.get(i).getX() - getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle()))
+                       < x && x < routes.get(i).getX() + getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle())))
+                    {
+                        double errorMargin;
+                        if(routes.get(i).isDoubleRoute())
+                            errorMargin = rectWidth;
+                        else
+                            errorMargin = rectWidth/2;
+
+                        if(-x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 - (errorMargin / sin(toRad(routes.get(i).getAngle())))
+                        < y && y < -x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 + (errorMargin / sin(toRad(routes.get(i).getAngle()))))
+                        {
+                            System.out.println("Congrats, you clicked the route between" + routes.get(i).getCity1() + " and " + routes.get(i).getCity2());
+                        }
+                    }
+                }
+        }
+        return false;
+    }
+
+    private double getTotalLength(MapRoute route)
+    {
+        return route.getLength() * rectLength + (route.getLength() - 1) * spacing;
+    }
+    private double toRad(double degrees)
+    {
+        return degrees * 3.14159265358 / 180;
+    }
 
     private void drawCity(Canvas canvas, float x, float y)
     {

@@ -32,6 +32,19 @@ public class PollCommand implements ICommand
             discardDestCards(response.getDiscardedDestCards());
             updateTrainCardsDrawn(response.getTrainCardsDrawn());
             updateGameHistory(response.getGameHistory());
+            advanceTurn(response.getTurnsEnded());
+        }
+    }
+
+    private void advanceTurn(int numTurns)
+    {
+        if(numTurns > 0)
+        {
+            ClientModel model = ClientModel.getInstance();
+            for (int i = 0; i < numTurns; i++)
+            {
+                model.endCurrentTurn();
+            }
         }
     }
 

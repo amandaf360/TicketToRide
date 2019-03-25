@@ -108,6 +108,10 @@ public class CommandHandler implements HttpHandler
                 ArrayList<String> historyList = wrappedRequest.getStringList();
                 command = new GameHistoryCommand(new Message(historyList.get(1), historyList.get(2)), historyList.get(0));
                 break;
+            case "endTurn":
+                ArrayList<String> turnList = wrappedRequest.getStringList();
+                command = new EndTurnCommand(turnList.get(0));
+                break;
 
         }
 

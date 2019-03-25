@@ -197,7 +197,7 @@ public class TrainView extends View
         routes.add(new MapRoute(2050, 370, 45, 3, false, "gray", "none", "Toronto", "Montreal"));
         routes.add(new MapRoute(2240, 360, 150, 2, true, "gray", "gray", "Montreal", "Boston"));
 
-        routes.add(new MapRoute(1930, 600,0, 2, false, "gray", "none", "Toronto", "Pittsburgh"));
+        routes.add(new MapRoute(1930, 600,1, 2, false, "gray", "none", "Toronto", "Pittsburgh"));
         routes.add(new MapRoute(2060, 950, 36, 2, true, "gray", "gray", "Washington", "Raleigh"));
         routes.add(new MapRoute(1960, 890, 174, 2, false, "gray", "none", "Pittsburgh", "Raleigh"));
         routes.add(new MapRoute(2030, 800, 125, 2, false, "gray", "none", "Pittsburgh", "Washington"));
@@ -344,8 +344,8 @@ public class TrainView extends View
                         else
                             errorMargin = rectWidth/2;
 
-                        if(x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle())) - errorMargin
-                        < y && y < x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle())) + errorMargin)
+                        if(-x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 - (errorMargin / sin(toRad(routes.get(i).getAngle())))
+                        < y && y < -x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 + (errorMargin / sin(toRad(routes.get(i).getAngle()))))
                         {
                             System.out.println("Congrats, you clicked the route between" + routes.get(i).getCity1() + " and " + routes.get(i).getCity2());
                         }

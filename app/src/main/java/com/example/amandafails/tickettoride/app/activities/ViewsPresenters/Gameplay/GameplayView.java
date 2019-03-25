@@ -16,6 +16,9 @@ import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
+
+import java.util.ArrayList;
+
 import ClientModel.Route;
 
 import ClientModel.ClientModel;
@@ -86,6 +89,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
             }
         });
+        trainView.setParentView(this);
 
         ClientModel.getInstance().initializeRoutes();
         presenter = new GameplayPresenter(this);
@@ -108,6 +112,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         setIntent.addCategory(Intent.CATEGORY_HOME);
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
+    }
+
+    public void claimRouteByTap(ArrayList<Route> routes)
+    {
+        presenter.claimRouteByTap(routes);
     }
 
 
@@ -145,6 +154,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         transaction.replace(R.id.frame, currentGameStatusFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void setRoutesClaimable(boolean enabled)
+    {
+        trainView.setRoutesClaimable(enabled);
     }
 
     public void onDrawRoutesClicked()

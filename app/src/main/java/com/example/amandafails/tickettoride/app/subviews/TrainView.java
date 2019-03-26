@@ -11,6 +11,9 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.IGameplayView;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -40,6 +43,9 @@ public class TrainView extends View
     private ArrayList<MapRoute> routes;
 
     private Canvas myCanvas;
+
+    private IGameplayView view;
+    private boolean canClaimRoutes;
 
     public TrainView(Context context)
     {
@@ -85,6 +91,9 @@ public class TrainView extends View
         rect = new Rect(0, rectLength, 0, rectWidth);
         claimedRectLength = 40;
         claimedRectWidth = 40;
+
+        IGameplayView view;
+        canClaimRoutes = false;
 
         cities.add(new MapCity(1790, 1160, "Atlanta"));
         cities.add(new MapCity(2310, 470, "Boston"));
@@ -225,6 +234,11 @@ public class TrainView extends View
         routes.add(new MapRoute(310, 1080, 49, 2, false, "gray", "none", "Los Angeles", "Las Vegas"));
     }
 
+    public void setParentView(IGameplayView view)
+    {
+        this.view = view;
+    }
+
     @Override
     protected void onDraw(Canvas canvas)
     {
@@ -261,7 +275,6 @@ public class TrainView extends View
                 default:break;
             }
             drawRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());
-
 
             if(routes.get(i).getClaimedColor1() != null)
             {
@@ -354,22 +367,19 @@ public class TrainView extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if(!canClaimRoutes)
+        {
+            return false;
+        }
+
         double x = event.getX();
         double y = event.getY();
-        System.out.println("X = " + x);
-        System.out.println("Y = " + y);
 
         switch(event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
                 for(int i = 0; i < routes.size(); i++)
                 {
-                    if(routes.get(i) == routes.get(10))
-                    {
-                        System.out.println("The target route is the one between " + routes.get(10).getCity1() + " and " + routes.get(10).getCity2());
-                        System.out.println("The x value range is " + (routes.get(i).getX() - getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle())))
-                                            + " and " + (routes.get(i).getX() + getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle()))));
-                    }
                     if(routes.get(i).getX() - getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle()))
                        < x && x < routes.get(i).getX() + getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle())))
                     {
@@ -382,12 +392,39 @@ public class TrainView extends View
                         if(-x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 - (errorMargin / sin(toRad(routes.get(i).getAngle())))
                         < y && y < -x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 + (errorMargin / sin(toRad(routes.get(i).getAngle()))))
                         {
-                            System.out.println("Congrats, you clicked the route between" + routes.get(i).getCity1() + " and " + routes.get(i).getCity2());
+                            ArrayList<Route> returnRoutes = new ArrayList<>();
+                            if(!routes.get(i).isDoubleRoute())
+                            {
+                                if(!routes.get(i).isClaimed1())
+                                {
+                                    Route route = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint(), routes.get(i).getLength());
+                                    returnRoutes.add(route);
+                                }
+                            }
+                            else
+                            {
+                                if(!routes.get(i).isClaimed1())
+                                {
+                                    Route route1 = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint(), routes.get(i).getLength());
+                                    returnRoutes.add(route1);
+                                }
+                                if(!routes.get(i).isClaimed2())
+                                {
+                                    Route route2 = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint2(), routes.get(i).getLength());
+                                    returnRoutes.add(route2);
+                                }
+                            }
+                            view.claimRouteByTap(returnRoutes);
                         }
                     }
                 }
         }
         return false;
+    }
+
+    public void setRoutesClaimable(boolean enabled)
+    {
+        canClaimRoutes = enabled;
     }
 
     private double getTotalLength(MapRoute route)

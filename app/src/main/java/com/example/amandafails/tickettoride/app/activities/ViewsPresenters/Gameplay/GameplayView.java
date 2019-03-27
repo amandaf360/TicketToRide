@@ -131,7 +131,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         presenter.demo();
     }
 
-    //define all these buttons inside of onCreate
+
     public void onDrawCardsClicked()
     {
         // set fragment to draw card fragment

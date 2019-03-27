@@ -164,6 +164,48 @@ public class PlayerHandTrains
         }
     }
 
+    public void discardCard(String color)
+    {
+        if(color.equals("red"))
+        {
+            numRed--;
+            totalCards--;
+        }
+        else if(color.equals("orange"))
+        {
+            numOrange--;
+            totalCards--;
+        }else if(color.equals("yellow"))
+        {
+            numYellow--;
+            totalCards--;
+        }else if(color.equals("green"))
+        {
+            numGreen--;
+            totalCards--;
+        }else if(color.equals("blue"))
+        {
+            numBlue--;
+            totalCards--;
+        }else if(color.equals("purple"))
+        {
+            numPurple--;
+            totalCards--;
+        }else if(color.equals("black"))
+        {
+            numBlack--;
+            totalCards--;
+        }else if(color.equals("white"))
+        {
+            numWhite--;
+            totalCards--;
+        }else if(color.equals("locomotive"))
+        {
+            numLocomotives--;
+            totalCards--;
+        }
+    }
+
     public int getTotalCards()
     {
         return totalCards;

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DrawDestCard.DrawDestFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
 
@@ -163,7 +164,12 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void onDrawRoutesClicked()
     {
-        presenter.drawRoute();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction  = manager.beginTransaction();
+        DrawDestFragmentView drawDestFragmentView = new DrawDestFragmentView();
+        transaction.replace(R.id.frame, drawDestFragmentView)
+                .addToBackStack(null)
+                .commit();
     }
 
     public void setDrawRoutesClickable(boolean canClick)
@@ -197,7 +203,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void setDiscardNumber(int num)
     {
-        String display = "Draw Dest. Cards (" + Integer.toString(num) + ")";
+        String display = "Draw Dest Card (" + Integer.toString(num) + ")";
         drawRoutesButton.setText(display);
     }
 

@@ -4,9 +4,6 @@ import android.os.AsyncTask;
 
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayPresenter;
 
-import PossiblyHelpful.ClaimRouteHelper;
-import requests.RequestWrapper;
-
 
 /*
     Just in case the demo needs to happen without us pressing the button each time.
@@ -68,9 +65,9 @@ public class AsyncDemo extends AsyncTask<Void, DemoCallback, Void>
             publishProgress(new DemoCallback() {
                 @Override
                 public void execute() {
-                    presenter.displayToast("Claiming route");
-                    ClaimRouteHelper helper = new ClaimRouteHelper(25);
-                    helper.claimRoute();
+                    //presenter.displayToast("Claiming route");
+                    //ClaimRouteService helper = new ClaimRouteService(25);
+                    //helper.claimRoute();
                 }
             });
             Thread.sleep(3000);

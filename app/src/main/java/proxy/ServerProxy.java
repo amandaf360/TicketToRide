@@ -479,7 +479,8 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         callBack.completeTask(response);
     }
 
-    public String getServerHost() {
+    public String getServerHost()
+    {
         return serverHost;
     }
 

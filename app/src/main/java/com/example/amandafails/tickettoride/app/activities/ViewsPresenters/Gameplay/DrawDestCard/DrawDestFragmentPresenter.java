@@ -56,7 +56,7 @@ public class DrawDestFragmentPresenter implements IDrawDestFragmentPresenter, Ob
         String remove = "";
         for(String string : added)
         {
-            if(string.equals(str));
+            if(string.equals(str))
             {
                 has = true;
                 remove = string;
@@ -95,7 +95,7 @@ public class DrawDestFragmentPresenter implements IDrawDestFragmentPresenter, Ob
         for(String str : added)
         {
 
-            discardDestCardService.discardCard(cards.get((cards.size() - 1) - (3 - Integer.parseInt(str))));
+            discardDestCardService.discardCard(cards.get((cards.size() - 1) - (2 - Integer.parseInt(str))));
             clientModel.deleteMainPlayersDestinationCardFromHand(
                     cards.get((cards.size() - 1) - (3 - Integer.parseInt(str))));
         }

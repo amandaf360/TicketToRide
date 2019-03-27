@@ -40,6 +40,14 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      */
     private Serializer serializer;
 
+    private String serverHost;
+    private String serverPort;
+
+    public ServerProxy(String host, String port) {
+        serverHost = host;
+        serverPort = port;
+    }
+
     /**
      * Sends username and password to server to see whether the user already exists and will log the
      * user in if they user exists and the password is correct.
@@ -432,7 +440,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://192.168.1.179:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://" + serverHost + ":" + serverPort);
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
@@ -474,5 +482,21 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
     @Override
     protected void onPostExecute(String response) {
         callBack.completeTask(response);
+    }
+
+    public String getServerHost() {
+        return serverHost;
+    }
+
+    public void setServerHost(String serverHost) {
+        this.serverHost = serverHost;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort) {
+        this.serverPort = serverPort;
     }
 }

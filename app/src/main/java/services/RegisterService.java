@@ -5,9 +5,9 @@ public class RegisterService
 {
     private ServerProxy proxy;
 
-    public RegisterService()
+    public RegisterService(String host, String port)
     {
-        proxy = new ServerProxy();
+        proxy = new ServerProxy(host, port);
     }
 
     public void register(String username, String password)

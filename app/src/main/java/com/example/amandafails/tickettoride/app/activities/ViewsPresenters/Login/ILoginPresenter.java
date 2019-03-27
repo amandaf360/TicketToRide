@@ -8,4 +8,6 @@ public interface ILoginPresenter {
     void onRegisterUsernameChanged();
     void onRegisterPasswordChanged();
     void onRegisterConfirmChanged();
+    void onServerHostChanged();
+    void onServerPortChanged();
 }

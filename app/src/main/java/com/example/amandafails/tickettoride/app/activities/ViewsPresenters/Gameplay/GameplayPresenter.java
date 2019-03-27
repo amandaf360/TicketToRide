@@ -138,7 +138,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     public String currentTurn()
     {
-        return clientModel.getActiveGame().getCurrentPlayersTurn();
+        String turn = clientModel.getActiveGame().getCurrentPlayersTurn() + "'s Turn";
+        return turn;
     }
 
 

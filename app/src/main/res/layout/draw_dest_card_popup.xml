@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F7FAD499">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/light_grey_transparent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-            <TextView
-                android:layout_width="645dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="30dp"
-                android:text="Choose up to 2 cards to discard."
-                android:textSize="22sp" />
+        <TextView
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:text="@string/choose2destCards"
+            android:textSize="22sp"
+            android:textStyle="italic"
+            android:textColor="@android:color/black"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/first_dest_card_popup"
-                android:layout_margin="45dp"
-                android:clickable="true"
-                android:text="dest1"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/second_dest_card_popup"
-                android:layout_margin="45dp"
-                android:clickable="true"
-                android:text="dest2"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/third_dest_card_popup"
-                android:layout_margin="45dp"
-                android:clickable="true"
-                android:text="dest3"/>
+        <TextView
+            android:id="@+id/first_dest_card_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:clickable="true"
+            android:text="dest1" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Done"
-                android:id="@+id/dest_card_popup_button"/>
+        <TextView
+            android:id="@+id/second_dest_card_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:clickable="true"
+            android:text="dest2" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/third_dest_card_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:clickable="true"
+            android:text="dest3" />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/dest_card_popup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/done"
+            android:layout_margin="10dp"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

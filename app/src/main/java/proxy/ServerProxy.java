@@ -40,12 +40,15 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      */
     private Serializer serializer;
 
-    private String serverHost;
-    private String serverPort;
+    private static String serverHost;
+    private static String serverPort;
 
-    public ServerProxy(String host, String port) {
-        serverHost = host;
-        serverPort = port;
+    /**
+     *  Initializes the ServerProxy object, and sets the serializer.
+     * @post serializer will not be null
+     */
+    public ServerProxy() {
+        serializer = new Serializer();
     }
 
     /**
@@ -417,14 +420,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
     }
 
     /**
-     *  Initializes the ServerProxy object, and sets the serializer.
-     * @post serializer will not be null
-     */
-    public ServerProxy() {
-        serializer = new Serializer();
-    }
-
-    /**
      * @throws IOException
      *
      * @param requests While the method accepts any number of RequestWrapper objects, only requests[0]
@@ -441,6 +436,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         try {
             Serializer serializer = new Serializer();
             URL myUrl = new URL("http://" + serverHost + ":" + serverPort);
+            //URL myUrl = new URL("http://192.168.254.131:3000");
+
+            System.out.println("Server host: " + serverHost);
+            System.out.println("Server port: " + serverPort);
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
@@ -488,15 +487,15 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         return serverHost;
     }
 
-    public void setServerHost(String serverHost) {
-        this.serverHost = serverHost;
+    public static void setServerHost(String host) {
+        serverHost = host;
     }
 
     public String getServerPort() {
         return serverPort;
     }
 
-    public void setServerPort(String serverPort) {
-        this.serverPort = serverPort;
+    public static void setServerPort(String port) {
+        serverPort = port;
     }
 }

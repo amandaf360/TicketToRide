@@ -9,13 +9,13 @@
     <ImageView
         android:id="@+id/loginImage"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/title_screen" />
 
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="60dp"
         android:columnCount="2"
         android:gravity="center"
@@ -53,7 +53,7 @@
                         android:layout_margin="10dp"
                         android:padding="10dp"
                         android:text="@string/username"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/login_username_edit_text"
@@ -78,7 +78,7 @@
                         android:layout_margin="10dp"
                         android:padding="10dp"
                         android:text="@string/password"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/login_password_edit_text"
@@ -92,20 +92,19 @@
 
             </TableLayout>
 
-            <Button
-                android:id="@+id/button_login"
-                style="@style/Widget.AppCompat.Button.Small"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="end|top|center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:freezesText="false"
-                android:padding="10dp"
-                android:textSize="20sp"
-                android:text="@string/login" />
+                <Button
+                    android:id="@+id/button_login"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end|top|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:freezesText="false"
+                    android:padding="10dp"
+                    android:text="@string/login"
+                    android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -139,7 +138,7 @@
                             android:layout_margin="10dp"
                             android:padding="10dp"
                             android:text="@string/username"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
 
                         <EditText
                             android:id="@+id/register_username_edit_text"
@@ -163,7 +162,7 @@
                             android:layout_margin="10dp"
                             android:padding="10dp"
                             android:text="@string/password"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
 
                         <EditText
                             android:id="@+id/register_password_edit_text"
@@ -186,7 +185,7 @@
                             android:layout_margin="10dp"
                             android:padding="10dp"
                             android:text="@string/confirmPassword"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
 
                         <EditText
                             android:id="@+id/register_confirm_edit_text"
@@ -207,12 +206,11 @@
                     android:layout_height="50dp"
                     android:layout_gravity="end|top|center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
-                    android:textSize="20sp"
-                    android:text="@string/register" />
+                    android:text="@string/register"
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </TableRow>
@@ -235,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:text="@string/serverHost" />
 
                 <EditText
@@ -262,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:text="@string/serverPort" />
 
                 <EditText

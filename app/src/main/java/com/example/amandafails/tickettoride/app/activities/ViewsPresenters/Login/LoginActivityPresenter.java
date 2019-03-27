@@ -3,6 +3,7 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Logi
 import java.util.Observable;
 import java.util.Observer;
 
+import proxy.ServerProxy;
 import services.LoginService;
 import services.RegisterService;
 import ClientModel.ClientModel;

@@ -175,7 +175,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
         if(o.getClass() == Game.class)
         {
-            view.changeTurnName(clientModel.getActiveGame().getCurrentPlayersTurn());
+            view.changeTurnName(clientModel.getActiveGame().getCurrentPlayersTurn() + "'s Turn");
             if(currentTurn().equals(clientModel.getMainPlayer().getName()))
             {
                 System.out.println("It is my turn!");

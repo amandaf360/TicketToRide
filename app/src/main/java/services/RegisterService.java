@@ -7,7 +7,9 @@ public class RegisterService
 
     public RegisterService(String host, String port)
     {
-        proxy = new ServerProxy(host, port);
+        proxy = new ServerProxy();
+        ServerProxy.setServerHost(host);
+        ServerProxy.setServerPort(port);
     }
 
     public void register(String username, String password)

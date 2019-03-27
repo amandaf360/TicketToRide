@@ -7,7 +7,9 @@ public class LoginService
 
     public LoginService(String host, String port)
     {
-        proxy = new ServerProxy(host, port);
+        proxy = new ServerProxy();
+        ServerProxy.setServerHost(host);
+        ServerProxy.setServerPort(port);
     }
 
     public void login(String username, String password)

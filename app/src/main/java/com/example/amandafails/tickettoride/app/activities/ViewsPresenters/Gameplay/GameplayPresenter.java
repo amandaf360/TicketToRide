@@ -14,6 +14,7 @@ import java.util.Observer;
 import ClientModel.ClientModel;
 import ClientModel.DestinationCards;
 import services.ClaimRouteService;
+import services.CreateHistoryMessageService;
 import services.DiscardDestCardService;
 import services.DrawDestCardService;
 import ClientModel.PlayerHandDestinations;
@@ -21,6 +22,7 @@ import ClientModel.TrainCarCard;
 import ClientModel.Route;
 import ClientModel.Game;
 import ClientModel.AsyncDemo;
+import services.EndTurnService;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
@@ -125,7 +127,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 //checks if they have enough of the color itself
                 if (numRelevantColor >= routes.get(0).getLength())
                 {
-                    //TODO: end turn
                     ArrayList<TrainCarCard> cards = new ArrayList<>();
                     for(int i = 0; i < routes.get(0).getLength(); i++)
                     {
@@ -134,11 +135,17 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                     }
                     ClaimRouteService service = new ClaimRouteService();
                     service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+
+                    CreateHistoryMessageService historyService = new CreateHistoryMessageService();
+                    historyService.sendMessage("Claimed the route from " + routes.get(0).getCityOne() + " to " + routes.get(0).getCityTwo()
+                            + " using " + routes.get(0).getLength() + " " + relevantColor + "s");
+
+                    EndTurnService endService = new EndTurnService();
+                    endService.endTurn();
                 }
                 //or if they have enough with locomotives
                 else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= routes.get(0).getLength() - numRelevantColor)
                 {
-                    //TODO: end turn
                     ArrayList<TrainCarCard> cards = new ArrayList<>();
                     for(int i = 0; i < numRelevantColor; i++)
                     {
@@ -152,6 +159,13 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                     }
                     ClaimRouteService service = new ClaimRouteService();
                     service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+
+                    CreateHistoryMessageService historyService = new CreateHistoryMessageService();
+                    historyService.sendMessage("Claimed the route from " + routes.get(0).getCityOne() + " to " + routes.get(0).getCityTwo()
+                            + " using " + routes.get(0).getLength() + " " + relevantColor + "s");
+
+                    EndTurnService endService = new EndTurnService();
+                    endService.endTurn();
                 }
                 //or if they just don't have enough at all
                 else

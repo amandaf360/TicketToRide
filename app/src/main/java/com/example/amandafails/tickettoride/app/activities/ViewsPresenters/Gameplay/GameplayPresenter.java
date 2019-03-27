@@ -121,13 +121,65 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 //resume their turn
                 view.showToast("Sorry, this route is already taken");
                 setState(MyTurnState.getInstance());
+                break;
             case 1:
                 //if there is one element, then either it is a double route with only 1 option remaining, or else it is an unclaimed single
                 //TODO: Check whether the player has the resources to claim the route
-                //TODO: Check whether the route is grey. If so, display a message asking what color of routes he/she wants to use
+                int relevantColor = 0;
+                switch(routes.get(0).getColor())
+                {
+                    case "blue":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlue();
+                        break;
+                    case "red":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumRed();
+                        break;
+                    case "yellow":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumYellow();
+                        break;
+                    case "white":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumWhite();
+                        break;
+                    case "black":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlack();
+                        break;
+                    case "green":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumGreen();
+                        break;
+                    case "purple":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple();
+                        break;
+                    case "orange":
+                        relevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange();
+                        break;
+                    case "gray":
+                        //TODO: Display window asking which one they want to use, collect answer
+                        break;
+                    default: break;
+                }
+
+                //checks if they have enough of the color itself
+                if(relevantColor >= routes.get(0).getLength())
+                {
+                    //TODO: discard the right number of train cards, send claim route order to server, end turn
+                }
+                //or if they have enough with locomotives
+                else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= routes.get(0).getLength() - relevantColor)
+                {
+                    //TODO: discard the right number of train cards, send claim route order to server, end turn
+                }
+                //or if they just don't have enough at all
+                else
+                {
+                    view.showToast("You don't have the resources to claim this route");
+                    setState(MyTurnState.getInstance());
+                }
+
+                break;
             case 2:
                 //if there is more than one element, than it is a double route where both options are unclaimed
                 //TODO: display some kind of message asking the person which route to take
+                break;
             default:break;
         }
 

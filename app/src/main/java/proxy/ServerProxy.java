@@ -436,10 +436,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         try {
             Serializer serializer = new Serializer();
             URL myUrl = new URL("http://" + serverHost + ":" + serverPort);
-            //URL myUrl = new URL("http://192.168.254.131:3000");
-
-            System.out.println("Server host: " + serverHost);
-            System.out.println("Server port: " + serverPort);
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);

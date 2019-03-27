@@ -40,6 +40,17 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      */
     private Serializer serializer;
 
+    private static String serverHost;
+    private static String serverPort;
+
+    /**
+     *  Initializes the ServerProxy object, and sets the serializer.
+     * @post serializer will not be null
+     */
+    public ServerProxy() {
+        serializer = new Serializer();
+    }
+
     /**
      * Sends username and password to server to see whether the user already exists and will log the
      * user in if they user exists and the password is correct.
@@ -409,14 +420,6 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
     }
 
     /**
-     *  Initializes the ServerProxy object, and sets the serializer.
-     * @post serializer will not be null
-     */
-    public ServerProxy() {
-        serializer = new Serializer();
-    }
-
-    /**
      * @throws IOException
      *
      * @param requests While the method accepts any number of RequestWrapper objects, only requests[0]
@@ -432,7 +435,11 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         RequestWrapper theRequest = requests[0];
         try {
             Serializer serializer = new Serializer();
-            URL myUrl = new URL("http://192.168.1.179:3000");//CHANGE IP ADDRESS HERE
+            URL myUrl = new URL("http://" + serverHost + ":" + serverPort);
+            //URL myUrl = new URL("http://192.168.254.131:3000");
+
+            System.out.println("Server host: " + serverHost);
+            System.out.println("Server port: " + serverPort);
 
             HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setDoOutput(true);
@@ -474,5 +481,21 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
     @Override
     protected void onPostExecute(String response) {
         callBack.completeTask(response);
+    }
+
+    public String getServerHost() {
+        return serverHost;
+    }
+
+    public static void setServerHost(String host) {
+        serverHost = host;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public static void setServerPort(String port) {
+        serverPort = port;
     }
 }

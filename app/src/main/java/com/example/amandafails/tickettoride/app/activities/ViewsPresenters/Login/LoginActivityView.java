@@ -25,6 +25,9 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
     private EditText registerPasswordEdit;
     private EditText confirmPasswordEdit;
 
+    private EditText serverHostEdit;
+    private EditText serverPortEdit;
+
     private Button loginButton;
     private Button registerButton;
 
@@ -40,6 +43,9 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
         registerUsernameEdit = findViewById(R.id.register_username_edit_text);
         registerPasswordEdit = findViewById(R.id.register_password_edit_text);
         confirmPasswordEdit = findViewById(R.id.register_confirm_edit_text);
+
+        serverHostEdit = findViewById(R.id.serverHostTextEdit);
+        serverPortEdit = findViewById(R.id.serverPortTextEdit);
 
         loginButton = findViewById(R.id.button_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +154,44 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
 
             }
         });
+
+        // add text changed listener to server host
+        serverHostEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+                setRegisterEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onServerHostChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // add text changed listener to server port
+        serverPortEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setLoginEnabled(false);
+                setRegisterEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.onServerPortChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -195,6 +239,16 @@ public class LoginActivityView extends AppCompatActivity implements ILoginView {
     @Override
     public String getConfirmPassword() {
         return confirmPasswordEdit.getText().toString();
+    }
+
+    @Override
+    public String getServerHost() {
+        return serverHostEdit.getText().toString();
+    }
+
+    @Override
+    public String getServerPort() {
+        return serverPortEdit.getText().toString();
     }
 
     @Override

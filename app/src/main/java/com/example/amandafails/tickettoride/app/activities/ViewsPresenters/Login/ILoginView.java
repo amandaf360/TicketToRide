@@ -10,6 +10,8 @@ public interface ILoginView {
     String getRegisterUsername();
     String getRegisterPassword();
     String getConfirmPassword();
+    String getServerHost();
+    String getServerPort();
     void switchActivity();
     void displayErrorMessage(String error);
 }

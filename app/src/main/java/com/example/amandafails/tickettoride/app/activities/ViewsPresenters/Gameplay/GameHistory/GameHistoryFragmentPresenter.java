@@ -18,7 +18,7 @@ public class GameHistoryFragmentPresenter implements IGameHistoryFragmentPresent
 
     @Override
     public void update(Observable o, Object arg) {
-
+        view.updateGameHistory();
     }
 
     @Override

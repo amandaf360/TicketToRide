@@ -7,6 +7,8 @@
     <string name="confirmPassword">Confirm Password:</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="serverHost">Server Host:</string>
+    <string name="serverPort">Server Port:</string>
 
     <!-- Strings related to activeGame room -->
     <string name="sampleText">SAMPLE TEXT</string>
@@ -29,7 +31,7 @@
     <string name="displayGameStatus">Display Game Status</string>
     <string name="drawTrains">Draw Trains</string>
     <string name="claimRoute">Claim Route</string>
-    <string name="drawRoute">Draw Route</string>
+    <string name="drawDestCard">Draw Dest. Cards</string>
     <string name="demo">Demo</string>
     <string name="playersTurn">Player\'s turn</string>
 

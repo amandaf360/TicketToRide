@@ -11,6 +11,9 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.IGameplayView;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -40,6 +43,9 @@ public class TrainView extends View
     private ArrayList<MapRoute> routes;
 
     private Canvas myCanvas;
+
+    private IGameplayView view;
+    private boolean canClaimRoutes;
 
     public TrainView(Context context)
     {
@@ -86,23 +92,26 @@ public class TrainView extends View
         claimedRectLength = 40;
         claimedRectWidth = 40;
 
+        IGameplayView view;
+        canClaimRoutes = false;
+
         cities.add(new MapCity(1790, 1160, "Atlanta"));
         cities.add(new MapCity(2310, 470, "Boston"));
         cities.add(new MapCity(600, 50, "Calgary"));
         cities.add(new MapCity(2010, 1250, "Charleston"));
         cities.add(new MapCity(1630, 710, "Chicago"));
-        cities.add(new MapCity(1170, 1300, "Dallas"));
+        cities.add(new MapCity(1180, 1310, "Dallas"));
         cities.add(new MapCity(850, 840, "Denver"));
         cities.add(new MapCity(1350, 480, "Duluth"));
         cities.add(new MapCity(750, 1310, "El Paso"));
         cities.add(new MapCity(770, 420, "Helena"));
         cities.add(new MapCity(1300, 1460, "Houston"));
         cities.add(new MapCity(1270, 860, "Kansas City"));
-        cities.add(new MapCity(210, 1160, "Las Angeles"));
-        cities.add(new MapCity(410, 1000, "Las Vegas"));
+        cities.add(new MapCity(210, 1160, "Los Angeles"));
+        cities.add(new MapCity(405, 1005, "Las Vegas"));
         cities.add(new MapCity(1410, 1120, "Little Rock"));
         cities.add(new MapCity(1990, 1610, "Miami"));
-        cities.add(new MapCity(2160, 260, "Montreal"));
+        cities.add(new MapCity(2170, 260, "Montreal"));
         cities.add(new MapCity(1700, 1050, "Nashville"));
         cities.add(new MapCity(1490, 1450, "New Orleans"));
         cities.add(new MapCity(2160, 640, "New York"));
@@ -112,7 +121,7 @@ public class TrainView extends View
         cities.add(new MapCity(1940, 730, "Pittsburgh"));
         cities.add(new MapCity(170, 320, "Portland"));
         cities.add(new MapCity(1990, 1040, "Raleigh"));
-        cities.add(new MapCity(1480, 910, "Saint Louis"));
+        cities.add(new MapCity(1500, 910, "Saint Louis"));
         cities.add(new MapCity(560, 740, "Salt Lake City"));
         cities.add(new MapCity(80, 840, "San Francisco"));
         cities.add(new MapCity(780, 1090, "Santa Fe"));
@@ -225,15 +234,16 @@ public class TrainView extends View
         routes.add(new MapRoute(310, 1080, 49, 2, false, "gray", "none", "Los Angeles", "Las Vegas"));
     }
 
+    public void setParentView(IGameplayView view)
+    {
+        this.view = view;
+    }
+
     @Override
     protected void onDraw(Canvas canvas)
     {
         myCanvas = canvas;
         canvas.save();
-        for(int i = 0; i < cities.size(); i++)
-        {
-            drawCity(canvas, cities.get(i).getX(), cities.get(i).getY());
-        }
 
         for(int i = 0; i < routes.size(); i++)
         {
@@ -265,7 +275,6 @@ public class TrainView extends View
                 default:break;
             }
             drawRoute(canvas, routes.get(i).getX(), routes.get(i).getY(), routes.get(i).getAngle(), routes.get(i).getLength(), routes.get(i).isDoubleRoute());
-
 
             if(routes.get(i).getClaimedColor1() != null)
             {
@@ -306,10 +315,49 @@ public class TrainView extends View
             }
         }
 
+        // DRAWING THE RED CITY DOTS
         for(int i = 0; i < cities.size(); i++)
         {
-            drawCityName(canvas, cities.get(i).getX() - 30, cities.get(i).getY() - 30, cities.get(i).getName());
+            drawCity(canvas, cities.get(i).getX(), cities.get(i).getY());
         }
+
+        // DRAWING THE CITY NAMES
+        drawCityName(canvas, cities.get(0).getX() - 170, cities.get(0).getY() - 5, "Atlanta");
+        drawCityName(canvas, cities.get(1).getX() + 40, cities.get(1).getY() + 10, "Boston");
+        drawCityName(canvas, cities.get(2).getX() + 45, cities.get(2).getY() + 50, "Calgary");
+        drawCityName(canvas, cities.get(3).getX() + 40, cities.get(3).getY() + 10, "Charleston");
+        drawCityName(canvas, cities.get(4).getX() + 25, cities.get(4).getY() + 50, "Chicago");
+        drawCityName(canvas, cities.get(5).getX() + 40, cities.get(5).getY() + 10, "Dallas");
+        drawCityName(canvas, cities.get(6).getX() - 165, cities.get(6).getY() + 40, "Denver");
+        drawCityName(canvas, cities.get(7).getX(), cities.get(7).getY() - 60, "Duluth");
+        drawCityName(canvas, cities.get(8).getX() - 50, cities.get(8).getY() + 80, "El Paso");
+        drawCityName(canvas, cities.get(9).getX() - 140, cities.get(9).getY() + 20, "Helena");
+        drawCityName(canvas, cities.get(10).getX() - 120, cities.get(10).getY() + 50, "Houston");
+        drawCityName(canvas, cities.get(11).getX() + 30, cities.get(11).getY() - 40, "Kansas City");
+        drawCityName(canvas, cities.get(12).getX() - 170, cities.get(12).getY() + 50, "Los Angeles");
+        drawCityName(canvas, cities.get(13).getX() + 35, cities.get(13).getY() + 30, "Las Vegas");
+        drawCityName(canvas, cities.get(14).getX() + 35, cities.get(14).getY() + 30, "Little Rock");
+        drawCityName(canvas, cities.get(15).getX() - 135, cities.get(15).getY() - 30, "Miami");
+        drawCityName(canvas, cities.get(16).getX() + 40, cities.get(16).getY(), "Montreal");
+        drawCityName(canvas, cities.get(17).getX() + 75, cities.get(17).getY() - 35, "Nashville");
+        drawCityName(canvas, cities.get(18).getX() + 85, cities.get(18).getY() + 5, "New Orleans");
+        drawCityName(canvas, cities.get(19).getX() + 40, cities.get(19).getY() + 35, "New York");
+        drawCityName(canvas, cities.get(20).getX() - 40, cities.get(20).getY() - 40, "Oklahoma City");
+        drawCityName(canvas, cities.get(21).getX() + 40, cities.get(21).getY(), "Ohmaha");
+        drawCityName(canvas, cities.get(22).getX() - 90, cities.get(22).getY() - 40, "Phoenix");
+        drawCityName(canvas, cities.get(23).getX() - 110, cities.get(23).getY() - 80, "Pittsburgh");
+        drawCityName(canvas, cities.get(24).getX() + 40, cities.get(24).getY() + 10, "Portland");
+        drawCityName(canvas, cities.get(25).getX() + 60, cities.get(25).getY() + 10, "Raleigh");
+        drawCityName(canvas, cities.get(26).getX() + 75, cities.get(26).getY() + 30, "Saint Louis");
+        drawCityName(canvas, cities.get(27).getX() - 260, cities.get(27).getY() - 25, "Salt Lake City");
+        drawCityName(canvas, cities.get(28).getX() + 70, cities.get(28).getY() + 50, "San Francisco");
+        drawCityName(canvas, cities.get(29).getX() + 30, cities.get(29).getY() + 50, "Santa Fe");
+        drawCityName(canvas, cities.get(30).getX() - 75, cities.get(30).getY() - 60, "Sault St. Marie");
+        drawCityName(canvas, cities.get(31).getX() - 140, cities.get(31).getY() + 10, "Seattle");
+        drawCityName(canvas, cities.get(32).getX() + 30, cities.get(32).getY() + 40, "Toronto");
+        drawCityName(canvas, cities.get(33).getX() - 180, cities.get(33).getY(), "Vancouver");
+        drawCityName(canvas, cities.get(34).getX() + 30, cities.get(34).getY() + 10, "Washington");
+        drawCityName(canvas, cities.get(35).getX() - 160, cities.get(35).getY() + 20, "Winnipeg");
 
     }
     //NOTE: You can force the UI to redraw itself with the postinvalidate method
@@ -319,22 +367,19 @@ public class TrainView extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if(!canClaimRoutes)
+        {
+            return false;
+        }
+
         double x = event.getX();
         double y = event.getY();
-        System.out.println("X = " + x);
-        System.out.println("Y = " + y);
 
         switch(event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
                 for(int i = 0; i < routes.size(); i++)
                 {
-                    if(routes.get(i) == routes.get(10))
-                    {
-                        System.out.println("The target route is the one between " + routes.get(10).getCity1() + " and " + routes.get(10).getCity2());
-                        System.out.println("The x value range is " + (routes.get(i).getX() - getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle())))
-                                            + " and " + (routes.get(i).getX() + getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle()))));
-                    }
                     if(routes.get(i).getX() - getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle()))
                        < x && x < routes.get(i).getX() + getTotalLength(routes.get(i))/2.d * sin(toRad(routes.get(i).getAngle())))
                     {
@@ -347,12 +392,39 @@ public class TrainView extends View
                         if(-x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 - (errorMargin / sin(toRad(routes.get(i).getAngle())))
                         < y && y < -x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 + (errorMargin / sin(toRad(routes.get(i).getAngle()))))
                         {
-                            System.out.println("Congrats, you clicked the route between" + routes.get(i).getCity1() + " and " + routes.get(i).getCity2());
+                            ArrayList<Route> returnRoutes = new ArrayList<>();
+                            if(!routes.get(i).isDoubleRoute())
+                            {
+                                if(!routes.get(i).isClaimed1())
+                                {
+                                    Route route = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint(), routes.get(i).getLength());
+                                    returnRoutes.add(route);
+                                }
+                            }
+                            else
+                            {
+                                if(!routes.get(i).isClaimed1())
+                                {
+                                    Route route1 = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint(), routes.get(i).getLength());
+                                    returnRoutes.add(route1);
+                                }
+                                if(!routes.get(i).isClaimed2())
+                                {
+                                    Route route2 = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint2(), routes.get(i).getLength());
+                                    returnRoutes.add(route2);
+                                }
+                            }
+                            view.claimRouteByTap(returnRoutes);
                         }
                     }
                 }
         }
         return false;
+    }
+
+    public void setRoutesClaimable(boolean enabled)
+    {
+        canClaimRoutes = enabled;
     }
 
     private double getTotalLength(MapRoute route)
@@ -367,18 +439,18 @@ public class TrainView extends View
     private void drawCity(Canvas canvas, float x, float y)
     {
         paint.setColor(Color.RED);
-        canvas.drawCircle(x, y, 30, paint);
+        canvas.drawCircle(x, y, 25, paint);
         paint.setColor(Color.WHITE);
-        canvas.drawCircle(x, y, 26, paint);
+        canvas.drawCircle(x, y, 21, paint);
         paint.setColor(Color.RED);
-        canvas.drawCircle(x, y, 23, paint);
+        canvas.drawCircle(x, y, 18, paint);
     }
 
     private void drawCityName(Canvas canvas, float x, float y, String text) {
         TextPaint textPaint = new TextPaint();
         textPaint.setTextSize(30);
         textPaint.setTextAlign(Paint.Align.LEFT);
-        textPaint.setColor(Color.BLUE);
+        textPaint.setColor(Color.BLACK);
         textPaint.setTypeface(Typeface.create("Arial", Typeface.BOLD));
         canvas.drawText(text, x, y, textPaint);
     }

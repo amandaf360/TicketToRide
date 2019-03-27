@@ -3,6 +3,7 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Logi
 import java.util.Observable;
 import java.util.Observer;
 
+import proxy.ServerProxy;
 import services.LoginService;
 import services.RegisterService;
 import ClientModel.ClientModel;
@@ -54,7 +55,7 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
         view.setLoginEnabled(false);
 
         // call login service connected to model??
-        LoginService loginService = new LoginService();
+        LoginService loginService = new LoginService(view.getServerHost(), view.getServerPort());
         // will get both username and password and attempt to login
         loginService.login(view.getLoginUsername(), view.getLoginPassword());
     }
@@ -74,7 +75,7 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
         view.setRegisterEnabled(false);
 
         // call register service connected to model??
-        RegisterService registerService = new RegisterService();
+        RegisterService registerService = new RegisterService(view.getServerHost(), view.getServerPort());
         // will make sure both passwords are the same
         registerService.register(view.getRegisterUsername(), view.getRegisterPassword());
 
@@ -89,8 +90,11 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
      */
     @Override
     public void onLoginUsernameChanged() {
-        // if both the username and password are filled in, enable the login button
-        if(view.getLoginUsername().length() != 0 && view.getLoginPassword().length() != 0) {
+        // if both the username and password are filled in,
+        // AND server host and port are filled in, then
+        // enable the login button
+        if(view.getLoginUsername().length() != 0 && view.getLoginPassword().length() != 0
+            && view.getServerHost().length() != 0 && view. getServerPort().length() != 0) {
             view.setLoginEnabled(true);
         }
     }
@@ -104,8 +108,10 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
      */
     @Override
     public void onLoginPasswordChanged() {
-        // if both the username and password are filled in, enable the login button
-        if(view.getLoginUsername().length() != 0 && view.getLoginPassword().length() != 0) {
+        // if both the username and password are filled in,
+        // AND server host and port are filled in, then enable the login button
+        if(view.getLoginUsername().length() != 0 && view.getLoginPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0) {
             view.setLoginEnabled(true);
         }
     }
@@ -121,10 +127,12 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
     @Override
     public void onRegisterUsernameChanged() {
         // if the username and password are filled in, and password == confirm password,
+        // AND server host and port are filled in
         // then enable the register button
         if(view.getRegisterUsername().length() != 0 && view.getRegisterPassword().length() != 0 &&
-                view.getConfirmPassword().length() != 0 &&
-                view.getConfirmPassword().equals(view.getRegisterPassword())) {
+                view.getConfirmPassword().length() != 0 && view.getServerHost().length() != 0
+                && view. getServerPort().length() != 0
+                && view.getConfirmPassword().equals(view.getRegisterPassword())) {
             view.setRegisterEnabled(true);
         }
         // else if a field is empty or passwords no longer match, disable the register button
@@ -144,10 +152,12 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
     @Override
     public void onRegisterPasswordChanged() {
         // if the username and password are filled in, and password == confirm password,
+        // AND server host and port are filled in
         // then enable the register button
         if(view.getRegisterUsername().length() != 0 && view.getRegisterPassword().length() != 0 &&
-                view.getConfirmPassword().length() != 0 &&
-                view.getConfirmPassword().equals(view.getRegisterPassword())) {
+                view.getConfirmPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0
+                && view.getConfirmPassword().equals(view.getRegisterPassword())) {
             view.setRegisterEnabled(true);
         }
         // else if a field is empty or passwords no longer match, disable the register button
@@ -167,15 +177,59 @@ public class LoginActivityPresenter implements ILoginPresenter, Observer {
     @Override
     public void onRegisterConfirmChanged() {
         // if the username and password are filled in, and password == confirm password,
+        // AND server host and port are filled in
         // then enable the register button
         if(view.getRegisterUsername().length() != 0 && view.getRegisterPassword().length() != 0 &&
-                view.getConfirmPassword().length() != 0 &&
-                view.getConfirmPassword().equals(view.getRegisterPassword())) {
+                view.getConfirmPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0
+                && view.getConfirmPassword().equals(view.getRegisterPassword())) {
             view.setRegisterEnabled(true);
         }
         // else if a field is empty or passwords no longer match, disable the register button
         else {
             view.setRegisterEnabled(false);
+        }
+    }
+
+    @Override
+    public void onServerHostChanged() {
+        // check to see if all fields are filled for either login or register capabilities
+        // enable correct button
+        if(view.getLoginUsername().length() != 0 && view.getLoginPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0) {
+            view.setLoginEnabled(true);
+        }
+        else if(view.getRegisterUsername().length() != 0 && view.getRegisterPassword().length() != 0 &&
+                view.getConfirmPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0
+                && view.getConfirmPassword().equals(view.getRegisterPassword())) {
+            view.setRegisterEnabled(true);
+        }
+        // else if a field is empty, disable the buttons
+        else {
+            view.setRegisterEnabled(false);
+            view.setLoginEnabled(false);
+        }
+    }
+
+    @Override
+    public void onServerPortChanged() {
+        // check to see if all fields are filled for either login or register capabilities
+        // enable correct button
+        if(view.getLoginUsername().length() != 0 && view.getLoginPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0) {
+            view.setLoginEnabled(true);
+        }
+        else if(view.getRegisterUsername().length() != 0 && view.getRegisterPassword().length() != 0 &&
+                view.getConfirmPassword().length() != 0
+                && view.getServerHost().length() != 0 && view. getServerPort().length() != 0
+                && view.getConfirmPassword().equals(view.getRegisterPassword())) {
+            view.setRegisterEnabled(true);
+        }
+        // else if a field is empty, disable the buttons
+        else {
+            view.setRegisterEnabled(false);
+            view.setLoginEnabled(false);
         }
     }
 

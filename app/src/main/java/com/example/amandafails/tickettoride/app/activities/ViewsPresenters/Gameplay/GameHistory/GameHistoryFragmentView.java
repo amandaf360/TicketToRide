@@ -55,4 +55,16 @@ public class GameHistoryFragmentView extends Fragment implements IGameHistoryFra
 
         return v;
     }
+
+    @Override
+    public void updateGameHistory() {
+        List<Message> gameHistoryMessages = presenter.getGameHistory();
+        lines.clear();
+        lines.addAll(gameHistoryMessages);
+
+        // display in recyclerview
+        mAdapter = new GameplayRecyclerViewAdaptor(lines);
+        mAdapter.notifyDataSetChanged();
+        mRecyclerView.setAdapter(mAdapter);
+    }
 }

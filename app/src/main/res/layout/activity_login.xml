@@ -243,7 +243,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:text="192.168.253.147"/>
 
             </LinearLayout>
 
@@ -270,7 +271,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:text="3000"/>
 
             </LinearLayout>
 

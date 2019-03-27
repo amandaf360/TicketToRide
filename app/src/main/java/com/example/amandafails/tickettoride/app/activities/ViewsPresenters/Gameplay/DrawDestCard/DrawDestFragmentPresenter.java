@@ -7,6 +7,7 @@ import java.util.Observer;
 
 import ClientModel.ClientModel;
 import ClientModel.DestinationCards;
+import services.CreateHistoryMessageService;
 import services.DiscardDestCardService;
 import services.DrawDestCardService;
 import services.EndTurnService;
@@ -109,6 +110,14 @@ public class DrawDestFragmentPresenter implements IDrawDestFragmentPresenter, Ob
 
         deleteObserver();
         view.popFragment();
+
+        CreateHistoryMessageService createHistoryMessageService = new CreateHistoryMessageService();
+
+        createHistoryMessageService.sendMessage(clientModel.getMainPlayer().getName() +
+                                                " just drew " +
+                                                (3 - cards.size()) +
+                                                "destination cards!");
+
 
         EndTurnService end = new EndTurnService();
         end.endTurn();

@@ -34,7 +34,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         clientModel = ClientModel.getInstance();
         this.clientModel.addObserver(this);
         clientModel.initializeRoutes();
-        if(currentTurn().equals(clientModel.getMainPlayer().getName()))
+        if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName()))
         {
             System.out.println("It is my turn!");
             setState(MyTurnState.getInstance());
@@ -173,6 +173,10 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     }
 
+    public String currentPlayerTurn() {
+        return clientModel.getActiveGame().getCurrentPlayersTurn();
+    }
+
     public String currentTurn()
     {
         String turn = clientModel.getActiveGame().getCurrentPlayersTurn() + "'s Turn";
@@ -214,7 +218,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         if(o.getClass() == Game.class)
         {
             view.changeTurnName(clientModel.getActiveGame().getCurrentPlayersTurn() + "'s Turn");
-            if(currentTurn().equals(clientModel.getMainPlayer().getName()))
+            if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName()))
             {
                 System.out.println("It is my turn!");
                 setState(MyTurnState.getInstance());

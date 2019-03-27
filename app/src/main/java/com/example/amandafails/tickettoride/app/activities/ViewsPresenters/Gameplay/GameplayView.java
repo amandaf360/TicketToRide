@@ -131,7 +131,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         presenter.demo();
     }
 
-    //define all these buttons inside of onCreate
+
     public void onDrawCardsClicked()
     {
         // set fragment to draw card fragment
@@ -197,7 +197,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void setDiscardNumber(int num)
     {
-        String display = "Draw Route (" + Integer.toString(num) + ")";
+        String display = "Draw Dest Card (" + Integer.toString(num) + ")";
         drawRoutesButton.setText(display);
     }
 

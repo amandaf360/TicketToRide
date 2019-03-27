@@ -183,7 +183,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void setDiscardNumber(int num)
     {
-        String display = "Draw Route (" + Integer.toString(num) + ")";
+        String display = "Draw Dest Card (" + Integer.toString(num) + ")";
         drawRoutesButton.setText(display);
     }
 

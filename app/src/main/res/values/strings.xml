@@ -72,4 +72,9 @@
     <string name="pointsLostDC">Dest. Card Points Lost</string>
     <string name="longestPath">Longest Path: </string>
 
+    <!-- Strings related to choosing dest. cards fragment -->
+    Choose up to 2 cards to discard.
+    <string name="choose2destCards">Choose up to 2 cards to discard:</string>
+    <string name="done">Done</string>
+
 </resources>

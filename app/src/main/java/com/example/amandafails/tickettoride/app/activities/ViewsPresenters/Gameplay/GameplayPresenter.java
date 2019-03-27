@@ -18,6 +18,7 @@ import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gamep
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.MyTurnState;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.NotMyTurnState;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -76,13 +77,38 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     public void drawCards()
     {
         // is this the function to choose your first destination cards??
-
     }
 
 
 
     public void placeTrains()
     {
+        setState(NotMyTurnState.getInstance());
+        view.setRoutesClaimable(true);
+    }
+
+    public void claimRouteByTap(ArrayList<Route> routes)
+    {
+        int numRoutes = routes.size();
+        switch(numRoutes)
+        {
+            case 0:
+                //if the array of routes has nothing in it, there are no valid selections, meaning the route is taken. Display a message and
+                //resume their turn
+                view.showToast("Sorry, this route is already taken");
+                setState(MyTurnState.getInstance());
+            case 1:
+                //if there is one element, then either it is a double route with only 1 option remaining, or else it is an unclaimed single
+                //TODO: Check whether the player has the resources to claim the route
+                //TODO: Check whether the route is grey. If so, display a message asking what color of routes he/she wants to use
+            case 2:
+                //if there is more than one element, than it is a double route where both options are unclaimed
+                //TODO: display some kind of message asking the person which route to take
+            default:break;
+        }
+
+        setState(MyTurnState.getInstance());
+        //System.out.println("You claimed the routes from " + routes.get(0).getCityOne() + " to " + routes.get(0).getCityTwo());
 
     }
 
@@ -273,30 +299,20 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             clientModel.deleteMainPlayersDestinationCardFromHand(
                     clientModel.getMainPlayer().getPlayerHandDestinations().getCardList().get(destChoiceValue - 1));
         }
+    }
 
-        /*
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for(int i = 0; i < 4; i++)
-        {
-            arrayList.add(selection[i]);
+    @Override
+    public void setPlayerCards() {
+        final int CARDS_TO_ADD = 4;
+        for(int i = 0; i < clientModel.getActiveGame().getCurrentPlayers(); i++) {
+            if(clientModel.getMainPlayer() != clientModel.getActiveGame().getPlayers().get(i)) {
+                for(int j = 0; j < CARDS_TO_ADD; j++) {
+                    TrainCarCard trainCarCard = new TrainCarCard("locomotive");
+                    clientModel.getActiveGame().getPlayers().get(i).addTrainCardToHand(trainCarCard);
+                }
+
+            }
         }
-        if(destChoiceValue == 0)
-        {
-            arrayList.remove(0);
-        }
-        else
-        {
-            arrayList.remove(destChoiceValue);
-            arrayList.remove(0);
-        }
-
-
-        */
-
-        //Player player = model.getCurrentPlayer();
-        //player.setDestCards(arrayList);
-
-
     }
 
 

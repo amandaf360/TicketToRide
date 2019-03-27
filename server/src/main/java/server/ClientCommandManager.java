@@ -36,6 +36,9 @@ public class ClientCommandManager
     private Map<String, ArrayList<String>> routesClaimed;
     private Map<String, ArrayList<String>> trainCardsDrawn;
     private Map<String, ArrayList<Message>> gameHistory;
+    private Map<String, Integer> turnsEnded;
+    private Map<String, ArrayList<String>> trainsUsed;
+    private Map<String, ArrayList<String>> pointsGained;
 
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
@@ -60,6 +63,10 @@ public class ClientCommandManager
         routesClaimed = new HashMap<>();
         trainCardsDrawn = new HashMap<>();
         gameHistory = new HashMap<>();
+        turnsEnded = new HashMap<>();
+        trainsUsed = new HashMap<>();
+        pointsGained = new HashMap<>();
+
     }
 
     public void addUser(String username)
@@ -77,6 +84,9 @@ public class ClientCommandManager
         routesClaimed.put(username, new ArrayList<String>());
         trainCardsDrawn.put(username, new ArrayList<String>());
         gameHistory.put(username, new ArrayList<Message>());
+        turnsEnded.put(username, 0);
+        trainsUsed.put(username, new ArrayList<String>());
+        pointsGained.put(username, new ArrayList<String>());
     }
 
     public PollResponse firstPoll()
@@ -91,20 +101,8 @@ public class ClientCommandManager
     public PollResponse poll(String username)
     {
         PollResponse response = new PollResponse();
-        ArrayList<Game> currentGamesCreated = gamesCreated.get(username);
-        ArrayList<Game> polledGamesCreated = new ArrayList<>();
-        for(int i = 0; i < currentGamesCreated.size(); i++)
-        {
-            polledGamesCreated.add(new Game(currentGamesCreated.get(i)));
-        }
-
-        if(startGameInfo.get(username) != null)
-        {
-            int i = 0;
-        }
 
         response.setGamesCreated(gamesCreated.get(username));
-
         response.setGamesDeleted(gamesDeleted.get(username));
         response.setPlayersJoined(playersJoined.get(username));
         response.setPlayersLeft(playersLeft.get(username));
@@ -116,6 +114,9 @@ public class ClientCommandManager
         response.setRoutesClaimed(routesClaimed.get(username));
         response.setTrainCardsDrawn(trainCardsDrawn.get(username));
         response.setGameHistory(gameHistory.get(username));
+        response.setTurnsEnded(turnsEnded.get(username));
+        response.setTrainsUsed(trainsUsed.get(username));
+        response.setPointsGained(pointsGained.get(username));
 
         return response;
     }
@@ -134,6 +135,9 @@ public class ClientCommandManager
         routesClaimed.put(username, null);
         trainCardsDrawn.get(username).clear();
         gameHistory.get(username).clear();
+        turnsEnded.put(username, 0);
+        trainsUsed.get(username).clear();
+        pointsGained.get(username).clear();
     }
 
     public void addGame(Game game)
@@ -220,6 +224,11 @@ public class ClientCommandManager
     public void addGameHistoryMessage(String username, Message message)
     {
         gameHistory.get(username).add(message);
+    }
+
+    public void advanceTurn(String username)
+    {
+        turnsEnded.put(username, turnsEnded.get(username) + 1);
     }
 
 }

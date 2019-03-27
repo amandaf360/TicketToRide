@@ -1,5 +1,7 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus;
 
+import android.widget.TextView;
+
 import java.util.List;
 
 public interface ICurrentGameStatusFragmentPresenter {
@@ -12,5 +14,6 @@ public interface ICurrentGameStatusFragmentPresenter {
     List<String> getPlayerCards();
     List<String> getPlayerDests();
     List<String> getPlayerNumEachCard();
+    void setPlayerNameColors(List<TextView> names);
 
 }

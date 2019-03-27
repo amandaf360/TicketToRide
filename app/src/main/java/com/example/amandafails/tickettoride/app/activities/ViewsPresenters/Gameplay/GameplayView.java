@@ -1,23 +1,24 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 
+import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
-import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DrawDestCard.DrawDestFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
+
+import java.util.ArrayList;
+
 import ClientModel.Route;
 
 import ClientModel.ClientModel;
@@ -30,7 +31,7 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     private Button drawTrainsButton;
     private Button drawRoutesButton;
     private Button placeTrainsButton;
-    private Button demoButton;
+    //private Button demoButton;
     private TextView currentTurn;
     private boolean firstCreate = true;
     private TrainView trainView;
@@ -70,16 +71,25 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
-        demoButton = findViewById(R.id.demo_button);
-        demoButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                onDemoClicked();
-            }
-        });
+        //demoButton = findViewById(R.id.demo_button);
+        //demoButton.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View view) {
+//                onDemoClicked();
+//            }
+//        });
 
         trainView = findViewById(R.id.view_trains);
+        trainView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+            }
+        });
+        trainView.setParentView(this);
 
         ClientModel.getInstance().initializeRoutes();
         presenter = new GameplayPresenter(this);
@@ -88,16 +98,12 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         currentTurn.setText(presenter.currentTurn());
 
 
-        if(firstCreate)
-        {
+        if(firstCreate) {
             presenter.chooseDestinationCards();
+            presenter.setPlayerCards();
         }
 
-
     }
-
-
-
 
     @Override
     public void onBackPressed()
@@ -106,6 +112,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         setIntent.addCategory(Intent.CATEGORY_HOME);
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
+    }
+
+    public void claimRouteByTap(ArrayList<Route> routes)
+    {
+        presenter.claimRouteByTap(routes);
     }
 
 
@@ -145,15 +156,14 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 .commit();
     }
 
+    public void setRoutesClaimable(boolean enabled)
+    {
+        trainView.setRoutesClaimable(enabled);
+    }
+
     public void onDrawRoutesClicked()
     {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction  = manager.beginTransaction();
-
-        DrawDestFragmentView drawDestFragmentView = new DrawDestFragmentView();
-        transaction.replace(R.id.frame, drawDestFragmentView)
-                .addToBackStack(null)
-                .commit();
+        presenter.drawRoute();
     }
 
     public void setDrawRoutesClickable(boolean canClick)
@@ -196,16 +206,6 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    public LayoutInflater getLayoutInflator()
-    {
-        return (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-    }
-
-    public View findViewByIdForPresenter(int yeet)
-    {
-        return findViewById(yeet);
-    }
-
     public void setDrawTrainCardsEnabled(boolean enabled)
     {
         drawTrainsButton.setEnabled(enabled);
@@ -220,6 +220,4 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     {
         placeTrainsButton.setEnabled(enabled);
     }
-
-
 }

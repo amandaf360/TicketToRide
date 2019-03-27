@@ -220,6 +220,7 @@ public class CurrentGameStatusFragmentView extends Fragment implements ICurrentG
                 texts.get(i).setText("");
             }
         }
+        presenter.setPlayerNameColors(texts);
     }
 
     private void populatePlayerPoints() {

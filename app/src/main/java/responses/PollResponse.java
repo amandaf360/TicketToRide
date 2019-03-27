@@ -23,6 +23,9 @@ public class PollResponse
     private ArrayList<String> routesClaimed;
     private ArrayList<String> trainCardsDrawn;
     private ArrayList<Message> gameHistory;
+    private int turnsEnded;
+    private ArrayList<String> trainsUsed;
+    private ArrayList<String> pointsGained;
 
 
     public PollResponse() {
@@ -140,5 +143,29 @@ public class PollResponse
 
     public void setGameHistory(ArrayList<Message> gameHistory) {
         this.gameHistory = gameHistory;
+    }
+
+    public int getTurnsEnded() {
+        return turnsEnded;
+    }
+
+    public void setTurnsEnded(int turnsEnded) {
+        this.turnsEnded = turnsEnded;
+    }
+
+    public ArrayList<String> getTrainsUsed() {
+        return trainsUsed;
+    }
+
+    public void setTrainsUsed(ArrayList<String> trainsUsed) {
+        this.trainsUsed = trainsUsed;
+    }
+
+    public ArrayList<String> getPointsGained() {
+        return pointsGained;
+    }
+
+    public void setPointsGained(ArrayList<String> pointsGained) {
+        this.pointsGained = pointsGained;
     }
 }

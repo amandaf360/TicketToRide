@@ -1,5 +1,8 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus;
 
+import android.graphics.Color;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -147,5 +150,36 @@ public class CurrentGameStatusFragmentPresenter implements ICurrentGameStatusFra
         numCards.add(Integer.toString(clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple()));
 
         return numCards;
+    }
+
+    @Override
+    public void setPlayerNameColors(List<TextView> names) {
+        for(int i = 0; i < clientModel.getActiveGame().getCurrentPlayers(); i++) {
+            names.get(i).setTextColor(Color.parseColor(stringToHex(clientModel.getActiveGame().getPlayers().get(i).getColor())));
+        }
+    }
+
+    private String stringToHex(String color) {
+        String hexColor = "";
+        switch (color) {
+            case "blue":
+                hexColor = "#0000ff";
+                break;
+            case "red":
+                hexColor = "#ff0000";
+                break;
+            case "green":
+                hexColor = "#008000";
+                break;
+            case "yellow":
+                hexColor = "#ffff00";
+                break;
+            case "black":
+                hexColor = "#000000";
+                break;
+        }
+
+
+        return hexColor;
     }
 }

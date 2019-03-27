@@ -89,91 +89,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             case 1:
                 //if there is one element, then either it is a double route with only 1 option remaining, or else it is an unclaimed single
-                int routeIndex = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(routes.get(0));
-                int numRelevantColor  = 0;
-                String relevantColor = routes.get(0).getColor();
-                switch(relevantColor)
-                {
-                    case "blue":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlue();
-                        break;
-                    case "red":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumRed();
-                        break;
-                    case "yellow":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumYellow();
-                        break;
-                    case "white":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumWhite();
-                        break;
-                    case "black":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlack();
-                        break;
-                    case "green":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumGreen();
-                        break;
-                    case "purple":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple();
-                        break;
-                    case "orange":
-                         numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange();
-                        break;
-                    case "gray":
-                        //TODO: Display window asking which one they want to use, collect answer, change relevant color to chosen color
-                        break;
-                    default: break;
-                }
-
-                //checks if they have enough of the color itself
-                if (numRelevantColor >= routes.get(0).getLength())
-                {
-                    ArrayList<TrainCarCard> cards = new ArrayList<>();
-                    for(int i = 0; i < routes.get(0).getLength(); i++)
-                    {
-                        cards.add(new TrainCarCard(relevantColor));
-                        clientModel.getMainPlayer().getPlayerHandTrains().discardCard(relevantColor);
-                    }
-                    ClaimRouteService service = new ClaimRouteService();
-                    service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
-
-                    CreateHistoryMessageService historyService = new CreateHistoryMessageService();
-                    historyService.sendMessage("Claimed the route from " + routes.get(0).getCityOne() + " to " + routes.get(0).getCityTwo()
-                            + " using " + routes.get(0).getLength() + " " + relevantColor + "s");
-
-                    EndTurnService endService = new EndTurnService();
-                    endService.endTurn();
-                }
-                //or if they have enough with locomotives
-                else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= routes.get(0).getLength() - numRelevantColor)
-                {
-                    ArrayList<TrainCarCard> cards = new ArrayList<>();
-                    for(int i = 0; i < numRelevantColor; i++)
-                    {
-                        cards.add(new TrainCarCard(relevantColor));
-                        clientModel.getMainPlayer().getPlayerHandTrains().discardCard(relevantColor);
-                    }
-                    for(int i = 0; i < routes.get(0).getLength() - numRelevantColor; i++)
-                    {
-                        cards.add(new TrainCarCard("locomotive"));
-                        clientModel.getMainPlayer().getPlayerHandTrains().discardCard("locomotive");
-                    }
-                    ClaimRouteService service = new ClaimRouteService();
-                    service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
-
-                    CreateHistoryMessageService historyService = new CreateHistoryMessageService();
-                    historyService.sendMessage("Claimed the route from " + routes.get(0).getCityOne() + " to " + routes.get(0).getCityTwo()
-                            + " using " + routes.get(0).getLength() + " " + relevantColor + "s");
-
-                    EndTurnService endService = new EndTurnService();
-                    endService.endTurn();
-                }
-                //or if they just don't have enough at all
-                else
-                {
-                    view.showToast("You don't have the resources to claim this route");
-                    setState(MyTurnState.getInstance());
-                }
-
+                claimRouteHelper(routes.get(0));
                 break;
             case 2:
                 //if there is more than one element, than it is a double route where both options are unclaimed
@@ -181,10 +97,94 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             default:break;
         }
+    }
 
-        setState(MyTurnState.getInstance());
-        //System.out.println("You claimed the routes from " + routes.get(0).getCityOne() + " to " + routes.get(0).getCityTwo());
+    public void claimRouteHelper(Route route)
+    {
+        int routeIndex = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
+        int numRelevantColor  = 0;
+        String relevantColor = route.getColor();
+        switch(relevantColor)
+        {
+            case "blue":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlue();
+                break;
+            case "red":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumRed();
+                break;
+            case "yellow":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumYellow();
+                break;
+            case "white":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumWhite();
+                break;
+            case "black":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlack();
+                break;
+            case "green":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumGreen();
+                break;
+            case "purple":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple();
+                break;
+            case "orange":
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange();
+                break;
+            case "gray":
+                //TODO: Display window asking which one they want to use, collect answer, change relevant color to chosen color
+                break;
+            default: break;
+        }
 
+        //checks if they have enough of the color itself
+        if (numRelevantColor >= route.getLength())
+        {
+            ArrayList<TrainCarCard> cards = new ArrayList<>();
+            for(int i = 0; i < route.getLength(); i++)
+            {
+                cards.add(new TrainCarCard(relevantColor));
+                clientModel.getMainPlayer().getPlayerHandTrains().discardCard(relevantColor);
+            }
+            ClaimRouteService service = new ClaimRouteService();
+            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+
+            CreateHistoryMessageService historyService = new CreateHistoryMessageService();
+            historyService.sendMessage("Claimed the route from " + route.getCityOne() + " to " + route.getCityTwo()
+                    + " using " + route.getLength() + " " + relevantColor + "s");
+
+            EndTurnService endService = new EndTurnService();
+            endService.endTurn();
+        }
+        //or if they have enough with locomotives
+        else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= route.getLength() - numRelevantColor)
+        {
+            ArrayList<TrainCarCard> cards = new ArrayList<>();
+            for(int i = 0; i < numRelevantColor; i++)
+            {
+                cards.add(new TrainCarCard(relevantColor));
+                clientModel.getMainPlayer().getPlayerHandTrains().discardCard(relevantColor);
+            }
+            for(int i = 0; i < route.getLength() - numRelevantColor; i++)
+            {
+                cards.add(new TrainCarCard("locomotive"));
+                clientModel.getMainPlayer().getPlayerHandTrains().discardCard("locomotive");
+            }
+            ClaimRouteService service = new ClaimRouteService();
+            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+
+            CreateHistoryMessageService historyService = new CreateHistoryMessageService();
+            historyService.sendMessage("Claimed the route from " + route.getCityOne() + " to " + route.getCityTwo()
+                    + " using " + numRelevantColor + " " + relevantColor + "s" + " and " + (route.getLength() - numRelevantColor) + " locomotives");
+
+            EndTurnService endService = new EndTurnService();
+            endService.endTurn();
+        }
+        //or if they just don't have enough at all
+        else
+        {
+            view.showToast("You don't have the resources to claim this route");
+            setState(MyTurnState.getInstance());
+        }
     }
 
     public String currentPlayerTurn() {

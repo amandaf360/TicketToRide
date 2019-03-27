@@ -32,7 +32,9 @@ public class Server
         System.out.println("Server started");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        //new Server().run(args[0]);
         new Server().run("3000");
     }
 }

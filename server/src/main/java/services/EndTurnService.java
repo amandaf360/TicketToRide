@@ -24,10 +24,7 @@ public class EndTurnService
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         for(String user: allUsers)
         {
-            if(!user.equals(username))
-            {
                 manager.advanceTurn(user);
-            }
         }
     }
 }

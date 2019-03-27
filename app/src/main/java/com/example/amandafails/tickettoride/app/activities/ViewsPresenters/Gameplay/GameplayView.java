@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DrawDestCard.DrawDestFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
 import ClientModel.Route;
@@ -89,7 +93,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
             presenter.chooseDestinationCards();
         }
 
+
     }
+
+
+
 
     @Override
     public void onBackPressed()
@@ -139,7 +147,13 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void onDrawRoutesClicked()
     {
-        presenter.drawRoute();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction  = manager.beginTransaction();
+
+        DrawDestFragmentView drawDestFragmentView = new DrawDestFragmentView();
+        transaction.replace(R.id.frame, drawDestFragmentView)
+                .addToBackStack(null)
+                .commit();
     }
 
     public void setDrawRoutesClickable(boolean canClick)
@@ -182,6 +196,16 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    public LayoutInflater getLayoutInflator()
+    {
+        return (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+    }
+
+    public View findViewByIdForPresenter(int yeet)
+    {
+        return findViewById(yeet);
+    }
+
     public void setDrawTrainCardsEnabled(boolean enabled)
     {
         drawTrainsButton.setEnabled(enabled);
@@ -196,4 +220,6 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     {
         placeTrainsButton.setEnabled(enabled);
     }
+
+
 }

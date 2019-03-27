@@ -1,9 +1,17 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.GameplayState;
@@ -26,6 +34,8 @@ import ClientModel.Route;
 import ClientModel.Game;
 import ClientModel.AsyncDemo;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
     GameplayView view;
@@ -38,7 +48,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         clientModel = ClientModel.getInstance();
         this.clientModel.addObserver(this);
         clientModel.initializeRoutes();
-        if(currentTurn().equals(clientModel.getMainPlayer().getName()))
+        if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName()))
         {
             System.out.println("It is my turn!");
             setState(MyTurnState.getInstance());
@@ -69,41 +79,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         // is this the function to choose your first destination cards??
     }
 
-    public void drawRoute()
-    {
-        view.setDrawRoutesClickable(false);
-        DrawDestCardService drawDestCardService = new DrawDestCardService();
-        drawDestCardService.drawCards(3);
 
-        while(!isNumDestCardsMoreThanThree())
-        {
-            try
-            {
-                Thread.sleep(100);
-            }
-            catch(InterruptedException ex)
-            {
-                System.out.println("Hello there! An InterruptedException has been thrown!");
-            }
-        }
-
-        ArrayList<DestinationCards> cards = clientModel.getNewlyAddedDestinationCardsFromMainPlayer();
-
-
-
-        String zeroth = "Do Not Discard";
-        String first = cards.get(0).toString();
-        String second = cards.get(1).toString();
-        String third = cards.get(2).toString();
-        String[] options = {zeroth, first, second, third};
-        String dialogTitle = "Choose a route to discard.";
-        int itemSelected = 0;
-
-
-
-
-        view.setDrawRoutesClickable(true);
-    }
 
     public void placeTrains()
     {
@@ -188,6 +164,10 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
     }
 
+    public String currentPlayerTurn() {
+        return clientModel.getActiveGame().getCurrentPlayersTurn();
+    }
+
     public String currentTurn()
     {
         String turn = clientModel.getActiveGame().getCurrentPlayersTurn() + "'s Turn";
@@ -213,9 +193,10 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 view.setFirstCreateToFalse();
                 showDialog(passer);
             }
-            else
+            else if (drawingRoute == true)
             {
-                addNumDestCardsAdded();
+                //drawRoutesNormal();
+                //addNumDestCardsAdded();
             }
 
         }
@@ -228,7 +209,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         if(o.getClass() == Game.class)
         {
             view.changeTurnName(clientModel.getActiveGame().getCurrentPlayersTurn() + "'s Turn");
-            if(currentTurn().equals(clientModel.getMainPlayer().getName()))
+            if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName()))
             {
                 System.out.println("It is my turn!");
                 setState(MyTurnState.getInstance());
@@ -244,25 +225,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     }
 
 
-    private int numDestCardsAdded = 0;
 
-    private void addNumDestCardsAdded()
-    {
-        numDestCardsAdded++;
-    }
-
-    private boolean isNumDestCardsMoreThanThree()
-    {
-        if(numDestCardsAdded >= 3)
-        {
-            numDestCardsAdded = 0;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
     private int numDemoClicks = 0;
     public void demo()
@@ -313,6 +276,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         DrawDestCardService drawDestCardService = new DrawDestCardService();
         drawDestCardService.drawCards(3);
+
     }
 
 
@@ -407,4 +371,40 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             }
         }
     }
+
+
+
+    private int numDestCardsAdded = 0;
+
+    private void addNumDestCardsAdded()
+    {
+        numDestCardsAdded++;
+    }
+
+    private boolean isNumDestCardsMoreThanThree()
+    {
+        if(numDestCardsAdded >= 3)
+        {
+            numDestCardsAdded = 0;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    private boolean drawingRoute = false;
+
+    public void drawRoute()
+    {
+
+
+
+    }
+
+
+
+
 }

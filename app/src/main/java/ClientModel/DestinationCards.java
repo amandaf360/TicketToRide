@@ -1,5 +1,7 @@
 package ClientModel;
 
+import java.util.StringTokenizer;
+
 public class DestinationCards
 {
     private String cityOne;
@@ -12,6 +14,35 @@ public class DestinationCards
         this.cityTwo = cityTwo;
         this.points = points;
     }
+
+    public DestinationCards(String toString)
+    {
+        StringTokenizer stringTokenizer = new StringTokenizer(toString, "-");
+        if(stringTokenizer.hasMoreElements())
+        {
+            this.cityOne = stringTokenizer.nextToken().trim();
+        }
+        if(stringTokenizer.hasMoreElements())
+        {
+            toString = stringTokenizer.nextToken().trim();
+        }
+        stringTokenizer = new StringTokenizer(toString, ":");
+
+        if(stringTokenizer.hasMoreElements())
+        {
+            this.cityTwo = stringTokenizer.nextToken().trim();
+        }
+        if(stringTokenizer.hasMoreElements())
+        {
+            toString = stringTokenizer.nextToken().trim();
+        }
+
+        this.points = Integer.parseInt(toString);
+
+
+    }
+
+
 
     public String getCityOne()
     {
@@ -47,4 +78,6 @@ public class DestinationCards
     {
         return cityOne + " - " + cityTwo + ":" + Integer.toString(points);
     }
+
+
 }

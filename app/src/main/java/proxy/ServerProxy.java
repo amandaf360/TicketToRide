@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import ClientModel.DestinationCards;
 import ClientModel.Message;
 import ClientModel.Player;
+import ClientModel.TrainCarCard;
 import requests.*;
 import commands.*;
 import responses.*;
@@ -306,7 +307,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      *
      * @post A ClaimRouteCommand will be executed.
      */
-    public void claimRoute(int index, String name)
+    public void claimRoute(int index, String name, ArrayList<TrainCarCard> cardsForPayment)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(Integer.toString(index));

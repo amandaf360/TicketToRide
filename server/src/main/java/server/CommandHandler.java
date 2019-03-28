@@ -102,7 +102,12 @@ public class CommandHandler implements HttpHandler
                 break;
             case "claimRoute":
                 ArrayList<String> claimRouteList = wrappedRequest.getStringList();
-                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1));
+                ArrayList<String> cards = new ArrayList<>();
+                for(int i = 2; i < wrappedRequest.getStringList().size(); i++)
+                {
+                    cards.add(wrappedRequest.getStringList().get(i));
+                }
+                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1), cards);
                 break;
             case "gameHistory":
                 ArrayList<String> historyList = wrappedRequest.getStringList();

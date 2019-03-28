@@ -7,8 +7,10 @@ import java.util.Observer;
 
 import ClientModel.ClientModel;
 import ClientModel.DestinationCards;
+import services.CreateHistoryMessageService;
 import services.DiscardDestCardService;
 import services.DrawDestCardService;
+import services.EndTurnService;
 
 public class DrawDestFragmentPresenter implements IDrawDestFragmentPresenter, Observer
 {
@@ -92,16 +94,33 @@ public class DrawDestFragmentPresenter implements IDrawDestFragmentPresenter, Ob
         DiscardDestCardService discardDestCardService = new DiscardDestCardService();
         ArrayList<DestinationCards> cards = clientModel.getMainPlayer().getPlayerHandDestinations()
                 .getCardList();
+        ArrayList<DestinationCards> toDelete = new ArrayList<>();
         for(String str : added)
         {
 
-            discardDestCardService.discardCard(cards.get((cards.size() - 1) - (2 - Integer.parseInt(str))));
-            clientModel.deleteMainPlayersDestinationCardFromHand(
-                    cards.get((cards.size() - 1) - (3 - Integer.parseInt(str))));
+            toDelete.add(cards.get((cards.size() - 1) - (2 - Integer.parseInt(str))));
+
+        }
+
+        for(DestinationCards card : toDelete)
+        {
+            discardDestCardService.discardCard(card);
+            clientModel.deleteMainPlayersDestinationCardFromHand(card);
         }
 
         deleteObserver();
         view.popFragment();
+
+        CreateHistoryMessageService createHistoryMessageService = new CreateHistoryMessageService();
+
+        createHistoryMessageService.sendMessage(clientModel.getMainPlayer().getName() +
+                                                " just drew " +
+                                                (3 - cards.size()) +
+                                                "destination cards!");
+
+
+        EndTurnService end = new EndTurnService();
+        end.endTurn();
     }
 
 

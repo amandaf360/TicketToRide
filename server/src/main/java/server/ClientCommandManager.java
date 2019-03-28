@@ -210,10 +210,11 @@ public class ClientCommandManager
         startGameInfo.put(username, info);
     }
 
-    public void claimRoute(int index, String userClaiming, String otherUserName)
+    public void claimRoute(int index, String userClaiming, int howMany, String otherUserName)
     {
         destinationCardsDrawn.get(otherUserName).add(Integer.toString(index));
         destinationCardsDrawn.get(otherUserName).add(userClaiming);
+        destinationCardsDrawn.get(otherUserName).add(Integer.toString(howMany));
     }
 
     public void addTrainCardDrawn(String userDrew, String sendingTo)

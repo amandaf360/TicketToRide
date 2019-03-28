@@ -312,6 +312,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(Integer.toString(index));
         stringList.add(name);
+        for(TrainCarCard trainCarCard : cardsForPayment)
+        {
+            stringList.add(trainCarCard.toString());
+        }
         RequestWrapper wrapper = new RequestWrapper("claimRoute", stringList);
 
         callBack = new OnTaskCompleted()

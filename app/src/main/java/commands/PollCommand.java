@@ -19,7 +19,7 @@ public class PollCommand implements ICommand
 
     public void execute()
     {
-        if(response != null)
+        if (response != null)
         {
             joinPlayers(response.getPlayersJoined());
             addGames(response.getGamesCreated());
@@ -38,7 +38,7 @@ public class PollCommand implements ICommand
 
     private void advanceTurn(int numTurns)
     {
-        if(numTurns > 0)
+        if (numTurns > 0)
         {
             ClientModel model = ClientModel.getInstance();
             for (int i = 0; i < numTurns; i++)
@@ -50,18 +50,20 @@ public class PollCommand implements ICommand
 
     private void updateGameHistory(ArrayList<Message> messages)
     {
-        if(messages != null)
+        if (messages != null)
         {
-            if(messages.size() != 0)
+            if (messages.size() != 0)
             {
                 ClientModel model = ClientModel.getInstance();
-                for(Message message: messages)
+                for (Message message : messages)
                 {
                     model.addMessageToHistory(message);
                 }
             }
         }
     }
+
+
 
     private void updateTrainCardsDrawn(ArrayList<String> usersDrew)
     {

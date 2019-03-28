@@ -212,9 +212,9 @@ public class ClientCommandManager
 
     public void claimRoute(int index, String userClaiming, int howMany, String otherUserName)
     {
-        destinationCardsDrawn.get(otherUserName).add(Integer.toString(index));
-        destinationCardsDrawn.get(otherUserName).add(userClaiming);
-        destinationCardsDrawn.get(otherUserName).add(Integer.toString(howMany));
+        routesClaimed.get(otherUserName).add(Integer.toString(index));
+        routesClaimed.get(otherUserName).add(userClaiming);
+        routesClaimed.get(otherUserName).add(Integer.toString(howMany));
     }
 
     public void addTrainCardDrawn(String userDrew, String sendingTo)

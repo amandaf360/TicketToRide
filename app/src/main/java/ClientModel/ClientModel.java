@@ -347,6 +347,14 @@ public class ClientModel extends Observable
         notifyObservers(this.mainPlayer);
     }
 
+    public void decrementPlayersTrainCardsByName(String name, int howMany)
+    {
+        activeGame.getPlayerByName(name).getPlayerHandTrains().decrementTotalCards(howMany);
+        setChanged();
+        notifyObservers(activeGame.getPlayerByName(name));
+
+    }
+
     public void takeTrainsFromPlayerByName(String name, int howMany)
     {
         if(name.equals(mainPlayer.getName()))

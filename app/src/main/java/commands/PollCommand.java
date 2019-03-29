@@ -175,9 +175,7 @@ public class PollCommand implements ICommand
                     indexOfRoute = Integer.parseInt(routesClaimed.get(i));
                     i++;
                     userClaiming = routesClaimed.get(i);
-
                     ClientModel.getInstance().claimRouteByIndex(indexOfRoute, userClaiming);
-
                 }
             }
         }

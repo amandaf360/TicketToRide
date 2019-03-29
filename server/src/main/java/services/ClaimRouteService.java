@@ -19,13 +19,7 @@ public class ClaimRouteService
     {
         ModelRoot root = ModelRoot.getModel();
         ActiveGame game = root.getGameByUser(name);
-
-
-
-
         game.claimRoute(index, name);
-
-
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> usernames = game.getAllUsernames();
@@ -37,6 +31,7 @@ public class ClaimRouteService
             }
         }
 
+        root.getMapGraph().claimRoute(name, index);
         ClaimRouteResponse response = new ClaimRouteResponse(index, name);
         return response;
     }

@@ -29,6 +29,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     GameplayView view;
     ClientModel clientModel;
     GameplayState currentState;
+    boolean lastTurn;
 
     public GameplayPresenter(GameplayView view)
     {
@@ -46,6 +47,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             System.out.println("It is not my turn!");
             setState(NotMyTurnState.getInstance());
         }
+        lastTurn = false;
     }
 
     public void setState(GameplayState newState)
@@ -78,6 +80,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     public void claimRouteByTap(ArrayList<Route> routes)
     {
         int numRoutes = routes.size();
+        boolean routeClaimed = false;
 
         switch(numRoutes)
         {
@@ -86,10 +89,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 //resume their turn
                 view.showToast("Sorry, this route is already taken");
                 setState(MyTurnState.getInstance());
+                routeClaimed = false;
                 break;
             case 1:
                 //if there is one element, then either it is a double route with only 1 option remaining, or else it is an unclaimed single
-                claimRouteHelper(routes.get(0));
+                routeClaimed = claimRouteHelper(routes.get(0));
                 break;
             case 2:
                 //if there is more than one element, than it is a double route where both options are unclaimed
@@ -97,9 +101,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             default:break;
         }
+
+
     }
 
-    public void claimRouteHelper(Route route)
+    private boolean claimRouteHelper(Route route)
     {
         int routeIndex = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
         int numRelevantColor  = 0;
@@ -154,6 +160,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
+            return true;
         }
         //or if they have enough with locomotives
         else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= route.getLength() - numRelevantColor)
@@ -178,12 +185,14 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
+            return true;
         }
         //or if they just don't have enough at all
         else
         {
             view.showToast("You don't have the resources to claim this route");
             setState(MyTurnState.getInstance());
+            return false;
         }
     }
 
@@ -221,7 +230,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 //drawRoutesNormal();
                 //addNumDestCardsAdded();
             }
-
         }
 
         if(o.getClass() == Route.class)

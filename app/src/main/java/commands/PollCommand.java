@@ -192,6 +192,12 @@ public class PollCommand implements ICommand
                 int numPoints;
                 for (int i = 0; i < routesClaimed.size(); i++)
                 {
+                    if(routesClaimed.size() == 1)
+                    {
+                        ClientModel.getInstance().addPointsToMainPlayer(
+                                Integer.parseInt(routesClaimed.get(i)));
+                        return;
+                    }
                     indexOfRoute = Integer.parseInt(routesClaimed.get(i));
                     i++;
 

@@ -323,6 +323,11 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
 
         int routeIndex = clientModel.getIndexOfMatchingUnclaimedRoute(route);
+        if(routeIndex == -1)
+        {
+            System.out.println("THIS ROUTE IS BROKEN IN THE MODEL. FIX IT!\nHERE IS THE ROUTE DATA: " + route.toString() + "\n");
+            return;
+        }
         if (numRelevantColor >= route.getLength())
         {
             ArrayList<TrainCarCard> cards = new ArrayList<>();

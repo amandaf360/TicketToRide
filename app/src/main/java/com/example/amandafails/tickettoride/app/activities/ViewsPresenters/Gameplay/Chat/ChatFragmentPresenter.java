@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import ClientModel.*;
 import services.CreateChatMessageService;
+import services.CreateHistoryMessageService;
 
 public class ChatFragmentPresenter implements IChatFragmentPresenter, Observer {
 
@@ -31,6 +32,9 @@ public class ChatFragmentPresenter implements IChatFragmentPresenter, Observer {
         if(message.equals("cheat"))
         {
             clientModel.addTenOfEachTrainCar();
+            clientModel.addTenOfEachTrainCar();
+            CreateHistoryMessageService create = new CreateHistoryMessageService();
+            create.sendMessage(clientModel.getMainPlayer().getName() + " just cheated!\n");
         }
         // clear chat message
         view.clearChatMessage();

@@ -22,23 +22,31 @@ public class ClaimRouteService
         ActiveGame game = root.getGameByUser(name);
 
 
-
-
         game.claimRoute(index, name, cards);
-
 
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> usernames = game.getAllUsernames();
-        for(int i = 0; i < usernames.size(); i++)
+
+
+        for (int i = 0; i < usernames.size(); i++)
         {
-            if(!usernames.get(i).equals(name))
+            if (!usernames.get(i).equals(name))
             {
                 manager.claimRoute(index, name, cards.size(), usernames.get(i));
+            } else
+            {
+                calculatePoints(cards.size());
             }
         }
 
         ClaimRouteResponse response = new ClaimRouteResponse(index, name);
         return response;
+    }
+
+
+    private int calculatePoints(int length)
+    {
+        return 0;
     }
 }

@@ -280,32 +280,46 @@ public class TrainView extends View
             {
                 switch(routes.get(i).getClaimedColor1())
                 {
-                    case "gray":   paint.setColor(Color.GRAY); break;
-                    case "white":  paint.setColor(Color.WHITE); break;
-                    case "black":  paint.setColor(Color.BLACK); break;
-                    case "red":    paint.setColor(Color.RED); break;
-                    case "blue":   paint.setColor(Color.BLUE); break;
-                    case "green":  paint.setColor(Color.GREEN); break;
-                    case "yellow": paint.setColor(Color.YELLOW); break;
-                    case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
-                    case "purple": paint.setColor(Color.parseColor("purple")); break;
-                    default:       break;
+                    case "blue":
+                        paint.setColor(Color.parseColor("#039BE5"));
+                        break;
+                    case "red":
+                        paint.setColor(Color.parseColor("#F44336"));
+                        break;
+                    case "green":
+                        paint.setColor(Color.parseColor("#8BC34A"));
+                        break;
+                    case "yellow":
+                        paint.setColor(Color.parseColor("#FFEB3B"));
+                        break;
+                    case "black":
+                        paint.setColor(Color.BLACK);
+                        break;
+                    default:
+                        break;
                 }
             }
             if(routes.get(i).getClaimedColor2() != null)
             {
                 switch(routes.get(i).getClaimedColor2())
                 {
-                    case "gray":   paint2.setColor(Color.GRAY); break;
-                    case "white":  paint2.setColor(Color.WHITE); break;
-                    case "black":  paint2.setColor(Color.BLACK); break;
-                    case "red":    paint2.setColor(Color.RED); break;
-                    case "blue":   paint2.setColor(Color.BLUE); break;
-                    case "green":  paint2.setColor(Color.GREEN); break;
-                    case "yellow": paint2.setColor(Color.YELLOW); break;
-                    case "orange": paint2.setColor(Color.parseColor("#FFA500")); break;
-                    case "purple": paint2.setColor(Color.parseColor("purple")); break;
-                    default:       break;
+                    case "blue":
+                        paint.setColor(Color.parseColor("#039BE5"));
+                        break;
+                    case "red":
+                        paint.setColor(Color.parseColor("#F44336"));
+                        break;
+                    case "green":
+                        paint.setColor(Color.parseColor("#8BC34A"));
+                        break;
+                    case "yellow":
+                        paint.setColor(Color.parseColor("#FFEB3B"));
+                        break;
+                    case "black":
+                        paint.setColor(Color.BLACK);
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -573,16 +587,23 @@ public class TrainView extends View
     {
         switch(route.getClaimedColor2())
         {
-            case "gray":   paint.setColor(Color.GRAY); break;
-            case "white":  paint.setColor(Color.WHITE); break;
-            case "black":  paint.setColor(Color.BLACK); break;
-            case "red":    paint.setColor(Color.RED); break;
-            case "blue":   paint.setColor(Color.BLUE); break;
-            case "green":  paint.setColor(Color.GREEN); break;
-            case "yellow": paint.setColor(Color.YELLOW); break;
-            case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
-            case "purple": paint.setColor(Color.parseColor("purple")); break;
-            default:       break;
+            case "blue":
+                paint.setColor(Color.parseColor("#039BE5"));
+                break;
+            case "red":
+                paint.setColor(Color.parseColor("#F44336"));
+                break;
+            case "green":
+                paint.setColor(Color.parseColor("#8BC34A"));
+                break;
+            case "yellow":
+                paint.setColor(Color.parseColor("#FFEB3B"));
+                break;
+            case "black":
+                paint.setColor(Color.BLACK);
+                break;
+            default:
+                break;
         }
     }
 

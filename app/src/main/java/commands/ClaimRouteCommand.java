@@ -9,7 +9,6 @@ public class ClaimRouteCommand implements ICommand
 {
     int index;
     String name;
-    int numCards;
 
     public ClaimRouteCommand(int index, String name)
     {

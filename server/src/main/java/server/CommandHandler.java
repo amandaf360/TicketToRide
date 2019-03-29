@@ -21,7 +21,7 @@ public class CommandHandler implements HttpHandler
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.println("Connected");
+        //System.out.println("Connected");
         StringBuilder builder = new StringBuilder();
 
         InputStreamReader reader = new InputStreamReader(exchange.getRequestBody());

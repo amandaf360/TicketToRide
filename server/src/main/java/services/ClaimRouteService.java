@@ -38,7 +38,7 @@ public class ClaimRouteService
             }
         }
 
-        ClaimRouteResponse response = new ClaimRouteResponse(index, name, cards.size());
+        ClaimRouteResponse response = new ClaimRouteResponse(index, name);
         return response;
     }
 }

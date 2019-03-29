@@ -8,6 +8,7 @@ import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gamep
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.NotMyTurnState;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,6 +24,7 @@ import ClientModel.Route;
 import ClientModel.Game;
 import ClientModel.AsyncDemo;
 import services.EndTurnService;
+import ClientModel.PlayerHandTrains;
 
 public class GameplayPresenter implements IGameplayPresenter, Observer
 {
@@ -77,6 +79,167 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         view.setRoutesClaimable(true);
     }
 
+
+    public void createDoubleRouteDialog(String colorOne, String colorTwo, List<Route> routes)
+    {
+        final String dialogTitle = "Which route do you want to claim?";
+
+        final String[] singleChoiceItems = {colorOne, colorTwo};
+        final int selection = 0;
+        final List<Route> finalRoutes = new ArrayList<Route>();
+        for(Route route : routes)
+        {
+            finalRoutes.add(route);
+        }
+        setDoubleSelection(0);
+        new AlertDialog.Builder(view)   //AlertDialog.Builder(view. R.whatever.dialog)
+                .setTitle(dialogTitle)
+                .setCancelable(false)
+                .setSingleChoiceItems(singleChoiceItems, selection, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int selectedIndex) {
+                        setDoubleSelection(selectedIndex);
+                    }
+                })
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        claimRouteHelper(finalRoutes.get(doubleSelection));
+                        System.out.println("This is doubleSelection: " + doubleSelection + "\n");
+                        System.out.println("This is the route'sColor: " + finalRoutes.get(doubleSelection).getColor() + "\n");
+                        System.out.println("This is the routes index in the model: " +
+                                            clientModel.getIndexOfMatchingUnclaimedRoute(finalRoutes.get(doubleSelection)) +
+                                            "\n");
+                    }
+                })
+
+                .show();
+
+        return;
+    }
+
+    private void  findGrayColor(Route route)
+    {
+        List<String> colors = new ArrayList<>();
+        colors.add("black");
+        colors.add("blue");
+        colors.add("green");
+        colors.add("locomotive");
+        colors.add("orange");
+        colors.add("purple");
+        colors.add("red");
+        colors.add("yellow");
+        colors.add("white");
+
+        showColorSelectionDialog(colors, route);
+
+    }
+
+    private void showColorSelectionDialog(List<String> colors, Route route)
+    {
+        final String dialogTitle = "Which color do you want to use?";
+        final Route route1 = route;
+
+        setGrayRouteColor("black");
+        String[] singleChoiceItems = new String[colors.size()];
+        singleChoiceItems = colors.toArray(singleChoiceItems);
+        final String[] finalSingleChoiceItems = singleChoiceItems;
+
+        setDoubleSelection(0);
+        new AlertDialog.Builder(view)   //AlertDialog.Builder(view. R.whatever.dialog)
+                .setTitle(dialogTitle)
+                .setCancelable(false)
+                .setSingleChoiceItems(finalSingleChoiceItems, doubleSelection, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int selectedIndex) {
+                        setGrayRouteColor(finalSingleChoiceItems[selectedIndex]);
+                        System.out.println("Selected this color: " + grayRouteColor + " for now...\n\n");
+                    }
+                })
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doItClaimRoute(route1);
+                        System.out.println("This is the colorChosen: " + grayRouteColor + "\n\n");
+                    }
+                })
+                .show();
+
+        return;
+    }
+
+    private void doItClaimRoute(Route route)
+    {
+        int numRelevantColor = 0;
+        switch(grayRouteColor)
+        {
+            case "blue":
+                numRelevantColor = ((clientModel.getMainPlayer().getPlayerHandTrains().getNumBlue()));
+                break;
+
+            case "red":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumRed();
+                break;
+
+            case "yellow":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumYellow();
+                break;
+
+            case "white":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumWhite();
+                break;
+
+            case "black":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumBlack();
+                break;
+
+            case "green":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumGreen();
+                break;
+
+            case "purple":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumPurple();
+                break;
+
+            case "orange":
+
+                numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange();
+                break;
+
+            default:
+                break;
+        }
+
+        claimRouteHelpersHelper(route, numRelevantColor, grayRouteColor);
+    }
+
+
+
+
+
+    private String grayRouteColor = "locomotive";
+
+
+    private void setGrayRouteColor(String selection)
+    {
+        grayRouteColor = selection;
+    }
+
+
+    private int doubleSelection = 0;
+
+    private void setDoubleSelection(int i)
+    {
+        doubleSelection = i;
+    }
+
+
     public void claimRouteByTap(ArrayList<Route> routes)
     {
         int numRoutes = routes.size();
@@ -97,12 +260,18 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             case 2:
                 //if there is more than one element, than it is a double route where both options are unclaimed
-                //TODO: display some kind of message asking the person which route to take
+                String colorOne = routes.get(0).getColor();
+                String colorTwo = routes.get(1).getColor();
+                if(colorOne.equals(colorTwo))
+                {
+                    claimRouteHelper(routes.get(0));
+                    break;
+                }
+
+                createDoubleRouteDialog(colorOne, colorTwo, routes);
                 break;
             default:break;
         }
-
-
     }
 
     private boolean claimRouteHelper(Route route)
@@ -137,12 +306,30 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange();
                 break;
             case "gray":
+                //THOMAS set RelevantColor to whatever they chose;
+                //THOMAS set numRelevantColor to howMany they have of that.
+
+                findGrayColor(route);
                 //TODO: Display window asking which one they want to use, collect answer, change relevant color to chosen color
-                break;
+                return;
             default: break;
         }
 
+        claimRouteHelpersHelper(route, numRelevantColor, relevantColor);
         //checks if they have enough of the color itself
+
+    }
+
+    private void claimRouteHelpersHelper(Route route, int numRelevantColor, String relevantColor)
+    {
+
+
+        int routeIndex = clientModel.getIndexOfMatchingUnclaimedRoute(route);
+        if(routeIndex == -1)
+        {
+            System.out.println("THIS ROUTE IS BROKEN IN THE MODEL. FIX IT!\nHERE IS THE ROUTE DATA: " + route.toString() + "\n");
+            return;
+        }
         if (numRelevantColor >= route.getLength())
         {
             ArrayList<TrainCarCard> cards = new ArrayList<>();
@@ -230,6 +417,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 //drawRoutesNormal();
                 //addNumDestCardsAdded();
             }
+
         }
 
         if(o.getClass() == Route.class)

@@ -24,9 +24,14 @@ public class ChatFragmentPresenter implements IChatFragmentPresenter, Observer {
 
     @Override
     public void sendMessage() {
-        CreateChatMessageService createChatMessageService = new CreateChatMessageService(view.getChatMessage());
+        String message = view.getChatMessage();
+        CreateChatMessageService createChatMessageService = new CreateChatMessageService(message);
         // call method on createChatMessageService object
         createChatMessageService.sendMessage();
+        if(message.equals("cheat"))
+        {
+            clientModel.addTenOfEachTrainCar();
+        }
         // clear chat message
         view.clearChatMessage();
     }

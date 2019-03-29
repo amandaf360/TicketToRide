@@ -64,12 +64,14 @@ public class CurrentGameStatusFragmentView extends Fragment implements ICurrentG
     private TextView player4Routes;
     private TextView player5Routes;
 
+    // all player dest cards
     private TextView player1Destinations;
     private TextView player2Destinations;
     private TextView player3Destinations;
     private TextView player4Destinations;
     private TextView player5Destinations;
 
+    // player number of cards
     private TextView numRed;
     private TextView numBlue;
     private TextView numGreen;

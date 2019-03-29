@@ -33,9 +33,8 @@ public class ChatFragmentPresenter implements IChatFragmentPresenter, Observer {
         {
             clientModel.addTenOfEachTrainCar();
             clientModel.addTenOfEachTrainCar();
-            CreateChatMessageService create = new CreateChatMessageService(
-                    clientModel.getMainPlayer().getName() + " just cheated!\n");
-            create.sendMessage();
+            CreateHistoryMessageService create = new CreateHistoryMessageService();
+            create.sendMessage(clientModel.getMainPlayer().getName() + " just cheated!\n");
         }
         // clear chat message
         view.clearChatMessage();

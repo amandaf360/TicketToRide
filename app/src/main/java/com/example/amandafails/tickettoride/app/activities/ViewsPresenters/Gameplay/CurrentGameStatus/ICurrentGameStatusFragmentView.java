@@ -3,5 +3,5 @@ package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Game
 public interface ICurrentGameStatusFragmentView {
     void populateEverything();
     void onExitButtonClicked();
-    void popFragment();
+    void popFragment(boolean exitPressed);
 }

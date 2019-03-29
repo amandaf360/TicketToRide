@@ -29,7 +29,7 @@ public class CurrentGameStatusFragmentPresenter implements ICurrentGameStatusFra
     @Override
     public void exit() {
         deleteObserver();
-        view.popFragment();
+        view.popFragment(true);
     }
 
     @Override
@@ -52,6 +52,10 @@ public class CurrentGameStatusFragmentPresenter implements ICurrentGameStatusFra
             names.add(name);
         }
         return names;
+    }
+
+    public String getCurrentPlayer() {
+        return clientModel.getMainPlayer().getName();
     }
 
     @Override

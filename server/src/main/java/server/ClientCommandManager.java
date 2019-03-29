@@ -221,6 +221,12 @@ public class ClientCommandManager
         routesClaimed.get(otherUserName).add(Integer.toString(numPoints));
     }
 
+    public void claimRoute(int numPoints, String userClaiming)
+    {
+        routesClaimed.put(userClaiming, new ArrayList<String>());
+        routesClaimed.get(userClaiming).add(Integer.toString(numPoints));
+    }
+
     public void addTrainCardDrawn(String userDrew, String sendingTo)
     {
         trainCardsDrawn.get(sendingTo).add(userDrew);

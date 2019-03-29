@@ -52,7 +52,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
                 // pop fragment
                 ServerProxy proxy = new ServerProxy();
                 proxy.endCurrentTurn(clientModel.getMainPlayer().getName());
-                view.popFragment();
+                view.popFragment(false);
             }
         }
         // if it's the FIRST draw...
@@ -63,7 +63,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
                 drawTrainCardService.drawCard(cardIndex);
                 ServerProxy proxy = new ServerProxy();
                 proxy.endCurrentTurn(clientModel.getMainPlayer().getName());
-                view.popFragment();
+                view.popFragment(false);
 
             }
             // otherwise draw a card and set cardDrawn
@@ -82,7 +82,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     @Override
     public void exit() {
         deleteObserver();
-        view.popFragment();
+        view.popFragment(true);
     }
 
 

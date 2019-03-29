@@ -166,7 +166,7 @@ public class TrainView extends View
         routes.add(new MapRoute(1560, 820, 35, 2, true, "green", "white", "Saint Louis", "Chicago"));
         routes.add(new MapRoute(1710, 830, 63, 4, false, "green", "none", "Saint Louis", "Pittsburgh"));
         routes.add(new MapRoute(2040, 670, 67, 2, true, "green", "white", "Pittsburgh", "New York City"));
-        routes.add(new MapRoute(1450, 1280, 350, 3, false, "green", "none", "Little Rock", "New Orleans"));
+        routes.add(new MapRoute(1450, 1280, 170, 3, false, "green", "none", "Little Rock", "New Orleans"));
 
         //orange routes (total 6)
         routes.add(new MapRoute(1060, 440, 95, 6, false, "orange", "none", "Helena", "Duluth"));
@@ -180,7 +180,7 @@ public class TrainView extends View
         routes.add(new MapRoute(670, 580, 26, 3, false, "purple", "none", "Helena", "Salt Lake City"));
         routes.add(new MapRoute(1020, 750, 78, 4, false, "purple", "none", "Denver", "Omaha"));
         routes.add(new MapRoute(1640, 480, 89, 6, false, "purple", "none", "Duluth", "Toronto"));
-        routes.add(new MapRoute(2020, 1460, 355, 4, false, "purple", "none", "Charleston", "Miami"));
+        routes.add(new MapRoute(2020, 1460, 175, 4, false, "purple", "none", "Charleston", "Miami"));
 
         //White routes (total 4)
         routes.add(new MapRoute(870, 60, 91, 6, false, "white", "none", "Calgary", "Winnipeg"));
@@ -221,7 +221,7 @@ public class TrainView extends View
         routes.add(new MapRoute(1290, 1220, 51, 2, false, "gray", "none", "Dallas", "Little Rock"));
         routes.add(new MapRoute(1250, 1380, 140, 1, true, "gray", "gray", "Dallas", "Houston"));
         routes.add(new MapRoute(1400, 1480, 87, 2, false, "gray", "none", "Houston", "New Orleans"));
-        routes.add(new MapRoute(1180, 1190, 185, 2, true, "gray", "gray", "Dallas", "Oklahoma City"));
+        routes.add(new MapRoute(1180, 1190, 5, 2, true, "gray", "gray", "Dallas", "Oklahoma City"));
         routes.add(new MapRoute(1230, 970, 20, 2, true, "gray", "gray", "Oklahoma City", "Kansas City"));
         routes.add(new MapRoute(1240, 780, 165, 1, true, "gray", "gray", "Kansas City", "Omaha"));
         routes.add(new MapRoute(1270, 580, 30, 2, true, "gray", "gray", "Omaha", "Duluth"));
@@ -280,32 +280,46 @@ public class TrainView extends View
             {
                 switch(routes.get(i).getClaimedColor1())
                 {
-                    case "gray":   paint.setColor(Color.GRAY); break;
-                    case "white":  paint.setColor(Color.WHITE); break;
-                    case "black":  paint.setColor(Color.BLACK); break;
-                    case "red":    paint.setColor(Color.RED); break;
-                    case "blue":   paint.setColor(Color.BLUE); break;
-                    case "green":  paint.setColor(Color.GREEN); break;
-                    case "yellow": paint.setColor(Color.YELLOW); break;
-                    case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
-                    case "purple": paint.setColor(Color.parseColor("purple")); break;
-                    default:       break;
+                    case "blue":
+                        paint.setColor(Color.parseColor("#039BE5"));
+                        break;
+                    case "red":
+                        paint.setColor(Color.parseColor("#F44336"));
+                        break;
+                    case "green":
+                        paint.setColor(Color.parseColor("#8BC34A"));
+                        break;
+                    case "yellow":
+                        paint.setColor(Color.parseColor("#FFEB3B"));
+                        break;
+                    case "black":
+                        paint.setColor(Color.BLACK);
+                        break;
+                    default:
+                        break;
                 }
             }
             if(routes.get(i).getClaimedColor2() != null)
             {
                 switch(routes.get(i).getClaimedColor2())
                 {
-                    case "gray":   paint2.setColor(Color.GRAY); break;
-                    case "white":  paint2.setColor(Color.WHITE); break;
-                    case "black":  paint2.setColor(Color.BLACK); break;
-                    case "red":    paint2.setColor(Color.RED); break;
-                    case "blue":   paint2.setColor(Color.BLUE); break;
-                    case "green":  paint2.setColor(Color.GREEN); break;
-                    case "yellow": paint2.setColor(Color.YELLOW); break;
-                    case "orange": paint2.setColor(Color.parseColor("#FFA500")); break;
-                    case "purple": paint2.setColor(Color.parseColor("purple")); break;
-                    default:       break;
+                    case "blue":
+                        paint.setColor(Color.parseColor("#039BE5"));
+                        break;
+                    case "red":
+                        paint.setColor(Color.parseColor("#F44336"));
+                        break;
+                    case "green":
+                        paint.setColor(Color.parseColor("#8BC34A"));
+                        break;
+                    case "yellow":
+                        paint.setColor(Color.parseColor("#FFEB3B"));
+                        break;
+                    case "black":
+                        paint.setColor(Color.BLACK);
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -573,16 +587,23 @@ public class TrainView extends View
     {
         switch(route.getClaimedColor2())
         {
-            case "gray":   paint.setColor(Color.GRAY); break;
-            case "white":  paint.setColor(Color.WHITE); break;
-            case "black":  paint.setColor(Color.BLACK); break;
-            case "red":    paint.setColor(Color.RED); break;
-            case "blue":   paint.setColor(Color.BLUE); break;
-            case "green":  paint.setColor(Color.GREEN); break;
-            case "yellow": paint.setColor(Color.YELLOW); break;
-            case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
-            case "purple": paint.setColor(Color.parseColor("purple")); break;
-            default:       break;
+            case "blue":
+                paint.setColor(Color.parseColor("#039BE5"));
+                break;
+            case "red":
+                paint.setColor(Color.parseColor("#F44336"));
+                break;
+            case "green":
+                paint.setColor(Color.parseColor("#8BC34A"));
+                break;
+            case "yellow":
+                paint.setColor(Color.parseColor("#FFEB3B"));
+                break;
+            case "black":
+                paint.setColor(Color.BLACK);
+                break;
+            default:
+                break;
         }
     }
 

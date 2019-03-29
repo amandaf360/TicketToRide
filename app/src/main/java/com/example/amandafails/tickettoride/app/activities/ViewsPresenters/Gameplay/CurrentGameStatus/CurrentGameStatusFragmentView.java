@@ -1,5 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayView;
 import com.example.amandafails.tickettoride.app.adaptors.ViewPagerAdaptor;
 
 import java.util.ArrayList;
@@ -188,6 +190,8 @@ public class CurrentGameStatusFragmentView extends Fragment implements ICurrentG
     @Override
     public void popFragment() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
+        Activity activity = getActivity();
+        ((GameplayView)activity).enableAllButtons();
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }

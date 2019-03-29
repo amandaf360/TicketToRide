@@ -286,6 +286,11 @@ public class ClientModel extends Observable
         notifyObservers(this.activeGame.getPlayerByName(name));
     }
 
+    public void decrementPlayerTrainsByName(String name, int howMany)
+    {
+
+    }
+
     public void addMessageToChat(Message message)
     {
         gameChat.add(message);

@@ -73,14 +73,6 @@ public class GameplayView extends FragmentActivity implements IGameplayView
                 onPlaceTrainsClicked();
             }
         });
-        //demoButton = findViewById(R.id.demo_button);
-        //demoButton.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view) {
-//                onDemoClicked();
-//            }
-//        });
 
         trainView = findViewById(R.id.view_trains);
         trainView.setOnClickListener(new View.OnClickListener()
@@ -133,9 +125,23 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         presenter.demo();
     }
 
+    public void enableAllButtons() {
+        setDrawTrainCardsEnabled(true);
+        setDrawDestCardsEnabled(true);
+        setClaimRouteEnabled(true);
+        setDisplayGameStatusButtonEnabled(true);
+    }
 
-    public void onDrawCardsClicked()
-    {
+    public void disableAllButtons() {
+        setDrawTrainCardsEnabled(false);
+        setDrawDestCardsEnabled(false);
+        setClaimRouteEnabled(false);
+        setDisplayGameStatusButtonEnabled(false);
+    }
+
+    public void onDrawCardsClicked() {
+        // disable all buttons
+        disableAllButtons();
         // set fragment to draw card fragment
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction  = manager.beginTransaction();
@@ -143,12 +149,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         transaction.replace(R.id.frame, trainCardDeckFragment)
                 .addToBackStack(null)
                 .commit();
-
-        // call draw cards method in train card deck fragment
-        //trainCardDeckFragment.drawCards();
     }
 
     public void onDisplayGameStatusClicked() {
+        // disable all buttons
+        disableAllButtons();
         // set fragment to draw card fragment
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction  = manager.beginTransaction();
@@ -173,11 +178,6 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         transaction.replace(R.id.frame, drawDestFragmentView)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    public void setDrawRoutesClickable(boolean canClick)
-    {
-        drawRoutesButton.setEnabled(canClick);
     }
 
     public void onPlaceTrainsClicked()
@@ -228,5 +228,9 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     public void setClaimRouteEnabled(boolean enabled)
     {
         placeTrainsButton.setEnabled(enabled);
+    }
+
+    public void setDisplayGameStatusButtonEnabled(boolean enabled) {
+        displayGameStatusButton.setEnabled(enabled);
     }
 }

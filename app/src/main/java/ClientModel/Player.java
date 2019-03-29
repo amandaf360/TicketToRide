@@ -23,6 +23,12 @@ public class Player
         numTrains = 45;
     }
 
+    public void decrementNumTrains(int howMany)
+    {
+        numTrains -= howMany;
+
+    }
+
     public String getColor()
     {
         return color;

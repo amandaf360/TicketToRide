@@ -210,7 +210,7 @@ public class ClientCommandManager
         startGameInfo.put(username, info);
     }
 
-    public void claimRoute(int index, String userClaiming, int howMany, String otherUserName)
+    public void claimRoute(int index, String userClaiming, int howMany, String otherUserName, int numPoints)
     {
 
         routesClaimed.put(otherUserName, new ArrayList<String>());
@@ -218,6 +218,7 @@ public class ClientCommandManager
         routesClaimed.get(otherUserName).add(Integer.toString(index));
         routesClaimed.get(otherUserName).add(userClaiming);
         routesClaimed.get(otherUserName).add(Integer.toString(howMany));
+        routesClaimed.get(otherUserName).add(Integer.toString(numPoints));
     }
 
     public void addTrainCardDrawn(String userDrew, String sendingTo)

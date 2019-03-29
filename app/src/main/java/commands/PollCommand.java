@@ -173,6 +173,7 @@ public class PollCommand implements ICommand
                 int indexOfRoute;
                 String userClaiming;
                 int howMany;
+                int numPoints;
                 for (int i = 0; i < routesClaimed.size(); i++)
                 {
                     indexOfRoute = Integer.parseInt(routesClaimed.get(i));
@@ -182,11 +183,16 @@ public class PollCommand implements ICommand
                     i++;
 
                     howMany = Integer.parseInt(routesClaimed.get(i));
+                    i++;
+
+                    numPoints = Integer.parseInt(routesClaimed.get(i));
 
 
                     ClientModel.getInstance().decrementPlayersTrainCardsByName(userClaiming, howMany);
 
                     ClientModel.getInstance().claimRouteByIndex(indexOfRoute, userClaiming);
+
+                    ClientModel.getInstance().addPointsToPlayerByName(userClaiming, numPoints);
 
                 }
             }

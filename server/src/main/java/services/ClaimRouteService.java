@@ -38,7 +38,7 @@ public class ClaimRouteService
                 manager.claimRoute(index, name, cards.size(), usernames.get(i), numPoints);
             } else
             {
-                calculatePoints(cards.size());
+                manager.claimRoute(numPoints, name);
             }
             manager.addTrainsUsed(usernames.get(i), name, cards.size());
         }

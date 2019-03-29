@@ -1,6 +1,7 @@
 package servermodel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActiveGame
 {
@@ -139,12 +140,18 @@ public class ActiveGame
         return usernameList;
     }
 
-    public void claimRoute(int index, String name)
+    public void claimRoute(int index, String name, List<String> cards)
     {
         if(index == -1)
         {
             return;
         }
+
+        for(String str : cards)
+        {
+            trainCarDiscard.discard(new TrainCarCard(str));
+        }
+
         Player player =  getPlayerByName(name);
         routes.get(index).setClaimedBy(player);
         player.addRoute();

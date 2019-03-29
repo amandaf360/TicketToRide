@@ -18,6 +18,6 @@ public class ClaimRouteService
     public void claimRoute(String name, int indexOfRouteToClaim, ArrayList<TrainCarCard> cardsForPayment)
     {
         ServerProxy proxy = new ServerProxy();
-        proxy.claimRoute(indexOfRouteToClaim, name);
+        proxy.claimRoute(indexOfRouteToClaim, name, cardsForPayment);
     }
 }

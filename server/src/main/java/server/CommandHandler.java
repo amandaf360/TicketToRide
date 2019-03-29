@@ -21,7 +21,7 @@ public class CommandHandler implements HttpHandler
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.println("Connected");
+        //System.out.println("Connected");
         StringBuilder builder = new StringBuilder();
 
         InputStreamReader reader = new InputStreamReader(exchange.getRequestBody());
@@ -102,7 +102,12 @@ public class CommandHandler implements HttpHandler
                 break;
             case "claimRoute":
                 ArrayList<String> claimRouteList = wrappedRequest.getStringList();
-                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1));
+                ArrayList<String> cards = new ArrayList<>();
+                for(int i = 2; i < wrappedRequest.getStringList().size(); i++)
+                {
+                    cards.add(wrappedRequest.getStringList().get(i));
+                }
+                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1), cards);
                 break;
             case "gameHistory":
                 ArrayList<String> historyList = wrappedRequest.getStringList();

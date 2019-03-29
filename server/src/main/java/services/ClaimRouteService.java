@@ -8,6 +8,7 @@ import server.ClientCommandManager;
 import servermodel.ActiveGame;
 import servermodel.ModelRoot;
 import servermodel.Player;
+import servermodel.TrainCarDiscard;
 
 public class ClaimRouteService
 {
@@ -20,11 +21,14 @@ public class ClaimRouteService
     {
         ModelRoot root = ModelRoot.getModel();
         ActiveGame game = root.getGameByUser(name);
-
-
-
-
         game.claimRoute(index, name, cards);
+        TrainCarDiscard discardPile = game.getTrainCarDiscard();
+
+        Player player = game.getPlayerByUsername(name);
+        for(int i = 0; i < cards.size(); i++)
+        {
+            discardPile.discard(player.removeTrainCarCard(cards.get(i)));
+        }
 
 
 
@@ -36,6 +40,7 @@ public class ClaimRouteService
             {
                 manager.claimRoute(index, name, cards.size(), usernames.get(i));
             }
+            manager.addTrainsUsed(usernames.get(i), name, cards.size());
         }
 
         ClaimRouteResponse response = new ClaimRouteResponse(index, name);

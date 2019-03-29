@@ -388,6 +388,15 @@ public class ClientModel extends Observable
         return -1;
     }
 
+    public void decrementPlayerTrainsByName(String name, int howMany)
+    {
+        Player player = activeGame.getPlayerByName(name);
+        player.setNumTrains(player.getNumTrains() - howMany);
+        setChanged();
+        notifyObservers(player);
+    }
+
+
     public void claimRouteByIndex(int index, String name)
     {
         if(index == -1)

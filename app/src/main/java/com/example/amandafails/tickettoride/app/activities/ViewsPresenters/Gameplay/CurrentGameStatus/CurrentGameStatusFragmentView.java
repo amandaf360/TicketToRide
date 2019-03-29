@@ -188,10 +188,17 @@ public class CurrentGameStatusFragmentView extends Fragment implements ICurrentG
     }
 
     @Override
-    public void popFragment() {
+    public void popFragment(boolean exitPressed) {
         FragmentManager manager = getActivity().getSupportFragmentManager();
-        Activity activity = getActivity();
-        ((GameplayView)activity).enableAllButtons();
+        if(exitPressed) {
+            Activity activity = getActivity();
+            if(((GameplayView)activity).getPresenter().currentPlayerTurn().equals(presenter.getCurrentPlayer())) {
+                ((GameplayView)activity).enableAllButtons();
+            }
+            else {
+                ((GameplayView)activity).setDisplayGameStatusButtonEnabled(true);
+            }
+        }
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }

@@ -15,5 +15,6 @@ public interface ICurrentGameStatusFragmentPresenter {
     List<String> getPlayerDests();
     List<String> getPlayerNumEachCard();
     void setPlayerNameColors(List<TextView> names);
+    String getCurrentPlayer();
 
 }

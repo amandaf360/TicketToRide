@@ -163,23 +163,21 @@ public class CurrentGameStatusFragmentPresenter implements ICurrentGameStatusFra
         String hexColor = "";
         switch (color) {
             case "blue":
-                hexColor = "#0000ff";
+                hexColor = "#039BE5";
                 break;
             case "red":
-                hexColor = "#ff0000";
+                hexColor = "#F44336";
                 break;
             case "green":
-                hexColor = "#008000";
+                hexColor = "#8BC34A";
                 break;
             case "yellow":
-                hexColor = "#ffff00";
+                hexColor = "#FFEB3B";
                 break;
             case "black":
                 hexColor = "#000000";
                 break;
         }
-
-
         return hexColor;
     }
 }

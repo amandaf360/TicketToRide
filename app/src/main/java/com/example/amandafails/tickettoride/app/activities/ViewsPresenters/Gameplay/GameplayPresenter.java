@@ -31,6 +31,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     GameplayView view;
     ClientModel clientModel;
     GameplayState currentState;
+    boolean lastTurn;
 
     public GameplayPresenter(GameplayView view)
     {
@@ -48,6 +49,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             System.out.println("It is not my turn!");
             setState(NotMyTurnState.getInstance());
         }
+        lastTurn = false;
     }
 
     public void setState(GameplayState newState)
@@ -241,6 +243,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     public void claimRouteByTap(ArrayList<Route> routes)
     {
         int numRoutes = routes.size();
+        boolean routeClaimed = false;
 
         switch(numRoutes)
         {
@@ -249,6 +252,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 //resume their turn
                 view.showToast("Sorry, this route is already taken");
                 setState(MyTurnState.getInstance());
+                routeClaimed = false;
                 break;
             case 1:
                 //if there is one element, then either it is a double route with only 1 option remaining, or else it is an unclaimed single
@@ -268,13 +272,12 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             default:break;
         }
+        view.setRoutesClaimable(false);
     }
 
-
-
-    public void claimRouteHelper(Route route)
+    private void claimRouteHelper(Route route)
     {
-
+        int routeIndex = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
         int numRelevantColor  = 0;
         String relevantColor = route.getColor();
         switch(relevantColor)
@@ -315,7 +318,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
         claimRouteHelpersHelper(route, numRelevantColor, relevantColor);
         //checks if they have enough of the color itself
-
     }
 
     private void claimRouteHelpersHelper(Route route, int numRelevantColor, String relevantColor)
@@ -345,7 +347,9 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
-        }//or if they have enough with locomotives
+            return;
+        }
+        //or if they have enough with locomotives
         else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= route.getLength() - numRelevantColor)
         {
             ArrayList<TrainCarCard> cards = new ArrayList<>();
@@ -368,12 +372,14 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
+            return;
         }
         //or if they just don't have enough at all
         else
         {
             view.showToast("You don't have the resources to claim this route");
             setState(MyTurnState.getInstance());
+            return;
         }
     }
 
@@ -493,7 +499,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     }
 
 
-    private boolean showDialog(final String[] destCards)
+    private void showDialog(final String[] destCards)
     {
         final String dialogTitle = "Choose a Destination Card to discard!";
 
@@ -522,7 +528,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 })
 
                 .show();
-        return true;
+        return;
     }
 
     private static int destChoiceValue = 0;

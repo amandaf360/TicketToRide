@@ -2,6 +2,7 @@ package servermodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import mapgraph.Graph;
 
 public class ModelRoot
 {
@@ -15,6 +16,7 @@ public class ModelRoot
         activeGameList = new ArrayList<>();
     }
 
+    private Graph mapGraph;
     private ArrayList<User> userList;
     private int gameCounter;
     private ArrayList<Game> gameList;
@@ -74,5 +76,13 @@ public class ModelRoot
             }
         }
         return null;
+    }
+
+    public Graph getMapGraph() {
+        return mapGraph;
+    }
+
+    public void setMapGraph(Graph mapGraph) {
+        this.mapGraph = mapGraph;
     }
 }

@@ -93,6 +93,14 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             case 2:
                 //if there is more than one element, than it is a double route where both options are unclaimed
+                String colorOne = routes.get(0).getColor();
+                String colorTwo = routes.get(1).getColor();
+                if(colorOne.equals(colorTwo))
+                {
+                    claimRouteHelper(routes.get(0));
+                    break;
+                }
+
                 //TODO: display some kind of message asking the person which route to take
                 break;
             default:break;
@@ -131,6 +139,8 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 numRelevantColor = clientModel.getMainPlayer().getPlayerHandTrains().getNumOrange();
                 break;
             case "gray":
+                //THOMAS set RelevantColor to whatever they chose;
+                //THOMAS set numRelevantColor to howMany they have of that.
                 //TODO: Display window asking which one they want to use, collect answer, change relevant color to chosen color
                 break;
             default: break;
@@ -154,8 +164,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
-        }
-        //or if they have enough with locomotives
+        }//or if they have enough with locomotives
         else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= route.getLength() - numRelevantColor)
         {
             ArrayList<TrainCarCard> cards = new ArrayList<>();

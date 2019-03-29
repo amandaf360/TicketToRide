@@ -210,10 +210,17 @@ public class ClientCommandManager
         startGameInfo.put(username, info);
     }
 
-    public void claimRoute(int index, String userClaiming, String otherUserName)
+    public void claimRoute(int index, String userClaiming, int howMany, String otherUserName)
     {
+
+        routesClaimed.put(otherUserName, new ArrayList<String>());
+        System.out.println("This will printout\n");
         routesClaimed.get(otherUserName).add(Integer.toString(index));
+        System.out.println("This miiight not\n");
         routesClaimed.get(otherUserName).add(userClaiming);
+
+        System.out.println("This will definitely not printout. Why?\n");
+        routesClaimed.get(otherUserName).add(Integer.toString(howMany));
     }
 
     public void addTrainCardDrawn(String userDrew, String sendingTo)

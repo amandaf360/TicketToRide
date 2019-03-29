@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import responses.ClaimRouteResponse;
 import server.ClientCommandManager;
@@ -15,11 +16,17 @@ public class ClaimRouteService
 
     }
 
-    public ClaimRouteResponse claimRoute(int index, String name)
+    public ClaimRouteResponse claimRoute(int index, String name, List<String> cards)
     {
         ModelRoot root = ModelRoot.getModel();
         ActiveGame game = root.getGameByUser(name);
-        game.claimRoute(index, name);
+
+
+
+
+        game.claimRoute(index, name, cards);
+
+
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> usernames = game.getAllUsernames();
@@ -27,11 +34,10 @@ public class ClaimRouteService
         {
             if(!usernames.get(i).equals(name))
             {
-                manager.claimRoute(index, name, usernames.get(i));
+                manager.claimRoute(index, name, cards.size(), usernames.get(i));
             }
         }
 
-        root.getMapGraph().claimRoute(name, index);
         ClaimRouteResponse response = new ClaimRouteResponse(index, name);
         return response;
     }

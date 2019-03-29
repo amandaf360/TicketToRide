@@ -123,12 +123,17 @@ public class Route
     public boolean almostEquals(Route route)
     {
         if(this.getCityOne().equals(route.getCityOne()) &&
-                this.getCityTwo().equals(route.getCityTwo()) &&
-                this.getColor().equals(route.getColor()) )
+           this.getCityTwo().equals(route.getCityTwo()) &&
+           this.getColor().equals(route.getColor()) )
         {
             return true;
         }
         return false;
+    }
+
+    public String toString()
+    {
+        return cityOne + " - " + cityTwo + ": " + color;
     }
 }
 

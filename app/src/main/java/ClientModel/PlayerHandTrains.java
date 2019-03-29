@@ -124,40 +124,39 @@ public class PlayerHandTrains
 
     public void addCard(String color)
     {
-        if(color.equals("red"))
+        if (color.equals("red"))
         {
             numRed++;
             totalCards++;
-        }
-        else if(color.equals("orange"))
+        } else if (color.equals("orange"))
         {
             numOrange++;
             totalCards++;
-        }else if(color.equals("yellow"))
+        } else if (color.equals("yellow"))
         {
             numYellow++;
             totalCards++;
-        }else if(color.equals("green"))
+        } else if (color.equals("green"))
         {
             numGreen++;
             totalCards++;
-        }else if(color.equals("blue"))
+        } else if (color.equals("blue"))
         {
             numBlue++;
             totalCards++;
-        }else if(color.equals("purple"))
+        } else if (color.equals("purple"))
         {
             numPurple++;
             totalCards++;
-        }else if(color.equals("black"))
+        } else if (color.equals("black"))
         {
             numBlack++;
             totalCards++;
-        }else if(color.equals("white"))
+        } else if (color.equals("white"))
         {
             numWhite++;
             totalCards++;
-        }else if(color.equals("locomotive"))
+        } else if (color.equals("locomotive"))
         {
             numLocomotives++;
             totalCards++;
@@ -166,40 +165,39 @@ public class PlayerHandTrains
 
     public void discardCard(String color)
     {
-        if(color.equals("red"))
+        if (color.equals("red"))
         {
             numRed--;
             totalCards--;
-        }
-        else if(color.equals("orange"))
+        } else if (color.equals("orange"))
         {
             numOrange--;
             totalCards--;
-        }else if(color.equals("yellow"))
+        } else if (color.equals("yellow"))
         {
             numYellow--;
             totalCards--;
-        }else if(color.equals("green"))
+        } else if (color.equals("green"))
         {
             numGreen--;
             totalCards--;
-        }else if(color.equals("blue"))
+        } else if (color.equals("blue"))
         {
             numBlue--;
             totalCards--;
-        }else if(color.equals("purple"))
+        } else if (color.equals("purple"))
         {
             numPurple--;
             totalCards--;
-        }else if(color.equals("black"))
+        } else if (color.equals("black"))
         {
             numBlack--;
             totalCards--;
-        }else if(color.equals("white"))
+        } else if (color.equals("white"))
         {
             numWhite--;
             totalCards--;
-        }else if(color.equals("locomotive"))
+        } else if (color.equals("locomotive"))
         {
             numLocomotives--;
             totalCards--;
@@ -209,5 +207,31 @@ public class PlayerHandTrains
     public int getTotalCards()
     {
         return totalCards;
+    }
+
+    public void decrementTotalCards(int howMany)
+    {
+        totalCards -= howMany;
+    }
+
+    public void decrementTotalCards()
+    {
+        totalCards--;
+    }
+
+    public void cheat()
+    {
+        numLocomotives += 10;
+        numWhite += 10;
+        numBlack += 10;
+        numPurple += 10;
+        numGreen += 10;
+        numYellow += 10;
+        numOrange +=10;
+        numRed +=10;
+        numBlue += 10;
+
+        totalCards += 90;
+
     }
 }

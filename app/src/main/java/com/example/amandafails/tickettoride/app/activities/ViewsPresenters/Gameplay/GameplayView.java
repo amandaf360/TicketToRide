@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DrawDestCard.DrawDestFragmentView;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.NotMyTurnState;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard.TrainCardDeckFragmentView;
 import com.example.amandafails.tickettoride.app.subviews.TrainView;
 
@@ -164,6 +165,8 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void onDrawRoutesClicked()
     {
+        presenter.setState(NotMyTurnState.getInstance());
+
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction  = manager.beginTransaction();
         DrawDestFragmentView drawDestFragmentView = new DrawDestFragmentView();

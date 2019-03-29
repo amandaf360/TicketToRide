@@ -254,7 +254,7 @@ public class TrainView extends View
                 case "white":  paint.setColor(Color.WHITE); break;
                 case "black":  paint.setColor(Color.BLACK); break;
                 case "red":    paint.setColor(Color.RED); break;
-                case "blue":   paint.setColor(Color.parseColor("cyan")); break;
+                case "blue":   paint.setColor(Color.BLUE); break;
                 case "green":  paint.setColor(Color.GREEN); break;
                 case "yellow": paint.setColor(Color.YELLOW); break;
                 case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
@@ -267,7 +267,7 @@ public class TrainView extends View
                 case "white":  paint2.setColor(Color.WHITE); break;
                 case "black":  paint2.setColor(Color.BLACK); break;
                 case "red":    paint2.setColor(Color.RED); break;
-                case "blue":   paint2.setColor(Color.parseColor("cyan")); break;
+                case "blue":   paint2.setColor(Color.BLUE); break;
                 case "green":  paint2.setColor(Color.GREEN); break;
                 case "yellow": paint2.setColor(Color.YELLOW); break;
                 case "orange": paint2.setColor(Color.parseColor("#FFA500")); break;
@@ -284,7 +284,7 @@ public class TrainView extends View
                     case "white":  paint.setColor(Color.WHITE); break;
                     case "black":  paint.setColor(Color.BLACK); break;
                     case "red":    paint.setColor(Color.RED); break;
-                    case "blue":   paint.setColor(Color.parseColor("cyan")); break;
+                    case "blue":   paint.setColor(Color.BLUE); break;
                     case "green":  paint.setColor(Color.GREEN); break;
                     case "yellow": paint.setColor(Color.YELLOW); break;
                     case "orange": paint.setColor(Color.parseColor("#FFA500")); break;
@@ -300,7 +300,7 @@ public class TrainView extends View
                     case "white":  paint2.setColor(Color.WHITE); break;
                     case "black":  paint2.setColor(Color.BLACK); break;
                     case "red":    paint2.setColor(Color.RED); break;
-                    case "blue":   paint2.setColor(Color.parseColor("cyan")); break;
+                    case "blue":   paint2.setColor(Color.BLUE); break;
                     case "green":  paint2.setColor(Color.GREEN); break;
                     case "yellow": paint2.setColor(Color.YELLOW); break;
                     case "orange": paint2.setColor(Color.parseColor("#FFA500")); break;
@@ -577,7 +577,7 @@ public class TrainView extends View
             case "white":  paint.setColor(Color.WHITE); break;
             case "black":  paint.setColor(Color.BLACK); break;
             case "red":    paint.setColor(Color.RED); break;
-            case "blue":   paint.setColor(Color.parseColor("cyan")); break;
+            case "blue":   paint.setColor(Color.BLUE); break;
             case "green":  paint.setColor(Color.GREEN); break;
             case "yellow": paint.setColor(Color.YELLOW); break;
             case "orange": paint.setColor(Color.parseColor("#FFA500")); break;

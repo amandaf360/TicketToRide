@@ -256,7 +256,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             case 1:
                 //if there is one element, then either it is a double route with only 1 option remaining, or else it is an unclaimed single
-                routeClaimed = claimRouteHelper(routes.get(0));
+                claimRouteHelper(routes.get(0));
                 break;
             case 2:
                 //if there is more than one element, than it is a double route where both options are unclaimed
@@ -274,7 +274,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
     }
 
-    private boolean claimRouteHelper(Route route)
+    private void claimRouteHelper(Route route)
     {
         int routeIndex = ClientModel.getInstance().getIndexOfMatchingUnclaimedRoute(route);
         int numRelevantColor  = 0;
@@ -317,7 +317,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
         claimRouteHelpersHelper(route, numRelevantColor, relevantColor);
         //checks if they have enough of the color itself
-
     }
 
     private void claimRouteHelpersHelper(Route route, int numRelevantColor, String relevantColor)
@@ -347,7 +346,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
-            return true;
+            return;
         }
         //or if they have enough with locomotives
         else if(clientModel.getMainPlayer().getPlayerHandTrains().getNumLocomotives() >= route.getLength() - numRelevantColor)
@@ -372,14 +371,14 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
 
             EndTurnService endService = new EndTurnService();
             endService.endTurn();
-            return true;
+            return;
         }
         //or if they just don't have enough at all
         else
         {
             view.showToast("You don't have the resources to claim this route");
             setState(MyTurnState.getInstance());
-            return false;
+            return;
         }
     }
 
@@ -499,7 +498,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     }
 
 
-    private boolean showDialog(final String[] destCards)
+    private void showDialog(final String[] destCards)
     {
         final String dialogTitle = "Choose a Destination Card to discard!";
 
@@ -528,7 +527,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 })
 
                 .show();
-        return true;
+        return;
     }
 
     private static int destChoiceValue = 0;

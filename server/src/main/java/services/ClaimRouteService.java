@@ -40,6 +40,7 @@ public class ClaimRouteService
             {
                 calculatePoints(cards.size());
             }
+            manager.addTrainsUsed(usernames.get(i), name, cards.size());
         }
 
         ClaimRouteResponse response = new ClaimRouteResponse(index, name);

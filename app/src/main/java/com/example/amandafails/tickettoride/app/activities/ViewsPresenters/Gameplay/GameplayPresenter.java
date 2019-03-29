@@ -272,6 +272,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 break;
             default:break;
         }
+        view.setRoutesClaimable(false);
     }
 
     private void claimRouteHelper(Route route)

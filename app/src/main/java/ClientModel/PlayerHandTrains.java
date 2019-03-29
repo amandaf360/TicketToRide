@@ -218,4 +218,20 @@ public class PlayerHandTrains
     {
         totalCards--;
     }
+
+    public void cheat()
+    {
+        numLocomotives += 10;
+        numWhite += 10;
+        numBlack += 10;
+        numPurple += 10;
+        numGreen += 10;
+        numYellow += 10;
+        numOrange +=10;
+        numRed +=10;
+        numBlue += 10;
+
+        totalCards += 90;
+
+    }
 }

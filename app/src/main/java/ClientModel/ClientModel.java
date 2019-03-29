@@ -355,6 +355,13 @@ public class ClientModel extends Observable
 
     }
 
+    public void addTenOfEachTrainCar()
+    {
+        mainPlayer.getPlayerHandTrains().cheat();
+        setChanged();
+        notifyObservers(mainPlayer);
+    }
+
     public void takeTrainsFromPlayerByName(String name, int howMany)
     {
         if(name.equals(mainPlayer.getName()))

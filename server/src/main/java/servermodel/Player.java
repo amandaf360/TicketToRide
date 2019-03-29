@@ -90,6 +90,21 @@ public class Player
         return null;
     }
 
+    public TrainCarCard removeTrainCarCard(String color)
+    {
+        TrainCarCard card = null;
+        for(int i = 0; i < trainCarCards.size(); i++)
+        {
+            if(trainCarCards.get(i).getColor().equals(color))
+            {
+                card = trainCarCards.get(i);
+                trainCarCards.remove(i);
+                break;
+            }
+        }
+        return card;
+    }
+
     public int getNumRoutes()
     {
         return numRoutes;

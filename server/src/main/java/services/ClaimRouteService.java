@@ -28,14 +28,15 @@ public class ClaimRouteService
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> usernames = game.getAllUsernames();
 
-        int numPoints = calculatePoints(cards.size());
-
 
         for (int i = 0; i < usernames.size(); i++)
         {
             if (!usernames.get(i).equals(name))
             {
-                manager.claimRoute(index, name, cards.size(), usernames.get(i), numPoints);
+                manager.claimRoute(index, name, cards.size(), usernames.get(i));
+            } else
+            {
+                calculatePoints(cards.size());
             }
         }
 
@@ -46,22 +47,6 @@ public class ClaimRouteService
 
     private int calculatePoints(int length)
     {
-        switch(length)
-        {
-            case 1:
-                return 1;
-            case 2:
-                return 2;
-            case 3:
-                return 4;
-            case 4:
-                return 7;
-            case 5:
-                return 10;
-            case 6:
-                return 15;
-            default:
-                return length;
-        }
+        return 0;
     }
 }

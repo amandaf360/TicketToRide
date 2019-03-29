@@ -1,5 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayPresenter;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.GameplayView;
 
 import java.util.List;
 import java.util.Locale;
@@ -121,6 +123,8 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
     @Override
     public void popFragment() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
+        Activity activity = getActivity();
+        ((GameplayView)activity).enableAllButtons();
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();
         }

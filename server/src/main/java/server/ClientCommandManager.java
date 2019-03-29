@@ -236,4 +236,10 @@ public class ClientCommandManager
         turnsEnded.put(username, turnsEnded.get(username) + 1);
     }
 
+    public void addTrainsUsed(String sendingTo, String playerDrew, int numberUsed)
+    {
+        trainsUsed.get(sendingTo).add(playerDrew);
+        trainsUsed.get(sendingTo).add(Integer.toString(numberUsed));
+    }
+
 }

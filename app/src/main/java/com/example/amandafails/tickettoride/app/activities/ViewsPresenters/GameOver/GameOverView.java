@@ -77,6 +77,12 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         player4Points = findViewById(R.id.player4_points_text);
         player5Points = findViewById(R.id.player5_points_text);
 
+        player1RoutePoints = findViewById(R.id.player1_route_points_text);
+        player2RoutePoints = findViewById(R.id.player2_route_points_text);
+        player3RoutePoints = findViewById(R.id.player3_route_points_text);
+        player4RoutePoints = findViewById(R.id.player4_route_points_text);
+        player5RoutePoints = findViewById(R.id.player5_route_points_text);
+
         player1DestCardPoints = findViewById(R.id.player1_dest_points_text);
         player2DestCardPoints = findViewById(R.id.player2_dest_points_text);
         player3DestCardPoints = findViewById(R.id.player3_dest_points_text);
@@ -89,6 +95,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         player4DestCardPointsLost = findViewById(R.id.player4_dest_points_lost_text);
         player5DestCardPointsLost = findViewById(R.id.player5_dest_points_lost_text);
 
+        longestPathWinner = findViewById(R.id.longestPathWinnerName);
         updateGameOverDisplay();
     }
 

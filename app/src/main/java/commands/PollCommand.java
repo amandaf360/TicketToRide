@@ -12,6 +12,7 @@ import ClientModel.Message;
 import ClientModel.GameStartInfo;
 import ClientModel.TrainCarCard;
 import ClientModel.DecksStateData;
+import ClientModel.*;
 
 public class PollCommand implements ICommand
 {
@@ -41,6 +42,18 @@ public class PollCommand implements ICommand
             if(response.isLastTurn())
             {
                 //lastTurn();
+            }
+            updateDestPointsInfo(response.getDestPointsInfo());
+        }
+    }
+
+    private void updateDestPointsInfo(ArrayList<DestPointsInfo> destPointsInfo)
+    {
+        if(destPointsInfo != null)
+        {
+            if(destPointsInfo.size() != 0)
+            {
+                ClientModel.getInstance().setDestPointsInfo(destPointsInfo);
             }
         }
     }

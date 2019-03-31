@@ -6,6 +6,7 @@ public class Game
 {
     private boolean gameOver;
     private boolean lastTurn;
+    private boolean actuallyLastTurn;
     private String name;
     private int maxPlayers;
     private ArrayList<Player> players;
@@ -18,6 +19,9 @@ public class Game
     public Game()
     {
         hasStarted = false;
+        actuallyLastTurn = false;
+        lastTurn = false;
+        gameOver = false;
         players = new ArrayList<Player>();
     }
 
@@ -137,6 +141,8 @@ public class Game
     public void setHasStarted(boolean hasStarted) {
         this.hasStarted = hasStarted;
     }
+
+
 
 
 }

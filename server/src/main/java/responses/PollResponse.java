@@ -3,6 +3,7 @@ package responses;
 import java.util.ArrayList;
 
 import servermodel.DecksStateData;
+import servermodel.DestPointsInfo;
 import servermodel.Game;
 import servermodel.GameStartInfo;
 import servermodel.Message;
@@ -28,6 +29,7 @@ public class PollResponse extends BaseResponse
     private ArrayList<String> pointsGained;
     private boolean gameOver;
     private boolean lastTurn;
+    private ArrayList<DestPointsInfo> destPointsInfo;
 
     public PollResponse() {
         gamesCreated = new ArrayList<>();
@@ -197,5 +199,13 @@ public class PollResponse extends BaseResponse
 
     public void setLastTurn(boolean lastTurn) {
         this.lastTurn = lastTurn;
+    }
+
+    public ArrayList<DestPointsInfo> getDestPointsInfo() {
+        return destPointsInfo;
+    }
+
+    public void setDestPointsInfo(ArrayList<DestPointsInfo> destPointsInfo) {
+        this.destPointsInfo = destPointsInfo;
     }
 }

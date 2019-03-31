@@ -12,6 +12,7 @@ import commands.*;
 import responses.PollResponse;
 import servermodel.ActiveGame;
 import servermodel.DecksStateData;
+import servermodel.DestPointsInfo;
 import servermodel.Game;
 import servermodel.GameStartInfo;
 import servermodel.Message;
@@ -41,6 +42,7 @@ public class ClientCommandManager
     private Map<String, ArrayList<String>> pointsGained;
     private Map<String, Boolean> lastTurn;
     private Map<String, Boolean> gameOver;
+    private Map<String, ArrayList<DestPointsInfo>> destPointsInfo;
 
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
@@ -70,7 +72,7 @@ public class ClientCommandManager
         pointsGained = new HashMap<>();
         lastTurn = new HashMap<>();
         gameOver = new HashMap<>();
-
+        destPointsInfo = new HashMap<>();
     }
 
     public void addUser(String username)
@@ -93,6 +95,7 @@ public class ClientCommandManager
         pointsGained.put(username, new ArrayList<String>());
         gameOver.put(username, false);
         lastTurn.put(username, false);
+        destPointsInfo.put(username, null);
     }
 
     public PollResponse firstPoll()
@@ -124,7 +127,8 @@ public class ClientCommandManager
         response.setTrainsUsed(trainsUsed.get(username));
         response.setPointsGained(pointsGained.get(username));
         response.setLastTurn(lastTurn.get(username));
-        response.setGameOver(lastTurn.get(username));
+        response.setGameOver(gameOver.get(username));
+        response.setDestPointsInfo(destPointsInfo.get(username));
 
         return response;
     }
@@ -148,6 +152,7 @@ public class ClientCommandManager
         pointsGained.get(username).clear();
         lastTurn.put(username, false);
         gameOver.put(username, false);
+        destPointsInfo.put(username, null);
     }
 
     public void addGame(Game game)
@@ -266,6 +271,11 @@ public class ClientCommandManager
     public void setGameOver(String username)
     {
         gameOver.put(username, true);
+    }
+
+    public void setDestPointsInfo(String username, ArrayList<DestPointsInfo> info)
+    {
+        destPointsInfo.put(username, info);
     }
 
 }

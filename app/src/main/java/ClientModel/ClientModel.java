@@ -578,5 +578,24 @@ public class ClientModel extends Observable
         notifyObservers(getActiveGame().isGameOver());
     }
 
+    public void setDestPointsInfo(ArrayList<DestPointsInfo> info)
+    {
+        Game activeGame = getActiveGame();
+        ArrayList<Player> players = activeGame.getPlayers();
+        for(Player player: players)
+        {
+            for(DestPointsInfo destInfo: info)
+            {
+                if(player.getName().equals(destInfo.getUsername()))
+                {
+                    player.setDestCardPoints(destInfo.getPositivePoints());
+                    player.setNegativeDestCardPoints(destInfo.getNegativePoints());
+                }
+            }
+        }
+        setChanged();
+        notifyObservers(this);
+    }
+
 
 }

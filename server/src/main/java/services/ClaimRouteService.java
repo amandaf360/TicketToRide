@@ -6,6 +6,7 @@ import java.util.List;
 import responses.ClaimRouteResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
+import servermodel.Message;
 import servermodel.ModelRoot;
 import servermodel.Player;
 
@@ -50,6 +51,7 @@ public class ClaimRouteService
                 manager.claimRoute(numPoints, name);
             }
             manager.addTrainsUsed(usernames.get(i), name, cards.size());
+            manager.addGameHistoryMessage(usernames.get(i), new Message("blue", "You have one turn remaining."));
         }
 
         game.getGraph().claimRoute(name, index);

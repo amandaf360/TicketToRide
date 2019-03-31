@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
+import servermodel.DestPointsInfo;
 import servermodel.ModelRoot;
 
 public class EndTurnService
@@ -22,12 +23,20 @@ public class EndTurnService
         game.advanceTurn();
         ArrayList<String> allUsers = game.getAllUsernames();
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
+        ArrayList<DestPointsInfo> info = null;
         boolean gameOver = false;
         if(game.isLastTurn())
         {
-            if(username.equals(game.getLastTurnPlayer()))
+            if(game.isActuallyLastTurn())
             {
-                gameOver = true;
+                if (username.equals(game.getLastTurnPlayer())) {
+                    gameOver = true;
+                    info = game.calculateRoutePoints();
+                }
+            }
+            else
+            {
+                game.setActuallyLastTurn(true);
             }
         }
         for(String user: allUsers)
@@ -36,6 +45,7 @@ public class EndTurnService
             if(gameOver)
             {
                 manager.setGameOver(user);
+                manager.setDestPointsInfo(user, info);
             }
         }
     }

@@ -102,12 +102,12 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
 
     @Override
     public void updateGameOverDisplay() {
-        showWinner();
         showPlayers();
-        showPoints();
         showRoutePoints();
         showDestPoints();
         showDestPointsLost();
+        showPoints();
+        showWinner();
         showLongestPathWinner();
     }
 

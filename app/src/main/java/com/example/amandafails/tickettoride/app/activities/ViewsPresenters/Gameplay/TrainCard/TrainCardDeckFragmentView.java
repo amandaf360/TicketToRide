@@ -123,9 +123,12 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
     @Override
     public void popFragment(boolean exitPressed) {
         FragmentManager manager = getActivity().getSupportFragmentManager();
+        Activity activity = getActivity();
         if(exitPressed) {
-            Activity activity = getActivity();
             ((GameplayView)activity).enableAllButtons();
+        }
+        else {
+            ((GameplayView)activity).setDisplayGameStatusButtonEnabled(true);
         }
         if(manager.getBackStackEntryCount() > 0) {
             manager.popBackStack();

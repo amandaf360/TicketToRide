@@ -116,7 +116,7 @@ public class DrawDestFragmentPresenter implements IDrawDestFragmentPresenter, Ob
         createHistoryMessageService.sendMessage(clientModel.getMainPlayer().getName() +
                                                 " just drew " +
                                                 (3 - toDelete.size()) +
-                                                "destination cards!");
+                                                " destination cards!");
 
 
         EndTurnService end = new EndTurnService();

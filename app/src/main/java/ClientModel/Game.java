@@ -19,6 +19,7 @@ public class Game
 
     public Game()
     {
+        gameOver = false;
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();

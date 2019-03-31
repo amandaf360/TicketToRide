@@ -102,12 +102,12 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
 
     @Override
     public void updateGameOverDisplay() {
-        showWinner();
         showPlayers();
-        showPoints();
         showRoutePoints();
         showDestPoints();
         showDestPointsLost();
+        showPoints();
+        showWinner();
         showLongestPathWinner();
     }
 
@@ -121,13 +121,8 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         texts.add(player4Name);
         texts.add(player5Name);
 
-        for(int i = 0; i < MAX_NUM_PLAYERS; i++) {
-            if(names.get(i) != null) {
-                texts.get(i).setText(names.get(i));
-            }
-            else {
-                texts.get(i).setText("");
-            }
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(names.get(i));
         }
         presenter.setPlayerNameColors(texts);
     }
@@ -140,19 +135,14 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         List<String> points = presenter.getPlayerPoints();
 
         ArrayList<TextView> texts = new ArrayList<>();
-        texts.add(player1Points);
-        texts.add(player2Points);
-        texts.add(player3Points);
-        texts.add(player4Points);
-        texts.add(player5Points);
+        texts.add(player1RoutePoints);
+        texts.add(player2RoutePoints);
+        texts.add(player3RoutePoints);
+        texts.add(player4RoutePoints);
+        texts.add(player5RoutePoints);
 
-        for(int i = 0; i < MAX_NUM_PLAYERS; i++) {
-            if(!points.get(i).equals("-1")) {
-                texts.get(i).setText(points.get(i));
-            }
-            else {
-                texts.get(i).setText("");
-            }
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(points.get(i));
         }
     }
 

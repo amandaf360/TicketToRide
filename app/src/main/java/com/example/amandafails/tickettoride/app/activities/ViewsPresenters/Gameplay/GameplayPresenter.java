@@ -423,6 +423,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         if(o.getClass() == Route.class)
         {
             view.drawRoutetoScreen((Route)o);
+            checkForGameEnd((Route)o);
         }
 
         if(o.getClass() == Game.class)
@@ -443,8 +444,23 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
     }
 
+    private void checkForGameEnd(Route route)
+    {
+        //if you are the one claiming the route
+        if(route.getClaimedBy().getName().equals(clientModel.getMainPlayer().getName()))
+        {
+            //and if you have less than three trains left (after claiming)
+            if(clientModel.getMainPlayer().getNumTrains() < 3)
+            {
+                lastTurn = true;
+            }
+        }
+    }
 
-
+    public boolean isLastTurn()
+    {
+        return lastTurn;
+    }
 
     private int numDemoClicks = 0;
     public void demo()

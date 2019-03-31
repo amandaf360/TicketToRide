@@ -17,7 +17,7 @@ public class Player
         destCards = new ArrayList<>();
         trainCarCards = new ArrayList<>();
         numRoutes = 0;
-        numTrains = 3;
+        numTrains = 15;
     }
 
     public Player(Player player)

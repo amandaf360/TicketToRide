@@ -19,6 +19,7 @@ public class ActiveGame
     private int currentTurnIndex = 0;
     private boolean lastTurn;
     private boolean gameOver;
+    private boolean actuallyLastTurn;
     private String lastTurnPlayer;
     private Graph graph;
 
@@ -35,6 +36,7 @@ public class ActiveGame
         faceUpCards.setDiscardPile(trainCarDiscard);
         lastTurn = false;
         gameOver = false;
+        actuallyLastTurn = false;
         graph = new Graph();
 
         initializeRoutes();
@@ -216,39 +218,39 @@ public class ActiveGame
         this.graph = graph;
     }
 
-    public void calculateRoutePoints(String username)
+    public ArrayList<DestPointsInfo> calculateRoutePoints()
     {
-        Player player = null;
-        for(int i = 0; i < players.size(); i++)
-        {
-            if(players.get(i).getName().equals(username))
-            {
-                player = players.get(i);
-                break;
-            }
-        }
-        if(player == null)
-        {
-            System.out.println("Could not find player of username " + username + " when calculating destination card points");
-            return;
-        }
+        ArrayList<DestPointsInfo> info = new ArrayList<>();
 
-        int negativePoints = 0;
-        int positivePoints = 0;
-
-        ArrayList<DestCard> destinationCards = player.getDestCards();
-        for(DestCard card : destinationCards)
+        for(Player player: players)
         {
-            if(graph.completedRoute(username, card.getCityOne(), card.getCityTwo()))
+            int negativePoints = 0;
+            int positivePoints = 0;
+
+            ArrayList<DestCard> destinationCards = player.getDestCards();
+            for(DestCard card : destinationCards)
             {
-                positivePoints += card.getPoints();
+                if(graph.completedRoute(player.getName(), card.getCityOne(), card.getCityTwo()))
+                {
+                    positivePoints += card.getPoints();
+                }
+                else
+                {
+                    negativePoints -= card.getPoints();
+                }
             }
-            else
-            {
-                negativePoints -= card.getPoints();
-            }
+            info.add(new DestPointsInfo(player.getName(), positivePoints, negativePoints));
         }
 
+        return info;
+    }
+
+    public boolean isActuallyLastTurn() {
+        return actuallyLastTurn;
+    }
+
+    public void setActuallyLastTurn(boolean actuallyLastTurn) {
+        this.actuallyLastTurn = actuallyLastTurn;
     }
 
     private void initializeRoutes()

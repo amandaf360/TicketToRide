@@ -3,6 +3,7 @@ package responses;
 import java.util.ArrayList;
 
 import ClientModel.DecksStateData;
+import ClientModel.DestPointsInfo;
 import ClientModel.Game;
 import ClientModel.GameStartInfo;
 import ClientModel.Message;
@@ -28,7 +29,7 @@ public class PollResponse
     private ArrayList<String> pointsGained;
     private boolean gameOver;
     private boolean lastTurn;
-
+    private ArrayList<DestPointsInfo> destPointsInfo;
 
     public PollResponse() {
     }
@@ -185,5 +186,13 @@ public class PollResponse
 
     public void setLastTurn(boolean lastTurn) {
         this.lastTurn = lastTurn;
+    }
+
+    public ArrayList<DestPointsInfo> getDestPointsInfo() {
+        return destPointsInfo;
+    }
+
+    public void setDestPointsInfo(ArrayList<DestPointsInfo> destPointsInfo) {
+        this.destPointsInfo = destPointsInfo;
     }
 }

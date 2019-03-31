@@ -33,6 +33,13 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
     private TextView player4Points;
     private TextView player5Points;
 
+    // all player route points
+    private TextView player1RoutePoints;
+    private TextView player2RoutePoints;
+    private TextView player3RoutePoints;
+    private TextView player4RoutePoints;
+    private TextView player5RoutePoints;
+
     // all player dest. card points
     private TextView player1DestCardPoints;
     private TextView player2DestCardPoints;
@@ -70,6 +77,12 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         player4Points = findViewById(R.id.player4_points_text);
         player5Points = findViewById(R.id.player5_points_text);
 
+        player1RoutePoints = findViewById(R.id.player1_route_points_text);
+        player2RoutePoints = findViewById(R.id.player2_route_points_text);
+        player3RoutePoints = findViewById(R.id.player3_route_points_text);
+        player4RoutePoints = findViewById(R.id.player4_route_points_text);
+        player5RoutePoints = findViewById(R.id.player5_route_points_text);
+
         player1DestCardPoints = findViewById(R.id.player1_dest_points_text);
         player2DestCardPoints = findViewById(R.id.player2_dest_points_text);
         player3DestCardPoints = findViewById(R.id.player3_dest_points_text);
@@ -82,6 +95,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         player4DestCardPointsLost = findViewById(R.id.player4_dest_points_lost_text);
         player5DestCardPointsLost = findViewById(R.id.player5_dest_points_lost_text);
 
+        longestPathWinner = findViewById(R.id.longestPathWinnerName);
         updateGameOverDisplay();
     }
 
@@ -91,6 +105,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         showWinner();
         showPlayers();
         showPoints();
+        showRoutePoints();
         showDestPoints();
         showDestPointsLost();
         showLongestPathWinner();
@@ -106,34 +121,28 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         texts.add(player4Name);
         texts.add(player5Name);
 
-        for(int i = 0; i < MAX_NUM_PLAYERS; i++) {
-            if(names.get(i) != null) {
-                texts.get(i).setText(names.get(i));
-            }
-            else {
-                texts.get(i).setText("");
-            }
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(names.get(i));
         }
         presenter.setPlayerNameColors(texts);
     }
 
     private void showPoints() {
+        presenter.calculateFinalPoints();
+    }
+
+    private void showRoutePoints() {
         List<String> points = presenter.getPlayerPoints();
 
         ArrayList<TextView> texts = new ArrayList<>();
-        texts.add(player1Points);
-        texts.add(player2Points);
-        texts.add(player3Points);
-        texts.add(player4Points);
-        texts.add(player5Points);
+        texts.add(player1RoutePoints);
+        texts.add(player2RoutePoints);
+        texts.add(player3RoutePoints);
+        texts.add(player4RoutePoints);
+        texts.add(player5RoutePoints);
 
-        for(int i = 0; i < MAX_NUM_PLAYERS; i++) {
-            if(!points.get(i).equals("-1")) {
-                texts.get(i).setText(points.get(i));
-            }
-            else {
-                texts.get(i).setText("");
-            }
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(points.get(i));
         }
     }
 

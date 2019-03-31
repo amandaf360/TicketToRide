@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IGameOverPresenter {
     void setDisplay();
-    void calculateFinalPoints();
+    List<String> calculateFinalPoints();
     String getWinnerName();
     String getLongestRouteWinnerName();
     List<String> getPlayerNames();
@@ -14,5 +14,6 @@ public interface IGameOverPresenter {
     List<String> getPlayerDestPoints();
     List<String> getPlayerDestPointsLost();
     void setPlayerNameColors(List<TextView> names);
+    int getPlayersInGame();
 
 }

@@ -34,7 +34,20 @@ public class PollCommand implements ICommand
             updateGameHistory(response.getGameHistory());
             advanceTurn(response.getTurnsEnded());
             updateTrains(response.getTrainsUsed());
+            if(response.isGameOver())
+            {
+                gameOver();
+            }
+            if(response.isLastTurn())
+            {
+                //lastTurn();
+            }
         }
+    }
+
+    private void gameOver()
+    {
+        ClientModel.getInstance().setGameOver();
     }
 
     private void updateTrains(ArrayList<String> trainList)

@@ -88,6 +88,18 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/route_points_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/routePoints"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/points_dc_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,9 +147,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/player1_route_points_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/empty"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/player1_dest_points_text"
@@ -146,7 +170,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -157,7 +181,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -186,9 +210,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/player2_route_points_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/empty"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/player2_dest_points_text"
@@ -197,7 +233,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -208,7 +244,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -237,9 +273,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/player3_route_points_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/empty"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/player3_dest_points_text"
@@ -248,7 +296,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -259,7 +307,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -288,9 +336,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/player4_route_points_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/empty"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/player4_dest_points_text"
@@ -299,7 +359,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -310,7 +370,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -339,9 +399,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/player5_route_points_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/empty"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/player5_dest_points_text"
@@ -350,7 +422,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -361,7 +433,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/zero"
+                    android:text="@string/empty"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Game
 {
+    private boolean gameOver;
+    private boolean lastTurn;
     private String name;
     private int maxPlayers;
     private ArrayList<Player> players;
@@ -135,4 +137,6 @@ public class Game
     public void setHasStarted(boolean hasStarted) {
         this.hasStarted = hasStarted;
     }
+
+
 }

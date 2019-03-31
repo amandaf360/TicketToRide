@@ -15,9 +15,11 @@ public class Game
     private List<TrainCarCard> faceUpCards;
     private int numCardsInDeck;
     private int numDestCardsInDeck;
+    private boolean gameOver;
 
     public Game()
     {
+        gameOver = false;
         players = new ArrayList<Player>();
         indexOfCurrentPlayer = 0;
         faceUpCards = new ArrayList<>();
@@ -181,5 +183,13 @@ public class Game
 
     public void setNumDestCardsInDeck(int numDestCardsInDeck) {
         this.numDestCardsInDeck = numDestCardsInDeck;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 }

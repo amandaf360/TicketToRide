@@ -22,9 +22,21 @@ public class EndTurnService
         game.advanceTurn();
         ArrayList<String> allUsers = game.getAllUsernames();
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
+        boolean gameOver = false;
+        if(game.isLastTurn())
+        {
+            if(username.equals(game.getLastTurnPlayer()))
+            {
+                gameOver = true;
+            }
+        }
         for(String user: allUsers)
         {
-                manager.advanceTurn(user);
+            manager.advanceTurn(user);
+            if(gameOver)
+            {
+                manager.setGameOver(user);
+            }
         }
     }
 }

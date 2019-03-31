@@ -34,7 +34,13 @@ public class Server
 
     public static void main(String[] args)
     {
-        //new Server().run(args[0]);
-        new Server().run("3000");
+        if(args.length == 0)
+        {
+            new Server().run("3000");
+        }
+        else {
+            new Server().run(args[0]);
+        }
+
     }
 }

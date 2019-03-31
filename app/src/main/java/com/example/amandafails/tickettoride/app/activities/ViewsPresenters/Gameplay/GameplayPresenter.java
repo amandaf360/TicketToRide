@@ -219,10 +219,6 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         claimRouteHelpersHelper(route, numRelevantColor, grayRouteColor);
     }
 
-
-
-
-
     private String grayRouteColor = "locomotive";
 
 

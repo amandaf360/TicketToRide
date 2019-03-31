@@ -33,6 +33,13 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
     private TextView player4Points;
     private TextView player5Points;
 
+    // all player route points
+    private TextView player1RoutePoints;
+    private TextView player2RoutePoints;
+    private TextView player3RoutePoints;
+    private TextView player4RoutePoints;
+    private TextView player5RoutePoints;
+
     // all player dest. card points
     private TextView player1DestCardPoints;
     private TextView player2DestCardPoints;
@@ -91,6 +98,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
         showWinner();
         showPlayers();
         showPoints();
+        showRoutePoints();
         showDestPoints();
         showDestPointsLost();
         showLongestPathWinner();
@@ -118,6 +126,10 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
     }
 
     private void showPoints() {
+        presenter.calculateFinalPoints();
+    }
+
+    private void showRoutePoints() {
         List<String> points = presenter.getPlayerPoints();
 
         ArrayList<TextView> texts = new ArrayList<>();

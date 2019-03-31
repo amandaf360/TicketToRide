@@ -13,6 +13,8 @@ public class Player
     private int numTrains;
     private int numRoutes;
     private int numDestCards;
+    private int destCardPoints;
+    private int negativeDestCardPoints;
 
     public Player()
     {
@@ -171,4 +173,19 @@ public class Player
         return playerHandDestinations.getNewlyAddedCards();
     }
 
+    public int getNegativeDestCardPoints() {
+        return negativeDestCardPoints;
+    }
+
+    public void setNegativeDestCardPoints(int negativeDestCardPoints) {
+        this.negativeDestCardPoints = negativeDestCardPoints;
+    }
+
+    public int getDestCardPoints() {
+        return destCardPoints;
+    }
+
+    public void setDestCardPoints(int destCardPoints) {
+        this.destCardPoints = destCardPoints;
+    }
 }

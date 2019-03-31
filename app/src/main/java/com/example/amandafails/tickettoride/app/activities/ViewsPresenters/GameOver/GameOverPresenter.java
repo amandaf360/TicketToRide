@@ -32,8 +32,9 @@ public class GameOverPresenter implements Observer, IGameOverPresenter {
     }
 
     @Override
-    public void calculateFinalPoints() {
-
+    public List<String> calculateFinalPoints() {
+        List<String> points = new ArrayList<>();
+        return points;
     }
 
     @Override
@@ -43,7 +44,7 @@ public class GameOverPresenter implements Observer, IGameOverPresenter {
 
     @Override
     public String getLongestRouteWinnerName() {
-        return null;
+        return "no longest route winner";
     }
 
     @Override

@@ -14,5 +14,6 @@ public interface IGameOverPresenter {
     List<String> getPlayerDestPoints();
     List<String> getPlayerDestPointsLost();
     void setPlayerNameColors(List<TextView> names);
+    int getPlayersInGame();
 
 }

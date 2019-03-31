@@ -49,7 +49,7 @@ public class GameOverPresenter implements Observer, IGameOverPresenter {
             pointsVal += clientModel.getActiveGame().getPlayers().get(i).getDestCardPoints();
 
             // grab dest card points lost
-            pointsVal -= clientModel.getActiveGame().getPlayers().get(i).getNegativeDestCardPoints();
+            pointsVal += clientModel.getActiveGame().getPlayers().get(i).getNegativeDestCardPoints();
 
             // see if they won the longest route card
             if(clientModel.getActiveGame().getPlayers().get(i).getNumRoutes() > greatestRoutes) {

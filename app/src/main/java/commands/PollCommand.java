@@ -47,7 +47,7 @@ public class PollCommand implements ICommand
 
     private void gameOver()
     {
-
+        ClientModel.getInstance().setGameOver();
     }
 
     private void updateTrains(ArrayList<String> trainList)

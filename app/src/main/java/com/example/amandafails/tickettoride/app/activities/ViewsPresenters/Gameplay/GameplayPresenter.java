@@ -437,7 +437,9 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         }
 
         if(o.getClass() == Boolean.class) {
-            view.switchActivities();
+            if(clientModel.getActiveGame().isGameOver()) {
+                view.switchActivities();
+            }
         }
 
         view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());

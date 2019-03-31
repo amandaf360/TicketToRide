@@ -128,7 +128,18 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
     }
 
     private void showPoints() {
-        presenter.calculateFinalPoints();
+        List<String> points = presenter.calculateFinalPoints();
+
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1Points);
+        texts.add(player2Points);
+        texts.add(player3Points);
+        texts.add(player4Points);
+        texts.add(player5Points);
+
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(points.get(i));
+        }
     }
 
     private void showRoutePoints() {
@@ -147,11 +158,33 @@ public class GameOverView extends AppCompatActivity implements IGameOverView {
     }
 
     private void showDestPoints() {
+        List<String> points = presenter.getPlayerDestPoints();
 
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1DestCardPoints);
+        texts.add(player2DestCardPoints);
+        texts.add(player3DestCardPoints);
+        texts.add(player4DestCardPoints);
+        texts.add(player5DestCardPoints);
+
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(points.get(i));
+        }
     }
 
     private void showDestPointsLost() {
+        List<String> points = presenter.getPlayerDestPointsLost();
 
+        ArrayList<TextView> texts = new ArrayList<>();
+        texts.add(player1DestCardPointsLost);
+        texts.add(player2DestCardPointsLost);
+        texts.add(player3DestCardPointsLost);
+        texts.add(player4DestCardPointsLost);
+        texts.add(player5DestCardPointsLost);
+
+        for(int i = 0; i < presenter.getPlayersInGame(); i++) {
+            texts.get(i).setText(points.get(i));
+        }
     }
 
     private void showWinner() {

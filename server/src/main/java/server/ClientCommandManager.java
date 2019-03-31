@@ -124,7 +124,7 @@ public class ClientCommandManager
         response.setTrainsUsed(trainsUsed.get(username));
         response.setPointsGained(pointsGained.get(username));
         response.setLastTurn(lastTurn.get(username));
-        response.setGameOver(lastTurn.get(username));
+        response.setGameOver(gameOver.get(username));
 
         return response;
     }

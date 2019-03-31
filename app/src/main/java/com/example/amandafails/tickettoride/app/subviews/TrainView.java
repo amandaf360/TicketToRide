@@ -17,6 +17,7 @@ import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gamep
 import java.util.ArrayList;
 import java.util.Map;
 
+import ClientModel.ClientModel;
 import ClientModel.Route;
 
 import static java.lang.Math.sin;
@@ -417,15 +418,40 @@ public class TrainView extends View
                             }
                             else
                             {
+                                if( (routes.get(i).isClaimed1() || routes.get(i).isClaimed2()) && ClientModel.getInstance().getActiveGame().getPlayers().size() == 2)
+                                {
+                                    //this is the situation where one route is claimed in a 2-player game
+                                    //Under these circumstances, the other route is unavailable.
+                                    view.claimRouteByTap(returnRoutes);
+                                    return false;
+                                }
+                                //if the first of a double route is free
                                 if(!routes.get(i).isClaimed1())
                                 {
                                     Route route1 = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint(), routes.get(i).getLength());
                                     returnRoutes.add(route1);
+                                    //this check prevents both parts of a double route being claimed by the same person
+                                    if(routes.get(i).isClaimed2())
+                                    {
+                                        if(routes.get(i).claimedColor2.equals(ClientModel.getInstance().getMainPlayer().getColor()))
+                                        {
+                                            returnRoutes.remove(returnRoutes.size() - 1);
+                                        }
+                                    }
                                 }
+                                //if the second of a double route is free
                                 if(!routes.get(i).isClaimed2())
                                 {
                                     Route route2 = new Route(routes.get(i).getCity1(), routes.get(i).getCity2(), routes.get(i).getPaint2(), routes.get(i).getLength());
                                     returnRoutes.add(route2);
+                                    //this check prevents both parts of a double route being claimed by the same person
+                                    if(routes.get(i).isClaimed1())
+                                    {
+                                        if(routes.get(i).claimedColor1.equals(ClientModel.getInstance().getMainPlayer().getColor()))
+                                        {
+                                            returnRoutes.remove(returnRoutes.size() - 1);
+                                        }
+                                    }
                                 }
                             }
                             view.claimRouteByTap(returnRoutes);
@@ -523,13 +549,14 @@ public class TrainView extends View
                     drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
                 }
                 //route 2
-                else if(route.isDoubleRoute() && route.isClaimed2())
+                if(route.isDoubleRoute() && route.isClaimed2())
                 {
                     setColorOnClaimedDoubleRoute(route);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY() + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, false);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
                 }
-                else //if it's not a double route
+                //if it's not a double route
+                if(!route.isDoubleRoute())
                 {
                     drawRectangle(canvas, route.getX(), route.getY() + (i + 0.5f)*tempRectLength + (i + 0.5f)*spacing, false);
                     drawRectangle(canvas, route.getX(), route.getY() - (i + 0.5f)*tempRectLength - (i + 0.5f)*spacing, false);
@@ -543,12 +570,12 @@ public class TrainView extends View
             {
                 drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, route.getY(), false);
             }
-            else if(route.isDoubleRoute() && route.isClaimed2())
+            if(route.isDoubleRoute() && route.isClaimed2())
             {
                 setColorOnClaimedDoubleRoute(route);
                 drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, route.getY(), false);
             }
-            else
+            if(!route.isDoubleRoute())
             {
                 drawRectangle(canvas, route.getX(), route.getY(), route.isDoubleRoute());
             }
@@ -563,13 +590,13 @@ public class TrainView extends View
                     drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, topCenter, false);
                     drawRectangle(canvas, route.getX() - (rectWidth + spacing)/2.f, bottomCenter, false);
                 }
-                else if(route.isDoubleRoute() && route.isClaimed2())
+                if(route.isDoubleRoute() && route.isClaimed2())
                 {
                     setColorOnClaimedDoubleRoute(route);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, topCenter, false);
                     drawRectangle(canvas, route.getX() + (rectWidth + spacing)/2.f, bottomCenter, false);
                 }
-                else
+                if(!route.isDoubleRoute())
                 {
                     drawRectangle(canvas, route.getX(), topCenter, route.isDoubleRoute());
                     drawRectangle(canvas, route.getX(), bottomCenter, route.isDoubleRoute());
@@ -647,12 +674,24 @@ public class TrainView extends View
             {
                 if(routes.get(i).getCity2().equals(route.getCityTwo()))
                 {
-                    if(routes.get(i).getPaint().equals(route.getColor()))
+                    //the logic for which route to pick doesn't work if it's a gray double route, so we have to do something
+                    //to address that specific case.
+                    boolean grayDouble = false;
+                    if(routes.get(i).getPaint().equals("gray") && routes.get(i).isDoubleRoute())
+                    {
+                        if(!routes.get(i).isClaimed1() && !routes.get(i).isClaimed2())
+                        {
+                            grayDouble = true;
+                            routes.get(i).setClaimed1(true);
+                            routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                        }
+                    }
+                    if(routes.get(i).getPaint().equals(route.getColor()) && !grayDouble)
                     {
                         routes.get(i).setClaimed1(true);
                         routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
                     }
-                    if(routes.get(i).getPaint2().equals(route.getColor()))
+                    if(routes.get(i).getPaint2().equals(route.getColor()) && !grayDouble)
                     {
                         routes.get(i).setClaimed2(true);
                         routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
@@ -661,18 +700,27 @@ public class TrainView extends View
             }
             else if(routes.get(i).getCity2().equals(route.getCityOne()))
             {
-                if(routes.get(i).getCity1().equals(route.getCityTwo()))
+                //the logic for which route to pick doesn't work if it's a gray double route, so we have to do something
+                //to address that specific case.
+                boolean grayDouble = false;
+                if(routes.get(i).getPaint().equals("gray") && routes.get(i).isDoubleRoute())
                 {
-                    if(routes.get(i).getPaint().equals(route.getColor()))
+                    if(!routes.get(i).isClaimed1() && !routes.get(i).isClaimed2())
                     {
+                        grayDouble = true;
                         routes.get(i).setClaimed1(true);
                         routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
                     }
-                    if(routes.get(i).getPaint2().equals(route.getColor()))
-                    {
-                        routes.get(i).setClaimed2(true);
-                        routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
-                    }
+                }
+                if(routes.get(i).getPaint().equals(route.getColor()) && !grayDouble)
+                {
+                    routes.get(i).setClaimed1(true);
+                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                }
+                if(routes.get(i).getPaint2().equals(route.getColor()) && !grayDouble)
+                {
+                    routes.get(i).setClaimed2(true);
+                    routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
                 }
             }
         }

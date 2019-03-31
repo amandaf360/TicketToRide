@@ -16,4 +16,6 @@ public interface IGameplayView
     void setDrawDestCardsEnabled(boolean enabled);
     void setClaimRouteEnabled(boolean enabled);
     void claimRouteByTap(ArrayList<Route> routes);
+
+    void switchActivities();
 }

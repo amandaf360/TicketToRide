@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amandafails.tickettoride.R;
+import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.GameOver.GameOverView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.CurrentGameStatus.CurrentGameStatusFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.DrawDestCard.DrawDestFragmentView;
 import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.State.NotMyTurnState;
@@ -161,6 +162,11 @@ public class GameplayView extends FragmentActivity implements IGameplayView
         transaction.replace(R.id.frame, currentGameStatusFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void switchActivities() {
+        Intent intent = new Intent(this, GameOverView.class);
+        startActivity(intent);
     }
 
     public void setRoutesClaimable(boolean enabled)

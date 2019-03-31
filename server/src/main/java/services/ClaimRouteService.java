@@ -51,7 +51,11 @@ public class ClaimRouteService
                 manager.claimRoute(numPoints, name);
             }
             manager.addTrainsUsed(usernames.get(i), name, cards.size());
-            manager.addGameHistoryMessage(usernames.get(i), new Message("blue", "You have one turn remaining."));
+            if(lastTurn)
+            {
+                manager.addGameHistoryMessage(usernames.get(i), new Message("Not important", "You have one turn remaining."));
+            }
+
         }
 
         game.getGraph().claimRoute(name, index);

@@ -573,12 +573,10 @@ public class ClientModel extends Observable
 
     public void setGameOver()
     {
-        getActiveGame().setGameOver();
+        getActiveGame().setGameOver(true);
         setChanged();
-        notifyObservers(getActiveGame().getGameOver());
+        notifyObservers(getActiveGame().isGameOver());
     }
-
-
 
 
 }

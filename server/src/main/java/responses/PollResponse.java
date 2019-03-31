@@ -26,6 +26,8 @@ public class PollResponse extends BaseResponse
     private int turnsEnded;
     private ArrayList<String> trainsUsed;
     private ArrayList<String> pointsGained;
+    private boolean gameOver;
+    private boolean lastTurn;
 
     public PollResponse() {
         gamesCreated = new ArrayList<>();
@@ -179,5 +181,21 @@ public class PollResponse extends BaseResponse
 
     public void setPointsGained(ArrayList<String> pointsGained) {
         this.pointsGained = pointsGained;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public boolean isLastTurn() {
+        return lastTurn;
+    }
+
+    public void setLastTurn(boolean lastTurn) {
+        this.lastTurn = lastTurn;
     }
 }

@@ -12,6 +12,7 @@ public class Graph
     public Graph()
     {
         cityList = new ArrayList<>();
+        routeList = new ArrayList<>();
         cityList.add(new CityNode("Vancouver"));//0
         cityList.add(new CityNode("Seattle"));//1
         cityList.add(new CityNode("Portland"));//2
@@ -49,6 +50,7 @@ public class Graph
         cityList.add(new CityNode("New York"));//34
         cityList.add(new CityNode("Washington"));//35
         cityList.add(new CityNode("Raleigh"));//36
+        cityList.get(15);
 
         routeList.add(new RouteNode(cityList.get(6), cityList.get(15), ""));//0
         cityList.get(6).addRoute(routeList.get(0));

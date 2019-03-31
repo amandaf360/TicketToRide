@@ -11,7 +11,7 @@ public class CityNode
     public CityNode(String name)
     {
         this.name = name;
-
+        adjacentRoutes = new ArrayList<>();
     }
 
     public void addRoute(RouteNode route)

@@ -20,15 +20,24 @@ public class ClaimRouteService
     {
         ModelRoot root = ModelRoot.getModel();
         ActiveGame game = root.getGameByUser(name);
-
-
         game.claimRoute(index, name, cards);
-
         int numPoints = calculatePoints(cards.size());
-
+        //get rid of cards from players hands
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> usernames = game.getAllUsernames();
+        Player player = game.getPlayerByUsername(name);
+        player.setNumTrains(player.getNumTrains() - cards.size());
+        boolean lastTurn = false;
+        if(!game.isLastTurn())
+        {
+            lastTurn = (player.getNumTrains() <= 2);
+            if(lastTurn)
+            {
+                game.setLastTurnPlayer(name);
+                game.setLastTurn(true);
+            }
+        }
 
 
         for (int i = 0; i < usernames.size(); i++)
@@ -43,6 +52,7 @@ public class ClaimRouteService
             manager.addTrainsUsed(usernames.get(i), name, cards.size());
         }
 
+        game.getGraph().claimRoute(name, index);
         ClaimRouteResponse response = new ClaimRouteResponse(index, name);
         return response;
     }

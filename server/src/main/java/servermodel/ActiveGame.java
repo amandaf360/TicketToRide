@@ -3,6 +3,8 @@ package servermodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapgraph.Graph;
+
 public class ActiveGame
 {
     private DestCardDeck destinationDeck;
@@ -15,6 +17,10 @@ public class ActiveGame
     private FaceUpCards faceUpCards;
     private ArrayList<Route> routes;
     private int currentTurnIndex = 0;
+    private boolean lastTurn;
+    private boolean gameOver;
+    private String lastTurnPlayer;
+    private Graph graph;
 
     public ActiveGame()
     {
@@ -27,6 +33,9 @@ public class ActiveGame
         routes = new ArrayList<>();
         trainCarDiscard = new TrainCarDiscard();
         faceUpCards.setDiscardPile(trainCarDiscard);
+        lastTurn = false;
+        gameOver = false;
+        graph = new Graph();
 
         initializeRoutes();
     }
@@ -168,6 +177,78 @@ public class ActiveGame
         }
 
         return null;
+    }
+
+
+    public boolean isLastTurn()
+    {
+        return lastTurn;
+    }
+
+    public void setLastTurn(boolean lastTurn)
+    {
+        this.lastTurn = lastTurn;
+    }
+
+    public boolean isGameOver()
+    {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver)
+    {
+        this.gameOver = gameOver;
+    }
+
+    public String getLastTurnPlayer() {
+        return lastTurnPlayer;
+    }
+
+    public void setLastTurnPlayer(String lastTurnPlayer) {
+        this.lastTurnPlayer = lastTurnPlayer;
+    }
+
+    public Graph getGraph() {
+        return graph;
+    }
+
+    public void setGraph(Graph graph) {
+        this.graph = graph;
+    }
+
+    public void calculateRoutePoints(String username)
+    {
+        Player player = null;
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(players.get(i).getName().equals(username))
+            {
+                player = players.get(i);
+                break;
+            }
+        }
+        if(player == null)
+        {
+            System.out.println("Could not find player of username " + username + " when calculating destination card points");
+            return;
+        }
+
+        int negativePoints = 0;
+        int positivePoints = 0;
+
+        ArrayList<DestCard> destinationCards = player.getDestCards();
+        for(DestCard card : destinationCards)
+        {
+            if(graph.completedRoute(username, card.getCityOne(), card.getCityTwo()))
+            {
+                positivePoints += card.getPoints();
+            }
+            else
+            {
+                negativePoints -= card.getPoints();
+            }
+        }
+
     }
 
     private void initializeRoutes()

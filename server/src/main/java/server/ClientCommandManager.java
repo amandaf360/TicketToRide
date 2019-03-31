@@ -39,6 +39,8 @@ public class ClientCommandManager
     private Map<String, Integer> turnsEnded;
     private Map<String, ArrayList<String>> trainsUsed;
     private Map<String, ArrayList<String>> pointsGained;
+    private Map<String, Boolean> lastTurn;
+    private Map<String, Boolean> gameOver;
 
 
     private static ClientCommandManager commandManager = new ClientCommandManager();
@@ -66,6 +68,8 @@ public class ClientCommandManager
         turnsEnded = new HashMap<>();
         trainsUsed = new HashMap<>();
         pointsGained = new HashMap<>();
+        lastTurn = new HashMap<>();
+        gameOver = new HashMap<>();
 
     }
 
@@ -87,6 +91,8 @@ public class ClientCommandManager
         turnsEnded.put(username, 0);
         trainsUsed.put(username, new ArrayList<String>());
         pointsGained.put(username, new ArrayList<String>());
+        gameOver.put(username, false);
+        lastTurn.put(username, false);
     }
 
     public PollResponse firstPoll()
@@ -117,6 +123,8 @@ public class ClientCommandManager
         response.setTurnsEnded(turnsEnded.get(username));
         response.setTrainsUsed(trainsUsed.get(username));
         response.setPointsGained(pointsGained.get(username));
+        response.setLastTurn(lastTurn.get(username));
+        response.setGameOver(lastTurn.get(username));
 
         return response;
     }
@@ -138,6 +146,8 @@ public class ClientCommandManager
         turnsEnded.put(username, 0);
         trainsUsed.get(username).clear();
         pointsGained.get(username).clear();
+        lastTurn.put(username, false);
+        gameOver.put(username, false);
     }
 
     public void addGame(Game game)
@@ -246,6 +256,16 @@ public class ClientCommandManager
     {
         trainsUsed.get(sendingTo).add(playerDrew);
         trainsUsed.get(sendingTo).add(Integer.toString(numberUsed));
+    }
+
+    public void setLastTurn(String username)
+    {
+        lastTurn.put(username, true);
+    }
+
+    public void setGameOver(String username)
+    {
+        gameOver.put(username, true);
     }
 
 }

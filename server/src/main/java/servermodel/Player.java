@@ -10,12 +10,14 @@ public class Player
     private ArrayList<DestCard> destCards;
     private ArrayList<TrainCarCard> trainCarCards;
     private int numRoutes;
+    private int numTrains;
 
     public Player()
     {
         destCards = new ArrayList<>();
         trainCarCards = new ArrayList<>();
         numRoutes = 0;
+        numTrains = 45;
     }
 
     public Player(Player player)
@@ -118,5 +120,13 @@ public class Player
     public void addRoute()
     {
         numRoutes++;
+    }
+
+    public int getNumTrains() {
+        return numTrains;
+    }
+
+    public void setNumTrains(int numTrains) {
+        this.numTrains = numTrains;
     }
 }

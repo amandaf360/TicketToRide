@@ -251,7 +251,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             case 0:
                 //if the array of routes has nothing in it, there are no valid selections, meaning the route is taken. Display a message and
                 //resume their turn
-                view.showToast("Sorry, this route is already taken");
+                view.showToast("Route is taken OR not enough trains");
                 setState(MyTurnState.getInstance());
                 routeClaimed = false;
                 break;

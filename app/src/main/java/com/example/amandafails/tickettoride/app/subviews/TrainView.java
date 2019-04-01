@@ -408,6 +408,14 @@ public class TrainView extends View
                         < y && y < -x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 + (errorMargin / sin(toRad(routes.get(i).getAngle()))))
                         {
                             ArrayList<Route> returnRoutes = new ArrayList<>();
+
+                            //this checks if the player has enough trains
+                            if(routes.get(i).getLength() > ClientModel.getInstance().getMainPlayer().getNumTrains())
+                            {
+                                view.claimRouteByTap(returnRoutes);
+                                return false;
+                            }
+
                             if(!routes.get(i).isDoubleRoute())
                             {
                                 if(!routes.get(i).isClaimed1())
@@ -700,27 +708,26 @@ public class TrainView extends View
             }
             else if(routes.get(i).getCity2().equals(route.getCityOne()))
             {
-                //the logic for which route to pick doesn't work if it's a gray double route, so we have to do something
-                //to address that specific case.
-                boolean grayDouble = false;
-                if(routes.get(i).getPaint().equals("gray") && routes.get(i).isDoubleRoute())
+                if(routes.get(i).getCity1().equals(route.getCityTwo()))
                 {
-                    if(!routes.get(i).isClaimed1() && !routes.get(i).isClaimed2())
-                    {
-                        grayDouble = true;
+                    //the logic for which route to pick doesn't work if it's a gray double route, so we have to do something
+                    //to address that specific case.
+                    boolean grayDouble = false;
+                    if (routes.get(i).getPaint().equals("gray") && routes.get(i).isDoubleRoute()) {
+                        if (!routes.get(i).isClaimed1() && !routes.get(i).isClaimed2()) {
+                            grayDouble = true;
+                            routes.get(i).setClaimed1(true);
+                            routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
+                        }
+                    }
+                    if (routes.get(i).getPaint().equals(route.getColor()) && !grayDouble) {
                         routes.get(i).setClaimed1(true);
                         routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
                     }
-                }
-                if(routes.get(i).getPaint().equals(route.getColor()) && !grayDouble)
-                {
-                    routes.get(i).setClaimed1(true);
-                    routes.get(i).setClaimedColor1(route.getClaimedBy().getColor());
-                }
-                if(routes.get(i).getPaint2().equals(route.getColor()) && !grayDouble)
-                {
-                    routes.get(i).setClaimed2(true);
-                    routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
+                    if (routes.get(i).getPaint2().equals(route.getColor()) && !grayDouble) {
+                        routes.get(i).setClaimed2(true);
+                        routes.get(i).setClaimedColor2(route.getClaimedBy().getColor());
+                    }
                 }
             }
         }

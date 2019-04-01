@@ -46,7 +46,8 @@ public class ClaimRouteService
             if (!usernames.get(i).equals(name))
             {
                 manager.claimRoute(index, name, cards.size(), usernames.get(i), numPoints);
-            } else
+            }
+            else
             {
                 manager.claimRoute(numPoints, name);
             }

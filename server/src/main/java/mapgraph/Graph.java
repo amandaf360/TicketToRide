@@ -50,7 +50,6 @@ public class Graph
         cityList.add(new CityNode("New York"));//34
         cityList.add(new CityNode("Washington"));//35
         cityList.add(new CityNode("Raleigh"));//36
-        cityList.get(15);
 
         routeList.add(new RouteNode(cityList.get(6), cityList.get(15), ""));//0
         cityList.get(6).addRoute(routeList.get(0));
@@ -60,9 +59,9 @@ public class Graph
         cityList.get(7).addRoute(routeList.get(1));
         cityList.get(10).addRoute(routeList.get(1));
 
-        routeList.add(new RouteNode(cityList.get(6), cityList.get(15), ""));//2
-        cityList.get(6).addRoute(routeList.get(2));
-        cityList.get(15).addRoute(routeList.get(2));
+        routeList.add(new RouteNode(cityList.get(7), cityList.get(10), ""));//2
+        cityList.get(7).addRoute(routeList.get(2));
+        cityList.get(10).addRoute(routeList.get(2));
 
         routeList.add(new RouteNode(cityList.get(10), cityList.get(17), ""));//3
         cityList.get(10).addRoute(routeList.get(3));
@@ -185,7 +184,7 @@ public class Graph
         cityList.get(34).addRoute(routeList.get(32));
 
         routeList.add(new RouteNode(cityList.get(24), cityList.get(25), ""));//33
-        cityList.get(25).addRoute(routeList.get(33));
+        cityList.get(24).addRoute(routeList.get(33));
         cityList.get(25).addRoute(routeList.get(33));
 
         routeList.add(new RouteNode(cityList.get(6), cityList.get(14), ""));//34

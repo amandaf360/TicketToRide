@@ -38,7 +38,7 @@ public class DestCardDeck
         deck.add(new DestCard("Portland", "Nashville", 17));
         deck.add(new DestCard("Vancouver", "Montreal", 20));
         deck.add(new DestCard("Los Angeles", "Miami", 20));
-        deck.add(new DestCard("Los Angeles", "New York City", 21));
+        deck.add(new DestCard("Los Angeles", "New York", 21));
         deck.add(new DestCard("Seattle", "New York", 22));
         shuffle();
     }

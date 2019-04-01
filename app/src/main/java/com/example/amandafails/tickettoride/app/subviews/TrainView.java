@@ -408,6 +408,14 @@ public class TrainView extends View
                         < y && y < -x / tan(toRad(routes.get(i).getAngle())) + routes.get(i).getY() - routes.get(i).getX() / tan(toRad(routes.get(i).getAngle()))*-1 + (errorMargin / sin(toRad(routes.get(i).getAngle()))))
                         {
                             ArrayList<Route> returnRoutes = new ArrayList<>();
+
+                            //this checks if the player has enough trains
+                            if(routes.get(i).getLength() > ClientModel.getInstance().getMainPlayer().getNumTrains())
+                            {
+                                view.claimRouteByTap(returnRoutes);
+                                return false;
+                            }
+
                             if(!routes.get(i).isDoubleRoute())
                             {
                                 if(!routes.get(i).isClaimed1())

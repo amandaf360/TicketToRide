@@ -5,6 +5,7 @@ public class RegisterResponse extends BaseResponse
     public RegisterResponse(){}
 
     private String username;
+    private String authToken;
     private String errorMessage;
 
     public String getUsername() {
@@ -21,5 +22,13 @@ public class RegisterResponse extends BaseResponse
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

@@ -244,7 +244,7 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:padding="10dp"
-                    android:text="192.168.254.227"/>
+                    android:text="10.24.198.110"/>
 
             </LinearLayout>
 

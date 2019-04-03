@@ -32,7 +32,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         clientModel.addObserver(this);
         // for error checking purposes only (adding games to game room)
         //clientModel.errorChecking();
-        this.poller = new Poller(clientModel.getUser().getUserName());
+        this.poller = new Poller(clientModel.getUser().getAuthToken());
         poller.poll();
     }
 
@@ -71,7 +71,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     private void joinGameYes(Game game)
     {
         JoinGameService joinGameService = new JoinGameService();
-        joinGameService.joinGame(clientModel.getGameNum(game), clientModel.getUser().getUserName());
+    joinGameService.joinGame(clientModel.getGameNum(game), clientModel.getUser().getUserName(), clientModel.getUser().getAuthToken());
 
         /*
         // *************** TEST FUNCTIONALITY ***************** //
@@ -121,7 +121,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
         if(createGame)
         {
             CreateGameService createGameService = new CreateGameService();
-            createGameService.createGame(clientModel.getUser().getUserName(), value + 2, makeGameName()); // FIX HERE FOR GAME CREATION (value + 2 instead of value + 1)
+            createGameService.createGame(clientModel.getUser().getUserName(), value + 1, makeGameName(), clientModel.getUser().getAuthToken()); // FIX HERE FOR GAME CREATION (value + 2 instead of value + 1)
             //joinGameService.joinGame(clientModel.getGameNum(game));
             createGameNo();
         }
@@ -140,7 +140,7 @@ public class GamesRoomPresenter implements IGamesRoomPresenter, Observer
     {
         setChoice(0);
         //final String joinGameName = "pick the amount of players you want in your game";
-        String[] singleChoiceItems = {"2","3","4","5"};                     // FIX HERE FOR GAME CREATION (2,3,4,5 instead of 1,2,3,4)
+        String[] singleChoiceItems = {"1","2","3","4"};                     // FIX HERE FOR GAME CREATION (2,3,4,5 instead of 1,2,3,4)
         final int itemSelected = 0;
         new AlertDialog.Builder(context)
                 .setTitle("How many players do you want in your game?")

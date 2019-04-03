@@ -6,6 +6,7 @@ import responses.RegisterResponse;
 import server.ClientCommandManager;
 import servermodel.ModelRoot;
 import servermodel.User;
+import java.util.UUID;
 
 public class RegisterService
 {
@@ -33,11 +34,13 @@ public class RegisterService
 
         if(!nameAlreadyExists)
         {
-            User user = new User(username, password);
+            String authToken = UUID.randomUUID().toString();
+            User user = new User(username, password, authToken);
             model.addUser(user);
             response.setUsername(username);
+            response.setAuthToken(authToken);
             ClientCommandManager commandManager = ClientCommandManager.getCommandManager();
-            commandManager.addUser(username);
+            commandManager.addUser(authToken);
             return response;
         }
         else

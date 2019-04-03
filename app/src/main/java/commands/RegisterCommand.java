@@ -5,14 +5,14 @@ public class RegisterCommand implements ICommand
 {
     private String username;
     private String errorMessage;
+    private String authToken;
 
     public void execute()
     {
-        System.out.println("In register command");
         if(username != null)
         {
             SetUserService userService = new SetUserService();
-            userService.setUser(username);
+            userService.setUser(username, authToken);
         }
         else
         {
@@ -20,13 +20,13 @@ public class RegisterCommand implements ICommand
             messageService.setMessage(errorMessage);
         }
 
-
     }
 
-    public RegisterCommand(String username, String errorMessage)
+    public RegisterCommand(String username, String errorMessage, String authToken)
     {
         this.username = username;
         this.errorMessage = errorMessage;
+        this.authToken = authToken;
     }
 
     public String getUsername() {
@@ -43,5 +43,13 @@ public class RegisterCommand implements ICommand
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

@@ -16,6 +16,6 @@ public class CreateChatMessageService
     {
         ClientModel model = ClientModel.getInstance();
         ServerProxy proxy = new ServerProxy();
-        proxy.sendChatMessage(model.getUser().getUserName(), message, model.getGameNum(model.getActiveGame()));
+        proxy.sendChatMessage(model.getUser().getAuthToken(), message, model.getGameNum(model.getActiveGame()));
     }
 }

@@ -20,10 +20,10 @@ public class DrawDestService
 
     }
 
-    public DrawDestResponse drawCards(int numCards, String username)
+    public DrawDestResponse drawCards(int numCards, String username, String authToken)
     {
         ModelRoot root = ModelRoot.getModel();
-        ActiveGame game = root.getGameByUser(username);
+        ActiveGame game = root.getGameByAuthToken(authToken);
         ArrayList<DestCard> cardsDrawn = new ArrayList<>();
         DestCardDeck deck = game.getDestinationDeck();
         Player player = game.getPlayerByUsername(username);
@@ -39,14 +39,14 @@ public class DrawDestService
         }
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
-        ArrayList<String> usernames = game.getAllUsernames();
-        for(int i = 0; i < usernames.size(); i++)
+        ArrayList<String> authTokens = game.getAllAuthTokens();
+        for(int i = 0; i < authTokens.size(); i++)
         {
-            if(!usernames.get(i).equals(username))
+            if(!authTokens.get(i).equals(authToken))
             {
-                manager.addCardsDrawn(numCards, username, usernames.get(i));
+                manager.addCardsDrawn(numCards, authToken, authTokens.get(i));
             }
-            manager.setDeckState(new DecksStateData(game), username);
+            manager.setDeckState(new DecksStateData(game), authToken);
         }
 
         DrawDestResponse response = new DrawDestResponse(cardsDrawn);

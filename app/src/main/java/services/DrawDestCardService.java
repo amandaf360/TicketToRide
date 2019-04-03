@@ -9,6 +9,6 @@ public class DrawDestCardService
     {
         ClientModel model = ClientModel.getInstance();
         ServerProxy proxy = new ServerProxy();
-        proxy.drawDestCards(numCards, model.getUser().getUserName());
+        proxy.drawDestCards(numCards, model.getUser().getUserName(), model.getUser().getAuthToken());
     }
 }

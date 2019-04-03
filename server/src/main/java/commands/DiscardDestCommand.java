@@ -10,18 +10,20 @@ public class DiscardDestCommand implements ICommand
     private String cityTwo;
     private int length;
     private String username;
+    private String authToken;
 
-    public DiscardDestCommand(String cityOne, String cityTwo, int length, String username)
+    public DiscardDestCommand(String cityOne, String cityTwo, int length, String username, String authToken)
     {
         this.cityOne = cityOne;
         this.cityTwo = cityTwo;
         this.length = length;
         this.username = username;
+        this.authToken = authToken;
     }
 
     public BaseResponse execute()
     {
-        DiscardDestService service = new DiscardDestService(cityOne, cityTwo, length, username);
+        DiscardDestService service = new DiscardDestService(cityOne, cityTwo, length, username, authToken);
         service.discardCard();
         return null;
     }

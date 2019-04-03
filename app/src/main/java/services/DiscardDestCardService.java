@@ -10,7 +10,7 @@ public class DiscardDestCardService
     {
         ClientModel model = ClientModel.getInstance();
         ServerProxy proxy = new ServerProxy();
-        proxy.discardDestCard(card, model.getUser().getUserName());
+        proxy.discardDestCard(card, model.getUser().getUserName(), model.getUser().getAuthToken());
     }
 }
 

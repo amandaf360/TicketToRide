@@ -7,17 +7,20 @@ public class JoinGameCommand implements ICommand
 {
     private int gameNum;
     private String username;
+    private String authToken;
 
     public BaseResponse execute()
     {
         JoinGameService service = new JoinGameService();
 
-        return service.joinGame(gameNum, username);
+        return service.joinGame(gameNum, username, authToken);
     }
 
-    public JoinGameCommand(int gameNum, String username) {
+    public JoinGameCommand(int gameNum, String username, String authToken)
+    {
         this.gameNum = gameNum;
         this.username = username;
+        this.authToken = authToken;
     }
 
     public int getGameNum() {

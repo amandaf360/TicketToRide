@@ -10,12 +10,12 @@ public class DrawTrainCardService
     {
         ClientModel model = ClientModel.getInstance();
         ServerProxy proxy = new ServerProxy();
-        proxy.drawTrainCarCard(model.getUser().getUserName(), faceUpIndex);
+        proxy.drawTrainCarCard(model.getUser().getUserName(), faceUpIndex, model.getUser().getAuthToken());
         ServerProxy messageProxy = new ServerProxy();
         if(faceUpIndex == -1)
         {
             messageProxy.sendGameHistoryMessage(model.getUser().getUserName(), new Message(model.getMainPlayer().getColor(),
-                    "Drew a face down train car card"));
+                    "Drew a face down train car card"), model.getUser().getAuthToken());
         }
         else
         {
@@ -27,7 +27,7 @@ public class DrawTrainCardService
             }
             indefArticle += " ";
             messageProxy.sendGameHistoryMessage(model.getUser().getUserName(), new Message(model.getMainPlayer().getColor(),
-                    "Drew " + indefArticle + color + " face up train car card"));
+                    "Drew " + indefArticle + color + " face up train car card"), model.getUser().getAuthToken());
         }
     }
 }

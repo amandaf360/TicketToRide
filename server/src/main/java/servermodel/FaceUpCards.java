@@ -16,6 +16,10 @@ public class FaceUpCards
     {
         TrainCarCard drawnCard = cards.get(index);
         cards.set(index, deck.draw());
+        if(cards.get(index) == null)
+        {
+            cards.set(index, new TrainCarCard("none"));
+        }
         checkValidity(deck);
         return drawnCard;
     }
@@ -72,5 +76,16 @@ public class FaceUpCards
 
     public void setDiscardPile(TrainCarDiscard discardPile) {
         this.discardPile = discardPile;
+    }
+
+    public void checkNulls(TrainCarDeck deck)
+    {
+        for(int i = 0; i < cards.size(); i++)
+        {
+            if(cards.get(i).getColor().equals("none"))
+            {
+                cards.set(i, deck.draw());
+            }
+        }
     }
 }

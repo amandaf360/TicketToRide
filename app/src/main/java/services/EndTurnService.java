@@ -8,6 +8,6 @@ public class EndTurnService
    public void endTurn()
    {
        ServerProxy proxy = new ServerProxy();
-       proxy.endCurrentTurn(ClientModel.getInstance().getMainPlayer().getName());
+       proxy.endCurrentTurn(ClientModel.getInstance().getMainPlayer().getName(), ClientModel.getInstance().getMainPlayer().getAuthToken());
    }
 }

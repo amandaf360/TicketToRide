@@ -93,7 +93,12 @@ public class TrainCardDeckFragmentView extends Fragment implements ITrainCardDec
         deck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCardClicked(-1);
+                if(presenter.getNumCardsLeftInDeck() <= 0) {
+                    showToast("Deck is empty, can't draw cards from here");
+                }
+                else {
+                    onCardClicked(-1);
+                }
             }
         });
 

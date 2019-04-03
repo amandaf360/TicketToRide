@@ -178,14 +178,19 @@ public class GameplayView extends FragmentActivity implements IGameplayView
 
     public void onDrawRoutesClicked()
     {
-        presenter.setState(NotMyTurnState.getInstance());
+        if(!presenter.canDrawDestCards()) {
+            showToast("Not enough destination cards left in the deck to draw 3");
+        }
+        else {
+            presenter.setState(NotMyTurnState.getInstance());
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction  = manager.beginTransaction();
-        DrawDestFragmentView drawDestFragmentView = new DrawDestFragmentView();
-        transaction.replace(R.id.frame, drawDestFragmentView)
-                .addToBackStack(null)
-                .commit();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction  = manager.beginTransaction();
+            DrawDestFragmentView drawDestFragmentView = new DrawDestFragmentView();
+            transaction.replace(R.id.frame, drawDestFragmentView)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     public void onPlaceTrainsClicked()

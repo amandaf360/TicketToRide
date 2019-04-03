@@ -8,14 +8,14 @@ import servermodel.ModelRoot;
 
 public class GameHistoryService
 {
-    public void sendGameHistoryMessage(Message message, String username)
+    public void sendGameHistoryMessage(Message message, String username, String authToken)
     {
         ModelRoot model = ModelRoot.getModel();
-        ArrayList<String> allUsers = model.getGameByUser(username).getAllUsernames();
+        ArrayList<String> allAuthTokens = model.getGameByAuthToken(authToken).getAllAuthTokens();
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
-        for(String user: allUsers)
+        for(String token: allAuthTokens)
         {
-            manager.addGameHistoryMessage(user, message);
+            manager.addGameHistoryMessage(token, message);
         }
     }
 }

@@ -15,16 +15,19 @@ public class DrawTrainService
 {
     private String username;
     private int index;
+    private String authToken;
 
-    public DrawTrainService(String username, int index) {
+    public DrawTrainService(String username, int index, String authToken)
+    {
         this.username = username;
         this.index = index;
+        this.authToken = authToken;
     }
 
     public DrawTrainResponse draw()
     {
         ModelRoot root = ModelRoot.getModel();
-        ActiveGame game = root.getGameByUser(username);
+        ActiveGame game = root.getGameByAuthToken(authToken);
         TrainCarCard cardDrawn;
         TrainCarDeck deck = game.getTrainDeck();
 
@@ -37,15 +40,15 @@ public class DrawTrainService
             FaceUpCards faceUpCards = game.getFaceUpCards();
             cardDrawn = faceUpCards.draw(index, deck);
         }
-        ArrayList<String> allUsernames = game.getAllUsernames();
+        ArrayList<String> allAuthTokens = game.getAllAuthTokens();
         DecksStateData data = new DecksStateData(game);
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
-        for(String name: allUsernames)
+        for(String token: allAuthTokens)
         {
-            manager.setDeckState(data, name);
-            if(!name.equals(username))
+            manager.setDeckState(data, token);
+            if(!token.equals(authToken))
             {
-                manager.addTrainCardDrawn(username, name);
+                manager.addTrainCardDrawn(authToken, token);
             }
         }
         game.getPlayerByUsername(username).addTrainCarCard(cardDrawn);

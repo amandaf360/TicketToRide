@@ -7,6 +7,7 @@ public class TrainCarDeck
 {
     private ArrayList<TrainCarCard> deck;
     private TrainCarDiscard discardPile;
+    private FaceUpCards faceUpCards;
 
     public TrainCarDeck()
     {
@@ -57,13 +58,20 @@ public class TrainCarDeck
 
     public TrainCarCard draw()
     {
-        TrainCarCard drawnCard;
+        TrainCarCard drawnCard = null;
         if(deck.size() == 0)
         {
             combineWithDiscard();
+            faceUpCards.checkNulls(this);
         }
-        drawnCard = deck.get(0);
-        deck.remove(0);
+
+        if(deck.size() != 0)
+        {
+            drawnCard = deck.get(0);
+            deck.remove(0);
+
+        }
+
 
         return drawnCard;
     }
@@ -82,5 +90,9 @@ public class TrainCarDeck
     public int size()
     {
         return deck.size();
+    }
+
+    public void setFaceUpCards(FaceUpCards faceUpCards) {
+        this.faceUpCards = faceUpCards;
     }
 }

@@ -10,8 +10,8 @@ public class JoinGameService
         proxy = new ServerProxy();
     }
 
-    public void joinGame(int gameNumber, String username)
+    public void joinGame(int gameNumber, String username, String authToken)
     {
-        proxy.joinGame(gameNumber, username);
+        proxy.joinGame(gameNumber, username, authToken);
     }
 }

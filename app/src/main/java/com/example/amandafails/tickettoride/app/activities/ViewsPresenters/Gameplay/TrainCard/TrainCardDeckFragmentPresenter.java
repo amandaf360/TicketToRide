@@ -51,7 +51,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
                 drawTrainCardService.drawCard(cardIndex);
                 // pop fragment
                 ServerProxy proxy = new ServerProxy();
-                proxy.endCurrentTurn(clientModel.getMainPlayer().getName());
+                proxy.endCurrentTurn(clientModel.getMainPlayer().getName(), clientModel.getMainPlayer().getAuthToken());
                 view.popFragment(false);
             }
         }
@@ -62,7 +62,7 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
                 DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
                 drawTrainCardService.drawCard(cardIndex);
                 ServerProxy proxy = new ServerProxy();
-                proxy.endCurrentTurn(clientModel.getMainPlayer().getName());
+                proxy.endCurrentTurn(clientModel.getMainPlayer().getName(), clientModel.getMainPlayer().getAuthToken());
                 view.popFragment(false);
 
             }

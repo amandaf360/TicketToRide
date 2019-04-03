@@ -73,7 +73,7 @@ public class CommandHandler implements HttpHandler
                 break;
             case "createGame":
                 ArrayList<String> createList = wrappedRequest.getStringList();
-                command = new CreateGameCommand(createList.get(0), Integer.parseInt(createList.get(1)), createList.get(2));
+                command = new CreateGameCommand(createList.get(0), Integer.parseInt(createList.get(1)), createList.get(2), createList.get(3));
                 break;
             case "clearPoll":
                 ArrayList<String> clearPollList = wrappedRequest.getStringList();
@@ -81,7 +81,7 @@ public class CommandHandler implements HttpHandler
                 break;
             case "joinGame":
                 ArrayList<String> joinGameList = wrappedRequest.getStringList();
-                command = new JoinGameCommand(Integer.parseInt(joinGameList.get(0)), joinGameList.get(1));
+                command = new JoinGameCommand(Integer.parseInt(joinGameList.get(0)), joinGameList.get(1), joinGameList.get(2));
                 break;
             case "sendChatMessage":
                 ArrayList<String> messageData = wrappedRequest.getStringList();
@@ -89,33 +89,33 @@ public class CommandHandler implements HttpHandler
                 break;
             case "drawDestCards":
                 ArrayList<String> drawList = wrappedRequest.getStringList();
-                command = new DrawDestCommand(Integer.parseInt(drawList.get(0)), drawList.get(1));
+                command = new DrawDestCommand(Integer.parseInt(drawList.get(0)), drawList.get(1), drawList.get(2));
                 break;
             case "discardDestCard":
                 ArrayList<String> discardDestList = wrappedRequest.getStringList();
                 command = new DiscardDestCommand(discardDestList.get(0), discardDestList.get(1), Integer.parseInt(discardDestList.get(2)),
-                        discardDestList.get(3));
+                        discardDestList.get(3), discardDestList.get(4));
                 break;
             case "drawTrainCarCard":
                 ArrayList<String> drawTrainList = wrappedRequest.getStringList();
-                command = new DrawTrainCommand(drawTrainList.get(0), Integer.parseInt(drawTrainList.get(1)));
+                command = new DrawTrainCommand(drawTrainList.get(0), Integer.parseInt(drawTrainList.get(1)), drawTrainList.get(2));
                 break;
             case "claimRoute":
                 ArrayList<String> claimRouteList = wrappedRequest.getStringList();
                 ArrayList<String> cards = new ArrayList<>();
-                for(int i = 2; i < wrappedRequest.getStringList().size(); i++)
+                for(int i = 3; i < wrappedRequest.getStringList().size(); i++)
                 {
                     cards.add(wrappedRequest.getStringList().get(i));
                 }
-                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1), cards);
+                command = new ClaimRouteCommand(Integer.parseInt(claimRouteList.get(0)), claimRouteList.get(1), cards, claimRouteList.get(2));
                 break;
             case "gameHistory":
                 ArrayList<String> historyList = wrappedRequest.getStringList();
-                command = new GameHistoryCommand(new Message(historyList.get(1), historyList.get(2)), historyList.get(0));
+                command = new GameHistoryCommand(new Message(historyList.get(1), historyList.get(2)), historyList.get(0), historyList.get(3));
                 break;
             case "endTurn":
                 ArrayList<String> turnList = wrappedRequest.getStringList();
-                command = new EndTurnCommand(turnList.get(0));
+                command = new EndTurnCommand(turnList.get(0), turnList.get(1));
                 break;
 
         }

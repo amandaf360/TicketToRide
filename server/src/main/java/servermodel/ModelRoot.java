@@ -78,6 +78,18 @@ public class ModelRoot
         return null;
     }
 
+    public ActiveGame getGameByAuthToken(String authToken)
+    {
+        for(int i = 0; i < activeGameList.size(); i++)
+        {
+            if(activeGameList.get(i).containsToken(authToken))
+            {
+                return activeGameList.get(i);
+            }
+        }
+        return null;
+    }
+
     public Graph getMapGraph() {
         return mapGraph;
     }

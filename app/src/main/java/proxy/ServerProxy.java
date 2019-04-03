@@ -74,7 +74,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
             @Override
             public void completeTask(String responseJson) {
                 LoginResponse response = serializer.deserializeLoginResponse(responseJson);
-                LoginCommand command = new LoginCommand(response.getUsername(), response.getErrorMessage());
+                LoginCommand command = new LoginCommand(response.getUsername(), response.getErrorMessage(), response.getAuthToken());
                 command.execute();
             }
         };
@@ -102,7 +102,8 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
             @Override
             public void completeTask(String responseJson) {
                 RegisterResponse response = serializer.deserializeRegisterResponse(responseJson);
-                RegisterCommand command = new RegisterCommand(response.getUsername(), response.getErrorMessage());
+                RegisterCommand command = new RegisterCommand(response.getUsername(), response.getErrorMessage(),
+                        response.getAuthToken());
                 command.execute();
             }
         };
@@ -148,11 +149,12 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      *
      * @post JoinGameCommand will be executed
      */
-    public void joinGame(int gameNumber, String username)
+    public void joinGame(int gameNumber, String username, String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(Integer.toString(gameNumber));
         stringList.add(username);
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("joinGame", stringList);
         callBack = new OnTaskCompleted() {
             @Override
@@ -180,12 +182,13 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      *
      * @post Will execute a createGameResponse
      */
-    public void createGame(String username, int numPlayers, String gameName)
+    public void createGame(String username, int numPlayers, String gameName, String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
         stringList.add(Integer.toString(numPlayers));
         stringList.add(gameName);
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("createGame", stringList);
         callBack = new OnTaskCompleted() {
             @Override
@@ -234,7 +237,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      * Sends a chat message to the server. The poller handles sending the response back, so this method
      * has no response.
      *
-     * @param username Name of the user
+     * @param authToken Name of the user
      * @param message Message object to be displayed in the chat window
      * @param gameNum The number of the game the user is currently in
      *
@@ -242,10 +245,10 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      * @pre message != null
      * @pre gameNum > 0
      */
-    public void sendChatMessage(String username, Message message, int gameNum)
+    public void sendChatMessage(String authToken, Message message, int gameNum)
     {
         ArrayList<String> stringList = new ArrayList<>();
-        stringList.add(username);
+        stringList.add(authToken);
         stringList.add(message.getMessage());
         stringList.add(message.getColor());
         stringList.add(Integer.toString(gameNum));
@@ -271,11 +274,12 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      *
      * @post Will execute a DrawDestCommand populated with the appropriate info from the server.
      */
-    public void drawDestCards(final int numCards, final String username)
+    public void drawDestCards(final int numCards, final String username, final String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(Integer.toString(numCards));
         stringList.add(username);
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("drawDestCards", stringList);
 
         callBack = new OnTaskCompleted() {
@@ -289,7 +293,7 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
                 else
                 {
                     ServerProxy proxy = new ServerProxy();
-                    proxy.drawDestCards(numCards, username);
+                    proxy.drawDestCards(numCards, username, authToken);
                 }
             }
         };
@@ -307,11 +311,12 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      *
      * @post A ClaimRouteCommand will be executed.
      */
-    public void claimRoute(int index, String name, ArrayList<TrainCarCard> cardsForPayment)
+    public void claimRoute(int index, String name, ArrayList<TrainCarCard> cardsForPayment, String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(Integer.toString(index));
         stringList.add(name);
+        stringList.add(authToken);
         for(TrainCarCard trainCarCard : cardsForPayment)
         {
             stringList.add(trainCarCard.toString());
@@ -341,13 +346,14 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      * @pre card != null
      * @pre username != null
      */
-    public void discardDestCard(DestinationCards card, String username)
+    public void discardDestCard(DestinationCards card, String username, String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(card.getCityOne());
         stringList.add(card.getCityTwo());
         stringList.add(Integer.toString(card.getPoints()));
         stringList.add(username);
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("discardDestCard", stringList);
         callBack = new OnTaskCompleted() {
             @Override
@@ -370,11 +376,12 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
      * @pre faceUpIndex >= -1 && faceUpIndex <= 4
      * @pre username != null
      */
-    public void drawTrainCarCard(String username, int faceUpIndex)//if from deck, index should be -1
+    public void drawTrainCarCard(String username, int faceUpIndex, String authToken)//if from deck, index should be -1
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
         stringList.add(Integer.toString(faceUpIndex));
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("drawTrainCarCard", stringList);
 
         callBack = new OnTaskCompleted() {
@@ -390,12 +397,13 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void sendGameHistoryMessage(String username, Message message)
+    public void sendGameHistoryMessage(String username, Message message, String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
         stringList.add(message.getColor());
         stringList.add(message.getMessage());
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("gameHistory", stringList);
 
         callBack = new OnTaskCompleted() {
@@ -408,10 +416,11 @@ public class ServerProxy extends AsyncTask<RequestWrapper, Void, String>
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wrapper);
     }
 
-    public void endCurrentTurn(String username)
+    public void endCurrentTurn(String username, String authToken)
     {
         ArrayList<String> stringList = new ArrayList<>();
         stringList.add(username);
+        stringList.add(authToken);
         RequestWrapper wrapper = new RequestWrapper("endTurn", stringList);
 
         callBack = new OnTaskCompleted() {

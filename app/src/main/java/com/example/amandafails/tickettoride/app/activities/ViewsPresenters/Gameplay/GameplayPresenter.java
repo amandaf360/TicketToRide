@@ -340,7 +340,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().getPlayerHandTrains().discardCard(relevantColor);
             }
             ClaimRouteService service = new ClaimRouteService();
-            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards, clientModel.getMainPlayer().getAuthToken());
 
             CreateHistoryMessageService historyService = new CreateHistoryMessageService();
             historyService.sendMessage("Claimed the route from " + route.getCityOne() + " to " + route.getCityTwo()
@@ -365,7 +365,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().getPlayerHandTrains().discardCard("locomotive");
             }
             ClaimRouteService service = new ClaimRouteService();
-            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards, clientModel.getMainPlayer().getAuthToken());
 
             CreateHistoryMessageService historyService = new CreateHistoryMessageService();
             historyService.sendMessage("Claimed the route from " + route.getCityOne() + " to " + route.getCityTwo()

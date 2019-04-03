@@ -34,6 +34,8 @@ public class ActiveGame
         routes = new ArrayList<>();
         trainCarDiscard = new TrainCarDiscard();
         faceUpCards.setDiscardPile(trainCarDiscard);
+        trainDeck.setFaceUpCards(faceUpCards);
+        trainDeck.setDiscardPile(trainCarDiscard);
         lastTurn = false;
         gameOver = false;
         actuallyLastTurn = false;
@@ -129,6 +131,18 @@ public class ActiveGame
         return false;
     }
 
+    public boolean containsToken(String authToken)
+    {
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(players.get(i).getAuthToken().equals(authToken))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Player getPlayerByUsername(String username)
     {
         for(int i = 0; i < players.size(); i++)
@@ -149,6 +163,16 @@ public class ActiveGame
             usernameList.add(players.get(i).getName());
         }
         return usernameList;
+    }
+
+    public ArrayList<String> getAllAuthTokens()
+    {
+        ArrayList<String> authTokens = new ArrayList<>();
+        for(int i = 0; i < players.size(); i++)
+        {
+            authTokens.add(players.get(i).getAuthToken());
+        }
+        return authTokens;
     }
 
     public void claimRoute(int index, String name, List<String> cards)

@@ -10,9 +10,9 @@ public class CreateGameService
         proxy = new ServerProxy();
     }
 
-    public void createGame(String username, int numPlayers, String gamename)
+    public void createGame(String username, int numPlayers, String gamename, String authToken)
     {
-        proxy.createGame(username, numPlayers, gamename);
+        proxy.createGame(username, numPlayers, gamename, authToken);
     }
 
 }

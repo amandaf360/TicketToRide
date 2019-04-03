@@ -11,7 +11,7 @@ import servermodel.Player;
 
 public class JoinGameService
 {
-    public JoinGameResponse joinGame(int gameNum, String username)
+    public JoinGameResponse joinGame(int gameNum, String username, String authToken)
     {
         JoinGameResponse response = new JoinGameResponse();
         ModelRoot model = ModelRoot.getModel();
@@ -25,6 +25,7 @@ public class JoinGameService
                 {
                     Player player = new Player();
                     player.setName(username);
+                    player.setAuthToken(authToken);
                     game.addPlayer(player);
                     ClientCommandManager manager = ClientCommandManager.getCommandManager();
                     manager.join(username, gameNum);

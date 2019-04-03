@@ -33,19 +33,18 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     GameplayState currentState;
     boolean lastTurn;
 
-    public GameplayPresenter(GameplayView view)
-    {
+    final int DEST_CARDS_TO_DRAW = 3;
+
+    public GameplayPresenter(GameplayView view) {
         this.view = view;
         clientModel = ClientModel.getInstance();
         this.clientModel.addObserver(this);
         clientModel.initializeRoutes();
-        if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName()))
-        {
+        if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName())) {
             System.out.println("It is my turn!");
             setState(MyTurnState.getInstance());
         }
-        else
-        {
+        else {
             System.out.println("It is not my turn!");
             setState(NotMyTurnState.getInstance());
         }
@@ -79,6 +78,13 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
         view.setRoutesClaimable(true);
     }
 
+    @Override
+    public boolean canDrawDestCards() {
+        if(clientModel.getActiveGame().getNumDestCardsInDeck() < 3) {
+            return false;
+        }
+        return true;
+    }
 
     public void createDoubleRouteDialog(String colorOne, String colorTwo, List<Route> routes)
     {
@@ -447,7 +453,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             }
         }
 
-        view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
+        view.setDiscardNumber(clientModel.getActiveGame().getNumDestCardsInDeck());
     }
 
     private int numDemoClicks = 0;
@@ -498,8 +504,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     public void chooseDestinationCards()
     {
         DrawDestCardService drawDestCardService = new DrawDestCardService();
-        drawDestCardService.drawCards(3);
-
+        drawDestCardService.drawCards(DEST_CARDS_TO_DRAW);
     }
 
 

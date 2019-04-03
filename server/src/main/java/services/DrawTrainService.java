@@ -48,7 +48,7 @@ public class DrawTrainService
             manager.setDeckState(data, token);
             if(!token.equals(authToken))
             {
-                manager.addTrainCardDrawn(authToken, token);
+                manager.addTrainCardDrawn(username, token);
             }
         }
         game.getPlayerByUsername(username).addTrainCarCard(cardDrawn);

@@ -44,7 +44,7 @@ public class DrawDestService
         {
             if(!authTokens.get(i).equals(authToken))
             {
-                manager.addCardsDrawn(numCards, authToken, authTokens.get(i));
+                manager.addCardsDrawn(numCards, username, authTokens.get(i));
             }
             manager.setDeckState(new DecksStateData(game), authToken);
         }

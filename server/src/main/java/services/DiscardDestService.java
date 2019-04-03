@@ -44,7 +44,7 @@ public class DiscardDestService
             {
                 manager.addCardDiscarded(username, allAuthTokens.get(i));
             }
-            manager.setDeckState(new DecksStateData(game), authToken);
+            manager.setDeckState(new DecksStateData(game), allAuthTokens.get(i));
         }
         return null;
     }

@@ -38,8 +38,12 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
 
     @Override
     public void drawCard(int cardIndex) {
+        // if the card is labeled "none", then show a toast
+        if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("none")) {
+            view.showToast("Empty slot - can't draw from here");
+        }
         // if it's the SECOND draw...
-        if(cardDrawn) {
+        else if(cardDrawn) {
             if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("locomotive")) {
                 // don't let them draw a wild if it's their second card to draw
                 view.showToast("Can't draw a wild as the second card");

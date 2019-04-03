@@ -453,7 +453,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
             }
         }
 
-        view.setDiscardNumber(ClientModel.getInstance().getActiveGame().getNumDestCardsInDeck());
+        view.setDiscardNumber(clientModel.getActiveGame().getNumDestCardsInDeck());
     }
 
     private int numDemoClicks = 0;

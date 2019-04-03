@@ -59,7 +59,7 @@ public class ClaimRouteService
             }
             else
             {
-                manager.claimRoute(numPoints, name);
+                manager.claimRoute(numPoints, authToken);
             }
             manager.addTrainsUsed(authTokens.get(i), name, cards.size());
             if(lastTurn)

@@ -33,19 +33,16 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     GameplayState currentState;
     boolean lastTurn;
 
-    public GameplayPresenter(GameplayView view)
-    {
+    public GameplayPresenter(GameplayView view) {
         this.view = view;
         clientModel = ClientModel.getInstance();
         this.clientModel.addObserver(this);
         clientModel.initializeRoutes();
-        if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName()))
-        {
+        if(currentPlayerTurn().equals(clientModel.getMainPlayer().getName())) {
             System.out.println("It is my turn!");
             setState(MyTurnState.getInstance());
         }
-        else
-        {
+        else {
             System.out.println("It is not my turn!");
             setState(NotMyTurnState.getInstance());
         }

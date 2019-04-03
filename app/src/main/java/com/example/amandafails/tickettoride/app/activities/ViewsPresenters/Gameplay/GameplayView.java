@@ -155,6 +155,8 @@ public class GameplayView extends FragmentActivity implements IGameplayView
     public void onDisplayGameStatusClicked() {
         // disable all buttons
         disableAllButtons();
+        // make routes not claimable
+        setRoutesClaimable(false);
         // set fragment to draw card fragment
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction  = manager.beginTransaction();

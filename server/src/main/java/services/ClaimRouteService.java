@@ -9,6 +9,8 @@ import servermodel.ActiveGame;
 import servermodel.Message;
 import servermodel.ModelRoot;
 import servermodel.Player;
+import servermodel.TrainCarCard;
+import servermodel.TrainCarDiscard;
 
 public class ClaimRouteService
 {
@@ -17,17 +19,25 @@ public class ClaimRouteService
 
     }
 
-    public ClaimRouteResponse claimRoute(int index, String name, List<String> cards)
+    public ClaimRouteResponse claimRoute(int index, String name, List<String> cards, String authToken)
     {
         ModelRoot root = ModelRoot.getModel();
-        ActiveGame game = root.getGameByUser(name);
+        ActiveGame game = root.getGameByAuthToken(authToken);
         game.claimRoute(index, name, cards);
         int numPoints = calculatePoints(cards.size());
-        //get rid of cards from players hands
+        Player player = game.getPlayerByUsername(name);
+        TrainCarDiscard discardPile = game.getTrainCarDiscard();
+        for(int i = 0; i < cards.size(); i++)
+        {
+            TrainCarCard discardedCard = player.removeTrainCarCard(cards.get(i));
+            if(discardedCard != null)
+            {
+                discardPile.discard(discardedCard);
+            }
+        }
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
-        ArrayList<String> usernames = game.getAllUsernames();
-        Player player = game.getPlayerByUsername(name);
+        ArrayList<String> authTokens = game.getAllAuthTokens();
         player.setNumTrains(player.getNumTrains() - cards.size());
         boolean lastTurn = false;
         if(!game.isLastTurn())
@@ -41,19 +51,20 @@ public class ClaimRouteService
         }
 
 
-        for (int i = 0; i < usernames.size(); i++)
+        for (int i = 0; i < authTokens.size(); i++)
         {
-            if (!usernames.get(i).equals(name))
+            if (!authTokens.get(i).equals(authToken))
             {
-                manager.claimRoute(index, name, cards.size(), usernames.get(i), numPoints);
-            } else
+                manager.claimRoute(index, name, cards.size(), authTokens.get(i), numPoints);
+            }
+            else
             {
                 manager.claimRoute(numPoints, name);
             }
-            manager.addTrainsUsed(usernames.get(i), name, cards.size());
+            manager.addTrainsUsed(authTokens.get(i), name, cards.size());
             if(lastTurn)
             {
-                manager.addGameHistoryMessage(usernames.get(i), new Message("Not important", "You have one turn remaining."));
+                manager.addGameHistoryMessage(authTokens.get(i), new Message("Not important", "You have one turn remaining."));
             }
 
         }

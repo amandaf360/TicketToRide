@@ -4,8 +4,10 @@ import java.util.List;
 
 import responses.BaseResponse;
 import responses.LoginResponse;
+import server.ClientCommandManager;
 import servermodel.ModelRoot;
 import servermodel.User;
+import java.util.UUID;
 
 public class LoginService
 {
@@ -40,7 +42,12 @@ public class LoginService
             return response;
         }
 
+        String authToken = UUID.randomUUID().toString();
         response.setUsername(username);
+        response.setAuthToken(authToken);
+        ClientCommandManager manager = ClientCommandManager.getCommandManager();
+        manager.addUser(authToken);
+
         return response;
     }
 }

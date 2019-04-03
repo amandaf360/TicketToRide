@@ -11,6 +11,7 @@ public class GameCreateService
     private String gameName;
     private int numPlayers;
     private String username;
+    private String authToken;
 
 
     public CreateGameResponse startGame()
@@ -29,9 +30,10 @@ public class GameCreateService
         return response;
     }
 
-    public GameCreateService(String gameName, int numPlayers, String username) {
+    public GameCreateService(String gameName, int numPlayers, String username, String authToken)  {
         this.gameName = gameName;
         this.numPlayers = numPlayers;
         this.username = username;
+        this.authToken = authToken;
     }
 }

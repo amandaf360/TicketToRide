@@ -15,6 +15,6 @@ public class CreateHistoryMessageService
         Player mainPlayer = ClientModel.getInstance().getMainPlayer();
         Message message = new Message(mainPlayer.getColor(), string);
         ServerProxy proxy = new ServerProxy();
-        proxy.sendGameHistoryMessage(mainPlayer.getName(), message);
+        proxy.sendGameHistoryMessage(mainPlayer.getName(), message, mainPlayer.getAuthToken());
     }
 }

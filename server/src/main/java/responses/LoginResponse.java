@@ -3,6 +3,7 @@ package responses;
 public class LoginResponse extends BaseResponse
 {
     private String username;
+    private String authToken;
     private String errorMessage;
 
     public LoginResponse()
@@ -25,5 +26,13 @@ public class LoginResponse extends BaseResponse
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

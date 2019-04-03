@@ -2,8 +2,9 @@ package responses;
 
 public class RegisterResponse
 {
-    String username;
-    String errorMessage;
+    private String username;
+    private String errorMessage;
+    private String authToken;
 
     public RegisterResponse(String username, String errorMessage) {
         this.username = username;
@@ -24,5 +25,13 @@ public class RegisterResponse
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

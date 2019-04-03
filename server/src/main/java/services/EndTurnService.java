@@ -10,18 +10,20 @@ import servermodel.ModelRoot;
 public class EndTurnService
 {
     private String username;
+    private String authToken;
 
-    public EndTurnService(String username)
+    public EndTurnService(String username, String authToken)
     {
         this.username = username;
+        this.authToken = authToken;
     }
 
     public void endTurn()
     {
         ModelRoot model = ModelRoot.getModel();
-        ActiveGame game = model.getGameByUser(username);
+        ActiveGame game = model.getGameByAuthToken(authToken);
         game.advanceTurn();
-        ArrayList<String> allUsers = game.getAllUsernames();
+        ArrayList<String> allAuthTokens = game.getAllAuthTokens();
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<DestPointsInfo> info = null;
         boolean gameOver = false;
@@ -39,13 +41,13 @@ public class EndTurnService
                 game.setActuallyLastTurn(true);
             }
         }
-        for(String user: allUsers)
+        for(String token: allAuthTokens)
         {
-            manager.advanceTurn(user);
+            manager.advanceTurn(token);
             if(gameOver)
             {
-                manager.setGameOver(user);
-                manager.setDestPointsInfo(user, info);
+                manager.setGameOver(token);
+                manager.setDestPointsInfo(token, info);
             }
         }
     }

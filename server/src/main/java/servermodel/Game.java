@@ -22,22 +22,9 @@ public class Game
         actuallyLastTurn = false;
         lastTurn = false;
         gameOver = false;
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
     }
 
-    public Game(Game game)
-    {
-        this.name = game.name;
-        this.maxPlayers = game.maxPlayers;
-        players = new ArrayList<>();
-        for(int i = 0; i < game.players.size(); i++)
-        {
-            players.add(new Player(game.players.get(i)));
-        }
-        this.gameNum = game.gameNum;
-        this.currentPlayers = game.currentPlayers;
-        this.creator = game.creator;
-    }
 
 
     public String getPlayerColor(Player player)

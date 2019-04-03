@@ -8,19 +8,21 @@ public class CreateGameCommand implements ICommand
     private String gameName;
     private String user;
     private int numPlayers;
+    private String authToken;
 
 
     @Override
     public CreateGameResponse execute()
     {
-        GameCreateService service = new GameCreateService(gameName, numPlayers, user);
+        GameCreateService service = new GameCreateService(gameName, numPlayers, user, authToken);
         return service.startGame();
     }
 
-    public CreateGameCommand(String user, int numPlayers, String gameName) {
+    public CreateGameCommand(String user, int numPlayers, String gameName, String authToken) {
         this.gameName = gameName;
         this.user = user;
         this.numPlayers = numPlayers;
+        this.authToken = authToken;
     }
 
     public String getGameName() {

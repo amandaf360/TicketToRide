@@ -262,7 +262,7 @@ public class PollCommand implements ICommand
 
                     Player player = new Player();
                     player.setName(username);
-                    player.setAuthToken(username);
+                    player.setAuthToken(model.getUser().getAuthToken());
                     player.setColor("blue");
 
                     Game game = model.getGameByNumber(gameNum);

@@ -84,6 +84,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         final String dialogTitle = "Which route do you want to claim?";
 
+        //final String[] singleChoiceItems = {(colorOne.substring(0,1).toUpperCase() + colorOne.substring(1)), (colorTwo.substring(0,1).toUpperCase() + colorTwo.substring(1))};
         final String[] singleChoiceItems = {colorOne, colorTwo};
         final int selection = 0;
         final List<Route> finalRoutes = new ArrayList<Route>();
@@ -139,6 +140,10 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
     {
         final String dialogTitle = "Which color do you want to use?";
         final Route route1 = route;
+//
+//        for(int i = 0; i < colors.size(); i++) {
+//            colors.set(i, (colors.get(i).substring(0,1).toUpperCase() + colors.get(i).substring(1)));
+//        }
 
         setGrayRouteColor("black");
         String[] singleChoiceItems = new String[colors.size()];
@@ -335,7 +340,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().getPlayerHandTrains().discardCard(relevantColor);
             }
             ClaimRouteService service = new ClaimRouteService();
-            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards, clientModel.getMainPlayer().getAuthToken());
 
             CreateHistoryMessageService historyService = new CreateHistoryMessageService();
             historyService.sendMessage("Claimed the route from " + route.getCityOne() + " to " + route.getCityTwo()
@@ -360,7 +365,7 @@ public class GameplayPresenter implements IGameplayPresenter, Observer
                 clientModel.getMainPlayer().getPlayerHandTrains().discardCard("locomotive");
             }
             ClaimRouteService service = new ClaimRouteService();
-            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards);
+            service.claimRoute(clientModel.getMainPlayer().getName(), routeIndex, cards, clientModel.getMainPlayer().getAuthToken());
 
             CreateHistoryMessageService historyService = new CreateHistoryMessageService();
             historyService.sendMessage("Claimed the route from " + route.getCityOne() + " to " + route.getCityTwo()

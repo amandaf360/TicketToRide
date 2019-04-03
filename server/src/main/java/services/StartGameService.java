@@ -36,7 +36,7 @@ public class StartGameService
                 activeGame.setPlayers(currentGame.getPlayers());
                 activeGame.setGameNum(currentGame.getGameNum());
                 ClientCommandManager manager = ClientCommandManager.getCommandManager();
-                ArrayList<String> usernames = activeGame.getAllUsernames();
+                ArrayList<String> usernames = activeGame.getAllAuthTokens();
                 TrainCarDeck deck = activeGame.getTrainDeck();
                 ArrayList<TrainCarCard> faceUps = new ArrayList<>();
                 for(int j = 0; j < 5; j++)

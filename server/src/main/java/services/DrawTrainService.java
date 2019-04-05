@@ -34,6 +34,10 @@ public class DrawTrainService
         if(index == -1)//drawing from the deck
         {
             cardDrawn = deck.draw();
+            if(deck.size() == 0)
+            {
+                deck.combineWithDiscard();
+            }
         }
         else//drawing from the face up pile.
         {

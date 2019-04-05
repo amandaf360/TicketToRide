@@ -82,9 +82,13 @@ public class FaceUpCards
     {
         for(int i = 0; i < cards.size(); i++)
         {
-            if(cards.get(i).getColor().equals("none"))
+            if(cards.get(i).getColor().equals("none") && deck.size() != 0)
             {
-                cards.set(i, deck.draw());
+                TrainCarCard cardDrawn = deck.draw();
+                if(cardDrawn != null)
+                {
+                    cards.set(i, cardDrawn);
+                }
             }
         }
     }

@@ -6,10 +6,12 @@ import java.util.List;
 import responses.ClaimRouteResponse;
 import server.ClientCommandManager;
 import servermodel.ActiveGame;
+import servermodel.DecksStateData;
 import servermodel.Message;
 import servermodel.ModelRoot;
 import servermodel.Player;
 import servermodel.TrainCarCard;
+import servermodel.TrainCarDeck;
 import servermodel.TrainCarDiscard;
 
 public class ClaimRouteService
@@ -35,6 +37,11 @@ public class ClaimRouteService
                 discardPile.discard(discardedCard);
             }
         }
+        TrainCarDeck deck = game.getTrainDeck();
+        if(deck.size() == 0)
+        {
+            deck.combineWithDiscard();
+        }
 
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> authTokens = game.getAllAuthTokens();
@@ -53,6 +60,7 @@ public class ClaimRouteService
 
         for (int i = 0; i < authTokens.size(); i++)
         {
+            manager.setDeckState(new DecksStateData(game), authTokens.get(i));
             if (!authTokens.get(i).equals(authToken))
             {
                 manager.claimRoute(index, name, cards.size(), authTokens.get(i), numPoints);

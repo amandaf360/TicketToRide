@@ -12,7 +12,7 @@ public class TrainCarDeck
     public TrainCarDeck()
     {
         deck = new ArrayList<>();
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 11; i++)
         {
             deck.add(new TrainCarCard("red"));
         }
@@ -20,7 +20,7 @@ public class TrainCarDeck
         {
             deck.add(new TrainCarCard("orange"));
         }
-        for(int i = 0; i < 12; i++)
+        /*for(int i = 0; i < 12; i++)
         {
             deck.add(new TrainCarCard("yellow"));
         }
@@ -47,7 +47,7 @@ public class TrainCarDeck
         for(int i = 0; i < 14; i++)
         {
             deck.add(new TrainCarCard("locomotive"));
-        }
+        }*/
         shuffle();
     }
 
@@ -62,16 +62,13 @@ public class TrainCarDeck
         if(deck.size() == 0)
         {
             combineWithDiscard();
-            faceUpCards.checkNulls(this);
         }
 
         if(deck.size() != 0)
         {
             drawnCard = deck.get(0);
             deck.remove(0);
-
         }
-
 
         return drawnCard;
     }
@@ -80,6 +77,7 @@ public class TrainCarDeck
     {
         deck.addAll(discardPile.getDiscardPile());
         discardPile.clearPile();
+        faceUpCards.checkNulls(this);
         shuffle();
     }
 

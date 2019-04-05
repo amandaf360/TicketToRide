@@ -1,5 +1,6 @@
 package com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gameplay.TrainCard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -37,7 +38,9 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
     }
 
     @Override
-    public void drawCard(int cardIndex) {
+    public void drawCard(int cardIndex)
+    {
+        int i = 0;
         // if the card is labeled "none", then show a toast
         if((cardIndex != -1) && clientModel.getActiveGame().getFaceUpCards().get(cardIndex).getColor().equals("none")) {
             view.showToast("Empty slot - can't draw from here");
@@ -76,10 +79,35 @@ public class TrainCardDeckFragmentPresenter implements ITrainCardDeckFragmentPre
                 view.setExitEnabled(false);
                 // acknowledge that they've drawn their first card
                 cardDrawn = true;
+                if(cardIndex == -1)
+                {
+                    clientModel.setActiveGameTrainCards(clientModel.getActiveGame().getNumCardsInDeck() - 1);
+                }
                 // call draw card service
                 DrawTrainCardService drawTrainCardService = new DrawTrainCardService();
                 drawTrainCardService.drawCard(cardIndex);
+                firstDrawNoMoreCards();
             }
+        }
+    }
+
+    private void firstDrawNoMoreCards()
+    {
+        int numNones = 0;
+        ClientModel model = ClientModel.getInstance();
+        List<TrainCarCard> cards = model.getActiveGame().getFaceUpCards();
+        for(int i = 0; i < 5; i++)
+        {
+            if(cards.get(i).getColor().equals("none"))
+            {
+                numNones++;
+            }
+        }
+        if(numNones == 4 && model.getActiveGame().getNumCardsInDeck() <= 0)
+        {
+            ServerProxy proxy = new ServerProxy();
+            proxy.endCurrentTurn(clientModel.getMainPlayer().getName(), clientModel.getMainPlayer().getAuthToken());
+            view.popFragment(false);
         }
     }
 

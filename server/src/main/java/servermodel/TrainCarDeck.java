@@ -12,39 +12,39 @@ public class TrainCarDeck
     public TrainCarDeck()
     {
         deck = new ArrayList<>();
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("red"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("orange"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("yellow"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("green"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("blue"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("purple"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++)
         {
             deck.add(new TrainCarCard("black"));
         }
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 1; i++) // should be 12!!
         {
             deck.add(new TrainCarCard("white"));
         }
-        for(int i = 0; i < 14; i++)
+        for(int i = 0; i < 1; i++) // should be 14!!
         {
             deck.add(new TrainCarCard("locomotive"));
         }

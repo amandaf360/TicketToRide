@@ -182,11 +182,6 @@ public class ActiveGame
             return;
         }
 
-        for(String str : cards)
-        {
-            trainCarDiscard.discard(new TrainCarCard(str));
-        }
-
         Player player =  getPlayerByName(name);
         routes.get(index).setClaimedBy(player);
         player.addRoute();

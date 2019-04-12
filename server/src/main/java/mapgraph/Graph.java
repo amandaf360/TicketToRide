@@ -2,6 +2,8 @@ package mapgraph;
 
 import java.util.ArrayList;
 
+import servermodel.DestCard;
+import servermodel.DestCardDeck;
 import servermodel.Route;
 
 public class Graph
@@ -486,6 +488,25 @@ public class Graph
     public void claimRoute(String username, int index)
     {
         routeList.get(index).setOwner(username);
+    }
+
+    public void testRoutes(String username, DestCardDeck deck)
+    {
+        for(int i = 0; i < routeList.size(); i++)
+        {
+            claimRoute(username, i);
+        }
+
+        for(int i = 0; i < deck.size(); i++)
+        {
+            DestCard card = deck.draw();
+            if(!completedRoute(username, card.getCityOne(), card.getCityTwo()))
+            {
+                System.out.println("Failed to connect " + card.getCityOne() + " and " + card.getCityTwo());
+            }
+        }
+        System.out.println("Done testing");
+
     }
 
 

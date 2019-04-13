@@ -1,6 +1,8 @@
-package dao;
+package PluginManager;
 
 import java.util.List;
+
+import PluginInterfaces.IPersistanceProvider;
 
 public class PluginManager {
     private List<IPersistanceProvider> plugins;

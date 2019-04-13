@@ -4,8 +4,8 @@ import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
 
-import dao.IPersistanceProvider;
-import dao.PluginManager;
+import PluginInterfaces.IPersistanceProvider;
+import PluginManager.PluginManager;
 
 
 public class Server

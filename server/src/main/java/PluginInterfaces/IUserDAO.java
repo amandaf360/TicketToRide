@@ -1,8 +1,9 @@
-package dao;
+package PluginInterfaces;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface IUserDAO
+{
     void addUser(byte[] s);
     List<byte[]> getAllUsers();
 }

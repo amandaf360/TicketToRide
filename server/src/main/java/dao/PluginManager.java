@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 
 public class PluginManager {
-    private List<ITransactionManager> plugins;
+    private List<IPersistanceProvider> plugins;
 
     void loadPlugins() {
         // TODO: implement

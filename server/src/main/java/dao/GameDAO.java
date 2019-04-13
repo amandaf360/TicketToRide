@@ -6,9 +6,9 @@ import commands.ICommand;
 import servermodel.ActiveGame;
 
 public interface GameDAO {
-    void addCommand(String s);
-    void setGameState(String s);
+    void addCommand(byte[] s, int gameNum);
+    void setGameState(byte[] s, int gameNum);
     void clearCommands();
-    List<ActiveGame> getAllGames();
-    List<ICommand> getAllGameCommands(String s);
+    byte[] getAllGames();
+    byte[] getAllGameCommands(int gameNum);
 }

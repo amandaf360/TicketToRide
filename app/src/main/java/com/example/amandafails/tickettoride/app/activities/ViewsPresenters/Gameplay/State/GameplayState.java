@@ -5,8 +5,8 @@ import com.example.amandafails.tickettoride.app.activities.ViewsPresenters.Gamep
 public interface GameplayState
 {
     // called when the state is entered
-    public void enter(GameplayPresenter presenter);
+    void enter(GameplayPresenter presenter);
 
     // called when the state is exited
-    public void exit(GameplayPresenter presenter);
+    void exit(GameplayPresenter presenter);
 }

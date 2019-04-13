@@ -44,9 +44,10 @@ public class Server
 
         // TODO: Choose which plugin to use based on command line args? - how to specify the plugin
         // directory, plugin jar name and plugin class name
+        String pluginDir = System.getProperty("user.dir").toString() + "\\server";
         PluginManager manager = new PluginManager();
         try {
-            DBPlugin dbPlugin = getDBPluginInstance("h", "i", "!");
+            DBPlugin dbPlugin = getDBPluginInstance(pluginDir, "i", "!");
             dbPlugin.getMessage();  // just displays what plugin was chosen ("toString" essentially)
         }
         catch (Exception e) {
@@ -73,6 +74,9 @@ public class Server
 
     public static void main(String[] args)
     {
+        System.out.println("num args: " + args.length);
+        // to get current working directory
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         if(args.length == 0)
         {
             new Server().run("3000");

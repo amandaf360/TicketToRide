@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
 
-import dao.DBPlugin;
+import dao.IPersistanceProvider;
 import dao.PluginManager;
 
 
@@ -44,11 +44,12 @@ public class Server
 
         // TODO: Choose which plugin to use based on command line args? - how to specify the plugin
         // directory, plugin jar name and plugin class name
-        String pluginDir = System.getProperty("user.dir").toString() + "\\server";
+        String pluginDir = System.getProperty("user.dir") + "\\server\\PluginJars";
+        String className = "Plugin";
         PluginManager manager = new PluginManager();
         try {
-            DBPlugin dbPlugin = getDBPluginInstance(pluginDir, "i", "!");
-            dbPlugin.getMessage();  // just displays what plugin was chosen ("toString" essentially)
+            IPersistanceProvider dbPlugin = getDBPluginInstance(pluginDir, persistanceType, className);
+            dbPlugin.getLabel();  // just displays what plugin was chosen ("toString" essentially)
         }
         catch (Exception e) {
             System.out.println("Unable to load desired plugin");
@@ -59,21 +60,20 @@ public class Server
         System.out.println("Server started");
     }
 
-    private DBPlugin getDBPluginInstance(String pluginDirectory, String pluginJarName, String pluginClassName) throws Exception {
+    private IPersistanceProvider getDBPluginInstance(String pluginDirectory, String pluginJarName, String pluginClassName) throws Exception {
         // Get a class loader and set it up to load the jar file
         File pluginJarFile = new File(pluginDirectory, pluginJarName);
         URL pluginURL = pluginJarFile.toURI().toURL();
         URLClassLoader loader = new URLClassLoader(new URL[]{pluginURL});
 
         // Load the jar file's plugin class, create and return an instance
-        Class<? extends DBPlugin> dbPluginClass = (Class<DBPlugin>) loader.loadClass(pluginClassName);
+        Class<? extends IPersistanceProvider> dbPluginClass = (Class<IPersistanceProvider>) loader.loadClass(pluginClassName);
 
         // TODO: might need to change the parameters for "getDeclaredConstructor"
         return dbPluginClass.getDeclaredConstructor(null).newInstance();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         System.out.println("num args: " + args.length);
         // to get current working directory
         System.out.println("Working Directory = " + System.getProperty("user.dir"));

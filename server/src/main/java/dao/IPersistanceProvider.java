@@ -1,10 +1,10 @@
 package dao;
 
-public interface ITransactionManager {
+public interface IPersistanceProvider {
     boolean beginTransaction();
     boolean endTransaction();
     UserDAO getUserDAO();
     GameDAO getGameDAO();
     String getLabel();
-    //pointer to DAO factory
+    //pointer to DAO factory??
 }

@@ -1,10 +1,9 @@
-package dao;
+package PluginInterfaces;
 
 public interface IPersistanceProvider {
     boolean beginTransaction();
     boolean endTransaction();
-    UserDAO getUserDAO();
-    GameDAO getGameDAO();
+    IUserDAO getUserDAO();
+    IGameDAO getGameDAO();
     String getLabel();
-    //pointer to DAO factory??
 }

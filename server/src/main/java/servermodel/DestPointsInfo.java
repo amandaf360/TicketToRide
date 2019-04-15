@@ -1,6 +1,8 @@
 package servermodel;
 
-public class DestPointsInfo
+import java.io.Serializable;
+
+public class DestPointsInfo implements Serializable
 {
     private String username;
     private int positivePoints;

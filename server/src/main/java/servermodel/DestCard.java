@@ -1,6 +1,8 @@
 package servermodel;
 
-public class DestCard
+import java.io.Serializable;
+
+public class DestCard implements Serializable
 {
     private String cityOne;
     private String cityTwo;

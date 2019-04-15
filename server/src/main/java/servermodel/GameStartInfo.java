@@ -1,8 +1,9 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameStartInfo
+public class GameStartInfo implements Serializable
 {
     private ArrayList<String> playersAndColors;
     private ArrayList<TrainCarCard> cardsInHand;

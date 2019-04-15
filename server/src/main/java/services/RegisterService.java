@@ -41,6 +41,7 @@ public class RegisterService
             response.setAuthToken(authToken);
             ClientCommandManager commandManager = ClientCommandManager.getCommandManager();
             commandManager.addUser(authToken);
+            model.addAuthTokenToDatabase(authToken);
             return response;
         }
         else

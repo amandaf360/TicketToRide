@@ -1,13 +1,15 @@
 package commands;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import responses.BaseResponse;
 import responses.ClaimRouteResponse;
+import servermodel.ModelRoot;
 import services.ClaimRouteService;
 
-public class ClaimRouteCommand implements ICommand
+public class ClaimRouteCommand implements ICommand, Serializable
 {
 
     private int index;
@@ -27,6 +29,8 @@ public class ClaimRouteCommand implements ICommand
     {
         ClaimRouteService service = new ClaimRouteService();
         ClaimRouteResponse response = service.claimRoute(index, name, cards, authToken);
+        int gameNum = ModelRoot.getModel().getGameByAuthToken(authToken).getGameNum();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return response;
     }
 }

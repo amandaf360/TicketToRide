@@ -1,6 +1,6 @@
 package servermodel;
 
-public class User
+public class User implements java.io.Serializable
 {
     private String username;
     private String password;
@@ -35,5 +35,10 @@ public class User
 
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
+    }
+
+    public byte[] getSerializadVersion()
+    {
+        return new byte[2];
     }
 }

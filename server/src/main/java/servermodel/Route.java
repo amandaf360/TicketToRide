@@ -2,9 +2,10 @@ package servermodel;
 
 
 
+import java.io.Serializable;
 import java.util.StringTokenizer;
 
-public class Route
+public class Route implements Serializable
 {
     String cityOne;
     String cityTwo;

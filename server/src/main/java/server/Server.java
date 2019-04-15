@@ -42,14 +42,11 @@ public class Server
 
         server.createContext("/", new CommandHandler());
 
-        
+
         PluginManager manager = new PluginManager();
         try
         {
-            manager.loadPlugins();
-
-
-            ModelRoot.getModel().setDataBase(manager.selectPlugin(persistanceType));
+            ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
             ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
         }
         catch (Exception e)

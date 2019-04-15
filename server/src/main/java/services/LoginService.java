@@ -47,6 +47,7 @@ public class LoginService
         response.setAuthToken(authToken);
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         manager.addUser(authToken);
+        model.addAuthTokenToDatabase(authToken);
 
         return response;
     }

@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import services.EndTurnService;
 
-public class EndTurnCommand implements ICommand
+public class EndTurnCommand implements ICommand, Serializable
 {
     private String username;
     private String authToken;

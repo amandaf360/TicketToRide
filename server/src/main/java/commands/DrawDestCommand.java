@@ -1,10 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import responses.DrawDestResponse;
 import services.DrawDestService;
 
-public class DrawDestCommand implements ICommand
+public class DrawDestCommand implements ICommand, Serializable
 {
     private int numCards;
     private String username;

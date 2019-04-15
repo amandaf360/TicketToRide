@@ -1,9 +1,10 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TrainCarDeck
+public class TrainCarDeck implements Serializable
 {
     private ArrayList<TrainCarCard> deck;
     private TrainCarDiscard discardPile;

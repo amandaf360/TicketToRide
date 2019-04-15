@@ -1,8 +1,9 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ColorAssigner
+public class ColorAssigner implements Serializable
 {
     private ArrayList<String> colorList;
     private int index;

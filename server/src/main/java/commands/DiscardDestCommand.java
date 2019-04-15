@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import services.DiscardDestService;
 
-public class DiscardDestCommand implements ICommand
+public class DiscardDestCommand implements ICommand, Serializable
 {
 
     private String cityOne;

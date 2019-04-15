@@ -1,9 +1,10 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DestCardDeck
+public class DestCardDeck implements Serializable
 {
     private ArrayList<DestCard> deck;
 

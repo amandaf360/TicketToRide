@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import services.SendMessageService;
 
-public class SendMessageCommand implements ICommand
+public class SendMessageCommand implements ICommand, Serializable
 {
 
     private String message;

@@ -1,13 +1,14 @@
 package commands;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import responses.BaseResponse;
 import responses.ClaimRouteResponse;
 import services.ClaimRouteService;
 
-public class ClaimRouteCommand implements ICommand
+public class ClaimRouteCommand implements ICommand, Serializable
 {
 
     private int index;

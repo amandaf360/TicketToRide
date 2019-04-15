@@ -1,6 +1,8 @@
 package servermodel;
 
-public class TrainCarCard
+import java.io.Serializable;
+
+public class TrainCarCard implements Serializable
 {
     private String color;
 

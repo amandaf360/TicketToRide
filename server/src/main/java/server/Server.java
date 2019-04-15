@@ -6,6 +6,7 @@ import com.sun.net.httpserver.*;
 
 import PluginInterfaces.IPersistanceProvider;
 import PluginManager.PluginManager;
+import servermodel.ModelRoot;
 
 
 public class Server
@@ -47,6 +48,9 @@ public class Server
         PluginManager manager = new PluginManager();
         try {
             manager.loadPlugins();
+
+            ModelRoot.getModel().setDataBase(manager.selectPlugin(persistanceType));
+            ModelRoot.getModel().setgameUpdateLimit(numCommandsBetweenCheckpoints);
         }
         catch (Exception e) {
 

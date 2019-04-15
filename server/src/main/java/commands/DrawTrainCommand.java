@@ -1,10 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import responses.DrawTrainResponse;
 import services.DrawTrainService;
 
-public class DrawTrainCommand implements ICommand
+public class DrawTrainCommand implements ICommand, Serializable
 {
 
     private String username;

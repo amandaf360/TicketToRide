@@ -1,10 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import servermodel.Message;
 import services.GameHistoryService;
 
-public class GameHistoryCommand implements ICommand
+public class GameHistoryCommand implements ICommand, Serializable
 {
     private Message message;
     private String user;

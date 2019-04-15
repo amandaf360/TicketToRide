@@ -1,11 +1,12 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import mapgraph.Graph;
 
-public class ActiveGame
+public class ActiveGame implements Serializable
 {
     private DestCardDeck destinationDeck;
     private TrainCarDeck trainDeck;

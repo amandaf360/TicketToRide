@@ -13,20 +13,20 @@ public class PluginManager {
 
     // load ALL plugins in a directory
     public void loadPlugins() throws Exception {
-        // TODO: scan directory and load all plugins?
-//        // Getting the jar URL which contains target class
-//        URL[] classLoaderUrls = new URL[]{new URL(System.getProperty("user.dir") + "/server/PluginJars/*.jar")};
-//        for(URL u : classLoaderUrls) {
-//            // Create a new URLClassLoader
-//            URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
-//
-//            // Load the target class
-//            Class<?> beanClass = urlClassLoader.loadClass("com.jcg.Bean");
-//
-//            // Create a new instance from the loaded class
-//            Constructor<?> constructor = beanClass.getConstructor();
-//            Object beanObj = constructor.newInstance();
-//        }
+        String className = "Plugin";
+         //TODO: scan directory and load all plugins?
+        // Getting the jar URL which contains target class
+        URL[] classLoaderUrls = new URL[]{new URL(System.getProperty("user.dir") + "/server/PluginJars/*.jar")};
+        for(URL u : classLoaderUrls) {
+
+            URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
+
+            Class<? extends IPersistanceProvider> dbPluginClass = (Class<IPersistanceProvider>) urlClassLoader.loadClass(className);
+
+
+            IPersistanceProvider object = dbPluginClass.getDeclaredConstructor(null).newInstance();
+            plugins.add(object);
+        }
     }
 
     // return a certain plugin
@@ -37,12 +37,20 @@ public class PluginManager {
 //
 //        String className = "Plugin";
 //        // Load the jar file's plugin class, create and return an instance
-//        Class<? extends IPersistanceProvider> dbPluginClass = (Class<IPersistanceProvider>) loader.loadClass(className);
 //
 //        // TODO: might need to change the parameters for "getDeclaredConstructor"
-//        return dbPluginClass.getDeclaredConstructor(null).newInstance();
 
         // FIX THIS
+
+        for(IPersistanceProvider plugin : plugins)
+        {
+            if(plugin.getLabel().equals(jarName))
+            {
+                return plugin;
+            }
+        }
+
+        System.out.println("THIS SHOULD NOT EVER PRINT OUT EVER\nYOU\'RE PROBABLY PUTTING IN THE WRONG JARNAME");
         return plugins.get(0);
     }
 

@@ -42,31 +42,22 @@ public class Server
 
         server.createContext("/", new CommandHandler());
 
-        String pluginDir = System.getProperty("user.dir") + "\\server\\PluginJars";
-        String className = "Plugin";
+        
         PluginManager manager = new PluginManager();
-        try {
+        try
+        {
             manager.loadPlugins();
+
 
             ModelRoot.getModel().setDataBase(manager.selectPlugin(persistanceType));
             ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
         }
-        catch (Exception e) {
-
+        catch (Exception e)
+        {
+            System.out.println("Unable to load plugin. Come on guys.\n");
+            e.printStackTrace();
         }
 
-        // TODO: use manager.selectPlugin(persistanceType)
-
-        /*
-        try {
-            IPersistanceProvider dbPlugin = getDBPluginInstance(pluginDir, persistanceType, className);
-            dbPlugin.getLabel();  // just displays what plugin was chosen ("toString" essentially)
-        }
-        catch (Exception e) {
-            System.out.println("Unable to load desired plugin");
-            return;
-        }
-*/
         server.start();
         System.out.println("Server started");
     }

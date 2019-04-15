@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import responses.BaseResponse;
 import responses.DrawDestResponse;
+import servermodel.ModelRoot;
 import services.DrawDestService;
 
 public class DrawDestCommand implements ICommand, Serializable
@@ -23,6 +24,10 @@ public class DrawDestCommand implements ICommand, Serializable
     {
         DrawDestService service = new DrawDestService();
         DrawDestResponse response = service.drawCards(numCards, username, authToken);
+
+
+        int gameNum = ModelRoot.getModel().getGameByAuthToken(authToken).getGameNum();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return response;
     }
 }

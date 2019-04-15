@@ -3,6 +3,7 @@ package commands;
 import java.io.Serializable;
 
 import responses.BaseResponse;
+import servermodel.ModelRoot;
 import services.SendMessageService;
 
 public class SendMessageCommand implements ICommand, Serializable
@@ -17,6 +18,7 @@ public class SendMessageCommand implements ICommand, Serializable
     {
         SendMessageService service = new SendMessageService(message, username, color, gameNum);
         service.sendMessage();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return null;
     }
 

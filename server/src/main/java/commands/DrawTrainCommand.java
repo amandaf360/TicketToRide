@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import responses.BaseResponse;
 import responses.DrawTrainResponse;
+import servermodel.ModelRoot;
 import services.DrawTrainService;
 
 public class DrawTrainCommand implements ICommand, Serializable
@@ -23,6 +24,10 @@ public class DrawTrainCommand implements ICommand, Serializable
     {
         DrawTrainService service = new DrawTrainService(username, index, authToken);
         DrawTrainResponse response = service.draw();
+
+
+        int gameNum = ModelRoot.getModel().getGameByAuthToken(authToken).getGameNum();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return response;
     }
 }

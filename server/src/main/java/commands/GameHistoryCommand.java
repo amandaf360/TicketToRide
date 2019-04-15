@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import responses.BaseResponse;
 import servermodel.Message;
+import servermodel.ModelRoot;
 import services.GameHistoryService;
 
 public class GameHistoryCommand implements ICommand, Serializable
@@ -16,6 +17,9 @@ public class GameHistoryCommand implements ICommand, Serializable
     {
         GameHistoryService service = new GameHistoryService();
         service.sendGameHistoryMessage(message, user, authToken);
+
+        int gameNum = ModelRoot.getModel().getGameByAuthToken(authToken).getGameNum();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return null;
     }
 

@@ -29,6 +29,21 @@ public class ModelRoot
         userList = new ArrayList<>();
         gameList = new ArrayList<>();
         activeGameList = new ArrayList<>();
+        haveLoaded = false;
+    }
+
+    public void loadState()
+    {
+        userDAO.getAllTokens();
+        userDAO.getAllUsers();
+        gameDAO.getAllGames();
+        // then you'll have all the games.
+        // The tough part is going to be parsing all the commands.
+        // loop through all the game numbers I suppose?
+        // Getting the game numbers will be tough.
+        // TODO: Learn how to serialize from Dallin.
+
+        haveLoaded = true;
     }
 
     private Graph mapGraph;
@@ -41,6 +56,7 @@ public class ModelRoot
     private ArrayList<ActiveGame> activeGameList;
     private int gameUpdateLimit;
     private Map<Integer, Integer> gameUpdates;
+    private boolean haveLoaded;
 
 
     public IPersistanceProvider getDataBase()
@@ -72,6 +88,7 @@ public class ModelRoot
         return null;
     }
 
+
     public ActiveGame getActiveGameByGameNum(int gameNum)
     {
         for(ActiveGame game : activeGameList)
@@ -86,32 +103,34 @@ public class ModelRoot
 
     public void addGameCommandToDataBase(int gameNum, ICommand command)
     {
-        if(gameUpdates == null)
+        if(haveLoaded)
         {
-            gameUpdates = new HashMap<Integer, Integer>();
-            for(Game game : gameList)
+            if (gameUpdates == null)
             {
-                gameUpdates.put(game.getGameNum(), 0);
+                gameUpdates = new HashMap<Integer, Integer>();
+                for (Game game : gameList)
+                {
+                    gameUpdates.put(game.getGameNum(), 0);
+                }
+
             }
 
+            if (gameUpdates.get(gameNum) >= gameUpdateLimit)
+            {
+                if (command.getClass() == JoinGameCommand.class)
+                {
+                    gameDAO.setGameState(serialize(getGameByGameNum(gameNum)), gameNum, "game");
+                    gameUpdates.put(gameNum, 0);
+                } else
+                {
+                    gameDAO.setGameState(serialize(getActiveGameByGameNum(gameNum)), gameNum, "activeGame");
+                    gameUpdates.put(gameNum, 0);
+                }
+            }
+
+            gameDAO.addCommand(serialize(command), gameNum);
+            gameUpdates.put(gameNum, gameUpdates.get(gameNum) + 1);
         }
-
-        if(gameUpdates.get(gameNum) >= gameUpdateLimit)
-        {
-            if(command.getClass() == JoinGameCommand.class)
-            {
-                gameDAO.setGameState(serialize(getGameByGameNum(gameNum)), gameNum, "game");
-                gameUpdates.put(gameNum, 0);
-            }
-            else
-            {
-                gameDAO.setGameState(serialize(getActiveGameByGameNum(gameNum)), gameNum, "activeGame");
-                gameUpdates.put(gameNum, 0);
-            }
-        }
-
-        gameDAO.addCommand(serialize(command), gameNum);
-        gameUpdates.put(gameNum, gameUpdates.get(gameNum) + 1);
 
     }
 
@@ -151,13 +170,19 @@ public class ModelRoot
 
     public void addUser(User user)
     {
-        userDAO.addUser(serialize(user));
+        if(haveLoaded)
+        {
+            userDAO.addUser(serialize(user));
+        }
         userList.add(user);
     }
 
     public void addAuthTokenToDatabase(String str)
     {
-        userDAO.addAuthToken(str);
+        if(haveLoaded)
+        {
+            userDAO.addAuthToken(str);
+        }
     }
 
     public ArrayList<User> getUserList()
@@ -180,7 +205,10 @@ public class ModelRoot
 
     public void addGame(Game game)
     {
-        gameDAO.setGameState(serialize(game), game.getGameNum(), "game");
+        if(haveLoaded)
+        {
+            gameDAO.setGameState(serialize(game), game.getGameNum(), "game");
+        }
         gameList.add(game);
     }
 
@@ -191,7 +219,10 @@ public class ModelRoot
 
     public void addActiveGame(ActiveGame game)
     {
-        gameDAO.setGameState(serialize(game), game.getGameNum(), "activeGame");
+        if(haveLoaded)
+        {
+            gameDAO.setGameState(serialize(game), game.getGameNum(), "activeGame");
+        }
         activeGameList.add(game);
     }
 

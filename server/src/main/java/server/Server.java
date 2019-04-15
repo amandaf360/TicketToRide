@@ -6,6 +6,7 @@ import com.sun.net.httpserver.*;
 
 import PluginManager.PluginManager;
 import servermodel.ModelRoot;
+import services.ClaimRouteService;
 
 
 public class Server
@@ -42,18 +43,28 @@ public class Server
 
         server.createContext("/", new CommandHandler());
 
+        if(persistanceType != null)
+        {
+            PluginManager manager = new PluginManager();
+            try
+            {
+                ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
+                ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
+            } catch (Exception e)
+            {
+                System.out.println("Unable to load plugin. Come on guys.\n");
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            System.out.println("Things are going to break pretty soon because you haven't " +
+                    "provided a plugin or a database");
+        }
 
-        PluginManager manager = new PluginManager();
-        try
-        {
-            ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
-            ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
-        }
-        catch (Exception e)
-        {
-            System.out.println("Unable to load plugin. Come on guys.\n");
-            e.printStackTrace();
-        }
+
+        //We have to load the server here.
+        ModelRoot.getModel().loadState();
 
         server.start();
         System.out.println("Server started");

@@ -1,10 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import responses.PollResponse;
 import services.PollService;
 
-public class PollCommand implements ICommand
+public class PollCommand implements ICommand, Serializable
 {
     private String username;
     private boolean firstPoll;

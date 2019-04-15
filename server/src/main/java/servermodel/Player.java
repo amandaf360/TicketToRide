@@ -1,8 +1,9 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player
+public class Player implements Serializable
 {
     private String color;
     private String authToken;

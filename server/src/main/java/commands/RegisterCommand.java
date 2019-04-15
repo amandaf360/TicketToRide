@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import services.RegisterService;
 
-public class RegisterCommand implements ICommand
+public class RegisterCommand implements ICommand, Serializable
 {
     private String username;
     private String password;

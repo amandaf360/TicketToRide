@@ -1,8 +1,9 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FaceUpCards
+public class FaceUpCards implements Serializable
 {
     private ArrayList<TrainCarCard> cards;
     private TrainCarDiscard discardPile;

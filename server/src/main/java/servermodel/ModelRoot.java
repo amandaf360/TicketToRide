@@ -55,7 +55,7 @@ public class ModelRoot
         this.userDAO = dataBase.getUserDAO();
     }
 
-    public void setgameUpdateLimit(int limit)
+    public void setGameUpdateLimit(int limit)
     {
         gameUpdateLimit = limit;
     }
@@ -114,13 +114,6 @@ public class ModelRoot
         gameUpdates.put(gameNum, gameUpdates.get(gameNum) + 1);
 
     }
-
-    public void addGameToDatabase()
-    {
-
-    }
-
-
 
     public byte[] serialize(Serializable obj)
     {

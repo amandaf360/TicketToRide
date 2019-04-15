@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
 
-import PluginInterfaces.IPersistanceProvider;
 import PluginManager.PluginManager;
 import servermodel.ModelRoot;
 
@@ -50,7 +49,7 @@ public class Server
             manager.loadPlugins();
 
             ModelRoot.getModel().setDataBase(manager.selectPlugin(persistanceType));
-            ModelRoot.getModel().setgameUpdateLimit(numCommandsBetweenCheckpoints);
+            ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
         }
         catch (Exception e) {
 

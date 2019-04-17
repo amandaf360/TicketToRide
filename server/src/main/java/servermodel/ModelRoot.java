@@ -18,6 +18,7 @@ import PluginInterfaces.IUserDAO;
 import commands.ICommand;
 import commands.JoinGameCommand;
 import mapgraph.Graph;
+import server.ClientCommandManager;
 
 public class ModelRoot
 {
@@ -35,10 +36,10 @@ public class ModelRoot
     public void loadState()
     {
         userDAO.getAllTokens();
+
         userDAO.getAllUsers();
         gameDAO.getAllGames();
         // then you'll have all the games.
-        // The tough part is going to be parsing all the commands.
         // loop through all the game numbers I suppose?
         // Getting the game numbers will be tough.
         // TODO: Learn how to serialize from Dallin.

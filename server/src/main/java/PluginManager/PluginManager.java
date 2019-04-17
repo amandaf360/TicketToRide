@@ -14,19 +14,19 @@ public class PluginManager {
     // load ALL plugins in a directory
     public void loadPlugins() throws Exception {
         // TODO: scan directory and load all plugins?
-//        // Getting the jar URL which contains target class
-//        URL[] classLoaderUrls = new URL[]{new URL(System.getProperty("user.dir") + "/server/PluginJars/*.jar")};
-//        for(URL u : classLoaderUrls) {
-//            // Create a new URLClassLoader
-//            URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
-//
-//            // Load the target class
-//            Class<?> beanClass = urlClassLoader.loadClass("com.jcg.Bean");
-//
-//            // Create a new instance from the loaded class
-//            Constructor<?> constructor = beanClass.getConstructor();
-//            Object beanObj = constructor.newInstance();
-//        }
+        // Getting the jar URL which contains target class
+        URL[] classLoaderUrls = new URL[]{new URL(System.getProperty("user.dir") + "/server/PluginJars/*.jar")};
+        for(URL u : classLoaderUrls) {
+            // Create a new URLClassLoader
+            URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
+
+            // Load the target class
+            Class<?> beanClass = urlClassLoader.loadClass("com.jcg.Bean");
+
+            // Create a new instance from the loaded class
+            Constructor<?> constructor = beanClass.getConstructor();
+            Object beanObj = constructor.newInstance();
+        }
     }
 
     // return a certain plugin

@@ -3,7 +3,6 @@ package server;
 import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import PluginManager.PluginManager;
 import servermodel.ModelRoot;
@@ -28,7 +27,7 @@ public class Server
         numCommandsBetweenCheckpoints = numCommands;
     }
 
-    private void run(String portNumber, boolean clearDB) {
+    private void run(String portNumber) {
         try {
 
             server = HttpServer.create(
@@ -50,9 +49,6 @@ public class Server
             try
             {
                 ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
-                if(clearDB) {
-                    ModelRoot.getModel().getDataBase().clearAll();
-                }
                 ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
             } catch (Exception e)
             {
@@ -80,13 +76,13 @@ public class Server
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         if(args.length == 0)
         {
-            new Server().run("3000", false);
+            new Server().run("3000");
         }
         else if(args.length == 2) {
             if(args[0].equals("sqlite") || args[0].equals("mongo")) {
                 try {
                     Integer.parseInt(args[1]);
-                    new Server(args[0], Integer.parseInt(args[1])).run("3000", false);
+                    new Server(args[0], Integer.parseInt(args[1])).run("3000");
                 } catch(Exception e) {
                     System.out.println("Invalid arguments given");
                 }
@@ -95,12 +91,11 @@ public class Server
                 System.out.println("Invalid arguments given");
             }
         }
-        // third argument if want to clear
         else if(args.length == 3) {
-            if((args[0].equals("sqlite") || args[0].equals("mongo")) && args[2].equals("clear")) {
+            if(args[1].equals("sqlite") || args[1].equals("mongo")) {
                 try {
-                    Integer.parseInt(args[1]);
-                    new Server(args[0], Integer.parseInt(args[1])).run("3000", true);
+                    Integer.parseInt(args[2]);
+                    new Server(args[1], Integer.parseInt(args[2])).run(args[0]);
                 } catch(Exception e) {
                     System.out.println("Invalid arguments given");
                 }

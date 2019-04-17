@@ -4,9 +4,9 @@ import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
 
-import PluginInterfaces.IPersistanceProvider;
 import PluginManager.PluginManager;
 import servermodel.ModelRoot;
+import services.ClaimRouteService;
 
 
 public class Server
@@ -43,31 +43,29 @@ public class Server
 
         server.createContext("/", new CommandHandler());
 
-        String pluginDir = System.getProperty("user.dir") + "\\server\\PluginJars";
-        String className = "Plugin";
-        PluginManager manager = new PluginManager();
-        try {
-            manager.loadPlugins();
-
-            ModelRoot.getModel().setDataBase(manager.selectPlugin(persistanceType));
-            ModelRoot.getModel().setgameUpdateLimit(numCommandsBetweenCheckpoints);
+        if(persistanceType != null)
+        {
+            PluginManager manager = new PluginManager();
+            try
+            {
+                ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
+                ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
+            } catch (Exception e)
+            {
+                System.out.println("Unable to load plugin. Come on guys.\n");
+                e.printStackTrace();
+            }
         }
-        catch (Exception e) {
-
+        else
+        {
+            System.out.println("Things are going to break pretty soon because you haven't " +
+                    "provided a plugin or a database");
         }
 
-        // TODO: use manager.selectPlugin(persistanceType)
 
-        /*
-        try {
-            IPersistanceProvider dbPlugin = getDBPluginInstance(pluginDir, persistanceType, className);
-            dbPlugin.getLabel();  // just displays what plugin was chosen ("toString" essentially)
-        }
-        catch (Exception e) {
-            System.out.println("Unable to load desired plugin");
-            return;
-        }
-*/
+        //We have to load the server here.
+        ModelRoot.getModel().loadState();
+
         server.start();
         System.out.println("Server started");
     }

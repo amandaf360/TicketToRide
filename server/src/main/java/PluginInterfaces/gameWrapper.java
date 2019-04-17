@@ -33,5 +33,4 @@ public class gameWrapper implements Serializable
         this.label = label;
     }
 
-
 }

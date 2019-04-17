@@ -5,6 +5,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,9 +16,11 @@ import java.util.Map;
 import PluginInterfaces.IGameDAO;
 import PluginInterfaces.IPersistanceProvider;
 import PluginInterfaces.IUserDAO;
+import PluginInterfaces.gameWrapper;
 import commands.ICommand;
 import commands.JoinGameCommand;
 import mapgraph.Graph;
+import server.ClientCommandManager;
 
 public class ModelRoot
 {
@@ -32,16 +35,60 @@ public class ModelRoot
         haveLoaded = false;
     }
 
+
     public void loadState()
     {
-        userDAO.getAllTokens();
-        userDAO.getAllUsers();
-        gameDAO.getAllGames();
-        // then you'll have all the games.
-        // The tough part is going to be parsing all the commands.
-        // loop through all the game numbers I suppose?
-        // Getting the game numbers will be tough.
-        // TODO: Learn how to serialize from Dallin.
+        List<String> allTokens = userDAO.getAllTokens();
+        ClientCommandManager manager = ClientCommandManager.getCommandManager();
+        for (String token : allTokens)
+        {
+            manager.addUser(token);
+        }
+
+
+        List<byte[]> usersSerialized = userDAO.getAllUsers();
+
+        for(byte[] serializedObj : usersSerialized)
+        {
+           User newUser = (User) deserialize(serializedObj);
+           addUser(newUser);
+        }
+
+
+        List<gameWrapper> games = gameDAO.getAllGames();
+
+        for(gameWrapper game: games)
+        {
+            if(game.getLabel().equals("activeGame"))
+            {
+                addActiveGame((ActiveGame) deserialize(game.getObject()));
+            }
+            else
+            {
+                addGame((Game) deserialize(game.getObject()));
+            }
+        }
+
+
+        for(Game game: gameList)
+        {
+            List<byte[]> commandList = gameDAO.getAllGameCommands(game.getGameNum());
+            for(byte[] command : commandList)
+            {
+                ICommand Icommand = (ICommand) deserialize(command);
+                Icommand.execute();
+            }
+        }
+
+        for(ActiveGame game: activeGameList)
+        {
+            List<byte[]> commandList = gameDAO.getAllGameCommands(game.getGameNum());
+            for(byte[] command : commandList)
+            {
+                ICommand Icommand = (ICommand) deserialize(command);
+                Icommand.execute();
+            }
+        }
 
         haveLoaded = true;
     }
@@ -166,6 +213,30 @@ public class ModelRoot
         }
 
         return stream;
+    }
+
+    public Object deserialize(byte[] serialized)
+    {
+        Object obj = null;
+        try(ByteArrayInputStream iStream = new ByteArrayInputStream(serialized);
+            ObjectInputStream objStream = new ObjectInputStream(iStream);)
+        {
+
+
+            obj = objStream.readObject();
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.out.println("Could not serialize an object!\n");
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return obj;
+
     }
 
     public void addUser(User user)

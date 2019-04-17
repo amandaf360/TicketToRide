@@ -426,7 +426,7 @@ public class TrainView extends View
                             }
                             else
                             {
-                                if( (routes.get(i).isClaimed1() || routes.get(i).isClaimed2()) && ClientModel.getInstance().getActiveGame().getPlayers().size() == 2)
+                                if( (routes.get(i).isClaimed1() || routes.get(i).isClaimed2()) && ClientModel.getInstance().getActiveGame().getPlayers().size() <= 3)
                                 {
                                     //this is the situation where one route is claimed in a 2-player game
                                     //Under these circumstances, the other route is unavailable.

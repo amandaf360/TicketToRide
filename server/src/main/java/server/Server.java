@@ -27,7 +27,7 @@ public class Server
         numCommandsBetweenCheckpoints = numCommands;
     }
 
-    private void run(String portNumber) {
+    private void run(String portNumber, boolean clearDB) {
         try {
 
             server = HttpServer.create(
@@ -49,6 +49,7 @@ public class Server
             try
             {
                 ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
+                // clear data base??
                 ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
             } catch (Exception e)
             {
@@ -76,13 +77,13 @@ public class Server
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         if(args.length == 0)
         {
-            new Server().run("3000");
+            new Server().run("3000", false);
         }
         else if(args.length == 2) {
             if(args[0].equals("sqlite") || args[0].equals("mongo")) {
                 try {
                     Integer.parseInt(args[1]);
-                    new Server(args[0], Integer.parseInt(args[1])).run("3000");
+                    new Server(args[0], Integer.parseInt(args[1])).run("3000", false);
                 } catch(Exception e) {
                     System.out.println("Invalid arguments given");
                 }
@@ -91,11 +92,12 @@ public class Server
                 System.out.println("Invalid arguments given");
             }
         }
+        // third argument if want to clear
         else if(args.length == 3) {
-            if(args[1].equals("sqlite") || args[1].equals("mongo")) {
+            if((args[0].equals("sqlite") || args[0].equals("mongo")) && args[2].equals("clear")) {
                 try {
-                    Integer.parseInt(args[2]);
-                    new Server(args[1], Integer.parseInt(args[2])).run(args[0]);
+                    Integer.parseInt(args[1]);
+                    new Server(args[0], Integer.parseInt(args[1])).run("3000", true);
                 } catch(Exception e) {
                     System.out.println("Invalid arguments given");
                 }

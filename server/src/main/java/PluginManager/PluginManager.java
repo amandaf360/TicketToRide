@@ -7,7 +7,6 @@ import PluginInterfaces.IPersistanceProvider;
 
 public class PluginManager {
 
-
     public IPersistanceProvider loadPlugins(String urlName) throws Exception
     {
         String className = "Plugin";
@@ -24,8 +23,6 @@ public class PluginManager {
         return plugin;
 
     }
-
-
 
 }
 

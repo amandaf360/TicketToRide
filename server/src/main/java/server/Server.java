@@ -48,7 +48,7 @@ public class Server
             PluginManager manager = new PluginManager();
             try
             {
-                ModelRoot.getModel().setDataBase(manager.loadPluginsThomasStyle(persistanceType));
+                ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
                 ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
             } catch (Exception e)
             {

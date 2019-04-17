@@ -8,4 +8,5 @@ public interface IUserDAO
     void addAuthToken(String token);
     List<String> getAllTokens();
     List<byte[]> getAllUsers();
+    void clearAll();
 }

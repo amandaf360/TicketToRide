@@ -9,6 +9,7 @@ public interface IGameDAO
     void clearCommands();
     List<gameWrapper> getAllGames();
     List<byte[]> getAllGameCommands(int gameNum);
+    void clearAll();
 
     //Add game functionality?
     //Should clearCommands take in a game num as one of its arguments?

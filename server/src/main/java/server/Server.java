@@ -3,6 +3,7 @@ package server;
 import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import PluginManager.PluginManager;
 import servermodel.ModelRoot;
@@ -49,7 +50,9 @@ public class Server
             try
             {
                 ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
-                // clear data base??
+                if(clearDB) {
+                    ModelRoot.getModel().getDataBase().clearAll();
+                }
                 ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
             } catch (Exception e)
             {

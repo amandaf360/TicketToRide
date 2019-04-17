@@ -6,4 +6,5 @@ public interface IPersistanceProvider {
     IUserDAO getUserDAO();
     IGameDAO getGameDAO();
     String getLabel();
+    void clearAll();
 }

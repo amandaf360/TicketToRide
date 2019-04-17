@@ -1,9 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
+import servermodel.ModelRoot;
 import services.DiscardDestService;
 
-public class DiscardDestCommand implements ICommand
+public class DiscardDestCommand implements ICommand, Serializable
 {
 
     private String cityOne;
@@ -25,6 +28,8 @@ public class DiscardDestCommand implements ICommand
     {
         DiscardDestService service = new DiscardDestService(cityOne, cityTwo, length, username, authToken);
         service.discardCard();
+        int gameNum = ModelRoot.getModel().getGameByAuthToken(authToken).getGameNum();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return null;
     }
 }

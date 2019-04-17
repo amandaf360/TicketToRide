@@ -1,8 +1,9 @@
 package servermodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DecksStateData
+public class DecksStateData implements Serializable
 {
     private int destDeckSize;
     private int trainDeckSize;

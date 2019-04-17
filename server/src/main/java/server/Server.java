@@ -4,8 +4,9 @@ import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
 
-import PluginInterfaces.IPersistanceProvider;
 import PluginManager.PluginManager;
+import servermodel.ModelRoot;
+import services.ClaimRouteService;
 
 
 public class Server
@@ -42,35 +43,31 @@ public class Server
 
         server.createContext("/", new CommandHandler());
 
-        // TODO: Choose which plugin to use based on command line args? - how to specify the plugin
-        // directory, plugin jar name and plugin class name
-        String pluginDir = System.getProperty("user.dir") + "\\server\\PluginJars";
-        String className = "Plugin";
-        PluginManager manager = new PluginManager();
-        try {
-            IPersistanceProvider dbPlugin = getDBPluginInstance(pluginDir, persistanceType, className);
-            dbPlugin.getLabel();  // just displays what plugin was chosen ("toString" essentially)
+        if(persistanceType != null)
+        {
+            PluginManager manager = new PluginManager();
+            try
+            {
+                ModelRoot.getModel().setDataBase(manager.loadPlugins(persistanceType));
+                ModelRoot.getModel().setGameUpdateLimit(numCommandsBetweenCheckpoints);
+            } catch (Exception e)
+            {
+                System.out.println("Unable to load plugin. Come on guys.\n");
+                e.printStackTrace();
+            }
         }
-        catch (Exception e) {
-            System.out.println("Unable to load desired plugin");
-            return;
+        else
+        {
+            System.out.println("Things are going to break pretty soon because you haven't " +
+                    "provided a plugin or a database");
         }
+
+
+        //We have to load the server here.
+        ModelRoot.getModel().loadState();
 
         server.start();
         System.out.println("Server started");
-    }
-
-    private IPersistanceProvider getDBPluginInstance(String pluginDirectory, String pluginJarName, String pluginClassName) throws Exception {
-        // Get a class loader and set it up to load the jar file
-        File pluginJarFile = new File(pluginDirectory, pluginJarName);
-        URL pluginURL = pluginJarFile.toURI().toURL();
-        URLClassLoader loader = new URLClassLoader(new URL[]{pluginURL});
-
-        // Load the jar file's plugin class, create and return an instance
-        Class<? extends IPersistanceProvider> dbPluginClass = (Class<IPersistanceProvider>) loader.loadClass(pluginClassName);
-
-        // TODO: might need to change the parameters for "getDeclaredConstructor"
-        return dbPluginClass.getDeclaredConstructor(null).newInstance();
     }
 
     public static void main(String[] args) {

@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
 import services.StartGameService;
 
-public class StartGameCommand implements ICommand
+public class StartGameCommand implements ICommand, Serializable
 {
     private int gameNum;
 

@@ -28,6 +28,7 @@ public class SendMessageService
         ActiveGame game = root.getGameByAuthToken(authToken);
         game.addMessage(new Message(color, message));
 
+
         ClientCommandManager manager = ClientCommandManager.getCommandManager();
         ArrayList<String> allAuthTokens = game.getAllAuthTokens();
         for(String authToken : allAuthTokens)

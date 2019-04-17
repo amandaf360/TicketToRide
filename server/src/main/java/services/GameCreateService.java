@@ -23,6 +23,8 @@ public class GameCreateService
         game.setName(gameName);
         game.setGameNum(model.assignNumber());
 
+
+
         model.addGame(game);
         ClientCommandManager commandManager = ClientCommandManager.getCommandManager();
         commandManager.addGame(game);

@@ -1,9 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
+import servermodel.ModelRoot;
 import services.SendMessageService;
 
-public class SendMessageCommand implements ICommand
+public class SendMessageCommand implements ICommand, Serializable
 {
 
     private String message;
@@ -15,6 +18,7 @@ public class SendMessageCommand implements ICommand
     {
         SendMessageService service = new SendMessageService(message, username, color, gameNum);
         service.sendMessage();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return null;
     }
 

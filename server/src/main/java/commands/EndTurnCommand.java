@@ -1,9 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 import responses.BaseResponse;
+import servermodel.ModelRoot;
 import services.EndTurnService;
 
-public class EndTurnCommand implements ICommand
+public class EndTurnCommand implements ICommand, Serializable
 {
     private String username;
     private String authToken;
@@ -18,6 +21,10 @@ public class EndTurnCommand implements ICommand
     {
         EndTurnService service = new EndTurnService(username, authToken);
         service.endTurn();
+
+
+        int gameNum = ModelRoot.getModel().getGameByAuthToken(authToken).getGameNum();
+        ModelRoot.getModel().addGameCommandToDataBase(gameNum, this);
         return null;
     }
 }
